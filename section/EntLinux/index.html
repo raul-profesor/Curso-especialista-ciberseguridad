@@ -905,8 +905,8 @@ root# ls -ld padre
 drwxrwsrwx 2 root raul 4096 Feb  3 00:33 padre/
 </code></pre></div>
 <p>Ahora, vamos a crear un nuevo archivo y un subdirectorio bajo el padre con root:</p>
-<div class="highlight"><pre><span></span><code>root# touch padre/new_file_by_root
-root# mkdir padre/new_dir_by_root```
+<div class="highlight"><pre><span></span><code>root# touch padre/nuevo_root
+root# mkdir padre/nuevo_dir_root```
 </code></pre></div>
 <p>Luego, verificaremos los propietarios del grupo de todos los archivos y subdirectorios en padre:</p>
 <p><div class="highlight"><pre><span></span><code>root# ls -l padre
@@ -950,31 +950,31 @@ drwxrwxrwx 2 root root 40 Feb  3 22:22 public/
 </code></pre></div>
 <p>A continuación, crearemos algunos archivos en público por diferentes usuarios:</p>
 <div class="highlight"><pre><span></span><code>$ ls -l
--rw-r--r-- 1 guest guest 0 Feb  3 22:28 file1_by_guest
--rw-r--r-- 1 guest guest 0 Feb  3 22:28 file2_by_guest
--rw-r--r-- 1 kent  kent  0 Feb  3 22:28 file_by_kent
+-rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo1_invitado
+-rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo2_invitado
+-rw-r--r-- 1 raul  raul  0 Feb  3 22:28 archivo_raul
 </code></pre></div>
-<p>Hasta ahora, no hemos colocado el sticky bit en ninguna parte. Veamos si el usuario kent puede eliminar un archivo propiedad de un invitado:</p>
-<p><div class="highlight"><pre><span></span><code>kent$ rm file1_by_guest 
-rm: remove write-protected regular empty file &#39;file1_by_guest&#39;? y
+<p>Hasta ahora, no hemos colocado el sticky bit en ninguna parte. Veamos si el usuario raul puede eliminar un archivo propiedad de un invitado:</p>
+<p><div class="highlight"><pre><span></span><code>raul$ rm archivo1_invitado 
+rm: remove write-protected regular empty archivo &#39;archivo1_invitado&#39;? y
 
-kent$ ls -l
--rw-r--r-- 1 guest guest 0 Feb  3 22:28 file2_by_guest
--rw-r--r-- 1 kent  kent  0 Feb  3 22:28 file_by_kent
+raul$ ls -l
+-rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo2_invitado
+-rw-r--r-- 1 raul  raul  0 Feb  3 22:28 archivo_raul
 </code></pre></div>
-Entonces, sin el sticki bit, podemos eliminar archivos propiedad de otros usuarios.</p>
+Entonces, sin el sticky bit, podemos eliminar archivos propiedad de otros usuarios.</p>
 <p>Ahora, configuremos el sticky bit y veamos si hay algún cambio:</p>
 <p><div class="highlight"><pre><span></span><code>root# chmod +t public
 root# ls -ld public 
 drwxrwxrwt 2 root root 80 Feb  3 22:33 public/
-root# su kent
+root# su raul
 
-kent$ rm file2_by_guest 
-rm: remove write-protected regular empty file &#39;file2_by_guest&#39;? y
-rm: cannot remove &#39;file2_by_guest&#39;: Operation not permitted
-kent$ ls -l 
--rw-r--r-- 1 guest guest 0 Feb 3 22:28 file2_by_guest
--rw-r--r-- 1 kent kent 0 Feb 3 22:28 file_by_kent
+raul$ rm archivo2_invitado 
+rm: remove write-protected regular empty archivo &#39;archivo2_invitado&#39;? y
+rm: cannot remove &#39;archivo2_invitado&#39;: Operation not permitted
+raul$ ls -l 
+-rw-r--r-- 1 invitado invitado 0 Feb 3 22:28 archivo2_invitado
+-rw-r--r-- 1 raul raul 0 Feb 3 22:28 archivo_raul
 </code></pre></div>
 Después de configurar el sticky bit ,  los archivos en  público solo pueden ser eliminados por los propietarios del archivo.</p>
 <div class="highlight"><pre><span></span><code>
