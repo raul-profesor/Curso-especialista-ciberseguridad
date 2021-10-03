@@ -52,7 +52,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="">
   
     
     <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
@@ -106,7 +106,7 @@
         
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent=""  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
@@ -434,6 +434,19 @@
   <a href="#crear-archivos-y-directorios" class="md-nav__link">
     Crear archivos y directorios
   </a>
+  
+    <nav class="md-nav" aria-label="Crear archivos y directorios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-archivos-usando-la-redireccion" class="md-nav__link">
+    Creando archivos usando la redirección
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -923,7 +936,7 @@ arturo:x.:182:100:Arturo Soria:/home/arlin:/bin/csh
 <td>Nombre completo del usuario</td>
 </tr>
 <tr>
-<td align="center">/u/rocio</td>
+<td align="center">/home/rocio</td>
 <td>Directorio de inicio del usuario.</td>
 </tr>
 <tr>
@@ -1019,7 +1032,37 @@ mkdir <span class="s2">&quot;carpeta 4&quot;</span> <span class="s2">&quot;carpe
 mkdir -p <span class="s2">&quot;carpeta 6&quot;</span>/<span class="s2">&quot;carpeta 7&quot;</span>
 ls
 </code></pre></div>
-Todos estos comandos crearán carpetas independientes y con espacios en los nombres. Debido a lo engorroso de tener que escapar este tipo de caracteres cada vez que se utilizan en el terminal, la tendencia es usar nombres sin espacios, sustituyendo estos por guiones ("-") o guiones bajos ("_")
+Todos estos comandos crearán carpetas independientes y con espacios en los nombres. Debido a lo engorroso de tener que escapar este tipo de caracteres cada vez que se utilizan en el terminal, la tendencia es usar nombres sin espacios, sustituyendo estos por guiones ("-") o guiones bajos ("_")</p>
+<h4 id="creando-archivos-usando-la-redireccion">Creando archivos usando la redirección</h4>
+<p>Supongamos que quisiéramos capturar la salida del comando "ls" como un archivo de texto que podemos manipular con posterioridad. Todo lo que tenemos que hacer es agregar el carácter mayor que (”&gt;”) al final de nuestra línea de comando, seguido del nombre del archivo en el que escribir:</p>
+<p><div class="highlight"><pre><span></span><code>ls &gt; salida.txt
+</code></pre></div>
+No se imprimirá nada por pantalla puesto que hemos redirigido la salida del comando al archivo salida.txt. En todo caso, podemos utilizar el comando "cat" para ver el contenido del archivo:</p>
+<div class="highlight"><pre><span></span><code>cat output.txt
+</code></pre></div>
+<p>Otro ejemplo de redirección podríamos llevarlo a cabo utilizando el comando "echo", el cual simplemente imprime por pantalla los argumentos que recibe. Sin embargo, podríamos redirigir la salida a un archivo y crear ficheros nuevos:</p>
+<p><div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;Esto es una prueba&quot;</span> &gt; test_1.txt
+<span class="nb">echo</span> <span class="s2">&quot;Esto es otra prueba&quot;</span> &gt; test_2.txt
+<span class="nb">echo</span> <span class="s2">&quot;Otra prueba más&quot;</span> &gt; test_3.txt
+ls
+</code></pre></div>
+Y para ver el contenido de los archivos podemos utilizar nuevamente "cat". Incluso podríamos pasarle el nombre de los 3 archivos simultánemamente como argumentos:</p>
+<div class="highlight"><pre><span></span><code>cat test_1.txt test_2.txt test_3.txt
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>
