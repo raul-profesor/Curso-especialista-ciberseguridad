@@ -168,33 +168,6 @@
       
       
         
-          
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
-        Warm up
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-        
       
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
@@ -206,10 +179,10 @@
                   <div class="md-sidebar__inner">
                     
 
+
   
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Curso de especialista en ciberseguridad - Warm up" class="md-nav__button md-logo" aria-label="Curso de especialista en ciberseguridad - Warm up" data-md-component="logo">
       
@@ -403,9 +376,97 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#contrasenas-en-linux" class="md-nav__link">
+    Contraseñas en Linux
+  </a>
+  
+    <nav class="md-nav" aria-label="Contraseñas en Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-archivo-etcpasswd" class="md-nav__link">
+    El archivo /etc/passwd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-sistema-de-contrasenas-cifradas-en-unixlinux" class="md-nav__link">
+    El sistema de contraseñas cifradas en Unix/Linux
+  </a>
+  
+    <nav class="md-nav" aria-label="El sistema de contraseñas cifradas en Unix/Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-funcion-de-cifrado-tradicional-crypt" class="md-nav__link">
+    La función de cifrado tradicional crypt()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#echandole-salt" class="md-nav__link">
+    Echándole "salt"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#principales-comandos-para-manejarse-en-el-terminal" class="md-nav__link">
     Principales comandos para manejarse en el terminal
   </a>
+  
+    <nav class="md-nav" aria-label="Principales comandos para manejarse en el terminal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-archivos-y-directorios" class="md-nav__link">
+    Crear archivos y directorios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moviendo-y-manipulando-archivos" class="md-nav__link">
+    Moviendo y manipulando archivos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#un-poco-de-fontaneria-tuberias" class="md-nav__link">
+    Un poco de fontanería (tuberías)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-linea-de-comandos-y-el-superusuario" class="md-nav__link">
+    La línea de comandos y el superusuario
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivos-ocultos" class="md-nav__link">
+    Archivos ocultos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -453,157 +514,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#estructura-de-ficheros" class="md-nav__link">
-    Estructura de ficheros
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usuarios-y-grupos" class="md-nav__link">
-    Usuarios y grupos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#permisos" class="md-nav__link">
-    Permisos
-  </a>
-  
-    <nav class="md-nav" aria-label="Permisos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grupos-de-permisos" class="md-nav__link">
-    Grupos de permisos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tipos-de-permisos" class="md-nav__link">
-    Tipos de permisos
-  </a>
-  
-    <nav class="md-nav" aria-label="Tipos de permisos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#como-se-cambian-los-permisos-en-linux" class="md-nav__link">
-    ¿Cómo se cambian los permisos en Linux?
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#permisos-avanzados" class="md-nav__link">
-    Permisos avanzados
-  </a>
-  
-    <nav class="md-nav" aria-label="Permisos avanzados">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bit-setuid" class="md-nav__link">
-    Bit setuid
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bit-setgid" class="md-nav__link">
-    Bit setgid
-  </a>
-  
-    <nav class="md-nav" aria-label="Bit setgid">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#bit-setgid-en-un-archivo" class="md-nav__link">
-    Bit setgid en un archivo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bit-setgid-en-un-directorio" class="md-nav__link">
-    Bit setgid en un directorio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sticky-bit" class="md-nav__link">
-    Sticky bit
-  </a>
-  
-    <nav class="md-nav" aria-label="Sticky bit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#el-sticky-bit-en-un-directorio" class="md-nav__link">
-    El sticky bit en un directorio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#principales-comandos-para-manejarse-en-el-terminal" class="md-nav__link">
-    Principales comandos para manejarse en el terminal
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           <div class="md-content" data-md-component="content">
@@ -794,7 +704,6 @@ Donde, en este último caso, los permisos rwx (lectura/escritura/ejecución) pue
 <p>a - todos los usuarios</p>
 <p>Si utilizamos el operador + estaremos agregando permisos, si usamos el - los eliminaremos:</p>
 <div class="highlight"><pre><span></span><code>chmod a-rw archivo1
-
 chmod u+rwx archivo2
 </code></pre></div>
 <p>Ejemplos prácticos del uso de <em>chmod</em> para cambiar permisos de un archivo. Podemos utilizar tanto la forma absoluta, como la simbólica:</p>
@@ -832,7 +741,7 @@ chmod u+rwx archivo2
 <p>El bit setuid solo tiene sentido si está configurado en archivos ejecutables. No hay ningún significado práctico si configuramos el bit setuid en un archivo o directorio no ejecutable.</p>
 <p>El comando passwd es un ejemplo con este bit especial aplicado:</p>
 <p><div class="highlight"><pre><span></span><code>$ ls -l /bin/passwd
--rwsr-xr-x 1 root root 63624 Dec 15 21:06 /bin/passwd
+-rwsr-xr-x <span class="m">1</span> root root <span class="m">63624</span> Dec <span class="m">15</span> <span class="m">21</span>:06 /bin/passwd
 </code></pre></div>
 Observamos que el permiso de ejecución para el propietario es una "s" minúscula en lugar de la "x" habitual. Esta "s" indica que el archivo tiene el bit setuid establecido. El comando passwd siempre se ejecutará con  privilegios de root sin importar quién lo inicie porque el propietario del archivo es root.</p>
 <p>Como ya sabemos, podemos usar el comando chmod para establecer el  bit setuid en un archivo:</p>
@@ -841,25 +750,24 @@ Observamos que el permiso de ejecución para el propietario es una "s" minúscul
 <strong>Sólo el propietario el archivo o el usuario o el usuario <em>root<em> puede establecer el bit </em>setuid</em></strong></p>
 <p>Un ejemplo práctico de cómo configurar este bit setuid en un archivo, de forma simbólica:</p>
 <p><div class="highlight"><pre><span></span><code>$ ls -l archivo
--rwxr-xr-x 1 raul raul 0 Feb 2 12:22 archivo
-
+-rwxr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb <span class="m">2</span> <span class="m">12</span>:22 archivo
 $ chmod u+s archivo
 $ ls -l archivo    
--rwsr-xr-x 1 raul raul 0 Feb  2 12:22 archivo
+-rwsr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb  <span class="m">2</span> <span class="m">12</span>:22 archivo
 </code></pre></div>
 En el modo absoluto, anteponemos un 4 a los permisos para indicar este bit:</p>
-<div class="highlight"><pre><span></span><code>$ chmod 4755 archivo
--rwsr-xr-x 1 raul raul 0 Feb  2 12:22 archivo
+<div class="highlight"><pre><span></span><code>$ chmod <span class="m">4755</span> archivo
+-rwsr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb  <span class="m">2</span> <span class="m">12</span>:22 archivo
 </code></pre></div>
 <p>Y para quitar este bit, en ambos modos:</p>
 <p><div class="highlight"><pre><span></span><code>$ chmod u-s archivo
 $ ls -l archivo
--rwxr-xr-x 1 raul raul 0 Feb  2 12:22 archivo
+-rwxr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb  <span class="m">2</span> <span class="m">12</span>:22 archivo
 </code></pre></div>
 y</p>
-<div class="highlight"><pre><span></span><code>$ chmod 0755 archivo
+<div class="highlight"><pre><span></span><code>$ chmod <span class="m">0755</span> archivo
 $ ls -l archivo
--rwxr-xr-x 1 raul raul 0 Feb  2 12:22 archivo
+-rwxr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb  <span class="m">2</span> <span class="m">12</span>:22 archivo
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Riesgo de seguridad<p>El bit setuid podría ser bastante útil en varias aplicaciones. Sin embargo, debemos tener cuidado al establecer esos permisos especiales, ya que pueden crear problemas de seguridad.</p>
@@ -871,50 +779,47 @@ $ ls -l archivo
 <p>setgid es la abreviatura de "set group id". Si configuramos el bit setgid en un archivo ejecutable, no importa quién inicie el archivo, se ejecuta con los privilegios del grupo propietario.</p>
 <p>El comando de localización es un ejemplo de un archivo con el conjunto de bits setgid :</p>
 <p><div class="highlight"><pre><span></span><code>$ ls -l /usr/bin/locate
--rwxr-sr-x 1 root locate 43048 Nov 13 18:09 /usr/bin/locate
+-rwxr-sr-x <span class="m">1</span> root locate <span class="m">43048</span> Nov <span class="m">13</span> <span class="m">18</span>:09 /usr/bin/locate
 </code></pre></div>
 Similar al  bit setuid , notamos una "s" minúscula en la salida de ls , excepto que está en la sección de grupo en lugar de en la sección de propietario.</p>
 <p>Para establecer este bit de modo simbólico podemos utilizar:</p>
 <div class="highlight"><pre><span></span><code>$ ls -l archivo2 
--rwxr-xr-x 1 raul raul 0 Feb 2 22:35 archivo2
-
+-rwxr-xr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb <span class="m">2</span> <span class="m">22</span>:35 archivo2
 $ chmod g+s archivo2
-
 $ ls -l archivo2
--rwxr-sr-x 1 raul raul 0 Feb 2 22:35 archivo2
+-rwxr-sr-x <span class="m">1</span> raul raul <span class="m">0</span> Feb <span class="m">2</span> <span class="m">22</span>:35 archivo2
 </code></pre></div>
 <p>Y de modo absoluto, anteponiendo un dos a los permisos:</p>
-<div class="highlight"><pre><span></span><code>chmod 2755 archivo2
+<div class="highlight"><pre><span></span><code>chmod <span class="m">2755</span> archivo2
 </code></pre></div>
 <h5 id="bit-setgid-en-un-directorio">Bit setgid en un directorio</h5>
 <p>Si configuramos el bit setgid en un directorio, todos los archivos y subdirectorios recién creados en el directorio heredarán el grupo de ese directorio. Sin embargo, los archivos y directorios existentes no aplicarán el cambio de grupo.</p>
 <p>Veamos un ejemplo para aclarar este comportamiento.</p>
 <p>Primero, preparamos un directorio padre que contiene dos archivos:</p>
 <p><div class="highlight"><pre><span></span><code>$ ls -ld padre
-drwxrwxrwx 2 root raul 4096 Feb  3 00:33 padre/
-
+drwxrwxrwx <span class="m">2</span> root raul <span class="m">4096</span> Feb  <span class="m">3</span> <span class="m">00</span>:33 padre/
 $ ls -l padre
-total 2
--rwxr-xr-x 1 invitado invitado    0 Feb  3 00:30 existing_grp_invitado1
--rwxr-xr-x 1 invitado invitado    0 Feb  3 00:30 existing_grp_invitado2
+total <span class="m">2</span>
+-rwxr-xr-x <span class="m">1</span> invitado invitado    <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">00</span>:30 existing_grp_invitado1
+-rwxr-xr-x <span class="m">1</span> invitado invitado    <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">00</span>:30 existing_grp_invitado2
 </code></pre></div>
 <em>padre</em> es propiedad del usuario root y del grupo raul. Contiene dos archivos e <em>invitado</em> es dueño de ambos.</p>
 <p>A continuación, establezcamos el bit setgid en <em>padre</em> usando chmod:</p>
 <div class="highlight"><pre><span></span><code>root# chmod g+s padre
 root# ls -ld padre
-drwxrwsrwx 2 root raul 4096 Feb  3 00:33 padre/
+drwxrwsrwx <span class="m">2</span> root raul <span class="m">4096</span> Feb  <span class="m">3</span> <span class="m">00</span>:33 padre/
 </code></pre></div>
 <p>Ahora, vamos a crear un nuevo archivo y un subdirectorio bajo el padre con root:</p>
 <div class="highlight"><pre><span></span><code>root# touch padre/nuevo_root
-root# mkdir padre/nuevo_dir_root```
+root# mkdir padre/nuevo_dir_root<span class="sb">```</span>
 </code></pre></div>
 <p>Luego, verificaremos los propietarios del grupo de todos los archivos y subdirectorios en padre:</p>
 <p><div class="highlight"><pre><span></span><code>root# ls -l padre
-total 4
--rwxr-xr-x 1 invitado invitado    0 Feb  3 00:30 grp_exist_invitado1
--rwxr-xr-x 1 invitado invitado    0 Feb  3 00:30 grp_exist_invitado2
-drwxr-sr-x 2 root  raul  4096 Feb  3 00:54 nuevo_dir_root/
--rw-r--r-- 1 root  raul     0 Feb  3 00:54 nuevo_arch_root
+total <span class="m">4</span>
+-rwxr-xr-x <span class="m">1</span> invitado invitado    <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">00</span>:30 grp_exist_invitado1
+-rwxr-xr-x <span class="m">1</span> invitado invitado    <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">00</span>:30 grp_exist_invitado2
+drwxr-sr-x <span class="m">2</span> root  raul  <span class="m">4096</span> Feb  <span class="m">3</span> <span class="m">00</span>:54 nuevo_dir_root/
+-rw-r--r-- <span class="m">1</span> root  raul     <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">00</span>:54 nuevo_arch_root
 </code></pre></div>
 En la salida anterior, vemos que los dos archivos existentes no han cambiado después de que establecemos el bit setuid en padre.</p>
 <p>Sin embargo, el archivo y el subdirectorio recién creados son propiedad de raul en lugar de  root , aunque root los creó. Esto se debe a que el padre tenía establecido el bit setgid , y los archivos y directorios recién creados bajo él heredaron el grupo del padre.</p>
@@ -928,7 +833,7 @@ En la salida anterior, vemos que los dos archivos existentes no han cambiado des
 <p>En otras palabras, este permiso especial evita que un usuario elimine los archivos de otros usuarios en un directorio público.</p>
 <p>Un ejemplo típico de sticky bit del mundo real es el directorio /tmp:</p>
 <p><div class="highlight"><pre><span></span><code>$ ls -ld /tmp
-drwxrwxrwt 24 root root 980 Feb  3 21:41 /tmp/
+drwxrwxrwt <span class="m">24</span> root root <span class="m">980</span> Feb  <span class="m">3</span> <span class="m">21</span>:41 /tmp/
 </code></pre></div>
 Debido a la "w" en la sección de permisos "otros", sabemos que cualquier usuario puede crear y eliminar cualquier archivo en el directorio /tmp .</p>
 <p>Pero si leemos la salida de ls anterior con atención, vemos que el bit de permiso de ejecución en la sección "otro" es una "t" minúscula, en lugar de la "x" habitual.</p>
@@ -938,7 +843,7 @@ Debido a la "w" en la sección de permisos "otros", sabemos que cualquier usuari
 <div class="highlight"><pre><span></span><code>chmod +t DIRECTORIO
 </code></pre></div>
 <p>De otra forma, también podemos anteponer un "1" al modo de un directorio para establecer el sticky bit:</p>
-<p><div class="highlight"><pre><span></span><code>chmod 1777 DIRECTORIO
+<p><div class="highlight"><pre><span></span><code>chmod <span class="m">1777</span> DIRECTORIO
 </code></pre></div>
 También podemos eliminar el sticky bit de un directorio usando -t :</p>
 <div class="highlight"><pre><span></span><code>chmod -t DIRECTORIO
@@ -946,38 +851,205 @@ También podemos eliminar el sticky bit de un directorio usando -t :</p>
 <p>Como de costumbre, veamos un ejemplo para comprender cómo el sticky bit puede proteger los archivos de un directorio y cómo configurar y eliminar el sticky bit en un directorio.</p>
 <p>Comencemos por preparar un directorio público llamado público y permitir que todos los usuarios escriban en él:</p>
 <div class="highlight"><pre><span></span><code>$ ls -ld public              
-drwxrwxrwx 2 root root 40 Feb  3 22:22 public/
+drwxrwxrwx <span class="m">2</span> root root <span class="m">40</span> Feb  <span class="m">3</span> <span class="m">22</span>:22 public/
 </code></pre></div>
 <p>A continuación, crearemos algunos archivos en público por diferentes usuarios:</p>
 <div class="highlight"><pre><span></span><code>$ ls -l
--rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo1_invitado
--rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo2_invitado
--rw-r--r-- 1 raul  raul  0 Feb  3 22:28 archivo_raul
+-rw-r--r-- <span class="m">1</span> invitado invitado <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">22</span>:28 archivo1_invitado
+-rw-r--r-- <span class="m">1</span> invitado invitado <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">22</span>:28 archivo2_invitado
+-rw-r--r-- <span class="m">1</span> raul  raul  <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">22</span>:28 archivo_raul
 </code></pre></div>
 <p>Hasta ahora, no hemos colocado el sticky bit en ninguna parte. Veamos si el usuario raul puede eliminar un archivo propiedad de un invitado:</p>
 <p><div class="highlight"><pre><span></span><code>raul$ rm archivo1_invitado 
-rm: remove write-protected regular empty archivo &#39;archivo1_invitado&#39;? y
-
+rm: remove write-protected regular empty archivo <span class="s1">&#39;archivo1_invitado&#39;</span>? y
 raul$ ls -l
--rw-r--r-- 1 invitado invitado 0 Feb  3 22:28 archivo2_invitado
--rw-r--r-- 1 raul  raul  0 Feb  3 22:28 archivo_raul
+-rw-r--r-- <span class="m">1</span> invitado invitado <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">22</span>:28 archivo2_invitado
+-rw-r--r-- <span class="m">1</span> raul  raul  <span class="m">0</span> Feb  <span class="m">3</span> <span class="m">22</span>:28 archivo_raul
 </code></pre></div>
 Entonces, sin el sticky bit, podemos eliminar archivos propiedad de otros usuarios.</p>
 <p>Ahora, configuremos el sticky bit y veamos si hay algún cambio:</p>
 <p><div class="highlight"><pre><span></span><code>root# chmod +t public
 root# ls -ld public 
-drwxrwxrwt 2 root root 80 Feb  3 22:33 public/
+drwxrwxrwt <span class="m">2</span> root root <span class="m">80</span> Feb  <span class="m">3</span> <span class="m">22</span>:33 public/
 root# su raul
-
 raul$ rm archivo2_invitado 
-rm: remove write-protected regular empty archivo &#39;archivo2_invitado&#39;? y
-rm: cannot remove &#39;archivo2_invitado&#39;: Operation not permitted
+rm: remove write-protected regular empty archivo <span class="s1">&#39;archivo2_invitado&#39;</span>? y
+rm: cannot remove <span class="s1">&#39;archivo2_invitado&#39;</span>: Operation not permitted
 raul$ ls -l 
--rw-r--r-- 1 invitado invitado 0 Feb 3 22:28 archivo2_invitado
--rw-r--r-- 1 raul raul 0 Feb 3 22:28 archivo_raul
+-rw-r--r-- <span class="m">1</span> invitado invitado <span class="m">0</span> Feb <span class="m">3</span> <span class="m">22</span>:28 archivo2_invitado
+-rw-r--r-- <span class="m">1</span> raul raul <span class="m">0</span> Feb <span class="m">3</span> <span class="m">22</span>:28 archivo_raul
 </code></pre></div>
 Después de configurar el sticky bit, los archivos en público solo pueden ser eliminados por los propietarios del archivo.</p>
+<h2 id="contrasenas-en-linux">Contraseñas en Linux</h2>
+<p>En este apartado se describe cómo se implementan las contraseñas dentro del sistema operativo Unix tanto para sistemas administrados localmente como basados ​​en red.</p>
+<h3 id="el-archivo-etcpasswd">El archivo /etc/passwd</h3>
+<p>Tradicionalmente, Unix usa el archivo /etc/passwd para realizar un seguimiento de cada usuario en el sistema. El archivo / etc / passwd contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
+<p>Puedes usar el gato comando para mostrar el archivo / etc / passwd de su sistema. Aquí hay algunas líneas de muestra de un archivo típico:</p>
+<div class="highlight"><pre><span></span><code>root:x:0:1:System Operator:/:/bin/ksh
+daemon:x:1:1::/tmp:
+uucp:x:4:4::/var/spool/uucppublic:/usr/lib/uucp/uucico
+rocio:x:181:100:Rocio Cordoba:/home/rachel:/bin/ksh
+arturo:x.:182:100:Arturo Soria:/home/arlin:/bin/csh
+</code></pre></div>
+<p>Las primeras tres cuentas, root , daemon y uucp , son cuentas del sistema, mientras que rachel y arlin son cuentas para usuarios individuales.</p>
+<p>Los campos individuales del archivo / etc / passwd tienen significados bastante sencillos. La Tabla 4-1 explica una línea de muestra del archivo que se muestra arriba.</p>
+<p>Alguno de los campos más importantes del archivo /etc/passwd, son:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Campo</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Raquel</td>
+<td>Nombre de usuario.</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td>Lugar de espera para la "contraseña cifrada" del usuario. Tradicionalmente, este campo almacenaba la contraseña cifrada del usuario. Los sistemas Unix modernos almacenan contraseñas cifradas en un archivo separado (el archivo de contraseñas ocultas ) al que solo pueden acceder los usuarios privilegiados.</td>
+</tr>
+<tr>
+<td align="center">181</td>
+<td>Número de identificación de usuario (UID) del usuario.</td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td>Número de identificación de grupo del usuario (GID).</td>
+</tr>
+<tr>
+<td align="center">Rocio Cordoba</td>
+<td>Nombre completo del usuario</td>
+</tr>
+<tr>
+<td align="center">/u/rocio</td>
+<td>Directorio de inicio del usuario.</td>
+</tr>
+<tr>
+<td align="center">/bin/ksh</td>
+<td>Shell del usuario.</td>
+</tr>
+</tbody>
+</table>
+<p>Las contraseñas se almacenaban tradicionalmente en el archivo /etc/passwd en un formato cifrado. Sin embargo, debido a los avances en la velocidad del procesador, las contraseñas cifradas ahora se almacenan casi universalmente en un archivo independiente, llamado /etc/shadow , que se describe más adelante.</p>
+<h3 id="el-sistema-de-contrasenas-cifradas-en-unixlinux">El sistema de contraseñas cifradas en Unix/Linux</h3>
+<p>Cuando Unix/Linux solicita su contraseña, necesita alguna forma de determinar que la contraseña es correcta. Muchos de los primeros sistemas informáticos almacenaban las contraseñas de todas sus cuentas en texto plano en un archivo. En circunstancias normales, el sistema protegía las contraseñas de modo que solo los usuarios privilegiados y las utilidades del sistema operativo pudieran acceder a ellas. Sin embargo, bien por accidente, bien por un error de programación o por un acto deliberado, un usuario no privilegiado podría acceder al contenido de este archivo. Para muestra un botón:</p>
+<p>Una de las situaciones más memorables ocurrió a principios de la década de 1960 cuando un administrador del sistema en el sistema CTSS del MIT estaba editando el archivo de contraseñas y otro administrador del sistema estaba editando el mensaje diario que se imprime en el terminal de todos al iniciar sesión. Debido a un error de diseño del software, los archivos temporales del editor de los dos usuarios se intercambiaron y, por lo tanto, durante un tiempo, el archivo de contraseña se imprimió en cada terminal cuando se iniciaba sesión.</p>
+<p>El peligro real que planteaban estos sistemas es que los usuarios pueden hacer copias del archivo de contraseñas y robarlas sin el conocimiento del administrador del sistema.</p>
+<p>Unix/Linux evitan este problema al no mantener las contraseñas reales en ninguna parte del sistema. En su lugar, Unix/Linux almacenan un valor que es generado mediante el uso de la contraseña para cifrar un bloque de bits con una función unidireccional llamada crypt(); el resultado del cálculo se almacenaba tradicionalmente en /etc/passwd. Cuando se intenta iniciar sesión, el programa /bin/login no descifra la contraseña almacenada. En su lugar, /bin/login toma la contraseña que ingresó, la usa para transformar otro bloque de ceros y compara el bloque recién transformado con el bloque almacenado en el archivo /etc/passwd. Si los dos resultados cirfrados coinciden, el sistema lo deja entrar.</p>
+<h5 id="la-funcion-de-cifrado-tradicional-crypt">La función de cifrado tradicional crypt()</h5>
+<p>El algoritmo que usa crypt() tradicionalmente se basa en el Estándar de cifrado de datos (DES) del Instituto Nacional de Estándares y Tecnología (NIST). En funcionamiento normal, DES utiliza una clave de 56 bits (8 caracteres ASCII de 7 bits, por ejemplo) para cifrar bloques de texto original o texto sin cifrar, que resultaban tener 64 bits de longitud. Los bloques de 64 bits resultantes de texto cifrado o texto cifrado no se pueden descifrar fácilmente al texto sin formato original sin conocer la clave original de 56 bits.</p>
+<p>Actualmente este algoritmo ha sido sustituido por unos mucho más seguros y robustos.</p>
+<h5 id="echandole-salt">Echándole "salt"</h5>
+<p>A medida que los ordenadores aumentaban de potencia y los algoritmos de cifrado fueron empezando a considerarse inseguros por ello, se inventaron nuevas formas de fortificarlos. Una de ellas fue el elemento conocido como "salt".</p>
+<p>En criptografía, la sal (en inglés, salt) comprende bits aleatorios que se usan como una de las entradas en una función derivadora de claves. La otra entrada es habitualmente una contraseña. La salida de la función derivadora de claves se almacena como la versión cifrada de la contraseña. </p>
+<p>En definitiva, el salt es una cadena de caracteres aleatorios que se concatenan con la contraseña antes de cifrarla para dificultad en gran medida su descifrado por un atacante.</p>
+<p>Los datos con sal complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de sal duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de sal se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la sal no. </p>
+<p>El beneficio aportado por usar una contraseña con sal es que un ataque simple de diccionario contra los valores cifrados es impracticable si la sal es lo suficientemente larga.</p>
+<p>Así el formato del contenido del archivo /etc/shadow es:</p>
+<p><img alt="" src="../../img/shadow.jpg" /></p>
+<p>El campo a la derecha del nombre de usuario indica qué algoritmo se ha utilizado para cifrar la contraseña junto con el salt del tercer campo. Por curiosidad, algunos de estos algorimos son:</p>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Algoritmo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1$</td>
+<td>MD5</td>
+</tr>
+<tr>
+<td>$2a$</td>
+<td>Blowfish</td>
+</tr>
+<tr>
+<td>$2y$</td>
+<td>Blowfish</td>
+</tr>
+<tr>
+<td>$5$</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>$6$</td>
+<td>SHA-512</td>
+</tr>
+</tbody>
+</table>
+<p>Los signos del dólar delimitan estos dos campos.</p>
 <h2 id="principales-comandos-para-manejarse-en-el-terminal">Principales comandos para manejarse en el terminal</h2>
+<h3 id="crear-archivos-y-directorios">Crear archivos y directorios</h3>
+<p>A modo de tutorial, puede ser interesante seguir los comandos que aquí se muestran. Para ello, en primer lugar vamos a crear un subdirectorio dentro del directorio /tmp y nos ubicaremos dentro de ese subdirectorio:</p>
+<div class="highlight"><pre><span></span><code>mkdir /tmp/tutorial
+<span class="nb">cd</span> /tmp/tutorial
+</code></pre></div>
+<p>El comando mkdir es una abreviatura de "make directory" y se utiliza para crear nuevos directorios vacíos. Permite incluso crear varios directorios en un sólo comando utilizando el número de parámetros o argumentos adecuado:</p>
+<p><div class="highlight"><pre><span></span><code>mkdir dir1 dir2 dir3
+</code></pre></div>
+Si quisiéramos listar los directorios creados, podríamos utilizar el comando para ello:</p>
+<p><div class="highlight"><pre><span></span><code>ls
+</code></pre></div>
+<img alt="" src="../../img/comandos1.png" /></p>
+<p>Podríamos incluso darle una vuleta de tuerca al comando. Ya que los directorios que crea están vacíos, pero si quisiéramos crear una carpeta con subdirectorios en su interior utilizando un único comando, haríamos:</p>
+<p><div class="highlight"><pre><span></span><code>mkdir -p dir4/dir5/dir6
+ls
+</code></pre></div>
+El "-p" es lo que se conoce como un <em>switch</em>, que no son más que distintas opciones para modificar el comportamiento de un comando.</p>
+<p>Y podríamos movernos por los subdirectorios para comprobar que, efectivamente, se han creado:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> dir4
+ls
+<span class="nb">cd</span> dir5
+ls
+<span class="nb">cd</span> ../..
+</code></pre></div>
+<p>Ahora que ya sabemos cómo crear varios directorios simplemente pasándolos como argumentos separados al mkdircomando. Pero supongamos que queremos crear un directorio con un espacio en el nombre. Vamos a intentarlo:</p>
+<p><div class="highlight"><pre><span></span><code>mkdir otro directorio
+ls
+</code></pre></div>
+Podéis intentar escribir esto en el terminal o, si sóis un poco suspicaces, os habréis dado cuenta de lo que pasará. Exactamente, se crearan dos directorios distintos.</p>
+<p>Si queremos trabajar con espacios en nombres de archivos o directorios, necesitamos <strong>"escaparlos"</strong>. Éste es un termino informático que hace referencia a códigos especiales para decirle a la máquina que determinados caracteres y símbolos los trate de forma diferente a lo normal. Como ejemplo:</p>
+<p><div class="highlight"><pre><span></span><code>mkdir <span class="s2">&quot;carpeta 1&quot;</span>
+mkdir <span class="s1">&#39;carpeta 2&#39;</span>
+mkdir carpeta<span class="se">\ </span><span class="m">3</span>
+mkdir <span class="s2">&quot;carpeta 4&quot;</span> <span class="s2">&quot;carpeta 5&quot;</span>
+mkdir -p <span class="s2">&quot;carpeta 6&quot;</span>/<span class="s2">&quot;carpeta 7&quot;</span>
+ls
+</code></pre></div>
+Todos estos comandos crearán carpetas independientes y con espacios en los nombres. Debido a lo engorroso de tener que escapar este tipo de caracteres cada vez que se utilizan en el terminal, la tendencia es usar nombres sin espacios, sustituyendo estos por guiones ("-") o guiones bajos ("_")
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div></p>
+<h3 id="moviendo-y-manipulando-archivos">Moviendo y manipulando archivos</h3>
+<h3 id="un-poco-de-fontaneria-tuberias">Un poco de fontanería (tuberías)</h3>
+<h3 id="la-linea-de-comandos-y-el-superusuario">La línea de comandos y el superusuario</h3>
+<h3 id="archivos-ocultos">Archivos ocultos</h3>
                 
               
               
@@ -1038,7 +1110,7 @@ Después de configurar el sticky bit, los archivos en público solo pueden ser e
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.expand", "navigation.top", "navigation.indexes"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
