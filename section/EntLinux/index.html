@@ -443,6 +443,19 @@
     Creando archivos usando la redirección
   </a>
   
+    <nav class="md-nav" aria-label="Creando archivos usando la redirección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-proposito-de-las-mayusculas-y-minusculas" class="md-nav__link">
+    A propósito de las mayúsculas y minúsculas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1047,21 +1060,51 @@ No se imprimirá nada por pantalla puesto que hemos redirigido la salida del com
 ls
 </code></pre></div>
 Y para ver el contenido de los archivos podemos utilizar nuevamente "cat". Incluso podríamos pasarle el nombre de los 3 archivos simultánemamente como argumentos:</p>
+<p><div class="highlight"><pre><span></span><code>cat test_1.txt test_2.txt test_3.txt
+</code></pre></div>
+Cuando desee pasar varios nombres de archivo a un solo comando, existen algunos atajos útiles que pueden ahorrarle mucho escribir si los archivos tienen nombres similares. Se puede utilizar un signo de interrogación ("?") Para indicar "cualquier carácter" dentro del nombre del archivo. Se puede utilizar un asterisco (”*”) para indicar “cero o más caracteres”. A veces se los denomina caracteres "comodín". Un par de ejemplos pueden ayudar, los siguientes comandos hacen lo mismo:</p>
 <div class="highlight"><pre><span></span><code>cat test_1.txt test_2.txt test_3.txt
+cat test_?.txt
+cat test_*
 </code></pre></div>
-<p><div class="highlight"><pre><span></span><code>
+<div class="admonition warning">
+<p class="admonition-title">Atención<p>Precisamente por las carácteres comodín en los comandos, tampoco es recomendable usar signos de puntuación en los nombres de los archivos, de otra forma habría que "escapar" estos caracteres a la hora de trabajar en la línea de comandos con los nombres de los archivos</p>
+</p>
+</div>
+<p>Observando la salida de <code>ls</code>, se puede ver que los únicos archivos o carpetas que comienzan por "t" son los tres archivos de prueba que acabamos de crear, por lo que incluso se podría simplificar ese último comando aún más <code>cat t*</code>, lo que significa "concatenar todos los archivos cuyos nombres comienzan con una t y van seguidos de cero o más caracteres ”. Usemos esta capacidad para unir todos nuestros archivos en un solo archivo nuevo y luego verlo:</p>
+<div class="highlight"><pre><span></span><code>cat t* &gt; combinado.txt
+cat combinado.txt
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+<p>Hay que tener cuidado puesto que la shell borra todo el contenido del archivo antes de escribir la salida del comando <code>cat</code> en él. Debido a esto, debe tener mucha precaución al usar la redirección para asegurarse de no sobrescribir accidentalmente un archivo que necesita. Si lo que queremos es añadir al final del archivo en lugar de reemplazar el contenido del mismo, debemos poner un doble símbolo de "mayor que":</p>
+<div class="highlight"><pre><span></span><code>cat t* &gt;&gt; combinado.txt
+<span class="nb">echo</span> <span class="s2">&quot;¡He añadido una línea!&quot;</span> &gt;&gt; combinado.txt
+cat combinado.txt
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+<p>Cuando el contenido del archivo es mayor de lo que se puede mostrar en la terminal, se necesita utilizar lo que se conoce como <strong><em>pager</em></strong> para que pagine la salida por el terminal. El pager más antiguo era <code>more</code> porque colocaba una línea de texto que decía "--More--" para indicar que aún había contenido por mostrar. </p>
+<p>Posteriormente surgió el pager <code>less</code> con el fin de reemplazar a <code>more</code>.</p>
+<p><div class="highlight"><pre><span></span><code>less archivo_muy_largo.txt
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+Al examinar un archivo utilizando <code>less</code>, se pueden utilizar las teclas de flecha arriba, flecha abajo, Re Pág, Av Pág, Inicio y Fin para desplazarse a través del fichero.</p>
+<h5 id="a-proposito-de-las-mayusculas-y-minusculas">A propósito de las mayúsculas y minúsculas</h5>
+<p>Los sistemas Unix son "case sensitive", es decir, distinguen entre mayúsculas y minúsculas, es decir, consideran que “A.txt” y “a.txt” son dos archivos diferentes. Ejecutando los siguientes comandos se terminaría con tres archivos distintos:</p>
+<p><div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;Con minusculas&quot;</span> &gt; a.txt
+<span class="nb">echo</span> <span class="s2">&quot;Con mayusculas&quot;</span> &gt; A.TXT
+<span class="nb">echo</span> <span class="s2">&quot;Ambas mezcladas&quot;</span> &gt; A.txt
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+Se debe tener precaución con esto puesto que Windows es "case insensitive" y no distinguiría entre esos tres archivos, los trataría como uno solo.</p>
+<div class="admonition note">
+<p class="admonition-title">Buenas prácticas de nomenclatura</p>
+<p>Cuando se considera tanto la distinción entre mayúsculas y minúsculas como el escape, una buena regla general es mantener los nombres de los archivos en minúsculas, con solo letras, números, guiones bajos y guiones. </p>
+<p>Además, aunque en linux los archivos no tienen extensión, se la pondremos con el fin de facilitar el trabajo.</p>
+</div>
+<h3 id="moviendo-y-manipulando-archivos">Moviendo y manipulando archivos</h3>
+<p>Ahora que ya hemos aprendido a crear archivos, vemos que tareas comunes podemos realizar con ellos.</p>
+<p>Por ejemplo, si queremos mover nuestro archivo <em>combinado.txt</em> al directorio <em>dir1</em>, usando el comando <code>mv (move)</code>:</p>
+<p><div class="highlight"><pre><span></span><code>mv combinado.txt dir1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
+Para confirmar que el comando se ha ejecutado con éxito podemos utilizar el comando <code>ls</code> para ver que el fichero ya no está en el directorio de trabajo, luego con  <code>cd dir1</code> cambiar a ese directorio, hacer  <code>ls</code> para ver que ahora el fichero está allí, y luego ```cd ..````para movernos al directorio de trabajo nuevamente. </p>
+<p>O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasando una ruta directamente al comando <code>ls</code> consultar directamente el contenido de ese directorio:</p>
+<p><div class="highlight"><pre><span></span><code>ls dir1
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div>
@@ -1089,7 +1132,6 @@ Y para ver el contenido de los archivos podemos utilizar nuevamente "cat". Inclu
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div></p>
-<h3 id="moviendo-y-manipulando-archivos">Moviendo y manipulando archivos</h3>
 <h3 id="un-poco-de-fontaneria-tuberias">Un poco de fontanería (tuberías)</h3>
 <h3 id="la-linea-de-comandos-y-el-superusuario">La línea de comandos y el superusuario</h3>
 <h3 id="archivos-ocultos">Archivos ocultos</h3>
