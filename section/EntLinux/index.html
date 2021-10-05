@@ -259,6 +259,110 @@
     Estructura de ficheros
   </a>
   
+    <nav class="md-nav" aria-label="Estructura de ficheros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directorio-raiz-o" class="md-nav__link">
+    Directorio raíz o "/"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorios-bin-sbin" class="md-nav__link">
+    Directorio/s bin, sbin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-boot" class="md-nav__link">
+    Directorio /boot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-dev" class="md-nav__link">
+    Directorio /dev
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-etc" class="md-nav__link">
+    Directorio /etc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-lib" class="md-nav__link">
+    Directorio lib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-media" class="md-nav__link">
+    Directorio media
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-opt" class="md-nav__link">
+    Directorio opt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-proc" class="md-nav__link">
+    Directorio proc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-root" class="md-nav__link">
+    Directorio /root
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-tmp" class="md-nav__link">
+    Directorio tmp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-usr" class="md-nav__link">
+    Directorio usr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-var" class="md-nav__link">
+    Directorio var
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directorio-home" class="md-nav__link">
+    Directorio home
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -568,8 +672,82 @@
 </li>
 </ul>
 <p><strong>Todo en Linux es un archivo</strong>, por lo que saber cómo manipularlos es muy importante. Así pues, en la sección correspondiente, veremos las operaciones básicas con archivos mediante el terminal.</p>
-<p>El sistema de archivos de Linux es jerárquico. Describe un árbol de directorios y subdirectorios, a partir de un elemento básico llamado raíz o root directory.</p>
+<p>La estructura de los directorios de Linux, así como su contenido y funciones, viene definida en el denominado Filesystem Hierarchy Standard o FHS por sus siglas en inglés, que en otras palabras viene a ser el estándar de jerarquía para los sistemas de archivos en sistemas Linux y otros derivados de UNIX.</p>
+<p>Como podéis ver en la siguiente imagen, todo el árbol de parte de una raíz común denominada root y que se simboliza por una barra inclinada. Aún así, esto no significa que varios de ellos no puedan estar en particiones separadas del resto. De hecho, en muchas distros GNU/Linux es una práctica muy común el hecho ubicar ciertos directorios en particiones separadas del resto.</p>
 <p><img alt="" src="../../img/f_struc.png" /></p>
+<p>La FHS distingue entre lo que serían directorios estáticos, que son aquellos que contienen binarios, bibliotecas, documentación, etc., de los dinámicos, que son aquellos que requieren de acciones más a menudo, tales como copias de seguridad, etc.</p>
+<p>También podemos diferencias claramente lo que son los directorios compartibles, que significa que contienen ficheros que pueden utilizarse desde otros dispositivos, de los no compartibles, que solo pueden utilizarse desde el dispositivo en el que se encuentran.</p>
+<h3 id="directorio-raiz-o">Directorio raíz o <em>"/"</em></h3>
+<p>Toda la estructura de directorios en los sistemas basados en UNIX parte de un directorio raíz también llamado directorio root y que se simboliza por una barra inclinada o /. De este directorio, es desde donde nacen todo el resto de directorios, independientemente que estén almacenados físicamente en discos o unidades separadas.</p>
+<p>Cualquier dirección de archivo o carpeta en Linux empieza por el directorio raíz o /, seguido de todos los directorios y subdirectorios que que lo contienen, separados cada uno de ellos por /.</p>
+<p><img alt="" src="../../img/directorios1.webp" /></p>
+<p>A continuación conocerás con más en detalle a todos los directorios principales que parten del directorio raíz, junto con sus subdirectorios más importantes y los ficheros que suelen contener.</p>
+<h3 id="directorios-bin-sbin">Directorio/s <em>bin, sbin</em></h3>
+<p>El directorio <strong>/bin</strong> es un directorio estático y es donde se almacenan todos los binarios necesarios para garantizar las funciones básicas a nivel de usuario. Solo almacena los ejecutables de usuario, ya que los binarios necesarios para tareas administrativas gestionadas por el usuario root o superusuario del sistema se encuentran en el directorio /sbin.</p>
+<p>Incluye también los binarios que permiten la ejecución de varias utilidades estándar de la terminal de Linux, concretamente cat, cd, cp, echo, grep, gzip, kill, ls, mv, rm, ping, su, ps, tar y vi.</p>
+<p>El directorio /sbin hace lo mismo pero para los binarios relativos tareas propias del sistema operativo, y que solamente pueden ser gestionadas por el usuario root, tales como el arranque, tareas de restauración, reparación, etc.</p>
+<h3 id="directorio-boot">Directorio <em>/boot</em></h3>
+<p>Es un directorio estático y contiene los archivos necesarios para arrancar el sistema. Los archivos del cargador de arranque GRUB y los kernels de Linux se almacenan aquí, por ejemplo. Sin embargo, los archivos de configuración del cargador de arranque no se encuentran aquí, están en / etc con los otros archivos de configuración.</p>
+<p>A la hora de instalar el sistema es importante prever bien el espacio que se le vaya a dar a la partición, ya que a la larga, con la acumulación de diferentes actualizaciones del Kernel, es común que se quede sin espacio. Si esto sucede, se pueden tener problemas a la hora de instalar futuras actualizaciones del núcleo, y será necesario hacer limpieza de versiones antiguas del kernel.</p>
+<h3 id="directorio-dev">Directorio <em>/dev</em></h3>
+<p>Este directorio incluye todos los dispositivos de almacenamiento, en forma de archivos especiales, conectados al sistema. Es decir, cualquier disco duro, partición, memoria USB, o CDROM conectado al sistema y que el sistema pueda entender como un volumen lógico de almacenamiento.</p>
+<p>Siendo esto así, veréis que la ruta en la que se encuentra cualquier volumen (partición o dispositivo externo) conectado al sistema siempre empieza por /dev.</p>
+<p>Este es el directorio que contiene, por decirlo de algún modo, la información de cada uno de los volúmenes, a diferencia del directorio <code>/media</code>, que veremos más adelante, que lo que contiene son solo los puntos de montaje, pero no la información real de estos volúmenes.</p>
+<p>Para ver esto en la práctica, si abres una ventana de terminal y ejecutas el comando sudo <code>fdisk -l</code>, verás la estructura de particiones de tu sistema. En una instalación típica de cualquier distro GNU/Linux suele ser la siguiente:</p>
+<div class="highlight"><pre><span></span><code>/dev/sda1 - Partición principal
+/dev/sda2 - Partición extendida 
+/dev/sda5 - Partición Swap
+</code></pre></div>
+<p>Estos no son archivos reales como los conocemos, pero aparecen como archivos; por ejemplo, <code>/dev/sda</code> representa la primera unidad SATA del sistema.</p>
+<p>Eso en cuanto a particiones. Si se trata de un dispositivo externo, el volumen estará igualmente dentro de /dev, pero en este caso varía el nombre que el sistema le asigna a dicho volumen. Generalmente la estructura suele ser la siguiente (ejecutando nuevamente el comando sudo fdisk -l con un dispositivo externo conectado puede comprobarse).</p>
+<div class="highlight"><pre><span></span><code>/dev/sdb1
+/dev/sdb2
+/dev/sdb3
+...
+</code></pre></div>
+<p>Este directorio también contiene pseudodispositivos, que son dispositivos virtuales que en realidad no se corresponden con el hardware. Por ejemplo, <code>/dev/random</code> produce números aleatorios. Otro ejemplo sería el de <code>/dev/null</code>, un dispositivo especial que no produce salida y descarta automáticamente todas las entradas; cuando canaliza la salida de un comando a <code>/dev/null</code>, la descarta.</p>
+<h3 id="directorio-etc">Directorio <em>/etc</em></h3>
+<p>El directorio <code>/etc</code> contiene archivos de configuración, que generalmente se pueden editar a mano en un editor de texto. Se debe tener en cuenta que el directorio <code>/etc</code> contiene archivos de configuración de todo el sistema, además de las aplicaciones y programas instaladas posteriormente; los archivos de configuración específicos del usuario se encuentran en el directorio de inicio de cada usuario.</p>
+<p>Es un directorio que debería contener únicamente ficheros de configuración, y no debería contener binarios.</p>
+<h3 id="directorio-lib">Directorio <em>lib</em></h3>
+<p>Incluye las bibliotecas esenciales que son necesarias para que se puedan ejecutar correctamente todos los binarios que se encuentran en los directorios <code>/bin</code> y <code>/sbin</code>, así como los módulos del propio kernel.</p>
+<p>En los sistemas operativos de 64 bits, además de <code>/lib</code> existe otro directorio denominado <code>/lib64</code>, referida a las bibliotecas para aplicaciones de 64 bits.</p>
+<h3 id="directorio-media">Directorio <em>media</em></h3>
+<p>Representa el punto de montaje de todos los volúmenes lógicos que se montan temporalmente. Es decir, El directorio <code>/media</code> contiene subdirectorios donde se montan los dispositivos de medios extraíbles insertados en el ordenador.</p>
+<p>En la mayoría de distribuciones GNU/Linux, desde hace ya algún tiempo, cada vez que se monta una unidad externa, partición, etc., esta se monta dentro del directorio /media y a su vez dentro de un directorio especifico dependiendo del usuario del sistema que monta el volumen.</p>
+<p>De este modo, si en un sistema hay varios usuarios, pongamos User1 y User2, los puntos de montaje de los volúmenes que montan cada uno de ellos se mostraran en directorios separados tal como así:</p>
+<div class="highlight"><pre><span></span><code>/media/User1
+/media/User2
+</code></pre></div>
+<h3 id="directorio-opt">Directorio <em>opt</em></h3>
+<p>El directorio <code>/opt</code> contiene subdirectorios para paquetes de software opcionales. Es comúnmente utilizado por software propietario que no obedece a la jerarquía del sistema de archivos estándar; por ejemplo, un programa propietario puede volcar sus archivos en <code>/opt/ NombreAplicacion</code> cuando se instala.</p>
+<p>Antiguamente se solía utilizar el directorio mnt para estas funciones, pero actualmente, la mayoría de distribuciones hacen uso de media.</p>
+<h3 id="directorio-proc">Directorio <em>proc</em></h3>
+<p>Este directorio contiene información de los procesos y aplicaciones que se están ejecutando en un momento determinado en el sistema, pero realmente no guarda nada como tal, ya que lo que almacena son archivos virtuales, por lo que el contenido de este directorio es nulo.</p>
+<h3 id="directorio-root">Directorio <em>/root</em></h3>
+<p>El directorio <code>/root</code> es el directorio de inicio del usuario root. En lugar de estar ubicado en <code>/home/root</code>, está ubicado en <code>/root</code>. Es distinto de <code>/</code>, que es el directorio raíz del sistema.</p>
+<h3 id="directorio-tmp">Directorio <em>tmp</em></h3>
+<p>Las aplicaciones almacenan archivos temporales en el directorio <code>/tmp</code>. Estos archivos generalmente se eliminan cada vez que se reinicia su sistema y pueden ser eliminados en cualquier momento por utilidades como tmpwatch.</p>
+<p>Las aplicaciones programadas para almacenar archivos en este directorio deben asumir que solo serán recuperables en la sesión actual. En este sentido, hay otro subdirectorio, <code>/var/tmp</code>, dispuesto igualmente para el almacenamiento de archivos temporales, pero cuyo contenido no se borra de forma automática tras el reinicio del sistema.</p>
+<h3 id="directorio-usr">Directorio <code>usr</code></h3>
+<p>El directorio <code>/usr</code> contiene aplicaciones y archivos utilizados por los usuarios, a diferencia de las aplicaciones y archivos utilizados por el sistema,  incluyendo todo el software instalado a través de los gestores de paquetes de cada distribución. Por ejemplo, las aplicaciones no esenciales se encuentran dentro del directorio <code>/usr/bin</code> en lugar del directorio <code>/bin</code> y los binarios de administración del sistema no esenciales se encuentran en el directorio <code>/usr/sbin</code> en lugar del directorio <code>/sbin</code>. Las bibliotecas para cada uno se encuentran dentro del directorio <code>/usr/lib</code>. El directorio <code>/usr</code> también contiene otros directorios; por ejemplo, los archivos independientes de la arquitectura, como los gráficos, se encuentran en <code>/usr/share</code>:</p>
+<div class="highlight"><pre><span></span><code>/usr/bin
+/usr/include
+/usr/lib
+/usr/local
+/usr/sbin
+/usr/share
+/usr/src
+</code></pre></div>
+<p>El directorio <code>/usr/local</code> es donde se instalan las aplicaciones compiladas localmente de forma predeterminada; esto evita que arruinen el resto del sistema</p>
+<h3 id="directorio-var">Directorio <em>var</em></h3>
+<p>Este directorio contiene varios archivos con información del sistema, como archivos de logs, emails de los usuarios del sistema, bases de datos, información almacenada en la caché o información relativa a los paquetes de aplicaciones almacenados en <code>/opt</code>. En cierto modo se podría decir que actúa a modo de registro del sistema.</p>
+<p>Podría decirse que el directorio <code>/var</code> es la contraparte "escriturable" del directorio <code>/usr</code>, que debe ser de solo lectura en el funcionamiento normal. Los archivos de registro y todo lo demás que normalmente se escribiría en <code>/usr</code> durante el funcionamiento normal se escriben en el directorio <code>/var</code>. </p>
+<h3 id="directorio-home">Directorio <em>home</em></h3>
+<p>El directorio <code>/home</code> contiene una carpeta de inicio para cada usuario. Por ejemplo, si el nombre de usuario es raul, habrá una carpeta de inicio ubicada en <code>/home/raul</code>. Esta carpeta de inicio contiene los archivos de datos del usuario y los archivos de configuración específicos del usuario (configuraciones de programas, por ejemplo). </p>
+<p>Cada usuario solo tiene acceso de escritura únicamente a su propia carpeta de inicio y debe convertirse en root para poder tener privilegios que le permitan modificar otros archivos en el sistema.</p>
+<p>Para visualizar los ficheros ocultos dentro del directorio individual de cada usuario, se puede usar la combinación de comandos CTRL + H en modo gráfico. Todos los archivos y carpetas ocultas en Linux empiezan por un punto, seguido del nombre.</p>
+<p>En muchas distribuciones es una práctica recomendada el hecho de ubicar el directorio <code>/home</code> es una partición separada del resto, por tal de facilitar que, en caso de reinstalar el sistema operativo, puedas mantener intacta la partición de la <code>/home</code>, y de este modo mantener todos los archivos personales.</p>
 <h2 id="usuarios-y-grupos">Usuarios y grupos</h2>
 <p>Un usuario es cualquiera que use un ordenador. En este caso, estamos describiendo los nombres que representan a esos usuarios. Puede ser Pol o Martí, y pueden usar los nombres superc0der o Pirate en lugar de su nombre real. Lo único que importa es que la computadora tenga un nombre para cada cuenta que cree, y es este nombre por el que una persona obtiene acceso para usar la computadora. Algunos servicios del sistema también se ejecutan utilizando cuentas de usuario restringidas o privilegiadas.</p>
 <p>La administración de los usuarios se realiza con fines de seguridad al limitar el acceso de ciertas maneras específicas. El superusuario (root) tiene acceso completo al sistema operativo y su configuración; está destinado solo para uso administrativo. Los usuarios sin privilegios pueden usar los programas su y sudo para la escalada de privilegios controlada.</p>
@@ -1104,9 +1282,9 @@ Se debe tener precaución con esto puesto que Windows es "case insensitive" y no
 </code></pre></div>
 Para confirmar que el comando se ha ejecutado con éxito podemos utilizar el comando <code>ls</code> para ver que el fichero ya no está en el directorio de trabajo, luego con  <code>cd dir1</code> cambiar a ese directorio, hacer  <code>ls</code> para ver que ahora el fichero está allí, y luego <code>cd ..</code> para movernos al directorio de trabajo nuevamente. </p>
 <p>O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasando una ruta directamente al comando <code>ls</code> consultar directamente el contenido de ese directorio:</p>
-<p><div class="highlight"><pre><span></span><code>ls dir1
+<div class="highlight"><pre><span></span><code>ls dir1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+<p><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div>
