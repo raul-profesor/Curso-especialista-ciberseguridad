@@ -1281,14 +1281,31 @@ Se debe tener precaución con esto puesto que Windows es "case insensitive" y no
 <p><div class="highlight"><pre><span></span><code>mv combinado.txt dir1
 </code></pre></div>
 Para confirmar que el comando se ha ejecutado con éxito podemos utilizar el comando <code>ls</code> para ver que el fichero ya no está en el directorio de trabajo, luego con  <code>cd dir1</code> cambiar a ese directorio, hacer  <code>ls</code> para ver que ahora el fichero está allí, y luego <code>cd ..</code> para movernos al directorio de trabajo nuevamente. </p>
-<p>O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasando una ruta directamente al comando <code>ls</code> consultar directamente el contenido de ese directorio:</p>
-<div class="highlight"><pre><span></span><code>ls dir1
+<p><strong>Los dos puntos nos permiten indicarle a un comando el directorio inmediatamente superior al que estamos.
+</strong>
+O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasando una ruta directamente al comando <code>ls</code> consultar directamente el contenido de ese directorio:</p>
+<p><div class="highlight"><pre><span></span><code>ls dir1
 </code></pre></div>
-<p><div class="highlight"><pre><span></span><code>
+Si ahora quisiéramos devolver el archivo combinado.txt al directorio padre, tendríamos dos opciones:</p>
+<ul>
+<li>
+<p>Entrar en <code>dir1</code> con <code>cd</code> y usar <code>mv combined.txt ..</code>. </p>
+</li>
+<li>
+<p><strong>De la misma manera que dos puntos ( ..) representan el directorio padre, por lo que .se puede usar un solo punto ( ) para representar el directorio de trabajo actual</strong> Como sabemos que solo hay un archivo en <code>dir1</code> , podemos usar “*” para que coincida con cualquier nombre de archivo en ese directorio, ahorrándonos escribir más comandos. Nuestro comando para mover el archivo de nuevo al directorio de trabajo se convierte en esto (se debe tener en cuenta el espacio antes del punto, ya que hay dos parámetros que se pasan a <code>mv</code>):</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>mv dir1/* .
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+<p>El comando <code>mv</code> nos permite mover más de un fichero a la vez.  Si se le pasa más de dos argumentos, el último se toma como el directorio de destino y los otros se consideran archivos (o directorios) a mover:</p>
+<p><div class="highlight"><pre><span></span><code>mv combinado.txt test_* dir3 dir2
+ls
+ls dir2
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+Si quisiéramos mover una vez más el archivo <code>combinado.txt</code> a un directorio llamado dir6, que estará dentro del directorio dir5, que a su vez está dentro del directorio dir4 y todos ellos dentro de nuestro directorio de trabajo, haríamos:</p>
+<p><div class="highlight"><pre><span></span><code>mv dir2/combined.txt dir4/dir5/dir6
+ls dir2
+ls dir4/dir5/dir6wszx
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div>
