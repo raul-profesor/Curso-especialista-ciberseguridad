@@ -702,7 +702,7 @@
 <p>Incluye también los binarios que permiten la ejecución de varias utilidades estándar de la terminal de Linux, concretamente cat, cd, cp, echo, grep, gzip, kill, ls, mv, rm, ping, su, ps, tar y vi.</p>
 <p>El directorio /sbin hace lo mismo pero para los binarios relativos tareas propias del sistema operativo, y que solamente pueden ser gestionadas por el usuario root, tales como el arranque, tareas de restauración, reparación, etc.</p>
 <h3 id="directorio-boot">Directorio <em>/boot</em></h3>
-<p>Es un directorio estático y contiene los archivos necesarios para arrancar el sistema. Los archivos del cargador de arranque GRUB y los kernels de Linux se almacenan aquí, por ejemplo. Sin embargo, los archivos de configuración del cargador de arranque no se encuentran aquí, están en / etc con los otros archivos de configuración.</p>
+<p>Es un directorio estático y contiene los archivos necesarios para arrancar el sistema. Los archivos del cargador de arranque GRUB y los kernels de Linux se almacenan aquí, por ejemplo. Sin embargo, los archivos de configuración del cargador de arranque no se encuentran aquí, están en <code>/etc</code> con los otros archivos de configuración.</p>
 <p>A la hora de instalar el sistema es importante prever bien el espacio que se le vaya a dar a la partición, ya que a la larga, con la acumulación de diferentes actualizaciones del Kernel, es común que se quede sin espacio. Si esto sucede, se pueden tener problemas a la hora de instalar futuras actualizaciones del núcleo, y será necesario hacer limpieza de versiones antiguas del kernel.</p>
 <h3 id="directorio-dev">Directorio <em>/dev</em></h3>
 <p>Este directorio incluye todos los dispositivos de almacenamiento, en forma de archivos especiales, conectados al sistema. Es decir, cualquier disco duro, partición, memoria USB, o CDROM conectado al sistema y que el sistema pueda entender como un volumen lógico de almacenamiento.</p>
@@ -735,8 +735,8 @@
 /media/User2
 </code></pre></div>
 <h3 id="directorio-opt">Directorio <em>opt</em></h3>
-<p>El directorio <code>/opt</code> contiene subdirectorios para paquetes de software opcionales. Es comúnmente utilizado por software propietario que no obedece a la jerarquía del sistema de archivos estándar; por ejemplo, un programa propietario puede volcar sus archivos en <code>/opt/ NombreAplicacion</code> cuando se instala.</p>
-<p>Antiguamente se solía utilizar el directorio mnt para estas funciones, pero actualmente, la mayoría de distribuciones hacen uso de media.</p>
+<p>El directorio <code>/opt</code> contiene subdirectorios para paquetes de software opcionales. Es comúnmente utilizado por software propietario que no obedece a la jerarquía del sistema de archivos estándar; por ejemplo, un programa propietario puede volcar sus archivos en <code>/opt/NombreAplicacion</code> cuando se instala.</p>
+<p>Antiguamente se solía utilizar el directorio <code>mnt</code> para estas funciones, pero actualmente, la mayoría de distribuciones hacen uso de media.</p>
 <h3 id="directorio-proc">Directorio <em>proc</em></h3>
 <p>Este directorio contiene información de los procesos y aplicaciones que se están ejecutando en un momento determinado en el sistema, pero realmente no guarda nada como tal, ya que lo que almacena son archivos virtuales, por lo que el contenido de este directorio es nulo.</p>
 <h3 id="directorio-root">Directorio <em>/root</em></h3>
