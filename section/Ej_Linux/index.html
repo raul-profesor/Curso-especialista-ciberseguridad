@@ -14,7 +14,7 @@
     
     
       
-        <title>Entornos Windows - Curso de especialista en ciberseguridad - Warm up</title>
+        <title>Ejercicios propuestos Linux - Curso de especialista en ciberseguridad - Warm up</title>
       
     
     
@@ -64,11 +64,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#entornos-windows" class="md-skip">
-          Saltar a contenido
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -95,7 +90,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Entornos Windows
+              Ejercicios propuestos Linux
             
           </span>
         </div>
@@ -251,18 +246,6 @@
             
   
   
-  
-    <li class="md-nav__item">
-      <a href="../Ej_Linux/" class="md-nav__link">
-        Ejercicios propuestos Linux
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
     
   
   
@@ -271,78 +254,23 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Entornos Windows
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Entornos Windows
+        Ejercicios propuestos Linux
       </a>
       
-        
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+    </li>
+  
+
+          
+            
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#windows-server-2019" class="md-nav__link">
-    Windows Server 2019
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#active-directory-y-gpos" class="md-nav__link">
-    Active Directory y GPOs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#actualizaciones-del-so" class="md-nav__link">
-    Actualizaciones del SO
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#manejo-de-credenciales" class="md-nav__link">
-    Manejo de credenciales
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#escalada-de-privilegios" class="md-nav__link">
-    Escalada de privilegios
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#edr" class="md-nav__link">
-    EDR
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+    <li class="md-nav__item">
+      <a href="../EntWin/" class="md-nav__link">
+        Entornos Windows
+      </a>
     </li>
   
 
@@ -378,13 +306,29 @@
               
                 
                 
-                <h1 id="entornos-windows">Entornos Windows</h1>
-<h2 id="windows-server-2019">Windows Server 2019</h2>
-<h2 id="active-directory-y-gpos">Active Directory y GPOs</h2>
-<h2 id="actualizaciones-del-so">Actualizaciones del SO</h2>
-<h2 id="manejo-de-credenciales">Manejo de credenciales</h2>
-<h2 id="escalada-de-privilegios">Escalada de privilegios</h2>
-<h2 id="edr">EDR</h2>
+                  <h1>Ejercicios propuestos Linux</h1>
+                
+                <ol>
+<li>
+<p>El primer ejercicio que os propongo es una suerte de <a href="https://es.wikipedia.org/wiki/Wargame_(hacking)">wargame</a>.</p>
+<p>Iremos a la página de <a href="https://overthewire.org/wargames/bandit/">overthewire</a> que disponer de varios retos, aunque nosotros nos centraremos en <strong>Bandit</strong>.</p>
+<p>En la página inicial a la que os lleva el link, explica el mecanismo del reto. Os debéis conectar vía ssh a la máquina <em>bandit.labs.overthewire.org</em>, al puerto <em>2220</em> con el usuario <em>bandit0</em> y el password <em>bandit0</em>. En Linux podéis utilizar directamente la línea de comandos, si estáis bajo un sistema Windows deberéis utilizar algún programa del tipo PuTTY, superPuTTY, MobaXterm o <a href="https://www.netadmintools.com/best-putty-alternatives">similares</a>.</p>
+<p><img alt="" src="../../img/bandit1.png" /></p>
+<p><img alt="" src="../../img/bandit2.png" /></p>
+<p>Una vez hecho eso, que es el level0, debéis ir al apartado del menú de la izquierda que os indicará que hacer para pasar de nivel, es decir, a <strong>Level 0 -&gt; Level 1</strong></p>
+<p><img alt="" src="../../img/bandit0.png" /></p>
+<p>En este menú nos indica el objetivo a conseguir en este nivel:</p>
+<p><img alt="" src="../../img/bandit3.png" /></p>
+<p>Es decir, tal y como explica ahí, el password para ir al siguiente nivel está localizado en el archivo <strong>readme</strong> que está en el home del usuario. Con este password y usando el usuario <strong>bandit1</strong>, podremos conectarnos igual que antes por SSH pero esta vez al nivel1.</p>
+<p>Os indica además, a modo de ayuda, algunos de los comandos que podéis llegar a necesitar para resolver el nivel. No tienen por qué ser todos, dependiendo de la forma en que lo solucionéis.</p>
+<p>El juego sigue este mecanismo para ir pasando de nivel. En ocasiones como pistas os pone los comandos a utilizar tal y como hemos visto y en otras os sugiere lecturas para afrontar el reto:</p>
+<p><img alt="" src="../../img/bandit4.png" /></p>
+<div class="admonition task">
+<p class="admonition-title">Tarea</p>
+<p>El objetivo sería completar todos los niveles o, en su defecto, llegar lo más lejos posible. Se habrá de aportar la contraseña de cada nivel así como una explicación de cómo se ha obtenido, a modo de prueba.</p>
+</div>
+</li>
+</ol>
                 
               
               
@@ -409,7 +353,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Pie">
       
         
-        <a href="../Ej_Linux/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Ejercicios propuestos Linux" rel="prev">
+        <a href="../EntLinux/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Entornos Linux" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -418,20 +362,20 @@
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Ejercicios propuestos Linux
+              Entornos Linux
             </div>
           </div>
         </a>
       
       
         
-        <a href="../webgrafia/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Webgrafía" rel="next">
+        <a href="../EntWin/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Entornos Windows" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Siguiente
               </span>
-              Webgrafía
+              Entornos Windows
             </div>
           </div>
           <div class="md-footer__button md-icon">

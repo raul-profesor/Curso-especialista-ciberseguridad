@@ -587,6 +587,19 @@
     Moviendo y manipulando archivos
   </a>
   
+    <nav class="md-nav" aria-label="Moviendo y manipulando archivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-archivos-y-carpetas" class="md-nav__link">
+    Eliminar archivos y carpetas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -619,6 +632,18 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ej_Linux/" class="md-nav__link">
+        Ejercicios propuestos Linux
+      </a>
     </li>
   
 
@@ -1304,7 +1329,7 @@ O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasand
 Si ahora quisiéramos devolver el archivo combinado.txt al directorio padre, tendríamos dos opciones:</p>
 <ul>
 <li>
-<p>Entrar en <code>dir1</code> con <code>cd</code> y usar <code>mv combined.txt ..</code>. </p>
+<p>Entrar en <code>dir1</code> con <code>cd</code> y usar <code>mv combinado.txt ..</code>. </p>
 </li>
 <li>
 <p><strong>De la misma manera que dos puntos ( ..) representan el directorio padre, por lo que .se puede usar un solo punto ( ) para representar el directorio de trabajo actual</strong> Como sabemos que solo hay un archivo en <code>dir1</code> , podemos usar “*” para que coincida con cualquier nombre de archivo en ese directorio, ahorrándonos escribir más comandos. Nuestro comando para mover el archivo de nuevo al directorio de trabajo se convierte en esto (se debe tener en cuenta el espacio antes del punto, ya que hay dos parámetros que se pasan a <code>mv</code>):</p>
@@ -1318,39 +1343,112 @@ ls
 ls dir2
 </code></pre></div>
 Si quisiéramos mover una vez más el archivo <code>combinado.txt</code> a un directorio llamado dir6, que estará dentro del directorio dir5, que a su vez está dentro del directorio dir4 y todos ellos dentro de nuestro directorio de trabajo, haríamos:</p>
-<p><div class="highlight"><pre><span></span><code>mv dir2/combined.txt dir4/dir5/dir6
+<p><div class="highlight"><pre><span></span><code>mv dir2/combinado.txt dir4/dir5/dir6
 ls dir2
 ls dir4/dir5/dir6
 </code></pre></div>
 Es decir, indicando las rutas adecuadas de directorios, podremos ejecutar este tipo de comandos desde cualquier lugar en el sistema de archivos o directorios.</p>
 <p>Si ahora lo que quisiéramos fuera hacer una copia del archivo <code>combinado.txt</code> en nuestro directorio de trabajo, podríamos hacer dicha copia y comprobarla con la siguiente secuencia de comandos:</p>
-<p><div class="highlight"><pre><span></span><code>cp dir4/dir5/dir6/combined.txt .
+<p><div class="highlight"><pre><span></span><code>cp dir4/dir5/dir6/combinado.txt .
 ls dir4/dir5/dir6
 ls
 </code></pre></div>
 Si además nos viéramos en la necesidad de cambiarle el nombre a un archivo o carpeta, Unix interpreta este hecho como que se está moviendo un archivo a otro, por ello haremos uso de <code>mv</code>, como por ejemplo:</p>
-<p><div class="highlight"><pre><span></span><code>mv backup_combined.txt combined_backup.txt
+<p><div class="highlight"><pre><span></span><code>mv backup_combinado.txt combinado_backup.txt
 ls
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+De la misma forma, <code>mv</code> nos permite renombrar directorios:</p>
+<div class="highlight"><pre><span></span><code>mv <span class="s2">&quot;carpeta 1&quot;</span> carpeta_1
+mv <span class="s2">&quot;carpeta 2&quot;</span> carpeta_2
+mv <span class="s2">&quot;carpeta 3&quot;</span> carpeta_3
+mv <span class="s2">&quot;carpeta 4&quot;</span> carpeta_4
+mv <span class="s2">&quot;carpeta 5&quot;</span> carpeta_5
+mv <span class="s2">&quot;carpeta 6&quot;</span> carpeta_6
+ls
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
+<h4 id="eliminar-archivos-y-carpetas">Eliminar archivos y carpetas</h4>
+<p>Ahora que ya sabemos cómo mover, copiar y renombrar archivos y directorios, únicamente nos queda saber cómo eliminarlos. Para ello usamos el comando <code>rm</code> (remove):</p>
+<p><div class="highlight"><pre><span></span><code>rm dir4/dir5/dir6/combinado.txt
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div></p>
+Además de archivos, se podría intentar eliminar directorios que no hagan falta, como por ejemplo:</p>
+<p><img alt="" src="../../img/comandos2.png" /></p>
+<p>¡Wow! ¿A qué se debe ese error? Pues que por motivos de seguridad o precaución, a pesar de que <code>rm</code> permite elminar miles de archivos con un único comando, no permite eliminar un directorio completo. Para ello necesitaremos el comando <code>rmdir</code>:</p>
+<p><img alt="" src="../../img/comandos3.png" /></p>
+<p>A pesar que las carpetas de la 1 a la 5 se han eliminado, las 6 nos ha dado un error. Esto es porque el comando <code>mkdir</code>, una vez más por motivos de precacución, exige que la carpeta esté vacía para eliminarla.</p>
+<p>No obstante, la tarea más habitual cuando <strong>realmente se está seguro</strong> de que se desea eliminar un directorio y todo lo que contiene, es utilizar el comando <code>rm</code> de forma recursiva, usando el switch u opción <code>-r</code>:</p>
+<p><img alt="" src="../../img/comandos4.png" /></p>
+<p><ins>Recordatorio</ins>: aunque <code>rm -r</code> es rápido y eficaz, también es peligroso. Es más seguro eliminar archivos explícitamente para borrar un directorio, luego <code>cd ..</code> al padre antes de usar <code>rmdir</code> para eliminarlo.</p>
+<div class="admonition warning">
+<p class="admonition-title">¡Peligro!<p>A diferencia de las interfaces gráficas, <code>rm</code> no mueve archivos a ninguna carpeta llamada "papelera" o similar. En cambio, los elimina total e irrevocablemente. Se debe tener mucho cuidado con los parámetros que usa con <code>rm</code> para asegurarno de que solo están eliminando los archivos deseados. Y se debe tener especial cuidado al usar comodines, ya que es fácil eliminar accidentalmente más archivos de los que se pretendía. Un carácter "espacio" equivocado en el comando puede cambiarlo por completo: <code>rm t*</code> significa "eliminar todos los archivos que comienzan con t", mientras que <code>rm t *</code> significa "eliminar el archivo t así como cualquier archivo cuyo nombre conste de cero o más caracteres, que sería todo en el ¡directorio! Si no se está seguro, se puede usar la opción <code>-i(interactive opcional)</code> del <code>rm</code> que pedirá que se confirme la eliminación de cada archivo.</p>
+</p>
+</div>
 <h3 id="un-poco-de-fontaneria-tuberias">Un poco de fontanería (tuberías)</h3>
+<p>A pesar de todos los avances técnicos de las últimas décadas, el texto sigue jugando un papel fundamental en la informática. La suerte es que en Linux existen múltiples herramientas excepcionales para el manejo de texto.</p>
+<p>Comenzando con algo simple, ¿cómo podríamos contar las líneas del archivo combinado.txt? Simple, con el comando <code>wc (word count)</code>, usando la opción <code>-l</code> con el fin de indicarle que únicamente queremos contar líneas:</p>
+<p><div class="highlight"><pre><span></span><code>wc -l combinado.txt
+</code></pre></div>
+De manera similar, si quisiéramos saber cuántos archivos y carpetas hay en nuestro directorio home (~) y contarlos, podríamos hacer lo siguiente:</p>
+<p><div class="highlight"><pre><span></span><code>ls ~ <span class="p">|</span> wc -l
+</code></pre></div>
+Esto es lo que se conoce como un <em>pipe</em> o tubería. La línea de comandos de Unix permite tomar la salida de un comando y con ella alimentar la entrada del siguiente comando. Esto es lo que conoce como <em>canalizar</em> los datos de un comando a otro y para ello se utiliza el carácter <strong>"|"</strong>.</p>
+<p>Los espacios alrededor del carácter de tubería no tienen importancia, este comando por ejemplo funcionaría perfectamente:</p>
+<p><div class="highlight"><pre><span></span><code>ls /etc<span class="p">|</span>wc -l
+</code></pre></div>
+¡Uf! Son bastantes archivos. Si quisiéramos enumerarlos todos, claramente llenaría más de una pantalla. Como ya hemos visto anteriormente, cuando un comando produce una gran cantidad de resultados, es mejor usar <code>less</code> para verlo, y ese consejo aún se aplica cuando se usa una tubería (recordad, presionad <strong>q</strong> para salir):</p>
+<p><div class="highlight"><pre><span></span><code>ls /etc <span class="p">|</span> less
+</code></pre></div>
+Una vuelta de tuerca más sería saber cuántas líneas sin repetir tiene el archivo <code>combinado.txt</code>, es decir, cuántas líneas son sin contar las repetidas. El comando que nos permite hacer esto en Unix es <code>uniq</code>:</p>
+<p><img alt="" src="../../img/comandos5.png" /></p>
+<p>Parece que se están eliminando muy pocas, si es que hay alguna, de nuestras líneas duplicadas. Para entender por qué, necesitamos mirar la documentación del comando.  La mayoría de las herramientas de línea de comandos vienen con un breve (y a veces no tan breve) manual de instrucciones, se accede a través del comando <code>man</code>. La salida se canaliza automáticamente a través del paginador <code>less</code>, por lo que podremos movernos hacia adelante y hacia atrás,presionando finalmente "q" cuando queramos salir:</p>
+<p><div class="highlight"><pre><span></span><code>man uniq
+</code></pre></div>
+<img alt="" src="../../img/comandos6.png" /></p>
+<p>El formato de las páginas de manual es a menudo conciso, se debe pensar en ellas más como una descripción general rápida de un comando que como un tutorial completo. A menudo son muy técnicas, pero generalmente se puede omitir la mayor parte del contenido y simplemente buscar los detalles de la opción o el argumento en el que estamos interesados.</p>
+<p>La página de manual de <code>uniq</code> es un ejemplo típico, ya que comienza con una breve descripción de una línea del comando, pasa a una sinopsis de cómo usarlo y luego tiene una descripción detallada de cada opción o parámetro. Pero aunque las páginas de manual son invaluables, también pueden ser impenetrables. Se han de utilizar mejor cuando se necesita un recordatorio de un interruptor/switch/opción o parámetro en particular, en lugar de como un recurso general para aprender a usar la línea de comandos. Sin embargo, la primera línea de la sección <strong>DESCRIPCIÓN</strong> responde a la pregunta de por qué no se han eliminado las líneas duplicadas: solo funciona en líneas coincidentes adyacentes.</p>
+<p>La pregunta, entonces, es cómo reorganizar las líneas en nuestro archivo para que las entradas duplicadas estén en líneas adyacentes. Si tuviéramos que ordenar el contenido del archivo alfabéticamente, eso sería suficiente. Unix ofrece un comando para hacer exactamente eso, <code>sort</code>. Una revisión rápida del man muestra que podemos pasar un nombre de archivo directamente al comando, así que veamos qué le hace a nuestro archivo:</p>
+<p><div class="highlight"><pre><span></span><code>sort combinado.txt <span class="p">|</span> less
+</code></pre></div>
+Deberíis poder ver que las líneas se han reordenado y ahora se han adecuado para conectarlas directamente con <code>uniq</code>. Finalmente podemos completar nuestra tarea de contar las líneas únicas en el archivo:</p>
+<div class="highlight"><pre><span></span><code>sort combinado.txt <span class="p">|</span> uniq <span class="p">|</span> wc -l
+</code></pre></div>
+<p><img alt="" src="../../img/comandos7.png" /></p>
+<p><img alt="" src="../../img/comandos8.png" /></p>
+<p>Como se puede ver, la capacidad de canalizar datos de un comando a otro, creando largas cadenas para manipular sus datos, es una herramienta poderosa. Por esta razón, veréis que se usan con bastante frecuencia en las línea de comandos. Una cadena larga de comandos puede parecer intimidante al principio, pero recordad que se puede dividir incluso la cadena más larga en comandos individuales (y mirar sus páginas de manual) para comprender mejor lo que está haciendo.</p>
 <h3 id="la-linea-de-comandos-y-el-superusuario">La línea de comandos y el superusuario</h3>
+<p>El superusuario es, como su nombre indica, un usuario con superpoderes. En los sistemas más antiguos, era un usuario real, con un nombre de usuario real (casi siempre “root”) que podía iniciar sesión como si tuviera la contraseña. </p>
+<p>En cuanto a esos superpoderes: root puede modificar o eliminar cualquier archivo en cualquier directorio del sistema, independientemente de quién sea el propietario; root puede reescribir las reglas del firewall o iniciar servicios de red que potencialmente podrían abrir la máquina a un ataque; root puede apagar la máquina incluso si otras personas todavía la están usando. En resumen, root puede hacer casi cualquier cosa, saltando fácilmente las salvaguardas que generalmente se implementan para evitar que los usuarios sobrepasen sus límites.</p>
+<p>Por supuesto, una persona que haya iniciado sesión como root es tan capaz de cometer errores como cualquier otra persona. Los anales de la historia de la informática están llenos de historias de un comando mal escrito que borró todo un sistema de archivos o que acabó con un servidor esencial. Además existe la posibilidad de un ataque malicioso: si un usuario inicia sesión como root y abandona su escritorio, no es demasiado complicado para un colega descontento saltar a su máquina y causar estragos.</p>
+<p>En un esfuerzo por reducir estos problemas, muchas distribuciones de Linux comenzaron a fomentar el uso del comando <code>su</code>. Es la abreviatura de 'superuser' y nos permite cambiar a otro usuario de la máquina sin tener que hacer logout y login de nuevo. Cuando se usa sin argumentos, asume que se desea cambiar al usuario root, pero puede pasarle un nombre de usuario para cambiar a una cuenta de usuario específica. Fomentando el uso de <code>su</code> el objetivo era persuadir a los administradores para que pasaran la mayor parte de su tiempo usando una cuenta normal, que sólo cambiaran a la cuenta de superusuario cuando lo necesitaran y luego usaran el comando <code>logout</code> (o el atajo Ctrl-D ) tan pronto como fuera posible para regresar a su usuario normal.</p>
+<p>Al minimizar la cantidad de tiempo que se pasa conectado como root , el uso de <code>su</code> reduce la ventana de oportunidad para cometer un error catastrófico. A pesar de eso, siendo la naturaleza humana lo que es, muchos administradores han sido culpables de dejar abiertos terminales de larga duración en los que solían hacer <code>su</code> para cambiar a la cuenta de root. En ese sentido, sufue solo un pequeño paso adelante en materia de seguridad.</p>
+<p>Cuando se utiliza <code>su</code>  toda la sesión del terminal se cambia al otro usuario. Los comandos que no necesitan acceso de root, algo tan mundano como <code>pwd</code> o <code>`ls</code>, se ejecutarían bajo los auspicios y permisos del superusuario, aumentando el riesgo de que un error en el programa cause problemas importantes. Peor aún, si pierde la pista de qué usuario está actuando en cada momento, se puede eejecutar un comando que fuera bastante benigno cuando se ejecuta como usuario, pero que podría destruir todo el sistema si se ejecuta como root .</p>
+<p>Es mejor deshabilitar la cuenta de root por completo y luego, en lugar de permitir sesiones de terminal de larga duración con poderes peligrosos, requerir que el usuario solicite específicamente derechos de superusuario por comando. La clave de este enfoque es un comando llamado <code>sudo</code>( “<strong>s</strong>witch <strong>u</strong>ser and <strong>do</strong> this command”).</p>
+<p><code>sudo</code> se utiliza para preceder a un comando que debe ejecutarse con privilegios de superusuario. Se utiliza un archivo de configuración para definir qué usuarios pueden usar <code>sudo</code> y qué comandos pueden ejecutar. Cuando se ejecuta un comando como este, se le solicita al usuario su propia contraseña, que luego se almacena en caché durante un período de tiempo (por defecto es de 15 minutos), por lo que si necesita ejecutar varios comandos de nivel de superusuario, no se le siguen pidiendo cada vez.</p>
+<p>Un ejemplo de todo lo comentado hasta ahora, sería:</p>
+<p><img alt="" src="../../img/comandos9.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">¡Cuidado con sudo!<p>Si se indica que debe ejecutarse un comando con <code>sudo</code>, aseguráos de comprender lo que hace el comando antes de continuar. Ejecutar con <code>sudo</code> le da a ese comando los mismos poderes que un superusuario.</p>
+</p>
+</div>
 <h3 id="archivos-ocultos">Archivos ocultos</h3>
+<p>Este tipo de archivos se usan comúnmente en sistemas Linux para almacenar configuraciones y/o datos de configuración y generalmente se ocultan simplemente para que no abarroten la vista de sus propios archivos. No hay nada especial en un archivo o carpeta ocultos, aparte de su nombre: simplemente comenzar un nombre con un punto (”.”) Es suficiente para que desaparezca.</p>
+<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> /tmp/tutorial
+ls
+mv combinado.txt .combinado.txt
+ls
+</code></pre></div>
+Aún se puede trabajar con el archivo oculto asegurándose de incluir el punto cuando especifique su nombre de archivo:</p>
+<p><div class="highlight"><pre><span></span><code>cat .combinado.txt
+mkdir .oculto
+mv .combinado.txt .oculto
+less .oculto/.combined.txt
+</code></pre></div>
+Si se ejecuta <code>ls</code>, se verá que el directorio <em>.oculto</em> está, como era de esperar, oculto. Aún se puede enumerar su contenido usando <code>ls .hidden</code>, pero como sólo contiene un solo archivo que está, asímismo, oculto, no se obtendrán muchos resultados. Sin embargo, se puede utilizar la opción/switch -a  del comando <code>`ls</code> para hacer que se muestre todo en un directorio, incluyendo los archivos y carpetas ocultos:</p>
+<div class="highlight"><pre><span></span><code>ls
+ls -a
+ls .hidden
+ls -a .hidden
+</code></pre></div>
+<p>Estos archivos normalmente almacenan la configuración personal, y es así como los sistemas Unix siempre han ofrecido la capacidad de tener configuraciones a nivel de sistema (generalmente en /etc) que pueden ser anuladas por usuarios individuales (cortesía de archivos ocultos en su directorio de inicio).</p>
                 
               
               
@@ -1391,13 +1489,13 @@ ls
       
       
         
-        <a href="../EntWin/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Entornos Windows" rel="next">
+        <a href="../Ej_Linux/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ejercicios propuestos Linux" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Siguiente
               </span>
-              Entornos Windows
+              Ejercicios propuestos Linux
             </div>
           </div>
           <div class="md-footer__button md-icon">
