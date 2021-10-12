@@ -309,33 +309,60 @@
     Active Directory y GPOs
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#actualizaciones-del-so" class="md-nav__link">
-    Actualizaciones del SO
+    <nav class="md-nav" aria-label="Active Directory y GPOs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-active-directory" class="md-nav__link">
+    ¿Qué es Active Directory?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#manejo-de-credenciales" class="md-nav__link">
-    Manejo de credenciales
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-nada-que-es-un-dominio" class="md-nav__link">
+    Antes de nada, ¿qué es un dominio?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#escalada-de-privilegios" class="md-nav__link">
-    Escalada de privilegios
+        
+          <li class="md-nav__item">
+  <a href="#que-son-los-domain-services-sevicios-de-dominio-de-active-directory" class="md-nav__link">
+    ¿Qué son los Domain Services (sevicios de dominio) de Active Directory?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#edr" class="md-nav__link">
-    EDR
+        
+          <li class="md-nav__item">
+  <a href="#la-estructura-jerarquica-de-los-servicios-de-dominio-de-active-directory" class="md-nav__link">
+    La estructura jerárquica de los servicios de dominio de Active Directory
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otros-servicios-de-active-directory" class="md-nav__link">
+    Otros servicios de Active Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-de-ad" class="md-nav__link">
+    Usuarios de AD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-de-datos-ntds" class="md-nav__link">
+    Base de datos NTDS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -343,6 +370,18 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ej_Win/" class="md-nav__link">
+        Ejercicios propuestos Windows
+      </a>
     </li>
   
 
@@ -381,10 +420,92 @@
                 <h1 id="entornos-windows">Entornos Windows</h1>
 <h2 id="windows-server-2019">Windows Server 2019</h2>
 <h2 id="active-directory-y-gpos">Active Directory y GPOs</h2>
-<h2 id="actualizaciones-del-so">Actualizaciones del SO</h2>
-<h2 id="manejo-de-credenciales">Manejo de credenciales</h2>
-<h2 id="escalada-de-privilegios">Escalada de privilegios</h2>
-<h2 id="edr">EDR</h2>
+<p>Empresas de todos los tamaños en todo el mundo utilizan Active Directory para administrar los permisos y controlar el acceso a los recursos críticos de la red empresarial. Pero, ¿qué es exactamente y cómo afecta al negocio?</p>
+<h3 id="que-es-active-directory">¿Qué es Active Directory?</h3>
+<p>Active Directory (AD) es un servicio de directorio que se ejecuta en Microsoft Windows Server. La función principal de Active Directory es permitir que los administradores del sistema manejen permisos y controlen el acceso a los recursos de la red. En Active Directory, los datos se almacenan como objetos, que incluyen usuarios, grupos, aplicaciones, servicios o dispositivos, y estos objetos se clasifican según su nombre y atributos.</p>
+<p>AD simplifica la vida de los administradores y usuarios finales al tiempo que mejora la seguridad de las organizaciones a través de la función políticas de grupo de AD. Los usuarios pueden autenticarse una vez y luego acceder sin problemas a cualquier recurso en el dominio para el que están autorizados (inicio de sesión único). Además, los archivos se almacenan en un repositorio central donde se pueden compartir con otros usuarios para facilitar la colaboración y los equipos de TI pueden respaldarlos adecuadamente para garantizar la continuidad del negocio.</p>
+<p><img alt="" src="../../img/microsoft-active-directory.webp" style="height:400px;width:800px" /></p>
+<h3 id="antes-de-nada-que-es-un-dominio">Antes de nada, ¿qué es un dominio?</h3>
+<p>Un dominio representa una agrupación lógica de un conjunto ordenadores conectados en una red los cuales comparten una base de datos de Active Directory. La base de base de datos es probablemente el elemento más importante en un AD (Active Directory) y es gestionada por los servidores centrales del dominio, también conocidos como Domain Controllers. </p>
+<p>Un dominio básicamente es una etiqueta que típicamente representa un nombre DNS, el cual en algunas organizaciones es el mismo que su sitio web, pero no tiene porque ser así en todos los casos y es posible que la organización prefiera utilizar otro nombre de dominio que será al que se unirán las estaciones de trabajo.</p>
+<h3 id="que-son-los-domain-services-sevicios-de-dominio-de-active-directory">¿Qué son los Domain Services (sevicios de dominio) de Active Directory?</h3>
+<p>Los servicios de dominio de Active Directory (AD DS) son un componente central de Active Directory y proporcionan el mecanismo principal para autenticar a los usuarios y determinar a qué recursos de red pueden acceder. Los servidores que ejecutan AD DS se denominan controladores de dominio (DC). Éstos son sistemas basados en Windows Server que pueden acceder y manipular la base de datos del AD. Cada dominio tiene como mínimo un controlador, por lo que si por ejemplo, un departamento o unidad de negocio crece más de lo esperado, es posible instalar más controladores de dominio dedicados a procesar las solicitudes de las estaciones de trabajo en ese departamento. También es posible crear subdominios para que los usuarios puedan acceder a los recursos en otros subdominios que hagan parte del mismo Forest.</p>
+<p>Las organizaciones normalmente tienen varios DC y cada uno tiene una copia del directorio para todo el dominio. Los cambios realizados en el directorio en un controlador de dominio, como la actualización de la contraseña o la eliminación de una cuenta de usuario, se replican en los otros controladores de dominio para que todos estén actualizados. </p>
+<p>AD DS también proporciona características adicionales como inicio de sesión único (SSO) mediante Kerberos, certificados de seguridad, LDAP (protocolo ligero de acceso a directorios) y administración de derechos de acceso.</p>
+<p><img alt="" src="../../img/ADDS.webp" /></p>
+<h3 id="la-estructura-jerarquica-de-los-servicios-de-dominio-de-active-directory">La estructura jerárquica de los servicios de dominio de Active Directory</h3>
+<p>Los dominios en AD son muy flexibles y permiten crear una infraestructura completa y bien organizada. Partiendo de un dominio raíz, es posible crear subdominios que representen la disposición física y/o lógica de las estaciones de trabajo. Esto significa que se puede crear un subdominio para el departamento de ventas, IT, marketing, etc. También se podría crear subdominios para las oficinas que se encuentran distribuidas en diferentes ubicaciones geográficas. Evidentemente, se trata de decisiones de diseño a la hora de configurar la red.</p>
+<p>AD DS organiza los datos en una estructura jerárquica que consta de dominios, árboles y bosques, como se detalla a continuación.</p>
+<ul>
+<li>
+<p><ins><strong>Dominios:</strong></ins> un dominio representa un grupo de objetos, como usuarios, grupos y dispositivos, que comparten la misma base de datos de AD. Puedes pensar en un dominio como una rama en un árbol. Un dominio tiene la misma estructura que los dominios y subdominios estándar, por ejemplo, sudominio.com y ventas.tudominio.com.</p>
+<p>Un dominio representa un límite de administración. Los objetos de un dominio determinado se almacenan en una única base de datos y se pueden administrar juntos.</p>
+</li>
+<li>
+<p><ins><strong>Árboles:</strong></ins> un árbol es uno o más dominios agrupados en una jerarquía lógica. Dado que los dominios de un árbol están relacionados, se dice que "confían" entre sí.</p>
+</li>
+<li>
+<p><ins><strong>Bosque:</strong></ins> un bosque es el nivel más alto de organización dentro de AD y contiene un grupo de árboles. Los árboles de un bosque también pueden confiar entre sí y también compartirán esquemas de directorio, catálogos, información de aplicaciones y configuraciones de dominio.</p>
+<p>Un bosque representa un límite de seguridad. Los objetos de diferentes bosques no pueden interactuar entre sí a menos que los administradores de cada bosque creen una relación de confianza entre ellos</p>
+</li>
+<li>
+<p><ins><strong>Unidades organizativas:</strong></ins> una unidad organizativa permite, como su propio nombre indica, organizar y agrupar usuarios, grupos, equipos y otras unidades organizativas.</p>
+</li>
+<li>
+<p><ins><strong>Contenedores:</strong></ins> un contenedor es similar a una unidad organizativa; sin embargo, a diferencia de una unidad organizativa, no es posible vincular un objeto de directiva de grupo (GPO) a un contenedor genérico de Active Directory.</p>
+</li>
+</ul>
+<p><img align="left" alt="" src="../../img/ADestructura5.webp" style="height:275px;width:500px" /></p>
+<p><img align="right" alt="" src="../../img/ADestructura6.png" style="height:275px;width:450px" /></p>
+<p><img align="left" alt="" src="../../img/ADestructura2.jpg" style="height:250px;width:450px" /></p>
+<p><img alignt="right" alt="" src="../../img/ADestructura3.jpg" style="height:250px;width:450px" /></p>
+<h3 id="otros-servicios-de-active-directory">Otros servicios de Active Directory</h3>
+<p>Además de los servicios de dominio de Active Directory, hay varios otros servicios críticos que proporciona AD. Algunos de esos servicios se enumeran a continuación:</p>
+<p><strong>Servicios de directorio ligeros:</strong> AD LDS es un servicio de directorio del Protocolo ligero de acceso a directorios (LDAP). Proporciona solo un subconjunto de las funciones de AD DS, lo que lo hace más versátil en términos de dónde se puede ejecutar. Por ejemplo, se puede ejecutar como un servicio de directorio independiente sin necesidad de integrarse con una implementación completa de Active Directory.</p>
+<p><strong>Servicios de certificados:</strong> puede crear, administrar y compartir certificados de cifrado, que permiten a los usuarios intercambiar información de forma segura a través de Internet.</p>
+<p><strong>Servicios de federación de Active Directory:</strong> ADFS es una solución de inicio de sesión único (SSO) para AD que permite a los empleados acceder a múltiples aplicaciones con un único conjunto de credenciales, lo que simplifica la experiencia del usuario.</p>
+<p><strong>Servicios de administración de derechos:</strong> AD RMS es un conjunto de herramientas que ayuda con la administración de tecnologías de seguridad que ayudarán a las organizaciones a mantener sus datos seguros. Dichas tecnologías incluyen cifrado, certificados y autenticación, y cubren una variedad de aplicaciones y tipos de contenido, como correos electrónicos y documentos de Word.</p>
+<p>El servidor que aloja AD DS se denomina <strong>controlador de dominio (DC)</strong>. También se puede usar un controlador de dominio para autenticarse con otros productos de MS, como Exchange Server, SharePoint Server, SQL Server, File Server u otros.</p>
+<div class="admonition danger">
+<p class="admonition-title">Atención</p>
+<p>El controlador de dominio, hablando de ciberseguridad en entornos Windows, <strong><em>es la joya de la corona</em></strong>. </p>
+<p>Bien sea realizando un pentest legal, bien sea un ataque malintencionado por parte de ciberdelincuentes, el fin último siempre será llegar a ser administrador del Controlador de Dominio (DC). </p>
+<p>Por ello es tremendamente importante conocer su complejo funcionamiento y saber fortificarlo en la medida de lo posible para protegernos frente a los ataques más comunes.</p>
+</div>
+<h3 id="usuarios-de-ad">Usuarios de AD</h3>
+<p>Entre otras cosas, Active Directory gestiona los usuarios del entorno tratándolos como un tipo de objeto especial que se almacena en la base de datos central. A vontinuación se listan algunas cuestiones importantes a tener en cuenta sobre los usuarios de un dominio.</p>
+<ul>
+<li>
+<p>Aunque el nombre de usuario sirve para identificarle, el SID (Security Identifier) también puede ser utilizado para dicho fin. El SID es la combinación del Domain SID y el RID (Relative Identifier). Algunas herramientas enseñan el SID en lugar del nombre de usuario, por ese motivo es importante saber esto.</p>
+</li>
+<li>
+<p>Los user secrets son elementos utilizados por el Domain Controller para realizar el proceso de autenticación. Las contraseñas no se guardan en texto plano, pero los user secrets derivados de ellas sí, los cuales son Hashes NT y claves Kerberos.</p>
+</li>
+<li>
+<p><strong>Los hashes LM y NT son almacenados en dos sitios: La SAM (Security Account Manager) de Windows y la base de datos del AD, la cual por defecto se encuentra disponible en los DC en la ruta C:\Windows\NTDS\ntds.dit.</strong></p>
+</li>
+<li>
+<p>Aunque los hashes NT no son contraseñas, se pueden utilizar en algunos casos para ataques del tipo Pass-The-Hash/Overpass-The-Hash</p>
+</li>
+<li>
+<p>Los ordenadores registrados en un AD también están representados por una cuenta de usuario, la cual es el nombre de la estación de trabajo con un “$” al final.</p>
+</li>
+<li>
+<p>Probablemente las cuentas de usuario más importantes son Administrator y krbtgt. La primera tiene privilegios altos en el sistema y la segunda permite el cifrado de los tickets TGT, lo que significa que si un atacante compromete dicha cuenta podrá crear este tipo de tickets sin problema. A esta técnica se le conoce como <em>Golden Ticket.</em></p>
+</li>
+</ul>
+<h3 id="base-de-datos-ntds">Base de datos NTDS</h3>
+<p>La base de datos de un AD contiene todos los objetos que se encuentran disponibles en el entorno y se comparte/sincroniza con todos los DC. Por defecto, se encuentra ubicada en el fichero C:\Windows\NTDS\ntds.dit de cada DC. Por otro lado, la NTDS se caracteriza por dos cosas:</p>
+<ul>
+<li>Es una base de datos distribuida.</li>
+<li>Cuenta con una estructura basada en objetos y jerarquías de clases.</li>
+</ul>
+<p>El elemento fundamental de la base de datos son las clases, las cuales están compuestas por un conjunto de propiedades y
+relaciones de herencia. Las clases más importantes son: User, Computer y Group.</p>
+<!-- ## Actualizaciones del SO
+## Manejo de credenciales
+## Escalada de privilegios
+## EDR -->
                 
               
               
@@ -425,13 +546,13 @@
       
       
         
-        <a href="../webgrafia/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Webgrafía" rel="next">
+        <a href="../Ej_Win/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ejercicios propuestos Windows" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Siguiente
               </span>
-              Webgrafía
+              Ejercicios propuestos Windows
             </div>
           </div>
           <div class="md-footer__button md-icon">
