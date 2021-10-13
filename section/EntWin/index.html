@@ -445,7 +445,7 @@
 <p>AD DS organiza los datos en una estructura jerárquica que consta de dominios, árboles y bosques, como se detalla a continuación.</p>
 <ul>
 <li>
-<p><ins><strong>Dominios:</strong></ins> un dominio representa un grupo de objetos, como usuarios, grupos y dispositivos, que comparten la misma base de datos de AD. Puedes pensar en un dominio como una rama en un árbol. Un dominio tiene la misma estructura que los dominios y subdominios estándar, por ejemplo, sudominio.com y ventas.tudominio.com.</p>
+<p><ins><strong>Dominios:</strong></ins> un dominio representa un grupo de objetos, como usuarios, grupos y dispositivos, que comparten la misma base de datos de AD. Puedes pensar en un dominio como una rama en un árbol. Un dominio tiene la misma estructura que los dominios y subdominios estándar, por ejemplo, tudominio.com y ventas.tudominio.com.</p>
 <p>Un dominio representa un límite de administración. Los objetos de un dominio determinado se almacenan en una única base de datos y se pueden administrar juntos.</p>
 </li>
 <li>
@@ -457,6 +457,7 @@
 </li>
 <li>
 <p><ins><strong>Unidades organizativas:</strong></ins> una unidad organizativa permite, como su propio nombre indica, organizar y agrupar usuarios, grupos, equipos y otras unidades organizativas.</p>
+<p>Las unidades organizativas (OU) de un dominio administrado de Active Directory Domain Services (AD DS) permiten agrupar lógicamente objetos como cuentas de usuario, cuentas de servicio o cuentas de equipo. Después, se puede asignar administradores a unidades organizativas específicas y aplicar la directiva de grupo para aplicar los valores de configuración de destino.</p>
 </li>
 <li>
 <p><ins><strong>Contenedores:</strong></ins> un contenedor es similar a una unidad organizativa; sin embargo, a diferencia de una unidad organizativa, no es posible vincular un objeto de directiva de grupo (GPO) a un contenedor genérico de Active Directory.</p>
@@ -480,7 +481,7 @@
 <p>Por ello es tremendamente importante conocer su complejo funcionamiento y saber fortificarlo en la medida de lo posible para protegernos frente a los ataques más comunes.</p>
 </div>
 <h3 id="usuarios-de-ad">Usuarios de AD</h3>
-<p>Entre otras cosas, Active Directory gestiona los usuarios del entorno tratándolos como un tipo de objeto especial que se almacena en la base de datos central. A vontinuación se listan algunas cuestiones importantes a tener en cuenta sobre los usuarios de un dominio.</p>
+<p>Entre otras cosas, Active Directory gestiona los usuarios del entorno tratándolos como un tipo de objeto especial que se almacena en la base de datos central. A continuación se listan algunas cuestiones importantes a tener en cuenta sobre los usuarios de un dominio.</p>
 <ul>
 <li>
 <p>Aunque el nombre de usuario sirve para identificarle, el SID (Security Identifier) también puede ser utilizado para dicho fin. El SID es la combinación del Domain SID y el RID (Relative Identifier). Algunas herramientas enseñan el SID en lugar del nombre de usuario, por ese motivo es importante saber esto.</p>
@@ -510,10 +511,6 @@
 <p>El elemento fundamental de la base de datos son las clases, las cuales están compuestas por un conjunto de propiedades y
 relaciones de herencia. Las clases más importantes son: User, Computer y Group.</p>
 <h3 id="gpos">GPOs</h3>
-<div class="video-wrapper">
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/zGD78RNsp_w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 <!-- ## Actualizaciones del SO
 ## Manejo de credenciales
 ## Escalada de privilegios
