@@ -361,9 +361,57 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gpos" class="md-nav__link">
     GPOs
+  </a>
+  
+    <nav class="md-nav" aria-label="GPOs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-una-directiva-de-grupo" class="md-nav__link">
+    ¿Qué es una directiva de grupo?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-objeto-de-directiva-de-grupo-o-group-policy-object-gpo" class="md-nav__link">
+    ¿Qué es un objeto de directiva de grupo o Group Policy Object (GPO)?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-gpo" class="md-nav__link">
+    Ejemplos de GPO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-se-procesan-los-objetos-de-directiva-de-grupo" class="md-nav__link">
+    ¿Cómo se procesan los objetos de directiva de grupo?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-las-gpos" class="md-nav__link">
+    Beneficios de las GPOs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitaciones-de-las-gpos" class="md-nav__link">
+    Limitaciones de las GPOs
   </a>
   
 </li>
@@ -429,7 +477,13 @@
 <h2 id="active-directory">Active Directory</h2>
 <p>Empresas de todos los tamaños en todo el mundo utilizan Active Directory para administrar los permisos y controlar el acceso a los recursos críticos de la red empresarial. Pero, ¿qué es exactamente y cómo afecta al negocio?</p>
 <h3 id="que-es-active-directory">¿Qué es Active Directory?</h3>
-<p>Active Directory (AD) es un servicio de directorio que se ejecuta en Microsoft Windows Server. La función principal de Active Directory es permitir que los administradores del sistema manejen permisos y controlen el acceso a los recursos de la red. En Active Directory, los datos se almacenan como objetos, que incluyen usuarios, grupos, aplicaciones, servicios o dispositivos, y estos objetos se clasifican según su nombre y atributos.</p>
+<p>Active Directory (AD) es un servicio de directorio que se ejecuta en Microsoft Windows Server. Un directorio es una estructura jerárquica que almacena información sobre los objetos en la red. </p>
+<p>La función principal de Active Directory es permitir que los administradores del sistema manejen permisos y controlen el acceso a los recursos de la red. En Active Directory, los datos se almacenan como objetos, que incluyen usuarios, grupos, aplicaciones, servicios o dispositivos, y estos objetos se clasifican según su nombre y atributos.</p>
+<p>Active Directory usa un almacén de datos estructurado como base para una organización jerárquica lógica de la información del directorio.</p>
+<div class="admonition tip">
+<p class="admonition-title">Definición</p>
+<p>El directorio activo o Active Directory (AD) es una manera de organizar y gestionar todos los elementos de una red informática: ordenadores, grupos, usuarios, dominios, políticas de seguridad, y cualquier tipo de objetos definidos para el usuario. </p>
+</div>
 <p>AD simplifica la vida de los administradores y usuarios finales al tiempo que mejora la seguridad de las organizaciones a través de la función políticas de grupo de AD. Los usuarios pueden autenticarse una vez y luego acceder sin problemas a cualquier recurso en el dominio para el que están autorizados (inicio de sesión único). Además, los archivos se almacenan en un repositorio central donde se pueden compartir con otros usuarios para facilitar la colaboración y los equipos de TI pueden respaldarlos adecuadamente para garantizar la continuidad del negocio.</p>
 <p><img alt="" src="../../img/microsoft-active-directory.webp" style="height:400px;width:800px" /></p>
 <h3 id="antes-de-nada-que-es-un-dominio">Antes de nada, ¿qué es un dominio?</h3>
@@ -507,10 +561,71 @@
 <ul>
 <li>Es una base de datos distribuida.</li>
 <li>Cuenta con una estructura basada en objetos y jerarquías de clases.</li>
+<li>El archivo NTDS.dit es una base de datos que almacena datos de Active Directory, incluida información sobre objetos de usuario, grupos y pertenencia a grupos. Incluye los hashes NTLM  de las contraseñas para todos los usuarios y computadores.</li>
 </ul>
-<p>El elemento fundamental de la base de datos son las clases, las cuales están compuestas por un conjunto de propiedades y
-relaciones de herencia. Las clases más importantes son: User, Computer y Group.</p>
-<h3 id="gpos">GPOs</h3>
+<p>Al extraer estos hashes, es posible utilizar herramientas como Mimikatz para realizar ataques de pass-the-hash o herramientas como Hashcat para descifrar estas contraseñas. La extracción y el descifrado de estas contraseñas se pueden realizar sin conexión, por lo que serán indetectables. Una vez que un atacante ha extraído estos hashes, puede actuar como cualquier usuario, incluidos los administradores de dominio.</p>
+<h2 id="gpos">GPOs</h2>
+<h3 id="que-es-una-directiva-de-grupo">¿Qué es una directiva de grupo?</h3>
+<p>Lo primero es lo primero, ¿qué es una directiva de grupo? La directiva de grupo es una característica de Windows que facilita una amplia variedad de configuraciones avanzadas que los administradores de sistemas pueden usar para controlar el entorno de trabajo de los usuarios y las cuentas de usuario en Active Directory. </p>
+<p><strong>Básicamente, proporciona un lugar centralizado para que los administradores administren y configuren los sistemas operativos, las aplicaciones y los ajustes de los usuarios.</strong></p>
+<p>Las políticas de grupo, cuando se usan correctamente, permiten aumentar la seguridad de las computadoras de los usuarios y ayudarlo a defenderse tanto de las amenazas internas como de los ataques externos.</p>
+<h3 id="que-es-un-objeto-de-directiva-de-grupo-o-group-policy-object-gpo">¿Qué es un objeto de directiva de grupo o <em>Group Policy Object</em> (GPO)?</h3>
+<p>Un objeto de directiva de grupo (GPO) es un grupo de configuraciones que se crean mediante el Editor de directivas de grupo de Microsoft Management Console (MMC). Los GPO se pueden asociar con uno o varios contenedores de Active Directory, incluidos sitios, dominios o unidades organizativas (OU). MMC permite a los usuarios crear GPO que definen políticas basadas en el registro, opciones de seguridad, instalación de software y mucho más.</p>
+<p>Active Directory aplica los GPO en el mismo orden lógico; políticas locales, políticas de sitio, políticas de dominio y políticas de OU.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Nota: Los GPO que están en unidades organizativas anidadas funcionan primero desde la unidad organizativa más cercana a la raíz y desde allí hacia afuera.</p>
+</div>
+<h3 id="ejemplos-de-gpo">Ejemplos de GPO</h3>
+<p>Los Objetos de directiva de grupo o GPO se pueden usar de varias formas para que beneficien a la seguridad. A continuación se muestran algunos ejemplos concretos:</p>
+<ul>
+<li>
+<p>Una GPO podría usarse para determinar la página de inicio que un usuario ve cuando inicia su navegador de Internet después de iniciar sesión en el dominio.</p>
+</li>
+<li>
+<p>Los administradores pueden usar GPO para definir qué impresoras conectadas a la red aparecen en la lista de impresoras disponibles después de que un usuario en una OU de Active Directory específica inicia sesión en el dominio.</p>
+</li>
+<li>
+<p>Los administradores también pueden usar GPO para modificar una serie de protocolos y prácticas de seguridad, como restringir las opciones de conexión a Internet, los programas e incluso el tiempo de pantalla inactiva.</p>
+</li>
+<li>
+<p>Restringir el acceso al panel de control y Configuración</p>
+<p><img alt="" src="../../img/GPO1.jpg" /> </p>
+</li>
+<li>
+<p>Bloquear acceso al símbolo del sistema</p>
+</li>
+<li>
+<p>Impedir la instalación de software </p>
+</li>
+<li>
+<p>Desactivar las actualizaciones automáticas de controladores.</p>
+<p><img alt="" src="../../img/GPO2.jpg" /> </p>
+</li>
+</ul>
+<h3 id="como-se-procesan-los-objetos-de-directiva-de-grupo">¿Cómo se procesan los objetos de directiva de grupo?</h3>
+<p>El orden en el que se procesan los GPO afecta la configuración que se aplica al equipo y al usuario. </p>
+<p>El orden en que se procesan los GPO se conoce como LSDOU, que significa local, sitio(una especie de subred en nuestro dominio), dominio, unidad organizativa. La política de la computadora local es la primera en ser procesada, seguida del nivel del sitio a las políticas de AD de dominio, y finalmente en las unidades de la organización. Si hay políticas en conflicto en LSDOU, las últimas políticas aplicadas ganan.</p>
+<p><img alt="" src="../../img/LSDOU.png" style="height:300px;width:400px" /></p>
+<h3 id="beneficios-de-las-gpos">Beneficios de las GPOs</h3>
+<p>Los beneficios de la política de grupo no se limitan únicamente a la seguridad, hay una serie de otras ventajas que vale la pena mencionar.</p>
+<ul>
+<li>
+<p><ins><strong>Política de contraseñas:</strong></ins> muchas empresas tienen políticas de contraseñas demasiado laxas, y muchos usuarios a menudo tienen contraseñas configuradas para que nunca caduquen. </p>
+<p>Las contraseñas que no se rotan regularmente, son demasiado simples o usan palabras comunes corren el riesgo de ser vulneradas por fuerza bruta. Los GPO se pueden utilizar para establecer la longitud, la complejidad y otros requisitos de la contraseña.</p>
+</li>
+<li>
+<p><ins><strong>Gestión de sistemas:</strong></ins> los GPO se pueden utilizar para simplificar tareas sencillas y repetitivas, ahorrando así mucho tiempo. Pueden ahorrar horas y horas de configuración del entorno de nuevos usuarios y equipos que se unen al dominio mediante el uso de GPOs para aplicar una configuración universal y estándar.</p>
+</li>
+<li>
+<p><ins><strong>Verificación de estado:</strong></ins> los GPO se pueden usar para implementar actualizaciones de software y parches del sistema para garantizar que su entorno esté en buen estado y actualizado contra las últimas amenazas de seguridad.</p>
+</li>
+</ul>
+<h3 id="limitaciones-de-las-gpos">Limitaciones de las GPOs</h3>
+<p>Estaríamos faltando a la verdad si dijeramos que los GPO son la fórmula mágica para mantener los datos seguros. Hay una serie de limitaciones que se deben conocer.</p>
+<p>En primer lugar, el editor de GPO no es la consola más fácil de usar, más bien es un tanto adusto. Un conocimiento profundo de PowerShell ayudará a que sea más fácil realizar todas las actualizaciones de GPO, lo cual complica más la cosa si cabe.</p>
+<p>Las actualizaciones de GPO, se realizan aleatoriamente cada 90 a 120 minutos cada vez que se reinicia la computadora.Puede específicarse una tasa de actualización desde 0 minutos hasta 45 días. Sin embargo, si se especifican 0 minutos, entonces, de forma predeterminada, las GPO intentarán actualizarse cada 7 segundos, lo que probablemente inunde la red de tráfico.</p>
+<p>Los GPO tampoco son inmunes a los ciberataques. Si un atacante quisiera cambiar las GPO locales en una computadora para moverse lateralmente a través de la red, sería muy difícil detectarlo sin una solución de auditoría y monitoreo de políticas de grupo implementada.</p>
 <!-- ## Actualizaciones del SO
 ## Manejo de credenciales
 ## Escalada de privilegios
