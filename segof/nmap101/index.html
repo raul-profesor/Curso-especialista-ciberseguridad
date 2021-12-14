@@ -963,20 +963,23 @@ Características:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sX objetivo
 </code></pre></div>
 <h3 id="estados-de-los-puertos-escaneados">Estados de los puertos escaneados</h3>
-<p>Tras realizar el escaneo de puertos, se nos pueden reportar tres posibles estados de los mismos:</p>
+<p>Tras realizar el escaneo de puertos, se nos pueden reportar cuatro posibles estados de los mismos:</p>
 <ul>
 <li>
-<p><strong>Abierto | filtrado</strong>: cuando no se recibe respuesta, el puerto se clasifica así porque "ninguna respuesta" puede significar sólo dos cosas:</p>
+<p><strong>open</strong>: El puerto responde activamente a las conexiones entrantes</p>
+</li>
+<li>
+<p><strong>open | filtered</strong>: cuando no se recibe respuesta, el puerto se clasifica así porque "ninguna respuesta" puede significar sólo dos cosas:</p>
 <ul>
-<li>El puerto esta abierto</li>
+<li>El puerto esta abierto (en algunos tipos de escaneos no se recibe respuesta al SYN)</li>
 <li>El puerto está protegido detrás de un firewall, por lo que se filtra</li>
 </ul>
 </li>
 <li>
-<p><strong>Filtrado</strong>: cuando el puerto está protegido detrás de un firewall que envía un ping ICMP de vuelta </p>
+<p><strong>filtered</strong>: cuando el puerto está protegido detrás de un firewall que envía un ping ICMP de vuelta </p>
 </li>
 <li>
-<p><strong>Cerrado</strong>: cuando recibe un paquete RST</p>
+<p><strong>closed</strong>: cuando se recibe un paquete RST</p>
 </li>
 </ul>
 <h4 id="puertos-filtrados-o-bloqueados">Puertos filtrados o bloqueados</h4>
@@ -1102,7 +1105,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <p><code>vuln</code>: Chequean vulnerabilidades especificas de software y generan resultados solamente si dichas vulnerabilidades son encontradas, ejemplos de este tipo de scripts son: <code>realvnc-auth-bypass</code> y <code>afp-path-vuln</code></p>
 </li>
 </ul>
-<p>Si la instalación de Nmap se ha realizado desde apt-get o dpkg, probablemente la ubicación de todos los scripts se encuentre en /usr/share/nmap/scripts</p>
+<p>Si la instalación de Nmap se ha realizado desde apt-get o dpkg, probablemente la ubicación de todos los scripts se encuentre en <code>/usr/share/nmap/scripts</code></p>
 <h4 id="seleccion-de-scripts">Selección de scripts</h4>
 <p>Podemos seleccionar el script que queremos ejecutar directamente indicando el fichero o podemos seleccionar todos los de una categoría o categorías.</p>
 <h5 id="seleccionar-categorias">Seleccionar categorías</h5>
