@@ -659,6 +659,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dumping-de-credenciales" class="md-nav__link">
+    Dumping de credenciales
+  </a>
+  
+    <nav class="md-nav" aria-label="Dumping de credenciales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#de-donde-se-puede-realizar-un-dumping-de-credenciales" class="md-nav__link">
+    ¿De dónde se puede realizar un dumping de credenciales?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mimikatz" class="md-nav__link">
+    Mimikatz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-evitar-el-dumping-de-credenciales" class="md-nav__link">
+    Cómo evitar el dumping de credenciales
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -845,6 +879,75 @@
 <p>NTLMv2 necesita además que la posible diferencia horaria entre clientes y servidores no supere los 30 minutos.</p>
 <p><ins>Ejemplo</ins></p>
 <p><code>admin::n46isnekpt:08CA45B7D7EA58EE:88DCBE4446168966A153A0064958DAC6: 5C7830315C78303100100000000000b45c67103d07d7b95acd12fa11230E0000000052920b85f78d013c31cdb3b92f5d765c783030</code></p>
+<h2 id="dumping-de-credenciales">Dumping de credenciales</h2>
+<p>El dumping de credenciales es un tipo de ciberataque en el que se vulnera un ordenador y el atacante obtiene los nombres de usuario y las contraseñas. Esto puede ser perjudicial si le ocurre a su ordenador personal, pero puede ser absolutamente devastador si un atacante es capaz de realizar el vertido de credenciales en un ordenador que forma parte de una red mayor.</p>
+<p>Esta técnica de hacking se implementa después de que un ordenador haya sido comprometido por el atacante. Los nombres de usuario y las contraseñas son extremadamente valiosos para los ciberdelincuentes y pueden utilizarse para adquirir información sensible, así como para obtener acceso a las credenciales de administrador y otras cuentas privilegiadas o a otros ordenadores de una red.</p>
+<p>Después de obtener acceso a un ordenador, un atacante llevará a cabo el dumping o volcado de credenciales accediendo a la caché de contraseñas que se almacenan en la memoria de su ordenador.</p>
+<p>Para la comodidad del usuario, los sistemas operativos y los navegadores tienen la capacidad de guardar los nombres de usuario y las contraseñas y luego rellenar automáticamente su información de acceso a los sitios y programas que frecuenta. Desgraciadamente, esta comodidad tiene un coste y puede dejar la información más vulnerable al robo de credenciales y al dumping.</p>
+<h3 id="de-donde-se-puede-realizar-un-dumping-de-credenciales">¿De dónde se puede realizar un dumping de credenciales?</h3>
+<p>Un atacante puede obtener credenciales de diferentes áreas de un sistema. Con acceso a una computadora terminal regular, un atacante puede buscar credenciales en las siguientes ubicaciones.</p>
+<ul>
+<li><strong>WDigest</strong></li>
+</ul>
+<p>Este es un protocolo heredado utilizado para autenticar usuarios en Windows. Cuando está habilitado, LSASS mantiene una copia de texto sin formato de la contraseña del usuario registrado en la memoria. Si bien el servicio está deshabilitado de forma predeterminada hoy en día, todavía existe en las últimas versiones de Windows y los atacantes a menudo lo habilitan para robar credenciales.</p>
+<ul>
+<li><strong>Administrador de cuentas de seguridad (SAM)</strong></li>
+</ul>
+<p>Este es un archivo de base de datos que existe en Windows desde los días de XP. SAM se usa para autenticar a los usuarios, tanto locales como remotos, lo que permite el acceso cuando las credenciales proporcionadas coinciden con lo que SAM tiene en el archivo. Si los atacantes roban este archivo, potencialmente se puede descifrar y se pueden extraer los nombres de usuario y las contraseñas almacenados en él.</p>
+<ul>
+<li><strong>LSA secrets</strong></li>
+</ul>
+<p>La Autoridad de Seguridad Local (LSA) administra la autenticación y el inicio de sesión de los usuarios en un sistema Windows, así como la política de seguridad local para una computadora. Los datos confidenciales utilizados por este subsistema se almacenan en un área de almacenamiento protegida llamada "secretos LSA".</p>
+<ul>
+<li><strong>Kerberos</strong></li>
+</ul>
+<p>El protocolo Kerberos fue diseñado específicamente para una autenticación sólida y segura. Lo hace a través de un sistema de ticketing, otorgando diversos permisos a usuarios y servicios. Los ataques contra Kerberos generalmente implican falsificar o inyectar tickets de Kerberos robados para obtener acceso.</p>
+<p>Si un atacante logra ingresar a un controlador de dominio, el servidor de red responsable de administrar la autenticación en el dominio, existen áreas adicionales donde se almacenan las credenciales.</p>
+<ul>
+<li><strong>NTDS</strong></li>
+</ul>
+<p>Aquí es donde Active Directory almacena información sobre los miembros de un dominio para verificar usuarios y credenciales.</p>
+<ul>
+<li><strong>Archivos de preferencias de directivas de grupo</strong></li>
+</ul>
+<p>Esta herramienta de Windows permite a los administradores implementar directivas de dominio para incluir credenciales incrustadas, lo que facilita la administración. Estas políticas generalmente se almacenan en un recurso compartido llamado SYSVOL, que cualquier usuario del dominio puede ver y potencialmente descifrar.</p>
+<ul>
+<li><strong>DCSync</strong></li>
+</ul>
+<p>En lugar de una ubicación, DCSync es una técnica en la que un atacante aprovecha la forma en que los controladores de dominio manejan las llamadas API disponibles. En resumen, el atacante imita el comportamiento de otro controlador de dominio a través de llamadas a la API y consigue que el controlador envíe hashes de credenciales que se pueden usar en otros ataques.</p>
+<h3 id="mimikatz">Mimikatz</h3>
+<p>Una de las herramientas más utilizadas para realizar el dumping de credenciales es Mimikatz. Esta herramienta fue creada por Benjamin Delphy en 2007 para demostrar un fallo de seguridad en Windows. Su código tuvo éxito y convenció a Microsoft para que acabara corrigiendo el fallo, y Mimikatz siguió utilizándose para realizar pruebas de penetración y seguridad.</p>
+<p>Desafortunadamente, también se ha convertido en una herramienta popular para los actores malintencionados.</p>
+<h3 id="como-evitar-el-dumping-de-credenciales">Cómo evitar el dumping de credenciales</h3>
+<ul>
+<li>
+<p>Limitar y controlar el uso de contraseñas de administrador.</p>
+</li>
+<li>
+<p>Limitar la reutilización de credenciales.</p>
+</li>
+<li>
+<p>Implantar la autenticación multifactor.</p>
+</li>
+<li>
+<p>Utilizar un gestor de contraseñas con una contraseña fuerte y no almacenada.</p>
+</li>
+<li>
+<p>Implementar un hash y un encriptados fuertes.</p>
+</li>
+<li>
+<p>Supervisar el acceso a servicios como LSASS y bases de datos como SAM con regularidad.</p>
+</li>
+<li>
+<p>Deshabilitar o restringir NT LAN Manager (NTLM)</p>
+</li>
+<li>
+<p>Supervisar los registros de actividades no programadas en el DC</p>
+</li>
+<li>
+<p>No mezclar las cuentas de administrador de dominio con las de grupos de administradores locales</p>
+</li>
+</ul>
                 
               
               
