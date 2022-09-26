@@ -1,0 +1,62 @@
+theme:
+  name: material
+  language: es
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - toc.integrate
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+  palette:
+      - scheme: default
+        primary: light green
+        toggle:
+          icon: material/toggle-switch-off-outline
+          name: Cambiar a modo oscuro
+      - scheme: slate
+        primary: teal
+        toggle:
+          icon: material/toggle-switch
+          name: Cambiar a modo normal
+  plugins:
+    - mkdocs-video:
+        mark: "vid"
+    - search:
+      lang: es
+
+      
+markdown_extensions: 
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.caret   
+  - pymdownx.critic 
+  - attr_list
+  - md_in_html
+
+
+site_name: Curso de especialista en ciberseguridad - Warm up
+nav:
+  - Warm up:
+    - section/index.md
+    - Entornos Linux: section/EntLinux.md
+    - Ejercicios propuestos Linux: section/Ej_Linux.md
+    - Entornos Windows: section/EntWin.md
+    - Ejercicios propuestos Windows: section/Ej_Win.md
+    - Escalada de privilegios: section/privesc.md
+    - Webgrafía: section/webgrafia.md
+  - Seguridad ofensiva:
+    - segof/index.md
+    - Introducción: segof/Intro.md
+    - Introducción a Nmap: segof/nmap101.md
+    - Explotación de vulnerabilidades: segof/exploit.md
+    - Causas de vulnerabilidades en sistemas: segof/servicios_desact.md
+    - Metasploit: segof/metasploit.md
+    - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
+    - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
+    - Webgrafía: segof/webgrafia.md
+

@@ -1,0 +1,1235 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.8">
+    
+    
+      
+        <title>Introducción a Nmap - Curso de especialista en ciberseguridad - Warm up</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.92558b1b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#que-son-los-puertos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Curso de especialista en ciberseguridad - Warm up" class="md-header__button md-logo" aria-label="Curso de especialista en ciberseguridad - Warm up" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso de especialista en ciberseguridad - Warm up
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción a Nmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent=""  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../section/" class="md-tabs__link">
+        Warm up
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Seguridad ofensiva
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso de especialista en ciberseguridad - Warm up" class="md-nav__button md-logo" aria-label="Curso de especialista en ciberseguridad - Warm up" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Curso de especialista en ciberseguridad - Warm up
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" data-md-state="indeterminate" type="checkbox" id="__nav_1" checked>
+      
+      <label class="md-nav__link" for="__nav_1">
+        Warm up
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Warm up" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Warm up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/EntLinux/" class="md-nav__link">
+        Entornos Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/Ej_Linux/" class="md-nav__link">
+        Ejercicios propuestos Linux
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/EntWin/" class="md-nav__link">
+        Entornos Windows
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/Ej_Win/" class="md-nav__link">
+        Ejercicios propuestos Windows
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/privesc/" class="md-nav__link">
+        Escalada de privilegios
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/webgrafia/" class="md-nav__link">
+        Webgrafía
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Seguridad ofensiva
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Seguridad ofensiva" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Seguridad ofensiva
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Intro/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introducción a Nmap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Introducción a Nmap
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-son-los-puertos" class="md-nav__link">
+    ¿Qué son los puertos?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-escaner-de-puertos" class="md-nav__link">
+    ¿Qué es un escáner de puertos?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windows-o-linux" class="md-nav__link">
+    Windows o Linux
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-de-nmap" class="md-nav__link">
+    Uso de Nmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso de Nmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-escaneos" class="md-nav__link">
+    Tipos de escaneos
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de escaneos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-nada-recordatorio-del-3-way-handshake" class="md-nav__link">
+    Antes de nada: recordatorio del 3-way-handshake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escaneo-tcp-syn-ss" class="md-nav__link">
+    Escaneo TCP SYN (-sS)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escaneo-tcp-connect-st" class="md-nav__link">
+    Escaneo TCP connect (-sT)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escaneos-udp-su" class="md-nav__link">
+    Escaneos UDP (-sU)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-null-scan-sn" class="md-nav__link">
+    TCP Null scan (-sN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-fin-scan-sf" class="md-nav__link">
+    TCP FIN scan (-sF)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-xmas-scan-sx" class="md-nav__link">
+    TCP Xmas scan (-sX)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estados-de-los-puertos-escaneados" class="md-nav__link">
+    Estados de los puertos escaneados
+  </a>
+  
+    <nav class="md-nav" aria-label="Estados de los puertos escaneados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#puertos-filtrados-o-bloqueados" class="md-nav__link">
+    Puertos filtrados o bloqueados
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puertos-cerrados-o-cuando-falla-el-firewall" class="md-nav__link">
+    Puertos cerrados o cuando falla el Firewall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puertos-abiertos" class="md-nav__link">
+    Puertos abiertos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opciones-para-los-escaneos-switches-de-nmap" class="md-nav__link">
+    Opciones para los escaneos (switches de Nmap)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-en-nmap" class="md-nav__link">
+    Scripts en Nmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripts en Nmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seleccion-de-scripts" class="md-nav__link">
+    Selección de scripts
+  </a>
+  
+    <nav class="md-nav" aria-label="Selección de scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seleccionar-categorias" class="md-nav__link">
+    Seleccionar categorías
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seleccion-de-script-especifico" class="md-nav__link">
+    Selección de script específico
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-la-base-de-datos-de-scripts" class="md-nav__link">
+    Actualizar la base de datos de scripts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demostracion-de-algunos-scripts" class="md-nav__link">
+    Demostración de algunos scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-de-nmap" class="md-nav__link">
+    Ejercicios de Nmap
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploit/" class="md-nav__link">
+        Explotación de vulnerabilidades
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicios_desact/" class="md-nav__link">
+        Causas de vulnerabilidades en sistemas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metasploit/" class="md-nav__link">
+        Metasploit
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EternalBlue/" class="md-nav__link">
+        Ejercicio práctico - Explotación de EternalBlue
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../passw_manag/" class="md-nav__link">
+        Gestión y almacenamiento de credenciales en Windows
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../webgrafia/" class="md-nav__link">
+        Webgrafía
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Introducción a Nmap</h1>
+                
+                <h2 id="que-son-los-puertos">¿Qué son los puertos?</h2>
+<p>Ya hemos comentado que Nmap es el estándar de facto a la hora de realizar un escáner de puertos pero... ¿qué entendemos por puertos?</p>
+<p>En los sistemas operativos modernos, los puertos son direcciones numeradas para el tráfico de red. Los diferentes tipos de servicios utilizan diferentes puertos de forma predeterminada.</p>
+<p>Por ejemplo, el tráfico web normal usa el puerto 80, mientras que el correo electrónico POP3 usa el puerto 110. Una de las formas en que funciona un firewall es permitiendo o restringiendo el tráfico a través de un puerto en particular.</p>
+<p>Dado que la configuración del puerto puede suponer un riesgo para la seguridad, es fundamental saber qué puertos están abiertos y cuáles están bloqueados.</p>
+<h2 id="que-es-un-escaner-de-puertos">¿Qué es un escáner de puertos?</h2>
+<p>Esta es una herramienta que se utiliza para descubrir y auditar redes, escanear y verificar vulnerabilidades en direcciones y puertos de Protocolo de Internet (IP) para una red determinada.</p>
+<p>Es usado por el administrador de red, gerente de TI o simplemente un profesional de seguridad de la empresa. Uno de los desafíos críticos que enfrentarán estos perfiles es batallar para saber qué se está ejecutando en su red y el tipo de problemas/desafíos de seguridad que plantean.</p>
+<p>Hay varias herramientas (incluido Nmap) disponibles para que los administradores de red las usen para monitorear su red y obtener actividades en tiempo real en su red:</p>
+<p>Con Nmap:</p>
+<ul>
+<li>Los administradores de red pueden identificar todos los dispositivos que se ejecutan o acceden a sus sistemas.</li>
+<li>Un administrador puede identificar todos los hosts, equipos conectados a su red, así como los servicios que ofrecen.</li>
+<li>Un administrador puede escanear todos los puertos abiertos, dando prioridad a la seguridad, es decir, las detecciones de amenazas a la seguridad.</li>
+<li>Un administrador puede escanear/monitorear un solo host o miles de dispositivos conectados.</li>
+</ul>
+<p>Como se ha indicado al principio, Nmap es, con mucho, la herramienta de escaneo de red más utilizada. Es una herramienta de escaneo de puertos, lo que significa que recopila información de estos puertos. </p>
+<p>Nmap es un detector de puertos. Puede escuchar las respuestas en el proceso. Puede determinar si un puerto está abierto o cerrado o filtrado de una forma u otra por el firewall (un sistema diseñado para denegar el acceso de usuarios no autorizados hacia o desde una red privada).</p>
+<p>Es una herramienta flexible y versátil, lo que significa que puede adaptarse a diferentes actividades y funciones.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El escaneo de puertos también se puede denominar enumeración o descubrimiento de puertos. Usaremos estos términos indistintamente, mientras que significan lo mismo.</p>
+</div>
+<p>Tal y como podemos leer en el propio site de <a href="https://nmap.org/book/intro.html">Nmap</a>:</p>
+<p>Nmap utiliza paquetes IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes/firewalls están en uso y decenas de otras características.</p>
+<p>Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Nmap se ejecuta en todos los principales sistemas operativos de computadoras, y están disponibles versiones gráficas y de consola.</p>
+<h2 id="windows-o-linux">Windows o Linux</h2>
+<p>Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Unix. La versión de Windows se lanzó en 2000, pero con algunas limitaciones que incluyen:</p>
+<ul>
+<li>
+<p>Microsoft eliminó el soporte para el socket TCP/IP sin procesar, ha demostrado ser difícil escanear varios clientes VPN ya que Nmap solo admite interfaces Ethernet.</p>
+</li>
+<li>
+<p>Se sabe que las API de red de Windows tienen varias deficiencias, por lo que no son lo suficientemente eficientes.</p>
+</li>
+<li>
+<p>Escanear la propia máquina desde sí misma se ha demostrado ser difícil de ejecutar y, por lo tanto, imposible.</p>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Por lo tanto, se recomienda el uso de Nmap en Linux por una mayor rapidez, eficiencia y experiencia de uso.</p>
+<p>Es posible instalar la interfaz gráfica "Zenmap" como frontend de Nmap aunque en este curso únicamente veremos su manejo en línea de comandos en Linux.</p>
+<p>Este curso no cubre el proceso de instalación de ninguna de las dos herramientas en ninguno de los dos SSOO ya que se da por sabido este proceso.</p>
+</div>
+<h2 id="uso-de-nmap">Uso de Nmap</h2>
+<p>Podemos ver la infinidad de opciones que nos ofrece Nmap simplemente escribiendo <code>$ nmap</code> en el terminal:</p>
+<p><img alt="" src="../../img/nmap_opciones.png" style="height:600px;width:500px" /></p>
+<p>Existen un <a href="https://nmap.org/book/scan-methods.html">sinfín de técnicas y algoritmos de escaneo en Nmap</a>, así como otras tantas opciones a aplicar a estos escaneos. Es imposible cubrirlo todo en este curso por lo que sólo nombraremos los aspectos más importantes y queda a discrección del alumno profundizar más.</p>
+<p>Output completo:</p>
+<div class="highlight"><pre><span></span><code>Nmap <span class="m">5</span>.61TEST5 <span class="o">(</span> https://nmap.org <span class="o">)</span>
+Usage: nmap <span class="o">[</span>Scan Type<span class="o">(</span>s<span class="o">)]</span> <span class="o">[</span>Options<span class="o">]</span> <span class="o">{</span>target specification<span class="o">}</span>
+TARGET SPECIFICATION:
+  Can pass hostnames, IP addresses, networks, etc.
+  Ex: scanme.nmap.org, microsoft.com/24, <span class="m">192</span>.168.0.1<span class="p">;</span> <span class="m">10</span>.0.0-255.1-254
+  -iL : Input from list of hosts/networks
+  -iR : Choose random targets
+  --exclude : Exclude hosts/networks
+  --excludefile : Exclude list from file
+HOST DISCOVERY:
+  -sL: List Scan - simply list targets to scan
+  -sn: Ping Scan - disable port scan
+  -Pn: Treat all hosts as online -- skip host discovery
+  -PS/PA/PU/PY<span class="o">[</span>portlist<span class="o">]</span>: TCP SYN/ACK, UDP or SCTP discovery to given ports
+  -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
+  -PO<span class="o">[</span>protocol list<span class="o">]</span>: IP Protocol Ping
+  -n/-R: Never <span class="k">do</span> DNS resolution/Always resolve <span class="o">[</span>default: sometimes<span class="o">]</span>
+  --dns-servers : Specify custom DNS servers
+  --system-dns: Use OS<span class="s1">&#39;s DNS resolver</span>
+<span class="s1">  --traceroute: Trace hop path to each host</span>
+<span class="s1">SCAN TECHNIQUES:</span>
+<span class="s1">  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans</span>
+<span class="s1">  -sU: UDP Scan</span>
+<span class="s1">  -sN/sF/sX: TCP Null, FIN, and Xmas scans</span>
+<span class="s1">  --scanflags : Customize TCP scan flags</span>
+<span class="s1">  -sI : Idle scan</span>
+<span class="s1">  -sY/sZ: SCTP INIT/COOKIE-ECHO scans</span>
+<span class="s1">  -sO: IP protocol scan</span>
+<span class="s1">  -b : FTP bounce scan</span>
+<span class="s1">PORT SPECIFICATION AND SCAN ORDER:</span>
+<span class="s1">  -p : Only scan specified ports</span>
+<span class="s1">    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span>
+<span class="s1">  -F: Fast mode - Scan fewer ports than the default scan</span>
+<span class="s1">  -r: Scan ports consecutively - don&#39;</span>t randomize
+  --top-ports : Scan  most common ports
+  --port-ratio : Scan ports more common than 
+SERVICE/VERSION DETECTION:
+  -sV: Probe open ports to determine service/version info
+  --version-intensity : Set from <span class="m">0</span> <span class="o">(</span>light<span class="o">)</span> to <span class="m">9</span> <span class="o">(</span>try all probes<span class="o">)</span>
+  --version-light: Limit to most likely probes <span class="o">(</span>intensity <span class="m">2</span><span class="o">)</span>
+  --version-all: Try every single probe <span class="o">(</span>intensity <span class="m">9</span><span class="o">)</span>
+  --version-trace: Show detailed version scan activity <span class="o">(</span><span class="k">for</span> debugging<span class="o">)</span>
+SCRIPT SCAN:
+  -sC: equivalent to --script<span class="o">=</span>default
+  --script<span class="o">=</span>:  is a comma separated list of
+           directories, script-files or script-categories
+  --script-args<span class="o">=</span>: provide arguments to scripts
+  --script-args-file<span class="o">=</span>filename: provide NSE script args <span class="k">in</span> a file
+  --script-trace: Show all data sent and received
+  --script-updatedb: Update the script database.
+  --script-help<span class="o">=</span>: Show <span class="nb">help</span> about scripts.
+            is a comma separted list of script-files or
+           script-categories.
+OS DETECTION:
+  -O: Enable OS detection
+  --osscan-limit: Limit OS detection to promising targets
+  --osscan-guess: Guess OS more aggressively
+TIMING AND PERFORMANCE:
+  Options which take  are <span class="k">in</span> seconds, or append <span class="s1">&#39;ms&#39;</span> <span class="o">(</span>milliseconds<span class="o">)</span>,
+  <span class="s1">&#39;s&#39;</span> <span class="o">(</span>seconds<span class="o">)</span>, <span class="s1">&#39;m&#39;</span> <span class="o">(</span>minutes<span class="o">)</span>, or <span class="s1">&#39;h&#39;</span> <span class="o">(</span>hours<span class="o">)</span> to the value <span class="o">(</span>e.g. 30m<span class="o">)</span>.
+  -T&lt;<span class="m">0</span>-5&gt;: Set timing template <span class="o">(</span>higher is faster<span class="o">)</span>
+  --min-hostgroup/max-hostgroup : Parallel host scan group sizes
+  --min-parallelism/max-parallelism : Probe parallelization
+  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout : Specifies
+      probe round trip time.
+  --max-retries : Caps number of port scan probe retransmissions.
+  --host-timeout : Give up on target after this long
+  --scan-delay/--max-scan-delay : Adjust delay between probes
+  --min-rate : Send packets no slower than  per second
+  --max-rate : Send packets no faster than  per second
+FIREWALL/IDS EVASION AND SPOOFING:
+  -f<span class="p">;</span> --mtu : fragment packets <span class="o">(</span>optionally w/given MTU<span class="o">)</span>
+  -D : Cloak a scan with decoys
+  -S : Spoof <span class="nb">source</span> address
+  -e : Use specified interface
+  -g/--source-port : Use given port number
+  --data-length : Append random data to sent packets
+  --ip-options : Send packets with specified ip options
+  --ttl : Set IP time-to-live field
+  --spoof-mac : Spoof your MAC address
+  --badsum: Send packets with a bogus TCP/UDP/SCTP checksum
+OUTPUT:
+  -oN/-oX/-oS/-oG : Output scan <span class="k">in</span> normal, XML, s<span class="p">|</span>: Output <span class="k">in</span> the three major formats at once
+  -v: Increase verbosity level <span class="o">(</span>use -vv or more <span class="k">for</span> greater effect<span class="o">)</span>
+  -d: Increase debugging level <span class="o">(</span>use -dd or more <span class="k">for</span> greater effect<span class="o">)</span>
+  --reason: Display the reason a port is <span class="k">in</span> a particular state
+  --open: Only show open <span class="o">(</span>or possibly open<span class="o">)</span> ports
+  --packet-trace: Show all packets sent and received
+  --iflist: Print host interfaces and routes <span class="o">(</span><span class="k">for</span> debugging<span class="o">)</span>
+  --log-errors: Log errors/warnings to the normal-format output file
+  --append-output: Append to rather than clobber specified output files
+  --resume : Resume an aborted scan
+  --stylesheet : XSL stylesheet to transform XML output to HTML
+  --webxml: Reference stylesheet from Nmap.Org <span class="k">for</span> more portable XML
+  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output
+MISC:
+  -6: Enable IPv6 scanning
+  -A: Enable OS detection, version detection, script scanning, and traceroute
+  --datadir : Specify custom Nmap data file location
+  --send-eth/--send-ip: Send using raw ethernet frames or IP packets
+  --privileged: Assume that the user is fully privileged
+  --unprivileged: Assume the user lacks raw socket privileges
+  -V: Print version number
+  -h: Print this <span class="nb">help</span> summary page.
+EXAMPLES:
+  nmap -v -A scanme.nmap.org
+  nmap -v -sn <span class="m">192</span>.168.0.0/16 <span class="m">10</span>.0.0.0/8
+  nmap -v -iR <span class="m">10000</span> -Pn -p <span class="m">80</span>
+SEE THE MAN PAGE <span class="o">(</span>https://nmap.org/book/man.html<span class="o">)</span> FOR MORE OPTIONS AND EXAMPLES
+</code></pre></div>
+<h3 id="tipos-de-escaneos">Tipos de escaneos</h3>
+<h4 id="antes-de-nada-recordatorio-del-3-way-handshake">Antes de nada: recordatorio del 3-way-handshake</h4>
+<p>Primero, un poco de antecedentes. Durante la comunicación con un servicio TCP, se establece una única conexión con el protocolo de enlace de 3 vías de TCP. Esto implica un <code>SYN</code> enviado a un puerto abierto TCP que tiene un servicio vinculado a él, ejemplos típicos son HTTP (puerto 80), SMTP (puerto 25), POP3 (puerto 110) o SSH (puerto 22).</p>
+<p>En el lado del servidor ser verá un <code>SYN</code> y se responderá con <code>SYN ACK</code>, y el cliente responderá <code>SYN ACK</code> con un <code>ACK</code>. Esto completa la configuración y ahora se puede realizar el intercambio de datos.</p>
+<p><img alt="" src="../../img/3way.png" /></p>
+<p>En este ejemplo, el firewall pasa el tráfico al servidor web (HTTP -&gt; 80) y el servidor web responde con el acuse de recibo.</p>
+<p>En todos estos ejemplos, un firewall podría ser un dispositivo de hardware independiente o podría ser un firewall de software local en la computadora host.</p>
+<h4 id="escaneo-tcp-syn-ss">Escaneo TCP SYN (-sS)</h4>
+<p>El análisis SYN es la opción de análisis predeterminada y más popular, por buenas razones. Se puede realizar rápidamente, escaneando miles de puertos por segundo en una red rápida no obstaculizada por firewalls restrictivos.</p>
+<p>También es relativamente discreto y sigiloso, ya que nunca completa las conexiones TCP.</p>
+<p>Características:</p>
+<ul>
+<li>Rápido</li>
+<li>Relativamente sigiloso</li>
+<li>Requiere privilegios </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sS objetivo
+</code></pre></div>
+<h4 id="escaneo-tcp-connect-st">Escaneo TCP connect (-sT)</h4>
+<p>El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción.Este es el caso cuando un usuario no tiene privilegios de paquetes sin procesar.</p>
+<p>En lugar de escribir paquetes sin procesar como hacen la mayoría de los otros tipos de escaneo, Nmap le pide al sistema operativo subyacente que establezca una conexión con la máquina y el puerto de destino emitiendo la llamada al sistema de conexión.</p>
+<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sT objetivo
+</code></pre></div>
+Características: </p>
+<ul>
+<li>Confía en el sistema operativo</li>
+<li>Más lento que TCP-SYN-Scan</li>
+</ul>
+<h4 id="escaneos-udp-su">Escaneos UDP (-sU)</h4>
+<p>Si bien los servicios más populares en Internet se ejecutan sobre el protocolo TCP, los servicios UDP se implementan ampliamente. DNS, SNMP y DHCP (puertos registrados 53, 161/162 y 67/68) son tres de los más comunes. </p>
+<p>Debido a que el escaneo UDP es generalmente más lento y más difícil que TCP, algunos auditores de seguridad ignoran estos puertos. Esto es un error, ya que los servicios UDP explotables son bastante comunes y los atacantes ciertamente no ignoran todo el protocolo.</p>
+<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sU objetivo
+</code></pre></div>
+Características:</p>
+<ul>
+<li>Lento</li>
+<li>Poco fiable</li>
+</ul>
+<h4 id="tcp-null-scan-sn">TCP Null scan (-sN)</h4>
+<p>En los TCP Null Scans, los paquetes TCP enviados no tienen ninguna de las flags TCP establecidas.</p>
+<p>Según el RFC, ante tal circunstancia, el objetivo debe responder con un RST si el puerto está cerrado</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sN objetivo
+</code></pre></div>
+<h4 id="tcp-fin-scan-sf">TCP FIN scan (-sF)</h4>
+<p>Esto es muy similar al anterior, excepto por el hecho de que en lugar de enviar un paquete TCP completamente vacío, envía un paquete con el flag FIN establecido que se usa para cerrar una conexión ordenadamente.</p>
+<p>En consecuencia, el objetivo debe responder con un RST para puertos cerrados según RFC.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sF objetivo
+</code></pre></div>
+<h4 id="tcp-xmas-scan-sx">TCP Xmas scan (-sX)</h4>
+<p>TCP Xmas Scans también es muy similar a las dos últimas técnicas de escaneo, excepto por el hecho de que utilizan paquetes TCP con los flags PSH, URG y FIN configurados.</p>
+<p>Como los dos últimos tipos de escaneo, esto también espera paquetes RST para puertos cerrados bajo RFC.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sX objetivo
+</code></pre></div>
+<h3 id="estados-de-los-puertos-escaneados">Estados de los puertos escaneados</h3>
+<p>Tras realizar el escaneo de puertos, se nos pueden reportar cuatro posibles estados de los mismos:</p>
+<ul>
+<li>
+<p><strong>open</strong>: El puerto responde activamente a las conexiones entrantes</p>
+</li>
+<li>
+<p><strong>open | filtered</strong>: cuando no se recibe respuesta, el puerto se clasifica así porque "ninguna respuesta" puede significar sólo dos cosas:</p>
+<ul>
+<li>El puerto esta abierto (en algunos tipos de escaneos no se recibe respuesta al SYN)</li>
+<li>El puerto está protegido detrás de un firewall, por lo que se filtra</li>
+</ul>
+</li>
+<li>
+<p><strong>filtered</strong>: cuando el puerto está protegido detrás de un firewall que envía un ping ICMP de vuelta </p>
+</li>
+<li>
+<p><strong>closed</strong>: cuando se recibe un paquete RST</p>
+</li>
+</ul>
+<h4 id="puertos-filtrados-o-bloqueados">Puertos filtrados o bloqueados</h4>
+<p>El trabajo de un firewall es proteger un sistema de paquetes no deseados que podrían dañarlo. En este ejemplo simple, el escaneo de puertos se realiza en el puerto 81, ya que no hay ningún servicio ejecutándose en este puerto, por lo que la mejor práctica es usar un firewall para bloquear el acceso.</p>
+<p>Un <code>filtered</code> port como resultado de Nmap indica que el puerto no ha respondido en absoluto. El SYN simplemente ha sido descartado por el firewall. </p>
+<p><img alt="" src="../../img/firewall-filtered-port.png" /></p>
+<h4 id="puertos-cerrados-o-cuando-falla-el-firewall">Puertos cerrados o cuando falla el Firewall</h4>
+<p>En este caso, el resultado <code>closed</code> más común indica que no hay ningún servicio ejecutándose en el puerto, pero el firewall ha permitido que la conexión pase al servidor. También puede significar que no hay ningún firewall presente.</p>
+<p>Se debe tener en cuenta que aunque se presentan los escenarios más comunes, es posible configurar un firewall para rechazar paquetes en lugar de descartarlos. Esto significaría que los paquetes que lleguen al firewall se verán cerrados (el firewall responde con RST ACK).</p>
+<p>A continuación se muestra un caso en el que una regla de firewall permite el paso del paquete en el puerto 81 aunque no haya ningún servicio escuchando en el puerto. Lo más probable es que esto se deba a que el firewall está mal configurado.</p>
+<p><img alt="" src="../../img/firewall-closed-port.png" /></p>
+<h4 id="puertos-abiertos">Puertos abiertos</h4>
+<p>Cuando de algún puerto se indica el resultado <code>Open</code> en principio se trata de algún servicio expuesto al público que está accesible.</p>
+<p>Un detalle interesante a notar es el <code>RST</code>  enviado después de aceptar el <code>SYN ACK</code> desde el servidor web. El <code>RST</code> es enviado por Nmap ya que el estado del puerto (abierto) ha sido determinado por el <code>SYN ACK</code>. Si estuviéramos buscando más información como la versión del servicio HTTP o para obtener la página, el RST no se enviaría. Se establecería una conexión completa.</p>
+<p><img alt="" src="../../img/syn_open.gif" /></p>
+<h4 id="opciones-para-los-escaneos-switches-de-nmap">Opciones para los escaneos (switches de Nmap)</h4>
+<p>Es imposible comentar todas las opciones que se pueden usar con Nmap, pero algunas de las más notorias serían:</p>
+<ul>
+<li><code>-T(0-5)</code>:  Esta es una opción para establecer la velocidad del escaneo. Los números van de 0 a 5, donde 5 es el más rápido y 0 es el más lento.</li>
+</ul>
+<p><img alt="" src="../../img/opcionTnmap.png" /></p>
+<ul>
+<li>
+<p><code>-A</code>: Esta opción hace que Nmap se esfuerce en identificar el sistema operativo, los servicios y las versiones de destino. También hace traceroute y <strong>aplica scripts NSE para detectar información adicional</strong>. Este es un escaneo bastante ruidoso ya que aplica muchos escaneos diferentes. Los scripts NSE aplicados son los de la configuración por defecto.</p>
+</li>
+<li>
+<p><code>-v</code>: Mayor verbosidad. Esto nos dará información adicional en los datos generados por Nmap.</p>
+</li>
+<li>
+<p><code>-sV</code>: Se utiliza para sondear activamente los puertos abiertos para intentar determinar qué servicio y versión están ejecutando. </p>
+</li>
+<li>
+<p><code>-p</code>: Lista separada por comas de los puertos que se desean analizar. Una forma sencilla de definir solo unos pocos puertos para escanear o aumentar el alcance del escaneo a, por ejemplo, todos los puertos TCP disponibles.</p>
+</li>
+<li>
+<p><code>-O</code>: Hacer que Nmap intente decidir qué tipo de sistema operativo es. El proceso de detección del sistema operativo puede ser bastante complejo, pero también bastante simple. Un factor simple para intentar decidir si se trata de un sistema operativo Windows o Unix es mirar el campo TTL (Tiempo de vida) en los paquetes que se envían desde el sistema operativo. Por lo general, Windows tiene un valor predeterminado de 128, mientras que Unix tiene un valor predeterminado de 64.</p>
+</li>
+<li>
+<p><code>-Pn</code>: Fuerza la suposición de que el host está activo, omitiendo así la fase de descubrimiento del host.</p>
+</li>
+<li>
+<p><code>-oA</code>: Guarda el resultado de salida de Nmap en formatos "normal", XML y grepable. No obstante, se puede concretar de forma específica el formato del archivo de salida:</p>
+<ul>
+<li>
+<p><code>-oN</code>: redirige la salida normal a un nombre de archivo determinado</p>
+</li>
+<li>
+<p><code>-oX</code>: Produce resultados en un formato XML limpio y guárdalos en un archivo determinado.</p>
+</li>
+<li>
+<p><code>-oG</code>: Produce una salida "grepable" y la almacena en un archivo. Formato obsoleto ya que los usuarios ahora se están moviendo hacia salidas XML.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="scripts-en-nmap">Scripts en Nmap</h3>
+<p>Nmap incorpora un potente sistema de scripts conocido como NSE (Nmap Scripting Engine) que permite a los usuarios extender las capacidades de Nmap usando los diversos scripts que incorpora (actualmente hay más de 500 disponibles) que permiten desde la detección avanzada de versiones a la explotación de vulnerabilidades, o creando nuevos scripts que podemos compartir con el resto de usuarios (para los script se utiliza el <a href="https://www.lua.org/">lenguaje de programación LUA</a>).</p>
+<p>Para habilitar el uso de script en Nmap usamos la opción <code>-sC (nmap -sC &lt;objetivo&gt;)</code>. Con esta opción se seleccionarán todos los scripts NSE que pertenecen a la categoría predeterminada (<em>default</em>) y se ejecutarán contra los objetivos que indiquemos en el comando, por ejemplo:</p>
+<p><div class="highlight"><pre><span></span><code>$ nmap -sC scanme.nmap.org
+</code></pre></div>
+En este caso le estamos indicando que habilite el uso de scripts de la categoría predeterminada y Nmap selecciona los script a usar teniendo en cuenta los puertos que encuentra. En este caso se ejecutan los scripts <code>ssh-hostkey</code> y <code>http-title</code> como podemos ver en los resultados reportados:</p>
+<div class="highlight"><pre><span></span><code>Starting Nmap <span class="m">7</span>.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at <span class="m">2021</span>-02-22 <span class="m">13</span>:01 CET
+Nmap scan report <span class="k">for</span> scanme.nmap.org <span class="o">(</span><span class="m">45</span>.33.32.156<span class="o">)</span>
+Host is up <span class="o">(</span><span class="m">0</span>.26s latency<span class="o">)</span>.
+Other addresses <span class="k">for</span> scanme.nmap.org <span class="o">(</span>not scanned<span class="o">)</span>: <span class="m">2600</span>:3c01::f03c:91ff:fe18:bb2f
+Not shown: <span class="m">996</span> closed ports
+PORT      STATE SERVICE
+<span class="m">22</span>/tcp    open  ssh
+<span class="p">|</span> ssh-hostkey: 
+<span class="p">|</span>   <span class="m">1024</span> ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 <span class="o">(</span>DSA<span class="o">)</span>
+<span class="p">|</span>   <span class="m">2048</span> <span class="m">20</span>:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 <span class="o">(</span>RSA<span class="o">)</span>
+<span class="p">|</span>   <span class="m">256</span> <span class="m">96</span>:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 <span class="o">(</span>ECDSA<span class="o">)</span>
+<span class="p">|</span>_  <span class="m">256</span> <span class="m">33</span>:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 <span class="o">(</span>ED25519<span class="o">)</span>
+<span class="m">80</span>/tcp    open  http
+<span class="p">|</span>_http-title: Go ahead and ScanMe!
+<span class="m">9929</span>/tcp  open  nping-echo
+<span class="m">31337</span>/tcp open  Elite
+
+Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned <span class="k">in</span> <span class="m">11</span>.64 seconds
+</code></pre></div>
+<p>Los scripts en NSE se dividen en las siguientes categorías:</p>
+<ul>
+<li>
+<p><code>auth</code>: Este tipo de Scripts permiten determinar credenciales de autenticación en el sistema objetivo, frecuentemente realizando ataques de fuerza bruta sencillos, algunos ejemplos de este tipo de scripts son ftp-anon, snmp-brute, http-auth, etc.</p>
+</li>
+<li>
+<p><code>broadcast</code>: Este tipo de Scripts permiten determinar credenciales de autenticación en el sistema objetivo, frecuentemente realizando ataques de fuerza bruta sencillos, algunos ejemplos de este tipo de scripts son ftp-anon, snmp-brute, http-auth, etc.</p>
+</li>
+<li>
+<p><code>brute</code>: esta categoría es para scripts que utilizan el sistema de fuerza bruta para averiguar las credenciales de usuario en un determinado servicio</p>
+</li>
+<li>
+<p><code>default</code>: estos son los scripts que se ejecutan cuando se ejecuta la opción -sC. Se trata de un conjunto de scripts que ejecutan operaciones concretas tratando de capturar la mayor cantidad de información contra un objetivo, se trata de una categoría que debe ser evitada, ya que puede hacer mucho ruido contra un sistema remoto que tenga un IDS/IPS instalado, utilizando esta categoría, probablemente el escaneo no sea tan discreto como se espera.</p>
+</li>
+<li>
+<p><code>discovery</code>: Estos scripts tratan de descubrir de forma activa servicios en el segmento de red tales como registros públicos, dispositivos SNMP, servicios de directorio, etc.</p>
+</li>
+<li>
+<p><code>dos</code>: Intentan causar denegación de servicio sobre un servicio determinado.</p>
+</li>
+<li>
+<p><code>exploit</code>: Tratan de detectar y explotar algún tipo de vulnerabilidad sobre el objetivo.</p>
+</li>
+<li>
+<p><code>external</code>: Registran la información de un escaneo determinado en un recurso externo como por ejemplo un servicio de almacenamiento en internet, sin embargo es necesario ser cauteloso con este tipo de scripts ya que pueden enviar a una fuente externa la dirección IP del objetivo y del atacante.</p>
+</li>
+<li>
+<p><code>fuzzer</code>: Estos Scripts envían información al servidor que es inesperada, incompleta o aleatoria, con el fin de detectar una posible vulnerabilidad en el servicio, sin embargo es costoso en términos de rendimiento del escaneo.</p>
+</li>
+<li>
+<p><code>intrusive</code>: Son Scripts con un alto grado de ser perjudiciales para el sistema objetivo, ya que intenta utilizar recursos del sistema objetivo tales como proxys HTTP o dispositivos con SNMP habilitado.</p>
+</li>
+<li>
+<p><code>malware</code>: Intentan determinar si el objetivo se encuentra infectado con malware o backdoors, algunos ejemplos de esta categoría de Scripts son: <code>smtp-strangeport</code> y <code>auth-spoof</code></p>
+</li>
+<li>
+<p><code>safe</code>: Están diseñados para no afectar ni dañar el objetivo, simplemente tratan de capturar información que pueda ser sensible sin afectar el rendimiento u otros factores de la ejecución del servicio, ejemplos de este tipo de scripts pueden ser: ssh-hostkey o html-title </p>
+</li>
+<li>
+<p><code>version</code>: Se trata de scripts que extienden el proceso de detección de versiones de servicios, están diseñados para ejecutarse solamente si el escaneo tiene la opción (Scan Version -sV)</p>
+</li>
+<li>
+<p><code>vuln</code>: Chequean vulnerabilidades especificas de software y generan resultados solamente si dichas vulnerabilidades son encontradas, ejemplos de este tipo de scripts son: <code>realvnc-auth-bypass</code> y <code>afp-path-vuln</code></p>
+</li>
+</ul>
+<p>Si la instalación de Nmap se ha realizado desde apt-get o dpkg, probablemente la ubicación de todos los scripts se encuentre en <code>/usr/share/nmap/scripts</code></p>
+<h4 id="seleccion-de-scripts">Selección de scripts</h4>
+<p>Podemos seleccionar el script que queremos ejecutar directamente indicando el fichero o podemos seleccionar todos los de una categoría o categorías.</p>
+<h5 id="seleccionar-categorias">Seleccionar categorías</h5>
+<div class="highlight"><pre><span></span><code>nmap -sV --script &lt;categoria&gt; &lt;objetivo&gt;
+</code></pre></div>
+<p>Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code>nmap -sV --script version scanme.nmap.org
+</code></pre></div>
+<p>Ejecutamos los script de la categoría version contra el objetivo scanme.nmap.org:</p>
+<div class="highlight"><pre><span></span><code>nmap -sV --script<span class="o">=</span><span class="s2">&quot;version,discovery&quot;</span> scanme.nmap.org
+</code></pre></div>
+<p>Además de los script de la categoría version también se usarán los de la categoría discovery.</p>
+<div class="highlight"><pre><span></span><code>nmap -sV --script <span class="s2">&quot;not intrusive&quot;</span> scanme.nmap.org
+</code></pre></div>
+<p>En este caso se ejecutarían todos los script excepto los de la categoría intrusive.</p>
+<div class="highlight"><pre><span></span><code>nmap -sV --script <span class="s2">&quot;(http-*) and not http-brute&quot;</span> scanme.nmap.org
+</code></pre></div>
+<p>En este caso se ejecutarían todos los script http excepto http-brute.</p>
+<h5 id="seleccion-de-script-especifico">Selección de script específico</h5>
+<div class="highlight"><pre><span></span><code>nmap --script &lt;nombre de fichero&gt; &lt;objetivo&gt;
+</code></pre></div>
+<p>Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code>nmap --script http-title scanme.nmap.org
+</code></pre></div>
+<p>Se ejecucuta el script http-title contra el objetivo scanme.nmap.org (es posible indicar varios scripts separandolos por comas).</p>
+<h4 id="actualizar-la-base-de-datos-de-scripts">Actualizar la base de datos de scripts</h4>
+<div class="highlight"><pre><span></span><code>sudo nmap --script-updatedb
+</code></pre></div>
+<p>Se actualizarán los script contra la base de datos de Nmap y los script nuevos se guardaran en la ruta por defecto de nuestra instalación.</p>
+<h4 id="demostracion-de-algunos-scripts">Demostración de algunos scripts</h4>
+<ol>
+<li>
+<p>Comprobar las versiones de los servicios en los puertos abiertos</p>
+<p><img alt="" src="../../img/scripts1.png" /></p>
+</li>
+<li>
+<p>A continuación se utiliza el script <code>ftp-anon</code> de la categoría <code>auth</code>. Este script nos permitirá saber si el acceso anónimo al servidor ftp está permitido.</p>
+<p><img alt="" src="../../img/scripts2.png" /></p>
+</li>
+<li>
+<p>Con el script <code>http-defaults-accounts</code> se intenta determinar si el acceso con credenciales por defecto está habilitado en algunas aplicaciones web.</p>
+<p><img alt="" src="../../img/scripts3.png" /></p>
+</li>
+<li>
+<p>El script <code>ftp-vsftpd-backdoor</code> corresponde a las categorías: exploit, intrusive, malware, vuln; este script busca la existencia de la puerta trasera (backdoor) reportada en <a href="https://www.incibe-cert.es/alerta-temprana/vulnerabilidades/cve-2011-2523">CVE-2011-2523</a> (una vulnerabilidad antigua pero con fines ilustrativos)</p>
+<p><img alt="" src="../../img/scripts4.png" /></p>
+</li>
+<li>
+<p>Utilizando los scripts de la categoría <code>vuln</code> para descubrir la vlnerabilidad <a href="https://www.csirt-epn.edu.ec/servicios/vulnerabilidades/58-ms17-010">MS17-010 (Eternalblue)</a>, la que utilizó <em>Wannacry</em> en su día.</p>
+<p><img alt="" src="../../img/scripts5.jpg" /></p>
+<p>Para haber buscado vulnerabilidad específicas de SMB, podíamos haber utilizado también:</p>
+<div class="highlight"><pre><span></span><code>nmap -sV --script smb* &lt;Objetivo&gt;
+</code></pre></div>
+<h2 id="ejercicios-de-nmap">Ejercicios de Nmap</h2>
+</li>
+</ol>
+<p>Completar la sala dedicada a Nmap en TryHackMe: <a href="https://tryhackme.com/room/furthernmap">Furthernmap</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Volver al principio
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../Intro/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Introducción" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Introducción
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../exploit/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Explotación de vulnerabilidades" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Explotación de vulnerabilidades
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.94ec81fe.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.48dfec6c.min.js"></script>
+      
+    
+  </body>
+</html>
