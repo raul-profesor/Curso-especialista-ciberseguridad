@@ -43,8 +43,6 @@ markdown_extensions:
   - attr_list
   - md_in_html
 
-
-site_name: Curso de especialista en ciberseguridad - Warm up
 nav:
   - Warm up:
     - section/index.md
@@ -65,10 +63,7 @@ nav:
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Webgrafía: segof/webgrafia.md
 
-<<<<<<< HEAD
 analytics: 
     provider: google 
     property: G-3NX5MD5C8H
 
-=======
->>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
