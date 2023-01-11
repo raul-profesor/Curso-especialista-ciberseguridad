@@ -1,5 +1,7 @@
+
 site_name: Seguridad en sistemas del curso de especialista en cibeseguridad
 site_url: https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/
+
 
 theme:
   name: material
@@ -63,7 +65,10 @@ nav:
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Webgrafía: segof/webgrafia.md
 
+<<<<<<< HEAD
 analytics: 
     provider: google 
     property: G-3NX5MD5C8H
 
+=======
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a

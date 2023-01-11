@@ -2,6 +2,13 @@ En estos primeros pasos veremos algunos conceptos muy básicos que es necesario 
 
 Estas nociones básicas nos darán las herramientas principales para desenvolvernos dentro de un sistema y entender los principios de ciberseguridad que se presentarán con posterioridad.
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 ## Estructura de ficheros
 Un sistema de archivos, llamado comúnmente File System o FS, determina la organización de los datos en un soporte de almacenamiento, y por tanto, cómo gestiona y organiza el sistema operativo los archivos. 
 
@@ -534,7 +541,11 @@ En este apartado se describe cómo se implementan las contraseñas dentro del si
 
 Tradicionalmente, Unix usa el archivo /etc/passwd para realizar un seguimiento de cada usuario en el sistema. El archivo / etc / passwd contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).
 
+<<<<<<< HEAD
 Se puede usar el comando `cat` para mostrar el archivo `/etc/passwd` del sistema. Aquí algunas líneas de muestra de un archivo típico:
+=======
+Puedes usar el gato comando para mostrar el archivo / etc / passwd de su sistema. Aquí hay algunas líneas de muestra de un archivo típico:
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 ```sh
 root:x:0:1:System Operator:/:/bin/ksh
@@ -544,6 +555,7 @@ rocio:x:181:100:Rocio Cordoba:/home/rachel:/bin/ksh
 arturo:x.:182:100:Arturo Soria:/home/arlin:/bin/csh
 ```
 
+<<<<<<< HEAD
 Las primeras tres cuentas, root, daemon y uucp, son cuentas del sistema, mientras que rocío y arturo son cuentas para usuarios individuales.
 
 Alguno de los campos más importantes del archivo `/etc/passwd`, son:
@@ -551,6 +563,17 @@ Alguno de los campos más importantes del archivo `/etc/passwd`, son:
 |Campo|Contenido|
 |:-----:|---------|
 |Rocío|Nombre de usuario.|
+=======
+Las primeras tres cuentas, root , daemon y uucp , son cuentas del sistema, mientras que rachel y arlin son cuentas para usuarios individuales.
+
+Los campos individuales del archivo / etc / passwd tienen significados bastante sencillos. La Tabla 4-1 explica una línea de muestra del archivo que se muestra arriba.
+
+Alguno de los campos más importantes del archivo /etc/passwd, son:
+
+|Campo|Contenido|
+|:-----:|---------|
+|Raquel|Nombre de usuario.|
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 |x|Lugar de espera para la "contraseña cifrada" del usuario. Tradicionalmente, este campo almacenaba la contraseña cifrada del usuario. Los sistemas Unix modernos almacenan contraseñas cifradas en un archivo separado (el archivo de contraseñas ocultas ) al que solo pueden acceder los usuarios privilegiados.|
 |181|Número de identificación de usuario (UID) del usuario.|
 |100|Número de identificación de grupo del usuario (GID).|
@@ -564,8 +587,12 @@ Las contraseñas se almacenaban tradicionalmente en el archivo /etc/passwd en un
 
 Cuando Unix/Linux solicita su contraseña, necesita alguna forma de determinar que la contraseña es correcta. Muchos de los primeros sistemas informáticos almacenaban las contraseñas de todas sus cuentas en texto plano en un archivo. En circunstancias normales, el sistema protegía las contraseñas de modo que solo los usuarios privilegiados y las utilidades del sistema operativo pudieran acceder a ellas. Sin embargo, bien por accidente, bien por un error de programación o por un acto deliberado, un usuario no privilegiado podría acceder al contenido de este archivo. Para muestra un botón:
 
+<<<<<<< HEAD
 !!!quote "Cita"
         Una de las situaciones más memorables ocurrió a principios de la década de 1960 cuando un administrador del sistema en el sistema CTSS del MIT estaba editando el archivo de contraseñas y otro administrador del sistema estaba editando el mensaje diario que se imprime en el terminal de todos al iniciar sesión. Debido a un error de diseño del software, los archivos temporales del editor de los dos usuarios se intercambiaron y, por lo tanto, durante un tiempo, el archivo de contraseña se imprimió en cada terminal cuando se iniciaba sesión.
+=======
+Una de las situaciones más memorables ocurrió a principios de la década de 1960 cuando un administrador del sistema en el sistema CTSS del MIT estaba editando el archivo de contraseñas y otro administrador del sistema estaba editando el mensaje diario que se imprime en el terminal de todos al iniciar sesión. Debido a un error de diseño del software, los archivos temporales del editor de los dos usuarios se intercambiaron y, por lo tanto, durante un tiempo, el archivo de contraseña se imprimió en cada terminal cuando se iniciaba sesión.
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 El peligro real que planteaban estos sistemas es que los usuarios pueden hacer copias del archivo de contraseñas y robarlas sin el conocimiento del administrador del sistema.
 
@@ -585,9 +612,15 @@ En criptografía, la sal (en inglés, salt) comprende bits aleatorios que se usa
 
 En definitiva, el salt es una cadena de caracteres aleatorios que se concatenan con la contraseña antes de cifrarla para dificultad en gran medida su descifrado por un atacante.
 
+<<<<<<< HEAD
 Los datos con salt complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de salt duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de salt se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la salt no. 
 
 El beneficio aportado por usar una contraseña con salt es que un ataque simple de diccionario contra los valores cifrados es impracticable si la salt es lo suficientemente larga.
+=======
+Los datos con sal complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de sal duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de sal se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la sal no. 
+
+El beneficio aportado por usar una contraseña con sal es que un ataque simple de diccionario contra los valores cifrados es impracticable si la sal es lo suficientemente larga.
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 Así el formato del contenido del archivo /etc/shadow es:
 

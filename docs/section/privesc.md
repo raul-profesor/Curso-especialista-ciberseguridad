@@ -262,7 +262,11 @@ Algunos ejecutables aceptan argumentos separados por espacios, p.Ej.: someprog.e
 
 Este comportamiento conduce a la ambigüedad cuando se utilizan rutas absolutas que están sin comillas y contienen espacios.
 
+<<<<<<< HEAD
 Considerad la siguiente ruta sin comillas:
+=======
+Considered la siguiente ruta sin comillas:
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 C:\Program FIles\Algun directorio\SomeProgram.exe
 
@@ -304,7 +308,7 @@ Los hashes están cifrados con una clave que se puede encontrar en un archivo ll
 
 Si se tiene la capacidad de leer los archivos SAM y SYSTEM, se pueden extraer los hashes. Los archivos SAM y SYSTEM se encuentran en el directorio ```C:\Windows\System32\config```.
 
-os archivos se bloquean mientras se ejecuta Windows. Sin embargo, podrían existir copias de seguridad de los archivos en los directorios ```C:\Windows\Repair``` o ```C:\Windows\System32\config\RegBack```.
+Estos archivos se bloquean mientras se ejecuta Windows. Sin embargo, podrían existir copias de seguridad de los archivos en los directorios ```C:\Windows\Repair``` o ```C:\Windows\System32\config\RegBack```.
 
 !!!Question "Task 11 de THM"
     Obtén una shell de Administrador haciendo uso de esta escalada de privilegios.

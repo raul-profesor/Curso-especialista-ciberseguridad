@@ -41,11 +41,19 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
     Básicamente es un almacén digital que permite a los usuarios almacenar las credenciales de usuario de forma *"segura"*. Todas las credenciales se almacenan en una carpeta específica en el sistema de Windows. 
 
     Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 + **Base de datos de dominio de Active Directory (NTDS.DIT)**
   
     Esta base de datos almacena todas las credenciales de los usuarios y equipos ubicados en cada servidor de controlador de dominio de Active Directory, en un entorno de dominio de Active Directory. 
     
+<<<<<<< HEAD
     Este archivo está ubicado en el directorio: `%SystemRoot%\NTDS)`
+=======
+    Este archivo está ubicado en el directorio: `%SystemRoot%\NTDS`
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 ## Tipos de hashes de credenciales en Windows
 
@@ -124,9 +132,15 @@ NTLM utiliza un procedimiento de desafío/respuesta para autenticar a los partic
 
 2. El host responde con un número aleatorio, el desafío.
 
+<<<<<<< HEAD
 3. El cliente crea un valor a partir de ese número y el hash de la contraseña del usuario y lo devuelve como respuesta.
 
 4. Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.
+=======
+3. El cliente crea un valor hash a partir de ese número y la contraseña del usuario y lo devuelve como respuesta.
+
+4. Del mismo modo, el host, que también conoce la contraseña, crea el valor hash y, a continuación, lo compara con la respuesta del cliente.
+>>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 5. Si ambos valores coinciden, se confirma la autenticidad del cliente y se permite el acceso. Si no hay coincidencia, se bloquea al cliente.
 
