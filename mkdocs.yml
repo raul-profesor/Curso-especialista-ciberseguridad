@@ -1,3 +1,4 @@
+site_name: Seguridad en sistemas del curso de especialista en cibeseguridad
 site_url: https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/
 
 theme:
@@ -61,4 +62,8 @@ nav:
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Webgrafía: segof/webgrafia.md
+
+analytics: 
+    provider: google 
+    property: G-3NX5MD5C8H
 

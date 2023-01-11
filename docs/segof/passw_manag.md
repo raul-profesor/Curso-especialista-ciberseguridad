@@ -81,9 +81,9 @@ Si realizaramos un volcado de la base de datos SAM/NTDS, se muestran junto con N
 
 + Cuando un usuario crea una nueva contraseña, esta contraseña se convierte a mayúsculas
 
-+ luego se rellena a 14 caracteres
++ Luego se rellena a 14 caracteres, utilizando 0s 
 
-+ Luego, la contraseña se divide en dos fragmentos de 7 bytes.
++ Más tarde, la contraseña se divide en dos fragmentos de 7 bytes.
 
 + Los dos fragmentos se utilizarán como clave en un cifrado de Estándar de cifrado de datos (DES) para cifrar un valor fijo
 
@@ -124,9 +124,9 @@ NTLM utiliza un procedimiento de desafío/respuesta para autenticar a los partic
 
 2. El host responde con un número aleatorio, el desafío.
 
-3. El cliente crea un valor hash a partir de ese número y la contraseña del usuario y lo devuelve como respuesta.
+3. El cliente crea un valor a partir de ese número y el hash de la contraseña del usuario y lo devuelve como respuesta.
 
-4. Del mismo modo, el host, que también conoce la contraseña, crea el valor hash y, a continuación, lo compara con la respuesta del cliente.
+4. Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.
 
 5. Si ambos valores coinciden, se confirma la autenticidad del cliente y se permite el acceso. Si no hay coincidencia, se bloquea al cliente.
 

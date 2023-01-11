@@ -8,8 +8,9 @@ Su subproyecto más conocido es el Metasploit Framework, una herramienta para de
 
 Metasploit framework es una herramienta desarrollada en Perl y Ruby en su mayor parte, que está enfocada a auditores de seguridad y equipos Red Team y Blue Team.
 
-Red Team es el equipo ofensivo o encargado del hacking ético, que hace pruebas de intrusión, mientras que el Red Team es el equipo que lleva a cabo la securización y toda la parte defensiva.
-Características principales
+Red Team es el equipo ofensivo o encargado del hacking ético, que hace pruebas de intrusión, mientras que el Blue Team es el equipo que lleva a cabo la securización y toda la parte defensiva.
+
+#### Características principales
 
 Es una herramienta muy completa que tiene muchísimos exploits, que son vulnerabilidades conocidas, en las cuales tienen también unos módulos, llamados payloads, que son los códigos que explotan estas vulnerabilidades.
 
@@ -58,7 +59,7 @@ Un exploit es una vulnerabilidad, y el payload es la carga que se ejecuta en esa
 
 #### Codificadores y NOPs
 
-Con el fin de hacer más difícil la detección del payload por de los sistemas IDS / IPS1 o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.
+Con el fin de hacer más difícil la detección del payload por de los sistemas IDS/IPS o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.
 
 #### Auxiliar
 
@@ -106,7 +107,7 @@ Por ejemplo, en la imagen de abajo se realiza una búsqueda de la vulnerabilidad
 
 Recuadrado en rojo ya nos informa sobre cómo utilizar el módulo que escojamos.
 
-Además, se nos ofrece una información acerca de los módulos, como por ejemplo la fecha de aparición del módulo (disclosure date), si permite comprobar si la víctima u objetivo es vulenrable a ese exploit (check) o qué ranking tiene, entendiendo como ranking el nivel de fiabilidad del exploit o módulo del que se trate. 
+Además, se nos ofrece una información acerca de los módulos, como por ejemplo la fecha de aparición del módulo (disclosure date), si permite comprobar si la víctima u objetivo es vulnerable a ese exploit (check) o qué ranking tiene, entendiendo como ranking el nivel de fiabilidad del exploit o módulo del que se trate. 
 
 Como curiosidad el ranking que se utiliza, de acuerdo con la documentación oficial, es este:
 
