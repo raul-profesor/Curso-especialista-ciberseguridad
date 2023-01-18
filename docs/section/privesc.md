@@ -262,11 +262,7 @@ Algunos ejecutables aceptan argumentos separados por espacios, p.Ej.: someprog.e
 
 Este comportamiento conduce a la ambigüedad cuando se utilizan rutas absolutas que están sin comillas y contienen espacios.
 
-<<<<<<< HEAD
 Considerad la siguiente ruta sin comillas:
-=======
-Considered la siguiente ruta sin comillas:
->>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 C:\Program FIles\Algun directorio\SomeProgram.exe
 
