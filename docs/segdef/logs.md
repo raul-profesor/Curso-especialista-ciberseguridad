@@ -6,9 +6,9 @@ description: En este caso vamos a ver qué son los logs de un sistema, para qué
 
 # Introducción
 
-El análisis de logs es el proceso de revisar logs de eventos generados por un computador para, de este forma, identificar de forma proactiva bugs, amenazas de seguridad u otros riesgos. El análisis de logs puede usarse en un espectro más amplio, como por ejemplo el cumplimiento de determinadas normativas o revisar comportamientos de los usuarios.
+El análisis de logs es el proceso de revisar logs de eventos generados por un computador para, de esta forma, identificar de forma proactiva bugs, amenazas de seguridad u otros riesgos. El análisis de logs puede usarse en un espectro más amplio, como por ejemplo el cumplimiento de determinadas normativas o revisar comportamientos de los usuarios.
 
-Un log es un archivo que captura toda actividad dentro del sistema operativo, aplicación software o dispositivo. Estos archivos documentan atuomáticamente cualquier información designada por los administradores de sistemas, incluyendo:
+Un log es un archivo que captura toda actividad dentro del sistema operativo, aplicación software o dispositivo. Estos archivos documentan automáticamente cualquier información designada por los administradores de sistemas, incluyendo:
 
 * Mensajes
 * Reportes de error
@@ -22,7 +22,7 @@ De igual manera la actividad viene marcada con fecha y hora, lo que ayuda a los 
 
 En muchos casos, por una cuestión legal. Las organizaciones se deben adherir a una regulación específica que dicta como se almacena y analizan los datos.
 
-Mas allá de los requerimientos legales, el análisis de los, cuando se hace de forma eficaz, puede proporcionar difernetes beneficios para el negocio. A continuación vemos algunos.
+Mas allá de los requerimientos legales, el análisis de los logs, cuando se hace de forma eficaz, puede proporcionar difrenetes beneficios para el negocio. A continuación vemos algunos.
 
 ### Un mejor troubleshooting 
 
@@ -66,6 +66,10 @@ Muchas soluciones de software de gestión de logs se basan en la indexación par
 Además, con las soluciones basadas en índices, los patrones de búsqueda también se definen en función de lo que se ha indexado. Esta es otra limitación crítica, sobre todo cuando se necesita una investigación y no se pueden buscar los datos disponibles porque no se han indexado correctamente.
 
 Las soluciones líderes ofrecen búsqueda de texto libre, que permite al equipo de TI buscar en cualquier campo de cualquier log. Esta capacidad ayuda a mejorar la velocidad a la que el equipo puede trabajar sin comprometer el rendimiento.
+
+## Análisis de logs desde la línea de comandos
+
+Demostración práctica.
 
 ## Métodos de análisis de logs
 
