@@ -62,8 +62,12 @@ nav:
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Webgrafía: segof/webgrafia.md
+  - Seguridad defensiva:
+    - segdef/index.md
+    - Logs: segdef/logs.md
 
-analytics: 
-    provider: google 
-    property: G-3NX5MD5C8H
+extra:
+  analytics: 
+      provider: google 
+      property: G-3NX5MD5C8H
 
