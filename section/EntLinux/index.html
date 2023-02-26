@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#head" class="md-skip">
+        <a href="#estructura-de-ficheros" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -346,8 +346,6 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Entornos Linux
@@ -363,8 +361,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -637,6 +633,93 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principales-comandos-para-manejarse-en-el-terminal" class="md-nav__link">
+    Principales comandos para manejarse en el terminal
+  </a>
+  
+    <nav class="md-nav" aria-label="Principales comandos para manejarse en el terminal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-archivos-y-directorios" class="md-nav__link">
+    Crear archivos y directorios
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear archivos y directorios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-archivos-usando-la-redireccion" class="md-nav__link">
+    Creando archivos usando la redirección
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando archivos usando la redirección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-proposito-de-las-mayusculas-y-minusculas" class="md-nav__link">
+    A propósito de las mayúsculas y minúsculas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moviendo-y-manipulando-archivos" class="md-nav__link">
+    Moviendo y manipulando archivos
+  </a>
+  
+    <nav class="md-nav" aria-label="Moviendo y manipulando archivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eliminar-archivos-y-carpetas" class="md-nav__link">
+    Eliminar archivos y carpetas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#un-poco-de-fontaneria-tuberias" class="md-nav__link">
+    Un poco de fontanería (tuberías)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-linea-de-comandos-y-el-superusuario" class="md-nav__link">
+    La línea de comandos y el superusuario
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivos-ocultos" class="md-nav__link">
+    Archivos ocultos
+  </a>
   
 </li>
         
@@ -928,6 +1011,8 @@
         
           
         
+          
+        
       
       
         
@@ -957,7 +1042,21 @@
   
     <li class="md-nav__item">
       <a href="../../segdef/logs/" class="md-nav__link">
-        Logs
+        Análisis de Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/idps/" class="md-nav__link">
+        Monitorización con IDS/IPS
       </a>
     </li>
   
@@ -985,24 +1084,10 @@
                   
 
 
+  <h1>Entornos Linux</h1>
+
 <p>En estos primeros pasos veremos algunos conceptos muy básicos que es necesario dominar previo a adquirir cualquier conocimiento relativo a la seguridad de sistemas.</p>
 <p>Estas nociones básicas nos darán las herramientas principales para desenvolvernos dentro de un sistema y entender los principios de ciberseguridad que se presentarán con posterioridad.</p>
-<h1 id="head">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <h2 id="estructura-de-ficheros">Estructura de ficheros</h2>
 <p>Un sistema de archivos, llamado comúnmente File System o FS, determina la organización de los datos en un soporte de almacenamiento, y por tanto, cómo gestiona y organiza el sistema operativo los archivos. </p>
 <p>Linux es, como todo Unix, un sistema operativo completamente orientado a archivos. Se representa todo (o casi todo) con un archivo, tanto los datos (archivos de datos de cualquier tipo, como una imagen o un programa) como los periféricos (terminales, ratones, teclado, tarjeta sonido, etc.) o incluso los medios de comunicación (sockets, tuberías nombradas, etc.). Se puede decir que el sistema de archivos es el corazón de cualquier sistema Unix.</p>
@@ -1436,33 +1521,14 @@ Después de configurar el sticky bit, los archivos en público solo pueden ser e
 <p>En este apartado se describe cómo se implementan las contraseñas dentro del sistema operativo Unix tanto para sistemas administrados localmente como basados ​​en red.</p>
 <h3 id="el-archivo-etcpasswd">El archivo /etc/passwd</h3>
 <p>Tradicionalmente, Unix usa el archivo /etc/passwd para realizar un seguimiento de cada usuario en el sistema. El archivo / etc / passwd contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Se puede usar el comando <code>cat</code> para mostrar el archivo <code>/etc/passwd</code> del sistema. Aquí algunas líneas de muestra de un archivo típico:
-=======
-Puedes usar el gato comando para mostrar el archivo / etc / passwd de su sistema. Aquí hay algunas líneas de muestra de un archivo típico:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Se puede usar el comando <code>cat</code> para mostrar el archivo <code>/etc/passwd</code> del sistema. Aquí algunas líneas de muestra de un archivo típico:</p>
 <div class="highlight"><pre><span></span><code>root:x:0:1:System Operator:/:/bin/ksh
 daemon:x:1:1::/tmp:
 uucp:x:4:4::/var/spool/uucppublic:/usr/lib/uucp/uucico
 rocio:x:181:100:Rocio Cordoba:/home/rachel:/bin/ksh
 arturo:x.:182:100:Arturo Soria:/home/arlin:/bin/csh
 </code></pre></div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Las primeras tres cuentas, root, daemon y uucp, son cuentas del sistema, mientras que rocío y arturo son cuentas para usuarios individuales.</p>
+<p>Las primeras tres cuentas, root, daemon y uucp, son cuentas del sistema, mientras que rocío y arturo son cuentas para usuarios individuales.</p>
 <p>Alguno de los campos más importantes del archivo <code>/etc/passwd</code>, son:</p>
 <table>
 <thead>
@@ -1475,34 +1541,6 @@ Las primeras tres cuentas, root, daemon y uucp, son cuentas del sistema, mientra
 <tr>
 <td align="center">Rocío</td>
 <td>Nombre de usuario.</td>
-</tr>
-<tr>
-<td align="center">=======</td>
-<td></td>
-</tr>
-<tr>
-<td align="center">Las primeras tres cuentas, root , daemon y uucp , son cuentas del sistema, mientras que rachel y arlin son cuentas para usuarios individuales.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Los campos individuales del archivo / etc / passwd tienen significados bastante sencillos. La Tabla 4-1 explica una línea de muestra del archivo que se muestra arriba.</p>
-<p>Alguno de los campos más importantes del archivo /etc/passwd, son:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Campo</th>
-<th>Contenido</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Raquel</td>
-<td>Nombre de usuario.</td>
-</tr>
-<tr>
-<td align="center">&gt;&gt;&gt;&gt;&gt;&gt;&gt; 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</td>
-<td></td>
 </tr>
 <tr>
 <td align="center">x</td>
@@ -1533,28 +1571,10 @@ Las primeras tres cuentas, root, daemon y uucp, son cuentas del sistema, mientra
 <p>Las contraseñas se almacenaban tradicionalmente en el archivo /etc/passwd en un formato cifrado. Sin embargo, debido a los avances en la velocidad del procesador, las contraseñas cifradas ahora se almacenan casi universalmente en un archivo independiente, llamado /etc/shadow , que se describe más adelante.</p>
 <h3 id="el-sistema-de-contrasenas-cifradas-en-unixlinux">El sistema de contraseñas cifradas en Unix/Linux</h3>
 <p>Cuando Unix/Linux solicita su contraseña, necesita alguna forma de determinar que la contraseña es correcta. Muchos de los primeros sistemas informáticos almacenaban las contraseñas de todas sus cuentas en texto plano en un archivo. En circunstancias normales, el sistema protegía las contraseñas de modo que solo los usuarios privilegiados y las utilidades del sistema operativo pudieran acceder a ellas. Sin embargo, bien por accidente, bien por un error de programación o por un acto deliberado, un usuario no privilegiado podría acceder al contenido de este archivo. Para muestra un botón:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <div class="admonition quote">
 <p class="admonition-title">Cita<p>Una de las situaciones más memorables ocurrió a principios de la década de 1960 cuando un administrador del sistema en el sistema CTSS del MIT estaba editando el archivo de contraseñas y otro administrador del sistema estaba editando el mensaje diario que se imprime en el terminal de todos al iniciar sesión. Debido a un error de diseño del software, los archivos temporales del editor de los dos usuarios se intercambiaron y, por lo tanto, durante un tiempo, el archivo de contraseña se imprimió en cada terminal cuando se iniciaba sesión.</p>
 </p>
 </div>
-<p>=======
-Una de las situaciones más memorables ocurrió a principios de la década de 1960 cuando un administrador del sistema en el sistema CTSS del MIT estaba editando el archivo de contraseñas y otro administrador del sistema estaba editando el mensaje diario que se imprime en el terminal de todos al iniciar sesión. Debido a un error de diseño del software, los archivos temporales del editor de los dos usuarios se intercambiaron y, por lo tanto, durante un tiempo, el archivo de contraseña se imprimió en cada terminal cuando se iniciaba sesión.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <p>El peligro real que planteaban estos sistemas es que los usuarios pueden hacer copias del archivo de contraseñas y robarlas sin el conocimiento del administrador del sistema.</p>
 <p>Unix/Linux evitan este problema al no mantener las contraseñas reales en ninguna parte del sistema. En su lugar, Unix/Linux almacenan un valor que es generado mediante el uso de la contraseña para cifrar un bloque de bits con una función unidireccional llamada crypt(); el resultado del cálculo se almacenaba tradicionalmente en /etc/passwd. Cuando se intenta iniciar sesión, el programa /bin/login no descifra la contraseña almacenada. En su lugar, /bin/login toma la contraseña que ingresó, la usa para transformar otro bloque de ceros y compara el bloque recién transformado con el bloque almacenado en el archivo /etc/passwd. Si los dos resultados cirfrados coinciden, el sistema lo deja entrar.</p>
 <h5 id="la-funcion-de-cifrado-tradicional-crypt">La función de cifrado tradicional crypt()</h5>
@@ -1564,26 +1584,8 @@ Una de las situaciones más memorables ocurrió a principios de la década de 19
 <p>A medida que los ordenadores aumentaban de potencia y los algoritmos de cifrado fueron empezando a considerarse inseguros por ello, se inventaron nuevas formas de fortificarlos. Una de ellas fue el elemento conocido como "salt".</p>
 <p>En criptografía, la sal (en inglés, salt) comprende bits aleatorios que se usan como una de las entradas en una función derivadora de claves. La otra entrada es habitualmente una contraseña. La salida de la función derivadora de claves se almacena como la versión cifrada de la contraseña. </p>
 <p>En definitiva, el salt es una cadena de caracteres aleatorios que se concatenan con la contraseña antes de cifrarla para dificultad en gran medida su descifrado por un atacante.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Los datos con salt complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de salt duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de salt se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la salt no. </p>
-<h1 id="el-beneficio-aportado-por-usar-una-contrasena-con-salt-es-que-un-ataque-simple-de-diccionario-contra-los-valores-cifrados-es-impracticable-si-la-salt-es-lo-suficientemente-larga">El beneficio aportado por usar una contraseña con salt es que un ataque simple de diccionario contra los valores cifrados es impracticable si la salt es lo suficientemente larga.</h1>
-<p>Los datos con sal complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de sal duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de sal se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la sal no. </p>
-<p>El beneficio aportado por usar una contraseña con sal es que un ataque simple de diccionario contra los valores cifrados es impracticable si la sal es lo suficientemente larga.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Los datos con salt complican los ataques de diccionario que cifran cada una de las entradas del mismo: cada bit de salt duplica la cantidad de almacenamiento y computación requeridas. Para mayor seguridad, el valor de salt se guarda en secreto, separado de la base de datos de contraseñas. Esto aporta una gran ventaja cuando la base de datos es robada, pero la salt no. </p>
+<p>El beneficio aportado por usar una contraseña con salt es que un ataque simple de diccionario contra los valores cifrados es impracticable si la salt es lo suficientemente larga.</p>
 <p>Así el formato del contenido del archivo /etc/shadow es:</p>
 <p><img alt="" src="../../img/shadow.jpg" /></p>
 <p>El campo a la derecha del nombre de usuario indica qué algoritmo se ha utilizado para cifrar la contraseña junto con el salt del tercer campo. Por curiosidad, algunos de estos algorimos son:</p>
@@ -1852,6 +1854,8 @@ ls -a .hidden
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -1920,7 +1924,7 @@ ls -a .hidden
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
