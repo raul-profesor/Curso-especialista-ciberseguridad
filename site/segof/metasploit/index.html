@@ -754,6 +754,8 @@
         
           
         
+          
+        
       
       
         
@@ -783,7 +785,21 @@
   
     <li class="md-nav__item">
       <a href="../../segdef/logs/" class="md-nav__link">
-        Logs
+        Análisis de Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/idps/" class="md-nav__link">
+        Monitorización con IDS/IPS
       </a>
     </li>
   
@@ -819,45 +835,10 @@
 <h3 id="metasploit-framework-msf">Metasploit framework (MSF)</h3>
 <p>Metasploit framework es una herramienta desarrollada en Perl y Ruby en su mayor parte, que está enfocada a auditores de seguridad y equipos Red Team y Blue Team.</p>
 <p>Red Team es el equipo ofensivo o encargado del hacking ético, que hace pruebas de intrusión, mientras que el Blue Team es el equipo que lleva a cabo la securización y toda la parte defensiva.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <h4 id="caracteristicas-principales">Características principales</h4>
-<p>=======</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
-Es una herramienta muy completa que tiene muchísimos exploits, que son vulnerabilidades conocidas, en las cuales tienen también unos módulos, llamados payloads, que son los códigos que explotan estas vulnerabilidades.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Es una herramienta muy completa que tiene muchísimos exploits, que son vulnerabilidades conocidas, en las cuales tienen también unos módulos, llamados payloads, que son los códigos que explotan estas vulnerabilidades.</p>
 <p>También dispone de otros tipo de módulos, por ejemplo, los encoders, que son una especie de códigos de cifrado para evasión de antivirus o sistemas de seguridad perimetral.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Otra de las ventajas de este framework es que nos permite interactuar también con herramientas externas, como Nmap o Nessus, como ya veremos durante el curso de Metasploit.
-=======
-Otra de las ventajas de este framework es que nos permite interactuar también con herramientas externas, como Nmap o Nessus.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Otra de las ventajas de este framework es que nos permite interactuar también con herramientas externas, como Nmap o Nessus.</p>
 <p>Además ofrece la posibilidad de exportar nuestro malware a cualquier formato, ya sea en sistemas Unix o Windows.</p>
 <p>Destacar también que es multiplataforma y gratuita, aunque tiene una versión de pago, en la que se nos ofrecen exploits ya desarrollados, pero cuyo coste es bastante elevado. La versión gratuita es muy interesante porque contiene todas las vulnerabilidades públicas.</p>
 <h3 id="arquitectura-de-msf">Arquitectura de MSF</h3>
@@ -879,25 +860,7 @@ Módulos</p>
 <p>Los payloads se proporcionan aquí, estos pueden ser usados tras una exitosa intrusión (explotación) en el sistema objetivo.</p>
 <p>Un exploit es una vulnerabilidad, y el payload es la carga que se ejecuta en esa vulnerabilidad, es decir, la carga que activamos a la hora de aprovechar dicha vulnerabilidad.</p>
 <h4 id="codificadores-y-nops">Codificadores y NOPs</h4>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Con el fin de hacer más difícil la detección del payload por de los sistemas IDS/IPS o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.
-=======
-Con el fin de hacer más difícil la detección del payload por de los sistemas IDS / IPS1 o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Con el fin de hacer más difícil la detección del payload por de los sistemas IDS/IPS o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.</p>
 <h4 id="auxiliar">Auxiliar</h4>
 <p>El módulo auxiliar proporciona varios programas de escaneo para la recuperación de información. Estos incluyen escáner de inicio de sesión, escáner de punto débil, sniffers de redes y escáner de puertos. </p>
 <h3 id="trabajando-con-msfcli">Trabajando con <em>msfcli</em></h3>
@@ -967,6 +930,8 @@ Con el fin de hacer más difícil la detección del payload por de los sistemas 
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -1035,7 +1000,7 @@ Con el fin de hacer más difícil la detección del payload por de los sistemas 
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

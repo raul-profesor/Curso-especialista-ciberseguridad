@@ -677,19 +677,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-del-mismo-modo-el-host-que-tambien-conoce-el-hash-de-la-contrasena-esta-en-la-sam-crea-el-valor-y-a-continuacion-lo-compara-con-la-respuesta-del-cliente" class="md-nav__link">
-    4. Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#ntlmv2-aka-net-ntlmv2" class="md-nav__link">
     NTLMv2 (a.k.a Net-NTLMv2)
@@ -697,7 +684,12 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dumping-de-credenciales" class="md-nav__link">
     Dumping de credenciales
   </a>
@@ -723,11 +715,6 @@
   <a href="#como-evitar-el-dumping-de-credenciales" class="md-nav__link">
     Cómo evitar el dumping de credenciales
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -787,6 +774,8 @@
         
           
         
+          
+        
       
       
         
@@ -816,7 +805,21 @@
   
     <li class="md-nav__item">
       <a href="../../segdef/logs/" class="md-nav__link">
-        Logs
+        Análisis de Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/idps/" class="md-nav__link">
+        Monitorización con IDS/IPS
       </a>
     </li>
   
@@ -843,6 +846,8 @@
                 
                   
 
+
+  <h1>Gestión y almacenamiento de credenciales en Windows</h1>
 
 <h2 id="credenciales-en-windows">Credenciales en Windows</h2>
 <p>El sistema operativo Windows tiene muchos lugares diferentes donde almacena o <em>cachea</em> sus credenciales. A continuación se nombran algunos de los tipos de credenciales de Windows que almacena y las ubicaciones donde se pueden encontrar estas credenciales:</p>
@@ -878,47 +883,11 @@
 <p>El administrador viene preinstalado ya en Windows 7 y superiores</p>
 <p>Básicamente es un almacén digital que permite a los usuarios almacenar las credenciales de usuario de forma <em>"segura"</em>. Todas las credenciales se almacenan en una carpeta específica en el sistema de Windows. </p>
 <p>Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...)
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-=======</p>
++ <strong>Base de datos de dominio de Active Directory (NTDS.DIT)</strong></p>
+<p>Esta base de datos almacena todas las credenciales de los usuarios y equipos ubicados en cada servidor de controlador de dominio de Active Directory, en un entorno de dominio de Active Directory. </p>
+<p>Este archivo está ubicado en el directorio: <code>%SystemRoot%\NTDS)</code></p>
 </li>
 </ul>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
-+ <strong>Base de datos de dominio de Active Directory (NTDS.DIT)</strong></p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<div class="highlight"><pre><span></span><code>Esta base de datos almacena todas las credenciales de los usuarios y equipos ubicados en cada servidor de controlador de dominio de Active Directory, en un entorno de dominio de Active Directory.
-</code></pre></div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-    Este archivo está ubicado en el directorio: <code>%SystemRoot%\NTDS)</code>
-=======
-    Este archivo está ubicado en el directorio: <code>%SystemRoot%\NTDS</code></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <h2 id="tipos-de-hashes-de-credenciales-en-windows">Tipos de hashes de credenciales en Windows</h2>
 <h3 id="hash-lm">Hash LM</h3>
 <p>El hash <strong>LAN Manager</strong> fue uno de los primeros algoritmos de hash de contraseñas que usaron los sistemas operativos Windows y la única versión compatible, hasta la llegada de NTLM, que se usaba en Windows 2000, XP, Vista y 7. Los sistemas operativos más nuevos aún admiten el uso de hash LM con fines de compatibilidad con versiones anteriores. Sin embargo, está deshabilitado de forma predeterminada para Windows Vista y Windows 7.</p>
@@ -1006,31 +975,11 @@
 <li>
 <p>El host responde con un número aleatorio, el desafío.</p>
 </li>
-</ol>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-3. El cliente crea un valor a partir de ese número y el hash de la contraseña del usuario y lo devuelve como respuesta.</p>
-<h1 id="4-del-mismo-modo-el-host-que-tambien-conoce-el-hash-de-la-contrasena-esta-en-la-sam-crea-el-valor-y-a-continuacion-lo-compara-con-la-respuesta-del-cliente">4. Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.</h1>
-<ol>
 <li>
-<p>El cliente crea un valor hash a partir de ese número y la contraseña del usuario y lo devuelve como respuesta.</p>
+<p>El cliente crea un valor a partir de ese número y el hash de la contraseña del usuario y lo devuelve como respuesta.</p>
 </li>
 <li>
-<p>Del mismo modo, el host, que también conoce la contraseña, crea el valor hash y, a continuación, lo compara con la respuesta del cliente.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7aa02229a9d73f210e37a19d0ef2e4a01f1e733a</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Del mismo modo, el host, que también conoce el hash de la contraseña (está en la SAM), crea el valor y, a continuación, lo compara con la respuesta del cliente.</p>
 </li>
 <li>
 <p>Si ambos valores coinciden, se confirma la autenticidad del cliente y se permite el acceso. Si no hay coincidencia, se bloquea al cliente.</p>
@@ -1123,6 +1072,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
           <a href="#" class="md-top md-icon" data-md-component="top" hidden>
@@ -1191,7 +1142,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

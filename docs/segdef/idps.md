@@ -1,5 +1,5 @@
 ---
-title: Monitorización mediante sistemas detectores de intrusos (IDS) y sistemas de prevención de intrusos (IDP)
+title: Monitorización mediante sistemas detectores de intrusos (IDS) y sistemas de prevención de intrusos (IPS)
 
 description: Dentro de la parte de seguridad defensiva del curso de especialista en ciberseguridad vamos a tratar esta vez los Intrusion Detection System (IDS), así como los Intrusion Prevention SYstem (IDP), enumerando sus ventajas y desventajas. En concreto vamos a trabajar con Suricata y justificaremos el motivo por el que lo preferiremos frente a Snort.
 ---
@@ -293,3 +293,5 @@ En este ejercicio deberéis llevar a cabo las siguientes acciones:
 [How to install Suricata in Debian 11](https://www.digitalocean.com/community/tutorials/how-to-install-suricata-on-debian-11)
 
 [How To Install Suricata on Debian 11/Debian 10](https://computingforgeeks.com/how-to-install-suricata-ids-ips-on-debian/)
+
+[Suricta User Guide](https://suricata.readthedocs.io/en/suricata-6.0.0/)
