@@ -10,20 +10,13 @@ Metasploit framework es una herramienta desarrollada en Perl y Ruby en su mayor 
 
 Red Team es el equipo ofensivo o encargado del hacking ético, que hace pruebas de intrusión, mientras que el Blue Team es el equipo que lleva a cabo la securización y toda la parte defensiva.
 
-<<<<<<< HEAD
 #### Características principales
 
-=======
->>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 Es una herramienta muy completa que tiene muchísimos exploits, que son vulnerabilidades conocidas, en las cuales tienen también unos módulos, llamados payloads, que son los códigos que explotan estas vulnerabilidades.
 
 También dispone de otros tipo de módulos, por ejemplo, los encoders, que son una especie de códigos de cifrado para evasión de antivirus o sistemas de seguridad perimetral.
 
-<<<<<<< HEAD
-Otra de las ventajas de este framework es que nos permite interactuar también con herramientas externas, como Nmap o Nessus, como ya veremos durante el curso de Metasploit.
-=======
 Otra de las ventajas de este framework es que nos permite interactuar también con herramientas externas, como Nmap o Nessus.
->>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 Además ofrece la posibilidad de exportar nuestro malware a cualquier formato, ya sea en sistemas Unix o Windows.
 
@@ -66,11 +59,7 @@ Un exploit es una vulnerabilidad, y el payload es la carga que se ejecuta en esa
 
 #### Codificadores y NOPs
 
-<<<<<<< HEAD
 Con el fin de hacer más difícil la detección del payload por de los sistemas IDS/IPS o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.
-=======
-Con el fin de hacer más difícil la detección del payload por de los sistemas IDS / IPS1 o programas antivirus, estos módulos ofrecen funciones para ofuscar el payload en redes.
->>>>>>> 7aa02229a9d73f210e37a19d0ef2e4a01f1e733a
 
 #### Auxiliar
 

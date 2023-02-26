@@ -15,6 +15,7 @@ theme:
     - navigation.expand
     - navigation.top
     - navigation.indexes
+    - content.tabs.link
   palette:
       - scheme: default
         primary: light green
@@ -64,7 +65,8 @@ nav:
     - Webgrafía: segof/webgrafia.md
   - Seguridad defensiva:
     - segdef/index.md
-    - Logs: segdef/logs.md
+    - Análisis de Logs: segdef/logs.md
+    - Monitorización con IDS/IPS: segdef/idps.md
 
 extra:
   analytics: 

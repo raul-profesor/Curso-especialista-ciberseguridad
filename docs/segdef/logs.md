@@ -2,6 +2,7 @@
 title: Análisis de logs en seguridad defensiva y respuesta a incidentes
 
 description: En este caso vamos a ver qué son los logs de un sistema, para qué sirven y cómo se pueden o deben analizar para realizar una correcta respuesta a incidentes, investigando los índices de compromiso, formando parte de la seguridad defensiva.
+Aquí hablaremos del Elastic Stack, es decir, ElasticSearch + Logstash + Kibana + Beats.
 ---
 
 # Introducción
@@ -105,7 +106,7 @@ La pila ELK (ELK stack) es una colección de tres productos de código abierto: 
 * L significa LogStash: se utiliza tanto para el envío como para el procesamiento y almacenamiento de logs. Ofrece unificación de datos de diferentes fuentes.
 * K significa Kibana: es una herramienta de visualización (una interfaz web) que se aloja a través de Nginx o Apache. Está especializado en grandes volúmenes de datos, así como datos en tiempo real.
   
-Posteriormente un cuarto producto se ha añadido, [**Beats**](https://www.elastic.co/es/beats/), que gestiona los agentes que recopila y envía sus logs a ELK desde cada máquina.
+Posteriormente un cuarto producto se ha añadido, [**Beats**](https://www.elastic.co/es/beats/), que gestiona los agentes que recopila y envían sus logs a ELK desde cada máquina.
 
 ElasticSearch, LogStash y Kibana son desarrollados, gestionados y mantenidos por la empresa Elastic.
 
