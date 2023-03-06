@@ -67,6 +67,7 @@ nav:
     - segdef/index.md
     - Análisis de Logs: segdef/logs.md
     - Monitorización con IDS/IPS: segdef/idps.md
+    - Monitorización con Security Onion: segdef/seconion.md
 
 extra:
   analytics: 
