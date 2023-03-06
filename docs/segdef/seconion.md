@@ -57,3 +57,7 @@ Aunque ya lo hemos usado anteriormente, la mejor forma de definir Cyberchef es a
 ### Resto de herramientas de Security Onion
 
 La mejor forma de descubrir las herramientas que integra Security Onion es acudir directamente a su [documentación](https://docs.securityonion.net/en/2.3/introduction.html)
+
+## Demostración práctica
+
+Investigación de un caso de exfiltración de datos haciendo uso de Security Onion.
