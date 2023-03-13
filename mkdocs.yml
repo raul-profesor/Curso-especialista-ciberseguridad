@@ -68,6 +68,7 @@ nav:
     - Análisis de Logs: segdef/logs.md
     - Monitorización con IDS/IPS: segdef/idps.md
     - Monitorización con Security Onion: segdef/seconion.md
+    - Monitorización de red con Arkime: segdef/arkime.md
 
 extra:
   analytics: 

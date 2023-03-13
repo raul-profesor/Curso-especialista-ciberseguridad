@@ -61,3 +61,4 @@ La mejor forma de descubrir las herramientas que integra Security Onion es acudi
 ## Demostración práctica
 
 Investigación de un caso de exfiltración de datos haciendo uso de Security Onion.
+
