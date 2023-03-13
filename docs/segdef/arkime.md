@@ -48,6 +48,16 @@ Y así sucesivamente.
 !!!quote "Cita de [Kasperksy](https://latam.kaspersky.com/resource-center/definitions/spear-phishing)"
     El spear phishing es una estafa de correo electrónico o comunicaciones dirigida a personas, organizaciones o empresas específicas. Aunque su objetivo a menudo es robar datos para fines maliciosos, los cibercriminales también pueden tratar de instalar malware en la computadora de la víctima.
 
+## Demostración práctica de Arkime
+
++ Analizando tráfico spear phising (Dridex)
+
++ Identificando tráfico C2C (Emotet)
+
++ Identificando tráfico C2C (Lokibot)
+
++ Identificación de malware usando comunicaciones seguras con TLS y utilización de hashes JA3 para detectar nodos del command&control
+
 
 ## Referencias
 
