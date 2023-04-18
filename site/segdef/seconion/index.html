@@ -774,6 +774,74 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ejerciciopractica" class="md-nav__link">
+    Ejercicio/Práctica
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejercicio/Práctica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importar-archivos-pcap" class="md-nav__link">
+    Importar archivos PCAP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trafico-malware" class="md-nav__link">
+    Tráfico malware
+  </a>
+  
+    <nav class="md-nav" aria-label="Tráfico malware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primer-flujo-tcp" class="md-nav__link">
+    PRIMER FLUJO TCP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segundo-flujo-tcp" class="md-nav__link">
+    SEGUNDO FLUJO TCP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tercer-flujo-tcp" class="md-nav__link">
+    TERCER FLUJO TCP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuarto-flujo-tcp" class="md-nav__link">
+    CUARTO FLUJO TCP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otras-formas-de-deteccion" class="md-nav__link">
+    OTRAS FORMAS DE DETECCIÓN
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -853,6 +921,84 @@
 <p>La mejor forma de descubrir las herramientas que integra Security Onion es acudir directamente a su <a href="https://docs.securityonion.net/en/2.3/introduction.html">documentación</a></p>
 <h2 id="demostracion-practica">Demostración práctica</h2>
 <p>Investigación de un caso de exfiltración de datos haciendo uso de Security Onion.</p>
+<h2 id="ejerciciopractica">Ejercicio/Práctica</h2>
+<h3 id="importar-archivos-pcap">Importar archivos PCAP</h3>
+<p>Si queremos borrar las alertas generadas y las visualizaciones en ElasticSearch, ejecutaremos estas dos instrucciones:</p>
+<div class="highlight"><pre><span></span><code>sudo so-nsm-clear
+sudo so-elastic-clear
+</code></pre></div>
+<p>Y, tras ello, podemos importar el .pcap así:</p>
+<div class="highlight"><pre><span></span><code>sudo so-import-pcap /ruta/absoluta/a/archivo.pcap
+</code></pre></div>
+<p>En principio no debería dar ningún problema pero, si lo diera, reinicidad la máquina. Puesto que Security Onion está basada en contenedores Docker para todas sus herramientas, puede que tras reiniciar tarde un rato en tenerlo todo listo. </p>
+<p>Podéis comprobar el estado en el que están los contenedores en tiempo real con:</p>
+<div class="highlight"><pre><span></span><code>watch sudo so-status
+</code></pre></div>
+<p>No os preocupéis si los últimos tres contenedores os salen como <code>DISABLED</code>, eso es porque no está capturando en tiempo real pero los pcap si los analizará con Suricata y Zeek.</p>
+<h3 id="trafico-malware">Tráfico malware</h3>
+<h5 id="primer-flujo-tcp"><strong>PRIMER FLUJO TCP</strong></h5>
+<ol>
+<li>¿Cómo podemos ver la secuencia temporal de las alertas, de menos reciente a más reciente? </li>
+<li>Vemos un primer flujo TCP, de una IP interna hacia un host de internet, ¿qué IPs (origen y destino) y qué puertos (origen y destino) se ven implicados?</li>
+<li>Hay una alerta que nos llama la atención puesto que vemos que se realiza una petición a un PDF pero diretamente a una dirección IP, en lugar de a un dominio que sería lo más normal, ¿de qué alerta se trata?</li>
+<li>Previo a esa alerta vemos alguna otra que nos indica que se ha observado un user-agent que se identifica como <a href="https://www.hostinger.es/tutoriales/comando-curl"><em>curl</em></a></li>
+<li>¿Qué nos dice que ha ocurrido la última alerta perteneciente a ese flujo?</li>
+<li>¿Si cojo cualquier alerta de las pertenecientes a ese flujo TCP, cómo puedo ver en detalle todos los mensajes...? ¿P...?</li>
+<li>¿En este flujo detallado, qué <em>user-agent</em> podemos ver?</li>
+<li>¿Se ve algo sospechoso en el cuerpo de la respueta?</li>
+<li>¿Dónde podemos mandar este tráfico, haciendo uso de un sombrero de cocina, para jugar con él?</li>
+<li>Una vez allí, ¿qué podemos ir quitándole (incluso con una varita mágica) hasta ver algo interesante para nosotros?</li>
+<li>Una vez llegado al meollo del asunto, ¿qué referencias raras podemos ver?</li>
+</ol>
+<h5 id="segundo-flujo-tcp"><strong>SEGUNDO FLUJO TCP</strong></h5>
+<ol>
+<li>Identifica las alerta que pertenecen al siguiente flujo gracias a los números de puerto y las IPs</li>
+<li>Volvemos a mirar todo el flujo de tráfico detallado de la misma manera que en el caso anterior</li>
+<li>¿Se ve algo raro aquí?</li>
+</ol>
+<h5 id="tercer-flujo-tcp"><strong>TERCER FLUJO TCP</strong></h5>
+<ol>
+<li>Identifica las dos alertas que identifican este flujo, así como sus parámetros.</li>
+<li>Volvemos a mirar todo el flujo de tráfico de la misma manera que en los casos anteriores</li>
+<li>¿Qué user-agent se está utilizando y qué acción realiza esta petición?</li>
+<li>Vemos que tras este flujo, hay una alerta más de tráfico HTTPS, ¿sabrías decir a qué corresponde este tráfico viendo lo que está ocurriendo?</li>
+</ol>
+<h5 id="cuarto-flujo-tcp"><strong>CUARTO FLUJO TCP</strong></h5>
+<ol>
+<li>Ahora aparecen un gran número de alertas avisando de varias cosas, ¿qué tiene pinta de haber ocurrido?</li>
+<li>¿Cómo puedes mirar detalladamente que ha ocurrido a partir de las alertas?</li>
+<li>¿Qué vemos en esta vista detallada?</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esto es un breve vistazo a las alertas que hemos generado pero, por normal general, querremos saber cómo lidiar con incidentes así cuando demos con atacantes más sofisticados que sean capaces de evadir nuestras firmas, veamos cómo.</p>
+</div>
+<ol>
+<li>Pestaña <code>Hunt</code></li>
+<li>Utilizamos una query predefinida que ordene por evento módulo y evento dataset</li>
+<li>En <em>Group Metrics</em>, ¿qué clase de logs vemos que ha recopilado Zeek?</li>
+<li>En el menú desplegable de las querys, elegir que nos muestre todas las conexiones por ip origen, ip destino, protocolo de red y puerto destino.</li>
+<li>Agrupad ahora en ese mismo desplegable por conexiones HTTP y puerto destino.</li>
+<li>¿Aparece en <em>Group Metrics</em> algún puerto que no sea el usual de <strong>HTTP</strong>?</li>
+<li>Si aparece --&gt; <em>Include</em></li>
+<li>¿Aparece algo digno de echarle un vistazo en <em>Events</em>? Miradlo de forma detallada como ya sabéis.</li>
+<li>¿Qué tenemos aquí?</li>
+</ol>
+<h4 id="otras-formas-de-deteccion">OTRAS FORMAS DE DETECCIÓN</h4>
+<ol>
+<li>Agrupar en la query por conexiones HTTP, por método http y por user-agent.</li>
+<li>¿Qué cosa interesante se ve aquí que podría servirnos para identificar también el tráfico malicioso?</li>
+<li>Agrupa ahora por conexiones HTTP  por virtual host.</li>
+<li>¿Hay algo que te llame la atención por raro y qué pueda ponernos sobre la pista de tráfico malicioso?</li>
+<li>Agrupa ahora por dataset notice (Zeek).</li>
+<li>¿Qué cosa sospechosa se ve?</li>
+<li>En <em>Events</em>, agrupa por el campo <code>notice.sub_message</code></li>
+<li>¿De qué entidad son la mayoría de los certificados?¿Qué conclusión extraes?</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tarea</p>
+<p>Documenta esta práctica con todas las explicaciones y capturas de pantalla pertinentes. Además, incluye una conclusión personal de todo este proceso al final del informe de la práctica.</p>
+</div>
 
 
   

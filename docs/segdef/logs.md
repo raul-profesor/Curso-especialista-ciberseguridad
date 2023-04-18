@@ -1,11 +1,11 @@
 ---
 title: Análisis de logs en seguridad defensiva y respuesta a incidentes
 
-description: En este caso vamos a ver qué son los logs de un sistema, para qué sirven y cómo se pueden o deben analizar para realizar una correcta respuesta a incidentes, investigando los índices de compromiso, formando parte de la seguridad defensiva.
-Aquí hablaremos del Elastic Stack, es decir, ElasticSearch + Logstash + Kibana + Beats.
+description: En este caso vamos a ver qué son los logs de un sistema, para qué sirven y cómo se pueden o deben analizar para realizar una correcta respuesta a incidentes, investigando los índices de compromiso, formando parte de la seguridad defensiva. Aquí hablaremos del Elastic Stack, es decir, ElasticSearch + Logstash + Kibana + Beats.
 ---
 
-# Introducción
+
+## Introducción
 
 El análisis de logs es el proceso de revisar logs de eventos generados por un computador para, de esta forma, identificar de forma proactiva bugs, amenazas de seguridad u otros riesgos. El análisis de logs puede usarse en un espectro más amplio, como por ejemplo el cumplimiento de determinadas normativas o revisar comportamientos de los usuarios.
 
