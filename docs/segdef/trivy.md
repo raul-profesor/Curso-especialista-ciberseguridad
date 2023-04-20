@@ -55,6 +55,7 @@ No obstante, en nuestro caso nos centraremos únicamente en el escaneo de imáge
 ```console
 $ trivy image zachroofsec/trivy-tutorial1
 ```
+
 + En primer lugar vemos que Tivy se queja de que estamos usando el tag `latest`. Para nuestros propósitos no hay problema alguno puesto que no estamos cambiando nada de las capas subyacentes de la imagen, más adelante ya nos preocuparemos de esto.
 
 + Vemos que Trivy nos informa de más de mil vulnerabilidades en el momento en que se escriben estos apuntes. De locos. Inabarcable.
@@ -106,7 +107,11 @@ Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server 
 
 ![](../img/trivy_ghactions.png){: style="height:425px;width:825px"}
 
-En primer lugar os debéis clonar el repositorio que utilizaremos como referencia:
+En primer lugar, debéis hacer un *fork* en vuestra cuenta del repositorio
+
+`https://`
+
+Y tras ello, en el terminal, os debéis clonar el repositorio que utilizaremos como referencia:
 
 ```console
 $ git clone 
@@ -114,12 +119,13 @@ $ git clone
 
 Y como medida de seguridad, protegeremos la única rama que tenemos ahora mismo (*main*). Para ello bien hacéis click en el propio aviso que os aparece en el repositorio al entrar vía web:
 
-![](../img/branch1.png)
+![](../img/branch_protection2.png)
 
-O bien váis directamente a:
+O bien váis directamente a `Settings`:
 
-![](../img/branch2.png)
+![](../img/branch_protection.png)
 
+Y marcáis lo que aparece en la imagen, que básicamente viene a decir que antes de hacer un *merge*, se requiere un *pull request* y además, aprobación del mismo. También se requiere que pase los status check (nuestras acciones de Github Actions) antes de poder hacer un *merge*
 
 Supongamos ahora que somos un desarrollador con el propósito de realizar o proponer cambios en nuestro Dockerfile. En primer lugar, nos crearemos la rama *updates* para realizar los cambios con los que luego haremos el *merge* a la rama principal:
 
@@ -136,7 +142,7 @@ $ nano docker-builder/registry-repos/trivy-tutorial/Dockerfile
 Y descomentamos las líneas resaltadas:
 
 ```Dockerfile hl_lines="12-14 19-23"
-FROM debian:stretch-20210208-slim
+FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -185,5 +191,32 @@ Y una vez hecho esto, haremos el *commit* y el *push*  correspondientes en nuest
 git commit -am "Dockerfile actualizado" && git push origin updates
 ```
 
-Crearemos un nuevo Pull Request:
+Tras ello, en el sitio web, crearemos un nuevo *Pull Request*:
+
+![](../img/pullrequest.png)
+
+!!!warning "¡Ojo cuidao!"
+    Aseguráos de que el *pull request* lo haceís desde la rama `updates` de **vuestro repositorio** a la rama `main`de **vuestro repositorio**, como véis en lla imagen de abajo.-
+
+![](../img/pullrequest2.png)
+
+Comparará los cambios realizados e informará de que todo está bien y se puede hacer *merge* automáticamente de ambas ramas. 
+
+![](../img/pullrequest3.png)
+
+Acto seguido veremos cómo está pasando el check requerido, que no es más que la acción definidia en GitHub Actions para que escanee la imagen Docker creada.
+
+También nos informa de que el *merge* está bloqueado puesto que requiere de aprobación explícita. Esto es debido a las protecciones de rama que hemos configurado anteriormente.
+
+![](../img/pullrequest4.png)
+
+
+En la pestaña `Checks` podemos ver que se van ejecutando, una tras otra, todas las acciones definidias y comprobamos que, tras instalar Trivy en la máquina virtual de la infraestructura de GitHub, está ejecutando el escaneo de vulnerabilidades pertinente:
+
+![](../img/pullrequest5.png)
+
+Y tras unos segundos, se produce un fallo debido a que se han encontrado vulnerabilidades (las mismas que en el escaneo local que vimos al principio):
+
+![](../img/pullrequest6.png)
+
 
