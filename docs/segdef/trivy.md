@@ -106,9 +106,20 @@ Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server 
 
 ![](../img/trivy_ghactions.png){: style="height:425px;width:825px"}
 
+En primer lugar os debéis clonar el repositorio que utilizaremos como referencia:
 
-1. **Clonar repositorio**
-2. **Protecciones de ramas**
+```console
+$ git clone 
+```
+
+Y como medida de seguridad, protegeremos la única rama que tenemos ahora mismo (*main*). Para ello bien hacéis click en el propio aviso que os aparece en el repositorio al entrar vía web:
+
+![](../img/branch1.png)
+
+O bien váis directamente a:
+
+![](../img/branch2.png)
+
 
 Supongamos ahora que somos un desarrollador con el propósito de realizar o proponer cambios en nuestro Dockerfile. En primer lugar, nos crearemos la rama *updates* para realizar los cambios con los que luego haremos el *merge* a la rama principal:
 
