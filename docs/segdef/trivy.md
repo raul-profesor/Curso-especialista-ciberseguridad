@@ -220,3 +220,15 @@ Y tras unos segundos, se produce un fallo debido a que se han encontrado vulnera
 ![](../img/pullrequest6.png)
 
 
+Tal y como vimos anteriormente, ahora podríamos ver el resultado de Trivy en la salida de nuestro check y comprobar que el problema que desencadena las vulnerabilidades es la inclusión de la librería `libSSL` vulnerable. Podemos ver también que la versión que da problemas coincide justo con la qu enosotros instalamos en nuesro Dockerfile.
+
+Gracias a este `status check` que conforma el escaneo de Trivy, podemos prevenir que publiquemos en nuestro entorno imágenes de Docker vulnerables. Aunque un revisor aprobase el merge, éste no se produciría por haber fallado el `status check`.
+
+En la imagen, puesto que soy administrador del repositorio, me permite sobreescribir esta regla y forzar el merge pero es obvio que no todos los usuarios del repositorio tendrán esos privilegios.
+
+Así las cosas, vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucinar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de `libSSL` correcta). Tras ello repetiremos nuestro `commit` y nuestro `push`, y comprobaremos que ahora sí, consigue pasar el `status check` con un estupendo tick verde.
+
+Llegados a este punto sólo necesitaríamos la aprobación de un revisor para hacer nuestro *merge*. Alquien podría preguntarse que si Trivy ha dado su beneplácito con un escaneo sin vulnerabilidades, para qué ibamos a necesitar una interacción humana en vez de dejarlo todo completamente automatizado. La repuesta es que aunque Trivy tiene muchísimas posibilidades y el funcinamiento es más que aceptable, es incapaz de detectar **todas** las vulnerabilidades que podrían ser introducidas dentro de una imagen Docker. Es por ello que siempre se necesita de un ojo experto y humano que revise el *pull request.*
+
+
+
