@@ -220,15 +220,168 @@ Y tras unos segundos, se produce un fallo debido a que se han encontrado vulnera
 ![](../img/pullrequest6.png)
 
 
-Tal y como vimos anteriormente, ahora podríamos ver el resultado de Trivy en la salida de nuestro check y comprobar que el problema que desencadena las vulnerabilidades es la inclusión de la librería `libSSL` vulnerable. Podemos ver también que la versión que da problemas coincide justo con la qu enosotros instalamos en nuesro Dockerfile.
+Tal y como vimos anteriormente, ahora podríamos ver el resultado de Trivy en la salida de nuestro check y comprobar que el problema que desencadena las vulnerabilidades es la inclusión de la librería `libSSL` vulnerable. Podemos ver también que la versión que da problemas coincide justo con la que nosotros instalamos en nuesro Dockerfile.
 
 Gracias a este `status check` que conforma el escaneo de Trivy, podemos prevenir que publiquemos en nuestro entorno imágenes de Docker vulnerables. Aunque un revisor aprobase el merge, éste no se produciría por haber fallado el `status check`.
 
-En la imagen, puesto que soy administrador del repositorio, me permite sobreescribir esta regla y forzar el merge pero es obvio que no todos los usuarios del repositorio tendrán esos privilegios.
+Hemos visto en una imagen más arriba que, puesto que soy administrador del repositorio, me permite sobreescribir esta regla y forzar el merge (*bypass branch protection*) pero es obvio que no todos los usuarios del repositorio tendrán esos privilegios.
 
-Así las cosas, vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucinar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de `libSSL` correcta). Tras ello repetiremos nuestro `commit` y nuestro `push`, y comprobaremos que ahora sí, consigue pasar el `status check` con un estupendo tick verde.
+!!!task "Tarea"
+    Vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucinar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de `libSSL` correcta). Tras ello repetiremos nuestro `commit` y nuestro `push`, y comprobaremos que ahora sí, consigue pasar el `status check` con un estupendo tick verde.
 
 Llegados a este punto sólo necesitaríamos la aprobación de un revisor para hacer nuestro *merge*. Alquien podría preguntarse que si Trivy ha dado su beneplácito con un escaneo sin vulnerabilidades, para qué ibamos a necesitar una interacción humana en vez de dejarlo todo completamente automatizado. La repuesta es que aunque Trivy tiene muchísimas posibilidades y el funcinamiento es más que aceptable, es incapaz de detectar **todas** las vulnerabilidades que podrían ser introducidas dentro de una imagen Docker. Es por ello que siempre se necesita de un ojo experto y humano que revise el *pull request.*
 
+### Explicación del código
+
+Veamos el contenido de los archivos más importantes implicados en nuestro workflow de GitHub Actions.
+
+Encontramos el archivo que define el workflow propiamente dicho en `.github/workflows/scan.yml`. El nombre del workflow es indiferente:
+
+```yaml title="scan.yml"
+# +--------------------+
+# WORKFLOW SUMMARY
+# +--------------------+
+
+# This is a Github Actions workflow file
+
+## Before modifying the code within a Github Repository, a peer review must occur
+## This peer review occurs within a "Pull Request"
+## When a Pull Request occurs, this workflow will use Trivy to scan for vulnerabilities
+
+## Github Actions Overview
+## https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#overview
+
+# +--------------------+
+# ASSUMPTIONS
+# +--------------------+
+
+## Github Branch Protection Rules enforce...:
+## 1. All changes must go through a Pull Request
+## 2. If the Trivy scan FAILS, a Pull Request CAN NOT be merged (i.e., accepted)
+
+
+# +--------------------+
+# MAIN LOGIC
+# +--------------------+
+
+name: Security - Docker - Scan
+
+## Run workflow when new changes are proposed
+on: [pull_request] #(1)
+
+jobs:
+  scan:
+    name: Scan Docker Images
+    ## Workflow runs within an isolated execution environment 
+    ## (e.g., fresh Ubuntu 20.04 server)
+    runs-on: ubuntu-20.04 #(2)
+    steps:
+      ## Allow access to trivy-tutorial Git repo
+      - name: Checkout Current Git Repo #(3)
+        uses: actions/checkout@v2
+
+      - name: Install Trivy
+        run: |
+          ## Run install script at trivy-tutorial/install.sh
+          bash install.sh
+
+      - name: Execute Trivy Scans
+        run: |
+          bash docker-scan.sh #(5)
+```
+
+1. El workflow se disparará cuando se proponga un nuevo cambio via *pull request*
+2. Este workflow se ejecuta en un entorno aislado, en este caso un Ubuntu 20.04
+3. Permitimos el acceso a nuestro repositorio
+4. Instalamos Trivy en el entorno usando el script de instalación
+5. Finalmente ejecutamos el script que define el escaneo y que veremos a continuación
+
+
+El script que define cómo realiza el escaneo Trivy: 
+
+```zsh title="docker-scan.sh"
+#!/bin/bash
+
+# +--------------------+
+# SUMMARY
+# +--------------------+
+
+## Checks if an Docker Image has vulnerabilities (via Trivy)
+
+# +--------------------+
+# ASSUMPTIONS
+# +--------------------+
+
+## 1. Script expects the following convention: #(1)
+##     trivy-tutorial/docker-builder/registry-repos/REPO_NAME/Dockerfile
+##     (e.g., trivy-tutorial/docker-builder/registry-repos/trivy-tutorial/Dockerfile)
+
+##     Convention is shared with the docker-registry-orchestrator.sh
+##     (uploads Docker Images to the Docker Image Registry)
+
+## 2. Script should be triggered on Pull Requests #(3)
+
+## 3. Docker Image changes (in git) must be approved by a trusted entity #(4)
+##    (Trivy can't find ALL docker vulnerabilities)
+
+# +--------------------+
+# MAIN LOGIC
+# +--------------------+
+
+## Iterate through Docker configurations (See Assumption 1 for path convention)
+for docker_build_context_relative_path in docker-builder/registry-repos/*; do #(5)
+    ## Only iterate through directories
+    [[ ! -d "$docker_build_context_relative_path" ]] && continue #(6)
+
+    ## Get the absolute path for the Docker configurations (i.e., build context)
+    docker_build_context_absolute_path=$(realpath "$docker_build_context_relative_path") #(7)
+
+    local_image_name=test-image
+
+    ## Local Docker image build
+    docker build --no-cache --tag "${local_image_name}" "${docker_build_context_absolute_path}" #(8)
+
+    ## Ensure that Trivy does NOT scan a cached image
+    trivy image --reset #(9)
+    
+    ## Trivy scan
+    ## (Into the future, we will make our blocking behavior more granular)
+    ## If a vulnerability is found, Trivy will emit an exit code of 2
+    trivy image --no-progress --security-checks vuln --severity CRITICAL,HIGH,MEDIUM --exit-code 2 --ignore-unfixed "${local_image_name}" #(10)
+    vuln_result_code="$?"
+
+    if [[ "$vuln_result_code" -eq 0 ]]; then #(11)
+        echo "Docker image is in compliance with the security policy!"
+        echo "Woo hoo!"
+        echo "Starting scan of next Docker Image (if defined)"
+        continue
+    elif [[ "$vuln_result_code" -eq 2 ]]; then
+        echo "This Docker image contains a vulnerability!"
+        echo "Please fix!"
+        echo "PATH: $docker_build_context_absolute_path"
+        exit 1 #(13)
+    else #(14)
+        echo "There was an unexpected error!"
+        echo "Please reach out to the Security Team"
+        exit 1
+    fi
+done
+```
+
+1. El script espera esta convenciónd de nombres, donde `REPO_NAME` es el nombre de nuestro repositorio en el Docker Registry (Docker Hub). 
+2. Esta convención es para ser compatible con el otro script, docker-registry-orchestrator.sh, que se encarga de subir las imágenes al registro de Docker.
+3. El script se ejecuta cuando se produce un PR
+4. Los cambios deben, adicionalmente, ser aprobados por un revisor ya que Trivy funciona muy bien pero no detecta el 100% de las vulnerabilidades.
+5. Iteramos sobre los archivos de configuración de Docker 
+6. Nos aseguramos de que sólo iteramos sobre directorios
+7. Obtenemos la ruta absoluta del archivo de configuración en cuestión 
+8. Construimos la imagen Docker en local
+9. **MUY IMPORTANTE** porque queremos escanear la imagen recién construida y no obtener resultados de escaneos anteriores de otras imágenes, por lo que borramos la caché de Trivy
+10. Ejecución del escaneo con Trivy:
+    + Si se encuentra una vulnerabilidad, Trivy emitirá el código de salida `2`
+11. En este bloque, si Trivy emite un código de salida `0` signfica que el escaneo ha resultado exitoso y no se ha producio ningún error inesperado y continua con el escaneo de los siguientes archivos de configuración
+12. Si se produce un código de salida `2`, sabemos que esa imagen de Docker contiene una vulnerabilidad.
+13. Si salimos con un `1`, le estamos diciendo a GitHub Actions que el status check es fallido y por tanto bloqueamos el *pull request* para hacer *merge*
+14. Para el caso de que se produzca un error inesperado no contemplado anteriormente
 
 

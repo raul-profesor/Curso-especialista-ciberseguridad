@@ -16,6 +16,7 @@ theme:
     - navigation.top
     - navigation.indexes
     - content.tabs.link
+    - content.code.annotate
   palette:
       - scheme: default
         primary: light green
