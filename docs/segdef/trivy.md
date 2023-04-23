@@ -105,7 +105,7 @@ En esta ocasión vamos a utilizar un enfoque proactivo para la integración de T
 
 Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server que estará hospedado en la infraestructura de GitHub y podremos usarlo para auditar los cambios antes de subir la imagen al Docker Registry. Es más, podemos examinar el resultado del escaneo de Trivy e incluirlo en un Pull Request, permitiendo que se produzca una discusión antes de incorporar los cambios.
 
-![](../img/trivy_ghactions.png){: style="height:425px;width:825px"}
+![](../img/trivy_ghactions.png){: style="height:425px;width:825px"} 
 
 En primer lugar, debéis hacer un *fork* en vuestra cuenta del repositorio
 
@@ -385,3 +385,130 @@ done
 14. Para el caso de que se produzca un error inesperado no contemplado anteriormente
 
 
+## Demostración 3
+
+En esta demostración práctica veremos:
+
++ Cómo usar GitHub actions para subir nuestra imágenes al registro de Docker
++ Construir/reconstruir imágenes Docker periódicamente para reducir vulnerabilidades (enfoque proactivo)
++ Cómo burlar los escaneos de Trivy
+  + Manipulación del registro de Docker
+  + Vulnerabilidades que no escaneables
+
+En la sección [Manos a la obra](#manos-a-la-obra) se mostraba una imagen donde se veían dos puntos de aparición de GitHub Actions; los escaneos de Trivy y el proceso de *Build* o creación de la imagen Docker. Como ya hemos visto en profundidad el primero, nos centraremos ahora en el segundo.
+
+Surgen un par de preguntas:
+
+1. ¿Cómo se suben las imágenes a Docker Hub tras escanearlas con Trivy?
+2. ¿Qué pasa si un atacante compromete nuestro Docker Hub y sube una imagen maliciosa? ¿Cómo podríamos saberlo?
+
+Comencemos con un resumen del workflow:
+
+```yaml
+# +--------------------+
+# WORKFLOW SUMMARY
+# +--------------------+
+
+## 1. Builds Docker Images and uploads them to remote Docker Registry # (1)
+## 2. Does signature validation to ensure Docker Images (in the Registry) have not been tampered with. # (2)
+
+
+# +--------------------+
+# MAIN LOGIC
+# +--------------------+
+
+name: Security - Docker - Registry Orchestrator
+on:
+#  schedule: # (3)
+    ## When our Docker Images are rebuilt, package updates occur
+    ## By executing this workflow on a recurring schedule, we minimize
+    ## vulnerabilities that can be discovered by Trivy
+    ## COMMENTED OUT TO SAVE RESOURCES
+#    - cron: '0 0 * * *'
+  push: # (4)
+    branches:
+      ## When a Pull Request is accepted, its code is merged into the main branch
+      ## At that point, this workflow will be triggered and Docker Images will be uploaded 
+      ## to the Registry
+      - main
+    paths-ignore: #(5)
+      ## When a Docker Image is built, the Image's unique signature 
+      ## is committed into the main branch of the Git repo.
+      ## (This allows us to check for malicious updates to Docker Images)
+      
+      ## This workflow file will invoke docker-registry-orchestrator.sh
+      
+      ## docker-registry-orchestrator.sh:
+      ## a) commits a Docker Image's signature into the main branch
+      ##                  (see path below)
+      ## b) uses the signature to check for Docker Registry tampering
+      
+      ## If we allowed this path to trigger this workflow, we would
+      ## have an infinite loop
+      - docker-builder/registry-repos/trivy-tutorial/image_sha.txt
+
+jobs:
+  docker-registry-orchestrator:
+    name: Docker Registry Orchestrator
+    runs-on: ubuntu-20.04
+    steps:
+      ## Allow access to trivy-tutorial Git repo
+      - name: Checkout current git repo # (6)
+        uses: actions/checkout@v2
+        with:
+          ## We use a separate Github User (i.e., an "automation user") specifically
+          ## for this workflow.
+          ## This user is given "admin" permissions so they can bypass
+          ## the branch protection rules and commit the Docker Image Signature DIRECTLY into the main branch
+          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
+          token: ${{ secrets.GIT_AUTOMATION_USER_TOKEN }} # (7)
+          
+      - name: Install Trivy # (8)
+        run: |
+          ## Run install script at trivy-tutorial/install.sh
+          bash install.sh
+          
+      ## Log in to the Dockerhub Image Registry
+      ## (allows us to eventually upload our Docker Images)
+      - name: Log in to Dockerhub # (9)
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
+          
+      - name: Docker Registry Interactions # (10) 
+        run: |
+          bash docker-registry-orchestrator.sh latest ${{ secrets.DOCKERHUB_USERNAME }}
+          ## We'll explore the script's arguments in the next section
+          
+          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
+```
+
+1. Como hemos dicho, este *workflow* invoca a un script que construye la imagen Docker y la sube al registro de Docker.
+2. También invoca a otro script que realiza la validación de la firma para asegurarse de que las imágenes del registro no han sido modificadas.   
+3. Cuando se reconstruyen las imágenes, tambén se producen actualizaciones de paquetes. 
+   
+    Ejecutando este workflow periódicamente (**schedule**) minimizamos las vulnerabilidades que pueden aparecer en el escaneo de Trivy.
+
+    La razón por la que se produce esta actualización es porque, si recordamos, en nuestro *Dockerfile* había una orden de actualización de paquetes del sistema operativo (`apt-get upgrade`).
+
+    Aparece aquí como prueba de concepto, comentado con el fin de ahorrar recursos.
+
+4. El evento *push* es cuando se acepta un *pull request* y se hace *merge* de este código con la rama *main*. 
+
+    En este punto el workflow se iniciará y las imágenes de Docker se subirán al registro.
+
+5. Cuando se construye una imagen la firma de la misma se incluye en `image_sha.txt` y se envía a la rama `main` del repositorio.
+
+    Si permitiéramos que este path activara el workflow, habría un bucle infinito, así que debemos tener en cuenta esa casuística y por eso le decimos que se ignore el *push* en este path.
+
+6. Damos permiso para acceder al repositorio
+
+7. Utilizamos un usuario con permisos de administración para poder bypassear la protección de rama y poder hacer un *push* de la firma a la rama *main* directamente.
+
+8. Cada vez que se ejecuta el workflow se crea una máquina virtual nueva, así que tenemos que instalar Trivy siempre.
+
+9. Esto nos permite hacer login en el registro de Docker para subir luego la imagen.
+
+10. Invocamos al script docker-registry-orchestator
