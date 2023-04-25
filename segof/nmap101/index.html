@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/segof/nmap101/">
       
+      
+        <link rel="prev" href="../Intro/">
+      
+      
+        <link rel="next" href="../exploit/">
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
-        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -70,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo">
   
     
     
@@ -122,29 +127,31 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
+      
+        <form class="md-header__option" data-md-component="palette">
           
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
           
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent=""  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
-          
-            <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            </label>
-          
-        
-          
-          
-          
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
-            </label>
-          
-        
-      </form>
+        </form>
+      
     
     
     
@@ -160,7 +167,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="Buscar">
         
         <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
@@ -174,7 +181,7 @@
           <div class="md-search-result__meta">
             Inicializando búsqueda
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -193,7 +200,7 @@
           
             
 <nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
+  <div class="md-grid">
     <ul class="md-tabs__list">
       
         
@@ -291,8 +298,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
       
       
         
@@ -325,7 +335,7 @@
           
         </div>
       
-      <nav class="md-nav" aria-label="Warm up" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
           Warm up
@@ -437,8 +447,9 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
         
@@ -475,7 +486,7 @@
           
         </div>
       
-      <nav class="md-nav" aria-label="Seguridad ofensiva" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Seguridad ofensiva
@@ -507,7 +518,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
@@ -841,8 +852,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
       
       
         
@@ -875,7 +889,7 @@
           
         </div>
       
-      <nav class="md-nav" aria-label="Seguridad defensiva" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Seguridad defensiva
@@ -1041,25 +1055,25 @@
 <p><img alt="" src="../../img/nmap_opciones.png" style="height:600px;width:500px" /></p>
 <p>Existen un <a href="https://nmap.org/book/scan-methods.html">sinfín de técnicas y algoritmos de escaneo en Nmap</a>, así como otras tantas opciones a aplicar a estos escaneos. Es imposible cubrirlo todo en este curso por lo que sólo nombraremos los aspectos más importantes y queda a discrección del alumno profundizar más.</p>
 <p>Output completo:</p>
-<div class="highlight"><pre><span></span><code>Nmap <span class="m">5</span>.61TEST5 <span class="o">(</span> https://nmap.org <span class="o">)</span>
-Usage: nmap <span class="o">[</span>Scan Type<span class="o">(</span>s<span class="o">)]</span> <span class="o">[</span>Options<span class="o">]</span> <span class="o">{</span>target specification<span class="o">}</span>
-TARGET SPECIFICATION:
-  Can pass hostnames, IP addresses, networks, etc.
-  Ex: scanme.nmap.org, microsoft.com/24, <span class="m">192</span>.168.0.1<span class="p">;</span> <span class="m">10</span>.0.0-255.1-254
-  -iL : Input from list of hosts/networks
-  -iR : Choose random targets
-  --exclude : Exclude hosts/networks
-  --excludefile : Exclude list from file
-HOST DISCOVERY:
-  -sL: List Scan - simply list targets to scan
-  -sn: Ping Scan - disable port scan
-  -Pn: Treat all hosts as online -- skip host discovery
-  -PS/PA/PU/PY<span class="o">[</span>portlist<span class="o">]</span>: TCP SYN/ACK, UDP or SCTP discovery to given ports
-  -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
-  -PO<span class="o">[</span>protocol list<span class="o">]</span>: IP Protocol Ping
-  -n/-R: Never <span class="k">do</span> DNS resolution/Always resolve <span class="o">[</span>default: sometimes<span class="o">]</span>
-  --dns-servers : Specify custom DNS servers
-  --system-dns: Use OS<span class="s1">&#39;s DNS resolver</span>
+<div class="highlight"><pre><span></span><code>Nmap<span class="w"> </span><span class="m">5</span>.61TEST5<span class="w"> </span><span class="o">(</span><span class="w"> </span>https://nmap.org<span class="w"> </span><span class="o">)</span>
+Usage:<span class="w"> </span>nmap<span class="w"> </span><span class="o">[</span>Scan<span class="w"> </span>Type<span class="o">(</span>s<span class="o">)]</span><span class="w"> </span><span class="o">[</span>Options<span class="o">]</span><span class="w"> </span><span class="o">{</span>target<span class="w"> </span>specification<span class="o">}</span>
+TARGET<span class="w"> </span>SPECIFICATION:
+<span class="w">  </span>Can<span class="w"> </span>pass<span class="w"> </span>hostnames,<span class="w"> </span>IP<span class="w"> </span>addresses,<span class="w"> </span>networks,<span class="w"> </span>etc.
+<span class="w">  </span>Ex:<span class="w"> </span>scanme.nmap.org,<span class="w"> </span>microsoft.com/24,<span class="w"> </span><span class="m">192</span>.168.0.1<span class="p">;</span><span class="w"> </span><span class="m">10</span>.0.0-255.1-254
+<span class="w">  </span>-iL<span class="w"> </span>:<span class="w"> </span>Input<span class="w"> </span>from<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>hosts/networks
+<span class="w">  </span>-iR<span class="w"> </span>:<span class="w"> </span>Choose<span class="w"> </span>random<span class="w"> </span>targets
+<span class="w">  </span>--exclude<span class="w"> </span>:<span class="w"> </span>Exclude<span class="w"> </span>hosts/networks
+<span class="w">  </span>--excludefile<span class="w"> </span>:<span class="w"> </span>Exclude<span class="w"> </span>list<span class="w"> </span>from<span class="w"> </span>file
+HOST<span class="w"> </span>DISCOVERY:
+<span class="w">  </span>-sL:<span class="w"> </span>List<span class="w"> </span>Scan<span class="w"> </span>-<span class="w"> </span>simply<span class="w"> </span>list<span class="w"> </span>targets<span class="w"> </span>to<span class="w"> </span>scan
+<span class="w">  </span>-sn:<span class="w"> </span>Ping<span class="w"> </span>Scan<span class="w"> </span>-<span class="w"> </span>disable<span class="w"> </span>port<span class="w"> </span>scan
+<span class="w">  </span>-Pn:<span class="w"> </span>Treat<span class="w"> </span>all<span class="w"> </span>hosts<span class="w"> </span>as<span class="w"> </span>online<span class="w"> </span>--<span class="w"> </span>skip<span class="w"> </span>host<span class="w"> </span>discovery
+<span class="w">  </span>-PS/PA/PU/PY<span class="o">[</span>portlist<span class="o">]</span>:<span class="w"> </span>TCP<span class="w"> </span>SYN/ACK,<span class="w"> </span>UDP<span class="w"> </span>or<span class="w"> </span>SCTP<span class="w"> </span>discovery<span class="w"> </span>to<span class="w"> </span>given<span class="w"> </span>ports
+<span class="w">  </span>-PE/PP/PM:<span class="w"> </span>ICMP<span class="w"> </span>echo,<span class="w"> </span>timestamp,<span class="w"> </span>and<span class="w"> </span>netmask<span class="w"> </span>request<span class="w"> </span>discovery<span class="w"> </span>probes
+<span class="w">  </span>-PO<span class="o">[</span>protocol<span class="w"> </span>list<span class="o">]</span>:<span class="w"> </span>IP<span class="w"> </span>Protocol<span class="w"> </span>Ping
+<span class="w">  </span>-n/-R:<span class="w"> </span>Never<span class="w"> </span><span class="k">do</span><span class="w"> </span>DNS<span class="w"> </span>resolution/Always<span class="w"> </span>resolve<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>sometimes<span class="o">]</span>
+<span class="w">  </span>--dns-servers<span class="w"> </span>:<span class="w"> </span>Specify<span class="w"> </span>custom<span class="w"> </span>DNS<span class="w"> </span>servers
+<span class="w">  </span>--system-dns:<span class="w"> </span>Use<span class="w"> </span>OS<span class="s1">&#39;s DNS resolver</span>
 <span class="s1">  --traceroute: Trace hop path to each host</span>
 <span class="s1">SCAN TECHNIQUES:</span>
 <span class="s1">  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans</span>
@@ -1074,82 +1088,82 @@ HOST DISCOVERY:
 <span class="s1">  -p : Only scan specified ports</span>
 <span class="s1">    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span>
 <span class="s1">  -F: Fast mode - Scan fewer ports than the default scan</span>
-<span class="s1">  -r: Scan ports consecutively - don&#39;</span>t randomize
-  --top-ports : Scan  most common ports
-  --port-ratio : Scan ports more common than 
-SERVICE/VERSION DETECTION:
-  -sV: Probe open ports to determine service/version info
-  --version-intensity : Set from <span class="m">0</span> <span class="o">(</span>light<span class="o">)</span> to <span class="m">9</span> <span class="o">(</span>try all probes<span class="o">)</span>
-  --version-light: Limit to most likely probes <span class="o">(</span>intensity <span class="m">2</span><span class="o">)</span>
-  --version-all: Try every single probe <span class="o">(</span>intensity <span class="m">9</span><span class="o">)</span>
-  --version-trace: Show detailed version scan activity <span class="o">(</span><span class="k">for</span> debugging<span class="o">)</span>
-SCRIPT SCAN:
-  -sC: equivalent to --script<span class="o">=</span>default
-  --script<span class="o">=</span>:  is a comma separated list of
-           directories, script-files or script-categories
-  --script-args<span class="o">=</span>: provide arguments to scripts
-  --script-args-file<span class="o">=</span>filename: provide NSE script args <span class="k">in</span> a file
-  --script-trace: Show all data sent and received
-  --script-updatedb: Update the script database.
-  --script-help<span class="o">=</span>: Show <span class="nb">help</span> about scripts.
-            is a comma separted list of script-files or
-           script-categories.
-OS DETECTION:
-  -O: Enable OS detection
-  --osscan-limit: Limit OS detection to promising targets
-  --osscan-guess: Guess OS more aggressively
-TIMING AND PERFORMANCE:
-  Options which take  are <span class="k">in</span> seconds, or append <span class="s1">&#39;ms&#39;</span> <span class="o">(</span>milliseconds<span class="o">)</span>,
-  <span class="s1">&#39;s&#39;</span> <span class="o">(</span>seconds<span class="o">)</span>, <span class="s1">&#39;m&#39;</span> <span class="o">(</span>minutes<span class="o">)</span>, or <span class="s1">&#39;h&#39;</span> <span class="o">(</span>hours<span class="o">)</span> to the value <span class="o">(</span>e.g. 30m<span class="o">)</span>.
-  -T&lt;<span class="m">0</span>-5&gt;: Set timing template <span class="o">(</span>higher is faster<span class="o">)</span>
-  --min-hostgroup/max-hostgroup : Parallel host scan group sizes
-  --min-parallelism/max-parallelism : Probe parallelization
-  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout : Specifies
-      probe round trip time.
-  --max-retries : Caps number of port scan probe retransmissions.
-  --host-timeout : Give up on target after this long
-  --scan-delay/--max-scan-delay : Adjust delay between probes
-  --min-rate : Send packets no slower than  per second
-  --max-rate : Send packets no faster than  per second
-FIREWALL/IDS EVASION AND SPOOFING:
-  -f<span class="p">;</span> --mtu : fragment packets <span class="o">(</span>optionally w/given MTU<span class="o">)</span>
-  -D : Cloak a scan with decoys
-  -S : Spoof <span class="nb">source</span> address
-  -e : Use specified interface
-  -g/--source-port : Use given port number
-  --data-length : Append random data to sent packets
-  --ip-options : Send packets with specified ip options
-  --ttl : Set IP time-to-live field
-  --spoof-mac : Spoof your MAC address
-  --badsum: Send packets with a bogus TCP/UDP/SCTP checksum
+<span class="s1">  -r: Scan ports consecutively - don&#39;</span>t<span class="w"> </span>randomize
+<span class="w">  </span>--top-ports<span class="w"> </span>:<span class="w"> </span>Scan<span class="w">  </span>most<span class="w"> </span>common<span class="w"> </span>ports
+<span class="w">  </span>--port-ratio<span class="w"> </span>:<span class="w"> </span>Scan<span class="w"> </span>ports<span class="w"> </span>more<span class="w"> </span>common<span class="w"> </span>than<span class="w"> </span>
+SERVICE/VERSION<span class="w"> </span>DETECTION:
+<span class="w">  </span>-sV:<span class="w"> </span>Probe<span class="w"> </span>open<span class="w"> </span>ports<span class="w"> </span>to<span class="w"> </span>determine<span class="w"> </span>service/version<span class="w"> </span>info
+<span class="w">  </span>--version-intensity<span class="w"> </span>:<span class="w"> </span>Set<span class="w"> </span>from<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>light<span class="o">)</span><span class="w"> </span>to<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">(</span>try<span class="w"> </span>all<span class="w"> </span>probes<span class="o">)</span>
+<span class="w">  </span>--version-light:<span class="w"> </span>Limit<span class="w"> </span>to<span class="w"> </span>most<span class="w"> </span>likely<span class="w"> </span>probes<span class="w"> </span><span class="o">(</span>intensity<span class="w"> </span><span class="m">2</span><span class="o">)</span>
+<span class="w">  </span>--version-all:<span class="w"> </span>Try<span class="w"> </span>every<span class="w"> </span>single<span class="w"> </span>probe<span class="w"> </span><span class="o">(</span>intensity<span class="w"> </span><span class="m">9</span><span class="o">)</span>
+<span class="w">  </span>--version-trace:<span class="w"> </span>Show<span class="w"> </span>detailed<span class="w"> </span>version<span class="w"> </span>scan<span class="w"> </span>activity<span class="w"> </span><span class="o">(</span><span class="k">for</span><span class="w"> </span>debugging<span class="o">)</span>
+SCRIPT<span class="w"> </span>SCAN:
+<span class="w">  </span>-sC:<span class="w"> </span>equivalent<span class="w"> </span>to<span class="w"> </span>--script<span class="o">=</span>default
+<span class="w">  </span>--script<span class="o">=</span>:<span class="w">  </span>is<span class="w"> </span>a<span class="w"> </span>comma<span class="w"> </span>separated<span class="w"> </span>list<span class="w"> </span>of
+<span class="w">           </span>directories,<span class="w"> </span>script-files<span class="w"> </span>or<span class="w"> </span>script-categories
+<span class="w">  </span>--script-args<span class="o">=</span>:<span class="w"> </span>provide<span class="w"> </span>arguments<span class="w"> </span>to<span class="w"> </span>scripts
+<span class="w">  </span>--script-args-file<span class="o">=</span>filename:<span class="w"> </span>provide<span class="w"> </span>NSE<span class="w"> </span>script<span class="w"> </span>args<span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>file
+<span class="w">  </span>--script-trace:<span class="w"> </span>Show<span class="w"> </span>all<span class="w"> </span>data<span class="w"> </span>sent<span class="w"> </span>and<span class="w"> </span>received
+<span class="w">  </span>--script-updatedb:<span class="w"> </span>Update<span class="w"> </span>the<span class="w"> </span>script<span class="w"> </span>database.
+<span class="w">  </span>--script-help<span class="o">=</span>:<span class="w"> </span>Show<span class="w"> </span><span class="nb">help</span><span class="w"> </span>about<span class="w"> </span>scripts.
+<span class="w">            </span>is<span class="w"> </span>a<span class="w"> </span>comma<span class="w"> </span>separted<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>script-files<span class="w"> </span>or
+<span class="w">           </span>script-categories.
+OS<span class="w"> </span>DETECTION:
+<span class="w">  </span>-O:<span class="w"> </span>Enable<span class="w"> </span>OS<span class="w"> </span>detection
+<span class="w">  </span>--osscan-limit:<span class="w"> </span>Limit<span class="w"> </span>OS<span class="w"> </span>detection<span class="w"> </span>to<span class="w"> </span>promising<span class="w"> </span>targets
+<span class="w">  </span>--osscan-guess:<span class="w"> </span>Guess<span class="w"> </span>OS<span class="w"> </span>more<span class="w"> </span>aggressively
+TIMING<span class="w"> </span>AND<span class="w"> </span>PERFORMANCE:
+<span class="w">  </span>Options<span class="w"> </span>which<span class="w"> </span>take<span class="w">  </span>are<span class="w"> </span><span class="k">in</span><span class="w"> </span>seconds,<span class="w"> </span>or<span class="w"> </span>append<span class="w"> </span><span class="s1">&#39;ms&#39;</span><span class="w"> </span><span class="o">(</span>milliseconds<span class="o">)</span>,
+<span class="w">  </span><span class="s1">&#39;s&#39;</span><span class="w"> </span><span class="o">(</span>seconds<span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;m&#39;</span><span class="w"> </span><span class="o">(</span>minutes<span class="o">)</span>,<span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;h&#39;</span><span class="w"> </span><span class="o">(</span>hours<span class="o">)</span><span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>value<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span>30m<span class="o">)</span>.
+<span class="w">  </span>-T&lt;<span class="m">0</span>-5&gt;:<span class="w"> </span>Set<span class="w"> </span>timing<span class="w"> </span>template<span class="w"> </span><span class="o">(</span>higher<span class="w"> </span>is<span class="w"> </span>faster<span class="o">)</span>
+<span class="w">  </span>--min-hostgroup/max-hostgroup<span class="w"> </span>:<span class="w"> </span>Parallel<span class="w"> </span>host<span class="w"> </span>scan<span class="w"> </span>group<span class="w"> </span>sizes
+<span class="w">  </span>--min-parallelism/max-parallelism<span class="w"> </span>:<span class="w"> </span>Probe<span class="w"> </span>parallelization
+<span class="w">  </span>--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout<span class="w"> </span>:<span class="w"> </span>Specifies
+<span class="w">      </span>probe<span class="w"> </span>round<span class="w"> </span>trip<span class="w"> </span>time.
+<span class="w">  </span>--max-retries<span class="w"> </span>:<span class="w"> </span>Caps<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>port<span class="w"> </span>scan<span class="w"> </span>probe<span class="w"> </span>retransmissions.
+<span class="w">  </span>--host-timeout<span class="w"> </span>:<span class="w"> </span>Give<span class="w"> </span>up<span class="w"> </span>on<span class="w"> </span>target<span class="w"> </span>after<span class="w"> </span>this<span class="w"> </span>long
+<span class="w">  </span>--scan-delay/--max-scan-delay<span class="w"> </span>:<span class="w"> </span>Adjust<span class="w"> </span>delay<span class="w"> </span>between<span class="w"> </span>probes
+<span class="w">  </span>--min-rate<span class="w"> </span>:<span class="w"> </span>Send<span class="w"> </span>packets<span class="w"> </span>no<span class="w"> </span>slower<span class="w"> </span>than<span class="w">  </span>per<span class="w"> </span>second
+<span class="w">  </span>--max-rate<span class="w"> </span>:<span class="w"> </span>Send<span class="w"> </span>packets<span class="w"> </span>no<span class="w"> </span>faster<span class="w"> </span>than<span class="w">  </span>per<span class="w"> </span>second
+FIREWALL/IDS<span class="w"> </span>EVASION<span class="w"> </span>AND<span class="w"> </span>SPOOFING:
+<span class="w">  </span>-f<span class="p">;</span><span class="w"> </span>--mtu<span class="w"> </span>:<span class="w"> </span>fragment<span class="w"> </span>packets<span class="w"> </span><span class="o">(</span>optionally<span class="w"> </span>w/given<span class="w"> </span>MTU<span class="o">)</span>
+<span class="w">  </span>-D<span class="w"> </span>:<span class="w"> </span>Cloak<span class="w"> </span>a<span class="w"> </span>scan<span class="w"> </span>with<span class="w"> </span>decoys
+<span class="w">  </span>-S<span class="w"> </span>:<span class="w"> </span>Spoof<span class="w"> </span><span class="nb">source</span><span class="w"> </span>address
+<span class="w">  </span>-e<span class="w"> </span>:<span class="w"> </span>Use<span class="w"> </span>specified<span class="w"> </span>interface
+<span class="w">  </span>-g/--source-port<span class="w"> </span>:<span class="w"> </span>Use<span class="w"> </span>given<span class="w"> </span>port<span class="w"> </span>number
+<span class="w">  </span>--data-length<span class="w"> </span>:<span class="w"> </span>Append<span class="w"> </span>random<span class="w"> </span>data<span class="w"> </span>to<span class="w"> </span>sent<span class="w"> </span>packets
+<span class="w">  </span>--ip-options<span class="w"> </span>:<span class="w"> </span>Send<span class="w"> </span>packets<span class="w"> </span>with<span class="w"> </span>specified<span class="w"> </span>ip<span class="w"> </span>options
+<span class="w">  </span>--ttl<span class="w"> </span>:<span class="w"> </span>Set<span class="w"> </span>IP<span class="w"> </span>time-to-live<span class="w"> </span>field
+<span class="w">  </span>--spoof-mac<span class="w"> </span>:<span class="w"> </span>Spoof<span class="w"> </span>your<span class="w"> </span>MAC<span class="w"> </span>address
+<span class="w">  </span>--badsum:<span class="w"> </span>Send<span class="w"> </span>packets<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>bogus<span class="w"> </span>TCP/UDP/SCTP<span class="w"> </span>checksum
 OUTPUT:
-  -oN/-oX/-oS/-oG : Output scan <span class="k">in</span> normal, XML, s<span class="p">|</span>: Output <span class="k">in</span> the three major formats at once
-  -v: Increase verbosity level <span class="o">(</span>use -vv or more <span class="k">for</span> greater effect<span class="o">)</span>
-  -d: Increase debugging level <span class="o">(</span>use -dd or more <span class="k">for</span> greater effect<span class="o">)</span>
-  --reason: Display the reason a port is <span class="k">in</span> a particular state
-  --open: Only show open <span class="o">(</span>or possibly open<span class="o">)</span> ports
-  --packet-trace: Show all packets sent and received
-  --iflist: Print host interfaces and routes <span class="o">(</span><span class="k">for</span> debugging<span class="o">)</span>
-  --log-errors: Log errors/warnings to the normal-format output file
-  --append-output: Append to rather than clobber specified output files
-  --resume : Resume an aborted scan
-  --stylesheet : XSL stylesheet to transform XML output to HTML
-  --webxml: Reference stylesheet from Nmap.Org <span class="k">for</span> more portable XML
-  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output
+<span class="w">  </span>-oN/-oX/-oS/-oG<span class="w"> </span>:<span class="w"> </span>Output<span class="w"> </span>scan<span class="w"> </span><span class="k">in</span><span class="w"> </span>normal,<span class="w"> </span>XML,<span class="w"> </span>s<span class="p">|</span>:<span class="w"> </span>Output<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>three<span class="w"> </span>major<span class="w"> </span>formats<span class="w"> </span>at<span class="w"> </span>once
+<span class="w">  </span>-v:<span class="w"> </span>Increase<span class="w"> </span>verbosity<span class="w"> </span>level<span class="w"> </span><span class="o">(</span>use<span class="w"> </span>-vv<span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span><span class="k">for</span><span class="w"> </span>greater<span class="w"> </span>effect<span class="o">)</span>
+<span class="w">  </span>-d:<span class="w"> </span>Increase<span class="w"> </span>debugging<span class="w"> </span>level<span class="w"> </span><span class="o">(</span>use<span class="w"> </span>-dd<span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span><span class="k">for</span><span class="w"> </span>greater<span class="w"> </span>effect<span class="o">)</span>
+<span class="w">  </span>--reason:<span class="w"> </span>Display<span class="w"> </span>the<span class="w"> </span>reason<span class="w"> </span>a<span class="w"> </span>port<span class="w"> </span>is<span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>particular<span class="w"> </span>state
+<span class="w">  </span>--open:<span class="w"> </span>Only<span class="w"> </span>show<span class="w"> </span>open<span class="w"> </span><span class="o">(</span>or<span class="w"> </span>possibly<span class="w"> </span>open<span class="o">)</span><span class="w"> </span>ports
+<span class="w">  </span>--packet-trace:<span class="w"> </span>Show<span class="w"> </span>all<span class="w"> </span>packets<span class="w"> </span>sent<span class="w"> </span>and<span class="w"> </span>received
+<span class="w">  </span>--iflist:<span class="w"> </span>Print<span class="w"> </span>host<span class="w"> </span>interfaces<span class="w"> </span>and<span class="w"> </span>routes<span class="w"> </span><span class="o">(</span><span class="k">for</span><span class="w"> </span>debugging<span class="o">)</span>
+<span class="w">  </span>--log-errors:<span class="w"> </span>Log<span class="w"> </span>errors/warnings<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>normal-format<span class="w"> </span>output<span class="w"> </span>file
+<span class="w">  </span>--append-output:<span class="w"> </span>Append<span class="w"> </span>to<span class="w"> </span>rather<span class="w"> </span>than<span class="w"> </span>clobber<span class="w"> </span>specified<span class="w"> </span>output<span class="w"> </span>files
+<span class="w">  </span>--resume<span class="w"> </span>:<span class="w"> </span>Resume<span class="w"> </span>an<span class="w"> </span>aborted<span class="w"> </span>scan
+<span class="w">  </span>--stylesheet<span class="w"> </span>:<span class="w"> </span>XSL<span class="w"> </span>stylesheet<span class="w"> </span>to<span class="w"> </span>transform<span class="w"> </span>XML<span class="w"> </span>output<span class="w"> </span>to<span class="w"> </span>HTML
+<span class="w">  </span>--webxml:<span class="w"> </span>Reference<span class="w"> </span>stylesheet<span class="w"> </span>from<span class="w"> </span>Nmap.Org<span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>portable<span class="w"> </span>XML
+<span class="w">  </span>--no-stylesheet:<span class="w"> </span>Prevent<span class="w"> </span>associating<span class="w"> </span>of<span class="w"> </span>XSL<span class="w"> </span>stylesheet<span class="w"> </span>w/XML<span class="w"> </span>output
 MISC:
-  -6: Enable IPv6 scanning
-  -A: Enable OS detection, version detection, script scanning, and traceroute
-  --datadir : Specify custom Nmap data file location
-  --send-eth/--send-ip: Send using raw ethernet frames or IP packets
-  --privileged: Assume that the user is fully privileged
-  --unprivileged: Assume the user lacks raw socket privileges
-  -V: Print version number
-  -h: Print this <span class="nb">help</span> summary page.
+<span class="w">  </span>-6:<span class="w"> </span>Enable<span class="w"> </span>IPv6<span class="w"> </span>scanning
+<span class="w">  </span>-A:<span class="w"> </span>Enable<span class="w"> </span>OS<span class="w"> </span>detection,<span class="w"> </span>version<span class="w"> </span>detection,<span class="w"> </span>script<span class="w"> </span>scanning,<span class="w"> </span>and<span class="w"> </span>traceroute
+<span class="w">  </span>--datadir<span class="w"> </span>:<span class="w"> </span>Specify<span class="w"> </span>custom<span class="w"> </span>Nmap<span class="w"> </span>data<span class="w"> </span>file<span class="w"> </span>location
+<span class="w">  </span>--send-eth/--send-ip:<span class="w"> </span>Send<span class="w"> </span>using<span class="w"> </span>raw<span class="w"> </span>ethernet<span class="w"> </span>frames<span class="w"> </span>or<span class="w"> </span>IP<span class="w"> </span>packets
+<span class="w">  </span>--privileged:<span class="w"> </span>Assume<span class="w"> </span>that<span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>is<span class="w"> </span>fully<span class="w"> </span>privileged
+<span class="w">  </span>--unprivileged:<span class="w"> </span>Assume<span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>lacks<span class="w"> </span>raw<span class="w"> </span>socket<span class="w"> </span>privileges
+<span class="w">  </span>-V:<span class="w"> </span>Print<span class="w"> </span>version<span class="w"> </span>number
+<span class="w">  </span>-h:<span class="w"> </span>Print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>summary<span class="w"> </span>page.
 EXAMPLES:
-  nmap -v -A scanme.nmap.org
-  nmap -v -sn <span class="m">192</span>.168.0.0/16 <span class="m">10</span>.0.0.0/8
-  nmap -v -iR <span class="m">10000</span> -Pn -p <span class="m">80</span>
-SEE THE MAN PAGE <span class="o">(</span>https://nmap.org/book/man.html<span class="o">)</span> FOR MORE OPTIONS AND EXAMPLES
+<span class="w">  </span>nmap<span class="w"> </span>-v<span class="w"> </span>-A<span class="w"> </span>scanme.nmap.org
+<span class="w">  </span>nmap<span class="w"> </span>-v<span class="w"> </span>-sn<span class="w"> </span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="m">10</span>.0.0.0/8
+<span class="w">  </span>nmap<span class="w"> </span>-v<span class="w"> </span>-iR<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-Pn<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span>
+SEE<span class="w"> </span>THE<span class="w"> </span>MAN<span class="w"> </span>PAGE<span class="w"> </span><span class="o">(</span>https://nmap.org/book/man.html<span class="o">)</span><span class="w"> </span>FOR<span class="w"> </span>MORE<span class="w"> </span>OPTIONS<span class="w"> </span>AND<span class="w"> </span>EXAMPLES
 </code></pre></div>
 <h3 id="tipos-de-escaneos">Tipos de escaneos</h3>
 <h4 id="antes-de-nada-recordatorio-del-3-way-handshake">Antes de nada: recordatorio del 3-way-handshake</h4>
@@ -1167,12 +1181,12 @@ SEE THE MAN PAGE <span class="o">(</span>https://nmap.org/book/man.html<span cla
 <li>Relativamente sigiloso</li>
 <li>Requiere privilegios </li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sS objetivo
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sS<span class="w"> </span>objetivo
 </code></pre></div>
 <h4 id="escaneo-tcp-connect-st">Escaneo TCP connect (-sT)</h4>
 <p>El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción.Este es el caso cuando un usuario no tiene privilegios de paquetes sin procesar.</p>
 <p>En lugar de escribir paquetes sin procesar como hacen la mayoría de los otros tipos de escaneo, Nmap le pide al sistema operativo subyacente que establezca una conexión con la máquina y el puerto de destino emitiendo la llamada al sistema de conexión.</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sT objetivo
+<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sT<span class="w"> </span>objetivo
 </code></pre></div>
 Características: </p>
 <ul>
@@ -1182,7 +1196,7 @@ Características: </p>
 <h4 id="escaneos-udp-su">Escaneos UDP (-sU)</h4>
 <p>Si bien los servicios más populares en Internet se ejecutan sobre el protocolo TCP, los servicios UDP se implementan ampliamente. DNS, SNMP y DHCP (puertos registrados 53, 161/162 y 67/68) son tres de los más comunes. </p>
 <p>Debido a que el escaneo UDP es generalmente más lento y más difícil que TCP, algunos auditores de seguridad ignoran estos puertos. Esto es un error, ya que los servicios UDP explotables son bastante comunes y los atacantes ciertamente no ignoran todo el protocolo.</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sU objetivo
+<p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sU<span class="w"> </span>objetivo
 </code></pre></div>
 Características:</p>
 <ul>
@@ -1192,17 +1206,17 @@ Características:</p>
 <h4 id="tcp-null-scan-sn">TCP Null scan (-sN)</h4>
 <p>En los TCP Null Scans, los paquetes TCP enviados no tienen ninguna de las flags TCP establecidas.</p>
 <p>Según el RFC, ante tal circunstancia, el objetivo debe responder con un RST si el puerto está cerrado</p>
-<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sN objetivo
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sN<span class="w"> </span>objetivo
 </code></pre></div>
 <h4 id="tcp-fin-scan-sf">TCP FIN scan (-sF)</h4>
 <p>Esto es muy similar al anterior, excepto por el hecho de que en lugar de enviar un paquete TCP completamente vacío, envía un paquete con el flag FIN establecido que se usa para cerrar una conexión ordenadamente.</p>
 <p>En consecuencia, el objetivo debe responder con un RST para puertos cerrados según RFC.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sF objetivo
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sF<span class="w"> </span>objetivo
 </code></pre></div>
 <h4 id="tcp-xmas-scan-sx">TCP Xmas scan (-sX)</h4>
 <p>TCP Xmas Scans también es muy similar a las dos últimas técnicas de escaneo, excepto por el hecho de que utilizan paquetes TCP con los flags PSH, URG y FIN configurados.</p>
 <p>Como los dos últimos tipos de escaneo, esto también espera paquetes RST para puertos cerrados bajo RFC.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span> -sX objetivo
+<div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sX<span class="w"> </span>objetivo
 </code></pre></div>
 <h3 id="estados-de-los-puertos-escaneados">Estados de los puertos escaneados</h3>
 <p>Tras realizar el escaneo de puertos, se nos pueden reportar cuatro posibles estados de los mismos:</p>
@@ -1280,27 +1294,27 @@ Características:</p>
 <h3 id="scripts-en-nmap">Scripts en Nmap</h3>
 <p>Nmap incorpora un potente sistema de scripts conocido como NSE (Nmap Scripting Engine) que permite a los usuarios extender las capacidades de Nmap usando los diversos scripts que incorpora (actualmente hay más de 500 disponibles) que permiten desde la detección avanzada de versiones a la explotación de vulnerabilidades, o creando nuevos scripts que podemos compartir con el resto de usuarios (para los script se utiliza el <a href="https://www.lua.org/">lenguaje de programación LUA</a>).</p>
 <p>Para habilitar el uso de script en Nmap usamos la opción <code>-sC (nmap -sC &lt;objetivo&gt;)</code>. Con esta opción se seleccionarán todos los scripts NSE que pertenecen a la categoría predeterminada (<em>default</em>) y se ejecutarán contra los objetivos que indiquemos en el comando, por ejemplo:</p>
-<p><div class="highlight"><pre><span></span><code>$ nmap -sC scanme.nmap.org
+<p><div class="highlight"><pre><span></span><code>$<span class="w"> </span>nmap<span class="w"> </span>-sC<span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 En este caso le estamos indicando que habilite el uso de scripts de la categoría predeterminada y Nmap selecciona los script a usar teniendo en cuenta los puertos que encuentra. En este caso se ejecutan los scripts <code>ssh-hostkey</code> y <code>http-title</code> como podemos ver en los resultados reportados:</p>
-<div class="highlight"><pre><span></span><code>Starting Nmap <span class="m">7</span>.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at <span class="m">2021</span>-02-22 <span class="m">13</span>:01 CET
-Nmap scan report <span class="k">for</span> scanme.nmap.org <span class="o">(</span><span class="m">45</span>.33.32.156<span class="o">)</span>
-Host is up <span class="o">(</span><span class="m">0</span>.26s latency<span class="o">)</span>.
-Other addresses <span class="k">for</span> scanme.nmap.org <span class="o">(</span>not scanned<span class="o">)</span>: <span class="m">2600</span>:3c01::f03c:91ff:fe18:bb2f
-Not shown: <span class="m">996</span> closed ports
-PORT      STATE SERVICE
-<span class="m">22</span>/tcp    open  ssh
-<span class="p">|</span> ssh-hostkey: 
-<span class="p">|</span>   <span class="m">1024</span> ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 <span class="o">(</span>DSA<span class="o">)</span>
-<span class="p">|</span>   <span class="m">2048</span> <span class="m">20</span>:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 <span class="o">(</span>RSA<span class="o">)</span>
-<span class="p">|</span>   <span class="m">256</span> <span class="m">96</span>:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 <span class="o">(</span>ECDSA<span class="o">)</span>
-<span class="p">|</span>_  <span class="m">256</span> <span class="m">33</span>:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 <span class="o">(</span>ED25519<span class="o">)</span>
-<span class="m">80</span>/tcp    open  http
-<span class="p">|</span>_http-title: Go ahead and ScanMe!
-<span class="m">9929</span>/tcp  open  nping-echo
-<span class="m">31337</span>/tcp open  Elite
+<div class="highlight"><pre><span></span><code>Starting<span class="w"> </span>Nmap<span class="w"> </span><span class="m">7</span>.80<span class="w"> </span><span class="o">(</span><span class="w"> </span>https://nmap.org<span class="w"> </span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span><span class="m">2021</span>-02-22<span class="w"> </span><span class="m">13</span>:01<span class="w"> </span>CET
+Nmap<span class="w"> </span>scan<span class="w"> </span>report<span class="w"> </span><span class="k">for</span><span class="w"> </span>scanme.nmap.org<span class="w"> </span><span class="o">(</span><span class="m">45</span>.33.32.156<span class="o">)</span>
+Host<span class="w"> </span>is<span class="w"> </span>up<span class="w"> </span><span class="o">(</span><span class="m">0</span>.26s<span class="w"> </span>latency<span class="o">)</span>.
+Other<span class="w"> </span>addresses<span class="w"> </span><span class="k">for</span><span class="w"> </span>scanme.nmap.org<span class="w"> </span><span class="o">(</span>not<span class="w"> </span>scanned<span class="o">)</span>:<span class="w"> </span><span class="m">2600</span>:3c01::f03c:91ff:fe18:bb2f
+Not<span class="w"> </span>shown:<span class="w"> </span><span class="m">996</span><span class="w"> </span>closed<span class="w"> </span>ports
+PORT<span class="w">      </span>STATE<span class="w"> </span>SERVICE
+<span class="m">22</span>/tcp<span class="w">    </span>open<span class="w">  </span>ssh
+<span class="p">|</span><span class="w"> </span>ssh-hostkey:<span class="w"> </span>
+<span class="p">|</span><span class="w">   </span><span class="m">1024</span><span class="w"> </span>ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75<span class="w"> </span><span class="o">(</span>DSA<span class="o">)</span>
+<span class="p">|</span><span class="w">   </span><span class="m">2048</span><span class="w"> </span><span class="m">20</span>:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2<span class="w"> </span><span class="o">(</span>RSA<span class="o">)</span>
+<span class="p">|</span><span class="w">   </span><span class="m">256</span><span class="w"> </span><span class="m">96</span>:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57<span class="w"> </span><span class="o">(</span>ECDSA<span class="o">)</span>
+<span class="p">|</span>_<span class="w">  </span><span class="m">256</span><span class="w"> </span><span class="m">33</span>:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56<span class="w"> </span><span class="o">(</span>ED25519<span class="o">)</span>
+<span class="m">80</span>/tcp<span class="w">    </span>open<span class="w">  </span>http
+<span class="p">|</span>_http-title:<span class="w"> </span>Go<span class="w"> </span>ahead<span class="w"> </span>and<span class="w"> </span>ScanMe!
+<span class="m">9929</span>/tcp<span class="w">  </span>open<span class="w">  </span>nping-echo
+<span class="m">31337</span>/tcp<span class="w"> </span>open<span class="w">  </span>Elite
 
-Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned <span class="k">in</span> <span class="m">11</span>.64 seconds
+Nmap<span class="w"> </span><span class="k">done</span>:<span class="w"> </span><span class="m">1</span><span class="w"> </span>IP<span class="w"> </span>address<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>host<span class="w"> </span>up<span class="o">)</span><span class="w"> </span>scanned<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">11</span>.64<span class="w"> </span>seconds
 </code></pre></div>
 <p>Los scripts en NSE se dividen en las siguientes categorías:</p>
 <ul>
@@ -1351,30 +1365,30 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <h4 id="seleccion-de-scripts">Selección de scripts</h4>
 <p>Podemos seleccionar el script que queremos ejecutar directamente indicando el fichero o podemos seleccionar todos los de una categoría o categorías.</p>
 <h5 id="seleccionar-categorias">Seleccionar categorías</h5>
-<div class="highlight"><pre><span></span><code>nmap -sV --script &lt;categoria&gt; &lt;objetivo&gt;
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span>&lt;categoria&gt;<span class="w"> </span>&lt;objetivo&gt;
 </code></pre></div>
 <p>Por ejemplo:</p>
-<div class="highlight"><pre><span></span><code>nmap -sV --script version scanme.nmap.org
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span>version<span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 <p>Ejecutamos los script de la categoría version contra el objetivo scanme.nmap.org:</p>
-<div class="highlight"><pre><span></span><code>nmap -sV --script<span class="o">=</span><span class="s2">&quot;version,discovery&quot;</span> scanme.nmap.org
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="o">=</span><span class="s2">&quot;version,discovery&quot;</span><span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 <p>Además de los script de la categoría version también se usarán los de la categoría discovery.</p>
-<div class="highlight"><pre><span></span><code>nmap -sV --script <span class="s2">&quot;not intrusive&quot;</span> scanme.nmap.org
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span><span class="s2">&quot;not intrusive&quot;</span><span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 <p>En este caso se ejecutarían todos los script excepto los de la categoría intrusive.</p>
-<div class="highlight"><pre><span></span><code>nmap -sV --script <span class="s2">&quot;(http-*) and not http-brute&quot;</span> scanme.nmap.org
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span><span class="s2">&quot;(http-*) and not http-brute&quot;</span><span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 <p>En este caso se ejecutarían todos los script http excepto http-brute.</p>
 <h5 id="seleccion-de-script-especifico">Selección de script específico</h5>
-<div class="highlight"><pre><span></span><code>nmap --script &lt;nombre de fichero&gt; &lt;objetivo&gt;
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>--script<span class="w"> </span>&lt;nombre<span class="w"> </span>de<span class="w"> </span>fichero&gt;<span class="w"> </span>&lt;objetivo&gt;
 </code></pre></div>
 <p>Por ejemplo:</p>
-<div class="highlight"><pre><span></span><code>nmap --script http-title scanme.nmap.org
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>--script<span class="w"> </span>http-title<span class="w"> </span>scanme.nmap.org
 </code></pre></div>
 <p>Se ejecucuta el script http-title contra el objetivo scanme.nmap.org (es posible indicar varios scripts separandolos por comas).</p>
 <h4 id="actualizar-la-base-de-datos-de-scripts">Actualizar la base de datos de scripts</h4>
-<div class="highlight"><pre><span></span><code>sudo nmap --script-updatedb
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nmap<span class="w"> </span>--script-updatedb
 </code></pre></div>
 <p>Se actualizarán los script contra la base de datos de Nmap y los script nuevos se guardaran en la ruta por defecto de nuestra instalación.</p>
 <h4 id="demostracion-de-algunos-scripts">Demostración de algunos scripts</h4>
@@ -1399,7 +1413,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <p>Utilizando los scripts de la categoría <code>vuln</code> para descubrir la vlnerabilidad <a href="https://www.csirt-epn.edu.ec/servicios/vulnerabilidades/58-ms17-010">MS17-010 (Eternalblue)</a>, la que utilizó <em>Wannacry</em> en su día.</p>
 <p><img alt="" src="../../img/scripts5.jpg" /></p>
 <p>Para haber buscado vulnerabilidad específicas de SMB, podíamos haber utilizado también:</p>
-<div class="highlight"><pre><span></span><code>nmap -sV --script smb* &lt;Objetivo&gt;
+<div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span>smb*<span class="w"> </span>&lt;Objetivo&gt;
 </code></pre></div>
 <h2 id="ejercicios-de-nmap">Ejercicios de Nmap</h2>
 </li>
@@ -1421,50 +1435,14 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Volver al principio
-          </a>
+          </button>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Pie" >
-      
-        
-        <a href="../Intro/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Introducción" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Anterior
-              </span>
-              Introducción
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../exploit/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Explotación de vulnerabilidades" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Siguiente
-              </span>
-              Explotación de vulnerabilidades
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1487,12 +1465,11 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
       
-    
     
   </body>
 </html>
