@@ -146,10 +146,9 @@ FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# +--------------------+
-# SYSTEM-LEVEL PACKAGE MANAGER INSTALLATIONS
-# (and misc dependencies) 
-# +--------------------+
+# +---------------------------------------------------------+
+# INSTALACIÓN A NIVEL DE SISTEMA MEDIANTE GESTOR DE PAQUETES
+# +---------------------------------------------------------+
 
 RUN apt-get update -y &&\
     apt-get dist-upgrade -y &&\
@@ -168,8 +167,8 @@ RUN apt-get update -y &&\
 
 
 # +--------------------+
-# MAKE INSTALLATION (shellshock)
-# (system-level installation WITHOUT package manager)
+# INSTLACIÓN CON MAKE (Shellshock)
+# (instalacióin a nivel de sistema SIN gestor de paquetes)
 # +--------------------+
 
 #RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz && \
@@ -179,9 +178,9 @@ RUN apt-get update -y &&\
 #    make && \
 #    make install
 
-# +--------------------+
-# APPLICATION-LEVEL PACKAGE MANAGER INSTALLATION (regex DoS)
-# +--------------------+
+# +------------------------------------------------------------------------+
+# INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)
+# +------------------------------------------------------------------------+
 
 #COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock
 ```
@@ -238,54 +237,29 @@ Veamos el contenido de los archivos más importantes implicados en nuestro workf
 Encontramos el archivo que define el workflow propiamente dicho en `.github/workflows/scan.yml`. El nombre del workflow es indiferente:
 
 ```yaml title="scan.yml"
-# +--------------------+
-# WORKFLOW SUMMARY
-# +--------------------+
-
-# This is a Github Actions workflow file
-
-## Before modifying the code within a Github Repository, a peer review must occur
-## This peer review occurs within a "Pull Request"
-## When a Pull Request occurs, this workflow will use Trivy to scan for vulnerabilities
-
-## Github Actions Overview
+## Descripción general de Github Actions
 ## https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#overview
 
 # +--------------------+
-# ASSUMPTIONS
-# +--------------------+
-
-## Github Branch Protection Rules enforce...:
-## 1. All changes must go through a Pull Request
-## 2. If the Trivy scan FAILS, a Pull Request CAN NOT be merged (i.e., accepted)
-
-
-# +--------------------+
-# MAIN LOGIC
+# LÓGICA PRINCIPAL
 # +--------------------+
 
 name: Security - Docker - Scan
 
-## Run workflow when new changes are proposed
 on: [pull_request] #(1)
-
 jobs:
   scan:
-    name: Scan Docker Images
-    ## Workflow runs within an isolated execution environment 
-    ## (e.g., fresh Ubuntu 20.04 server)
+    name: Escanear Docker Imágenes
     runs-on: ubuntu-20.04 #(2)
     steps:
-      ## Allow access to trivy-tutorial Git repo
-      - name: Checkout Current Git Repo #(3)
+      - name: Permitir acceso repositorio #(3)
         uses: actions/checkout@v2
 
-      - name: Install Trivy
+      - name: Instalar Trivy
         run: |
-          ## Run install script at trivy-tutorial/install.sh
           bash install.sh
 
-      - name: Execute Trivy Scans
+      - name: Ejecutar escáner de Trivy
         run: |
           bash docker-scan.sh #(5)
 ```
@@ -303,66 +277,36 @@ El script que define cómo realiza el escaneo Trivy:
 #!/bin/bash
 
 # +--------------------+
-# SUMMARY
+# LÓGICA PRINCIPAL
 # +--------------------+
 
-## Checks if an Docker Image has vulnerabilities (via Trivy)
-
-# +--------------------+
-# ASSUMPTIONS
-# +--------------------+
-
-## 1. Script expects the following convention: #(1)
-##     trivy-tutorial/docker-builder/registry-repos/REPO_NAME/Dockerfile
-##     (e.g., trivy-tutorial/docker-builder/registry-repos/trivy-tutorial/Dockerfile)
-
-##     Convention is shared with the docker-registry-orchestrator.sh
-##     (uploads Docker Images to the Docker Image Registry)
-
-## 2. Script should be triggered on Pull Requests #(3)
-
-## 3. Docker Image changes (in git) must be approved by a trusted entity #(4)
-##    (Trivy can't find ALL docker vulnerabilities)
-
-# +--------------------+
-# MAIN LOGIC
-# +--------------------+
-
-## Iterate through Docker configurations (See Assumption 1 for path convention)
 for docker_build_context_relative_path in docker-builder/registry-repos/*; do #(5)
-    ## Only iterate through directories
     [[ ! -d "$docker_build_context_relative_path" ]] && continue #(6)
 
-    ## Get the absolute path for the Docker configurations (i.e., build context)
     docker_build_context_absolute_path=$(realpath "$docker_build_context_relative_path") #(7)
 
     local_image_name=test-image
 
-    ## Local Docker image build
     docker build --no-cache --tag "${local_image_name}" "${docker_build_context_absolute_path}" #(8)
 
-    ## Ensure that Trivy does NOT scan a cached image
     trivy image --reset #(9)
-    
-    ## Trivy scan
-    ## (Into the future, we will make our blocking behavior more granular)
-    ## If a vulnerability is found, Trivy will emit an exit code of 2
+
     trivy image --no-progress --security-checks vuln --severity CRITICAL,HIGH,MEDIUM --exit-code 2 --ignore-unfixed "${local_image_name}" #(10)
     vuln_result_code="$?"
 
     if [[ "$vuln_result_code" -eq 0 ]]; then #(11)
-        echo "Docker image is in compliance with the security policy!"
+        echo "La imagen Docker cumple con la política de seguridad!"
         echo "Woo hoo!"
-        echo "Starting scan of next Docker Image (if defined)"
+        echo "Empezado el escaneo de la nueva imagen Docker
         continue
     elif [[ "$vuln_result_code" -eq 2 ]]; then
-        echo "This Docker image contains a vulnerability!"
-        echo "Please fix!"
+        echo "¡Esta imagen Docker contiene una vulnerabilidad!"
+        echo "¡Soluciónala por favor!"
         echo "PATH: $docker_build_context_absolute_path"
         exit 1 #(13)
     else #(14)
-        echo "There was an unexpected error!"
-        echo "Please reach out to the Security Team"
+        echo "¡Ha habido un error inesperado!"
+        echo "Por favor, contacte con el equipo de seguridad"
         exit 1
     fi
 done
@@ -395,6 +339,7 @@ En esta demostración práctica veremos:
   + Manipulación del registro de Docker
   + Vulnerabilidades que no escaneables
 
+
 En la sección [Manos a la obra](#manos-a-la-obra) se mostraba una imagen donde se veían dos puntos de aparición de GitHub Actions; los escaneos de Trivy y el proceso de *Build* o creación de la imagen Docker. Como ya hemos visto en profundidad el primero, nos centraremos ahora en el segundo.
 
 Surgen un par de preguntas:
@@ -402,49 +347,23 @@ Surgen un par de preguntas:
 1. ¿Cómo se suben las imágenes a Docker Hub tras escanearlas con Trivy?
 2. ¿Qué pasa si un atacante compromete nuestro Docker Hub y sube una imagen maliciosa? ¿Cómo podríamos saberlo?
 
+### Explicación del workflow
+
 Comencemos con un resumen del workflow:
 
 ```yaml title="builder.yml"
 # +--------------------+
-# WORKFLOW SUMMARY
-# +--------------------+
-
-## 1. Builds Docker Images and uploads them to remote Docker Registry # (1)
-## 2. Does signature validation to ensure Docker Images (in the Registry) have not been tampered with. # (2)
-
-
-# +--------------------+
-# MAIN LOGIC
+# LÓGICA PRINCIPAL
 # +--------------------+
 
 name: Security - Docker - Registry Orchestrator
 on:
 #  schedule: # (3)
-    ## When our Docker Images are rebuilt, package updates occur
-    ## By executing this workflow on a recurring schedule, we minimize
-    ## vulnerabilities that can be discovered by Trivy
-    ## COMMENTED OUT TO SAVE RESOURCES
 #    - cron: '0 0 * * *'
   push: # (4)
     branches:
-      ## When a Pull Request is accepted, its code is merged into the main branch
-      ## At that point, this workflow will be triggered and Docker Images will be uploaded 
-      ## to the Registry
       - main
     paths-ignore: #(5)
-      ## When a Docker Image is built, the Image's unique signature 
-      ## is committed into the main branch of the Git repo.
-      ## (This allows us to check for malicious updates to Docker Images)
-      
-      ## This workflow file will invoke docker-registry-orchestrator.sh
-      
-      ## docker-registry-orchestrator.sh:
-      ## a) commits a Docker Image's signature into the main branch
-      ##                  (see path below)
-      ## b) uses the signature to check for Docker Registry tampering
-      
-      ## If we allowed this path to trigger this workflow, we would
-      ## have an infinite loop
       - docker-builder/registry-repos/trivy-tutorial/image_sha.txt
 
 jobs:
@@ -452,37 +371,25 @@ jobs:
     name: Docker Registry Orchestrator
     runs-on: ubuntu-20.04
     steps:
-      ## Allow access to trivy-tutorial Git repo
       - name: Checkout current git repo # (6)
         uses: actions/checkout@v2
         with:
-          ## We use a separate Github User (i.e., an "automation user") specifically
-          ## for this workflow.
-          ## This user is given "admin" permissions so they can bypass
-          ## the branch protection rules and commit the Docker Image Signature DIRECTLY into the main branch
-          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
           token: ${{ secrets.GIT_AUTOMATION_USER_TOKEN }} # (7)
           
-      - name: Install Trivy # (8)
+      - name: Instalar Trivy # (8)
         run: |
-          ## Run install script at trivy-tutorial/install.sh
           bash install.sh
           
-      ## Log in to the Dockerhub Image Registry
-      ## (allows us to eventually upload our Docker Images)
-      - name: Log in to Dockerhub # (9)
+      - name: Log in en Dockerhub # (9)
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
-          
-      - name: Docker Registry Interactions # (10) 
+         
+      - name: Interacciones con Docker Registry  # (10) 
         run: |
           bash docker-registry-orchestrator.sh latest ${{ secrets.DOCKERHUB_USERNAME }}
-          ## We'll explore the script's arguments in the next section
-          
-          ## Setup instructions: https://github.com/zachroofsec-org/trivy-tutorial#github-action-setup-instructions-advanced
+
 ```
 
 1. Como hemos dicho, este *workflow* invoca a un script que construye la imagen Docker y la sube al registro de Docker.
@@ -519,41 +426,15 @@ Sigamos con el shell script:
 #!/bin/bash
 
 # +--------------------+
-# SUMMARY
-# +--------------------+
-
-# 1) Builds (and uploads) Docker Images a remote Docker Registry
-# 2) Checks if an Docker Image (in the remote registry) has been modified OUTSIDE of this script
-
-
-# +--------------------+
-# ASSUMPTIONS
-# +--------------------+
-
-# 1. Script should be triggered every 24 hours AND when Dockerfile modifications are made (at a minimum)
-
-# 2. Dockerfiles pull in package updates on every build
-
-# 3. Docker Image changes (in git) must be approved by a trusted entity
-#   (Trivy can't find ALL docker vulnerabilities)
-
-# 4. Script expects the following convention (shared with docker-scan.sh):
-#     trivy-tutorial/docker-builder/registry-repos/REPO_NAME/Dockerfile
-#     (e.g., trivy-tutorial/docker-builder/registry-repos/trivy-tutorial/Dockerfile)
-
-# +--------------------+
 # INPUTS
 # +--------------------+
 
-# Docker Tags are a way to version Docker Images
-# In this demo, we build Docker Images with the "latest" tag
 TAG="$1" # (1)
-
 
 DOCKERHUB_USER="$2"
 
 # +--------------------+
-# FUNCTIONS
+# FUNCONES
 # +--------------------+
 
 generate_signature_and_upload_image() {
@@ -561,8 +442,6 @@ generate_signature_and_upload_image() {
     local remote_image_name="$2"
     local sig_abs_path="$3"
 
-    # Generate Docker Image signature 
-    # (used to detect Docker Image tampering)
     container-diff analyze --no-cache --format='{{(index .Analysis 0).Digest}}' daemon://"$local_image_name" > "$sig_abs_path"
     
     docker tag "$local_image_name" "$remote_image_name"
@@ -579,54 +458,29 @@ commit_and_push_signature() {
 
 
 # +--------------------+
-# MAIN LOGIC
+# LÓGICA PRINCIPAL
 # +--------------------+
 
-# Git Configurations
 git config user.name "Security Bot" # (2)
 git config user.email "<>"
 git pull origin main
 
-
-# Iterate through Docker configurations (See Assumption 4 for path convention)
 for docker_build_context_relative_path in docker-builder/registry-repos/*; do # (3)
-    # Only iterate through directories
     [[ ! -d "$docker_build_context_relative_path" ]] && continue
 
-    # Get the absolute path for the Docker configurations (i.e., build context)
     docker_build_context_absolute_path=$(realpath "$docker_build_context_relative_path")
     
-    # Get the Docker Registry repo name from our path convention
     repo_name=$(basename "$docker_build_context_absolute_path")
 
-    # Generate image names 
     local_image_name="$repo_name:$TAG" # (4)
-    
-    # We download the remote image (within the Docker Registry) during the integrity checking process
-    # (We'll soon see this)
+
     remote_image_name="$DOCKERHUB_USER/$local_image_name" # (5)
 
-    # Local image build
     docker build --no-cache --tag "${local_image_name}" "${docker_build_context_absolute_path}" # (6)
-    # We can now refer to this local image by its tag
 
-    # +--------------------+
-    # TAMPERING CHECKS SUMMARY
-    # +--------------------+
-    
-    # If an attacker changes the registry's Docker Image, they subvert all 
-    # preexisting controls
-    # (i.e., Trivy scan, Pull Request Approval)
-
-    # We need to ensure that a malicious Docker Image has NOT been placed in
-    # the Docker Registry
-
-    # For additional tampering checks, you should also use Docker Content Trust
-    # (outside the scope of this tutorial)
-
-    # +--------------------+
-    # TAMPERING CHECK LOGIC
-    # +--------------------+
+    # +--------------------------------------------------------------+
+    # LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)
+    # +--------------------------------------------------------------+
 
     # Is this the first build of the Docker Image?
     # If so, we won't check for image tampering
@@ -635,59 +489,40 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do # 
     signature_absolute_path="$docker_build_context_absolute_path/image_sha.txt"
     first_run=false
     if [[ ! -f "$signature_absolute_path" ]]; then # (7)
-        # Signature does NOT exist
         first_run=true
     fi
 
     if [[ "$first_run" == "true" ]]; then # (8)
-        # Use Google's container-diff tool to generate the
-        # Docker Image signature
-        # (on subsequent image builds, we'll validate that the remote Docker Image signature matches this signature)
-        # Ex: sha256:9e81b4fc8735413c172a7595636957278b90c3613fb8983f4418208ba7ecab97
+
         generate_signature_and_upload_image "$local_image_name" "$remote_image_name" "$signature_absolute_path"
         
-        # commit the signature into the "main" branch
         commit_and_push_signature "$signature_absolute_path"
         
-        echo "First time building this Docker Image..."
-        echo "Skipping integrity checks..."
-        
-        # Continue to next set of Docker configurations
-        # (within the for loop)
+        echo "Primera vez que se construye esta imagen..."
+        echo "Saltándonos las comprobaciones de integridad..."    
         continue
     fi
 
-    # This is NOT the first time this Docker Image has been built
-    # Thus, we need to check for image tampering
-
-    # Download remote version of Docker Image
     docker pull "${remote_image_name}"
 
-    # Get the signature of the remote Docker Image
-    remote_signature=$(container-diff analyze --no-cache --format='{{(index .Analysis 0).Digest}}' # (9)daemon://"$remote_image_name")
-    # Get the signature of the Docker Image that was previously built
+    remote_signature=$(container-diff analyze --no-cache --format='{{(index .Analysis 0).Digest}}' daemon://"$remote_image_name") # (9)
     previous_build_signature=$(cat "$signature_absolute_path") # (10)
 
     if [[ "${remote_signature}" != "${previous_build_signature}" ]]; then # (11)
-        # The signatures do NOT match!
-        
-        echo "The remote signature does NOT match the previous build's signature!"
-        echo "Docker Image tampering might be present in Dockerhub!"
-        
-        echo "Remote signature: $remote_signature"
-        echo "Previous build signature: $previous_build_signature"
+        echo "La firma remote NO coincidie con la de la última imagen que se construyó"
+        echo "¡Puede que se haya producido una modificación maliciosa en Docker Hub!
+                
+        echo "Firma remota: $remote_signature"
+        echo "Firma del último build: $previous_build_signature"
         echo "Docker Registry Repo: $repo_name"
-        
-        echo "Running Trivy scans on the remote Docker Image" # (12)
-        
-        # Ensure that Trivy does NOT scan a cached image
-        trivy image --reset
-    
-        # For simplicity, we will use our previous scan settings
-        trivy image --no-progress --severity CRITICAL,HIGH,MEDIUM --ignore-unfixed "${remote_image_name}"
-        
 
-        echo "Looking at differences between the Docker Images" # (13)
+        echo "Corriendo el escáner de Trivy sobre la imagen Docker remota" # (12)
+        
+        trivy image --reset
+           
+        trivy image --no-progress --severity CRITICAL,HIGH,MEDIUM --ignore-unfixed "${remote_image_name}"
+
+        echo "Buscando diferencias entre las imágenes de Docker" # (13)
         container-diff diff \
             --no-cache \
             --order \
@@ -702,16 +537,12 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do # 
             daemon://$local_image_name\
             daemon://$remote_image_name
 
-        echo "Not uploading Docker Image!" # (14)
-        echo "An investigation needs to occur"
-        
-        # TODO: Send alert to SIEM
-        
+        echo "¡No subimos la imagen!" # (14)
+        echo "Debe llevarse a cabo una investigación"
+                       
         exit 1
-    else # (15)
-        # The signatures DO match!
-        
-        echo "No Docker Image tampering is present!"
+    else # (15)     
+        echo "¡No se ha producido tampering de la imagen Docker!"
         generate_signature_and_upload_image "$local_image_name" "$remote_image_name" "$signature_absolute_path"
         commit_and_push_signature "$signature_absolute_path"
     fi
@@ -749,3 +580,104 @@ done
 14. Tras todo esto, no vamos a subir la imagen al registro de Docker sino que se necesita comenzar una investigación forense y/o enviar una alerta a un SIEM..
 
 15. Si se ejecuta esta parte del código es que no se ha detectado ninguna modificación y se subirá la iamgen, así como la firma de la misma.
+
+### Simulando una manipulación maliciosa de la imagen en Docker Hub
+
+!!!task "Tarea"
+    Si volvéis al site de GitHub que nos permitía forzar el *merge* del *pull request* que teníamos pendiente gracias a nuestros permisos de administrador, hacedlo.
+
+    Os aparecerá este segundo workflow que hemos visto ejecutándose (con el punto amarillo).
+
+Tras hacer el merge y completarse el workflow, debéis ver en la pestaña *Code* un anuncio de que **Security Bot** actualizado la firma.
+
+![](../img/securitybot.png)
+
+Y si hacéis clic, podréis ver el nuevo valor de la firma.
+
+Visto que todo funciona correctamente, hagamos nuestra simulación introduciendo una imagen vulnerable de Docker en nuestro repositorio. Para ello vamos a descomentar las líneas resaltadas de nuestro Dockerfile:
+
+```Dockerfile title="Dockerfile" hl_lines="31-36 42"
+FROM debian
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# +---------------------------------------------------------+
+# INSTALACIÓN A NIVEL DE SISTEMA MEDIANTE GESTOR DE PAQUETES
+# +---------------------------------------------------------+
+
+RUN apt-get update -y &&\
+    apt-get dist-upgrade -y &&\
+    apt-get install -y apache2 \
+        wget \
+        build-essential &&\
+    apt-get autoremove &&\
+    apt-get clean &&\
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb && \
+#    dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb
+
+#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &&\
+#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb
+
+# +--------------------+
+# MAKE INSTALLATION (shellshock)
+# (system-level installation WITHOUT package manager)
+# +--------------------+
+
+#RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz && \ # (1)
+#    tar zxvf bash-4.3.tar.gz && \
+#    cd bash-4.3 && \
+#    ./configure && \
+#    make && \
+#    make install
+
+# +------------------------------------------------------------------------+
+# INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)
+# +------------------------------------------------------------------------+
+#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock # (2)
+```
+
+1. Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.
+2. Con esto introducimos una vulnerabilidad DoS mediante una expresión regular (ReDoS) en un paquete de Python (httplib2)
+
+Por poner en contexto: puede parecer que estas vulnerabilidades tampco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.
+
+Pasamos a construir la imagen nosotros mismos:
+
+```console
+$ docker build -t usuario-docker/nombre-repo-docker docker-builder/registry-repos/nombre-repo
+```
+
+Así evitamos pasar por Git y ser detectados por los workflows anteriores.
+
+En este caso estamos suponiendo que un atacante ha conseguido nuestras credenciales del Docker Hub por cualquiera de las múltiples maneras posibles. Teniendo en cuenta esto, nos logueamos en Docker Hub:
+
+```console
+$ docker login --username nombre-usuario-docker
+```
+
+Y subimos la nueva imagen:
+
+```console
+$ docker push nombre-usuario-docker/nombre-repo-docker
+```
+
+Pues ya tendríamos simulado un ataque con una imagen modificada. Teniendo en cuenta que con anterioridad habíamos comentado el bloque del workflow que nos permitía ejecutarlo periódicamente (*schedule*) y para cumplir los propósitos de esta demo, vamos a ejecutar de nuevo los jobs manualmente, para ver si se detecta la problemática.
+
+En la pestaña *Actions*, en el workflow `Docker Registry Orchestator` que es el que nos interesa, le damos a re-ejecutar los jobs:
+
+![](../img/rerun.png)
+
+Si todo ha ido correctamente, el workflow fallará. Y si miráis los detalles, debéis ver que Trivy ha detectado una vulnerabilidad en `Pipfile.lock` pero no ha detectado **Shellshock**.
+
+
+!!!question "Pregunta"
+    Shellshock no se ha detectado por una razón concreta y es una de las causas del tipo de vulnerabilidades que no detecta Trivy y se necesita la aprobación humana que comentábamos antes.¿Sabrías decir cuál es esta razón
+
+## Conclusión
+
+Ninguna herramienta de ciberseguridad puede monitorizar TODOS los ataques. Sin embargo, una combinación de herramientas adecuadas pueden ofrecer pintas sobre qué ha cambiado
+
+!!!question "Pregunta"
+    ¿Serías capaz de en la salida que nos ofrece la pestaña *Actions* identificar la salida de `container-diff` y donde se ven todos los archivos relativos a bash que se han añadido a la imagen?
