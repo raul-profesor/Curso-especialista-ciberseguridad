@@ -141,7 +141,7 @@ $ nano docker-builder/registry-repos/trivy-tutorial/Dockerfile
 
 Y descomentamos las líneas resaltadas:
 
-```Dockerfile hl_lines="12-14 19-23"
+```Dockerfile hl_lines="11-14 19-23"
 FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
