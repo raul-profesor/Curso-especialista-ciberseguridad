@@ -481,11 +481,7 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do # 
     # +--------------------------------------------------------------+
     # LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)
     # +--------------------------------------------------------------+
-
-    # Is this the first build of the Docker Image?
-    # If so, we won't check for image tampering
-    # signature_absolute_path is only available AFTER the first build
-    
+   
     signature_absolute_path="$docker_build_context_absolute_path/image_sha.txt"
     first_run=false
     if [[ ! -f "$signature_absolute_path" ]]; then # (7)
