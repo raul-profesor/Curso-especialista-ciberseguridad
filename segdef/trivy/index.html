@@ -1311,10 +1311,6 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="w">    </span><span class="c1"># LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)</span>
 <span class="w">    </span><span class="c1"># +--------------------------------------------------------------+</span>
 
-<span class="w">    </span><span class="c1"># Is this the first build of the Docker Image?</span>
-<span class="w">    </span><span class="c1"># If so, we won&#39;t check for image tampering</span>
-<span class="w">    </span><span class="c1"># signature_absolute_path is only available AFTER the first build</span>
-
 <span class="w">    </span><span class="nv">signature_absolute_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$docker_build_context_absolute_path</span><span class="s2">/image_sha.txt&quot;</span>
 <span class="w">    </span><span class="nv">first_run</span><span class="o">=</span><span class="nb">false</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1"># (7)</span>
