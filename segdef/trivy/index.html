@@ -911,7 +911,7 @@
 <p>A medida que las aplicaciones cada vez más van cambiando su infraestructura a una basada en contenedores, más se va haciendo evidente que hay que auditar estos contenedores en búsqueda de vulnerabilidades.</p>
 <p>En esta sección usaremos Trivy para auditar imágenes de contenedores y, además, veremos como integrar Trivy con Github Actions para que se produzca un escaneo automático de la imagen cada vez que esta se construya. Además, gracias a ello, veremos cómo prevenir que imágenes vulnerables pasen a producción.</p>
 <h3 id="que-es-trivy">¿Qué es Trivy?</h3>
-<p>Trivi es un sencillo, rápido y completo escáner de vulnerabilidades para contenedores, muy adecuado para la integración continua y DevSecOps. Esta herramienta detecta vulnerabilidades en los paquetes de los sistemas operativos, sea éste Alpine, RHEL, Debian, Ubuntu, Amazon Linux o lo que proceda, además de en ependencias de aplicaciones (Node, Ruby, Python, Java...).</p>
+<p>Trivi es un sencillo, rápido y completo escáner de vulnerabilidades para contenedores, muy adecuado para la integración continua y DevSecOps. Esta herramienta detecta vulnerabilidades en los paquetes de los sistemas operativos, sea éste Alpine, RHEL, Debian, Ubuntu, Amazon Linux o lo que proceda, además de en dependencias de aplicaciones (Node, Ruby, Python, Java...).</p>
 <p>Debido a la rapidez de Trivy, podemos integrarlo fácilmente de forma directa en nuestros workflows de desarrollo. Dicho de otro modo, en cuánto un desarrollador actualice el código, éste puede ser escaneado en tiempo real en búsqueda de vulnerabilidades.</p>
 <p><img alt="" src="../../img/trivy.png" /></p>
 <h3 id="nist-csf-y-trivy">NIST CSF y Trivy</h3>
@@ -924,17 +924,24 @@
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Esta demostración ha sido realizada con Debian 11 Bullseye y se ha comprobado que funciona correctamente.</p>
+<p>Prerrequisitos necesarios:</p>
+<ul>
+<li>Cuenta en GitHub</li>
+<li>Personal Access Token creado en GitHub</li>
+<li>Cuenta en DockerHub</li>
+<li>Personal Access Token creado en DockerHub</li>
+</ul>
 </div>
 <p>Para esta demostración el primer paso es, como cabía esperar, instalar Trivy. Para ello:</p>
 <ol>
 <li>
-<p>Debéis clonaros en vuestra máquina virtual el repositorio: <code>https://github.com/trivy-org/analisis-trivy</code></p>
+<p>Debéis hacer un fork del repositorio: <code>https://github.com/raul-profesor/practica-de-trivy</code> y luego clonarlo en vuestra máquina virtual</p>
 </li>
 <li>
 <p>Si echamos un ojo al script <code>install.sh</code> vemos que:</p>
 <ol>
 <li>Obtiene el nombre de la distribución</li>
-<li>Instala Trivy y las dependencias necearias</li>
+<li>Instala Trivy y las dependencias necesarias</li>
 <li>También instala <code>container-diff</code> para inspeccionar y detectar imágenes que hayan sido manipuladas </li>
 <li>Se instala Docker en caso de que sea necesario porque no esté instalado ya</li>
 </ol>
@@ -952,7 +959,7 @@ No obstante, en nuestro caso nos centraremos únicamente en el escaneo de imáge
 <p>En primer lugar vemos que Tivy se queja de que estamos usando el tag <code>latest</code>. Para nuestros propósitos no hay problema alguno puesto que no estamos cambiando nada de las capas subyacentes de la imagen, más adelante ya nos preocuparemos de esto.</p>
 </li>
 <li>
-<p>Vemos que Trivy nos informa de más de mil vulnerabilidades en el momento en que se escriben estos apuntes. De locos. Inabarcable.</p>
+<p>Vemos que Trivy nos informa de más de 400 vulnerabilidades en el momento en que se escriben estos apuntes. De locos. Inabarcable.</p>
 <p><img alt="" src="../../img/trivy1.png" /></p>
 </li>
 </ul>
@@ -965,7 +972,7 @@ Y realizar un escaneo más sensato y priorizando vulnerabilidades. Esto incluye 
 </div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>La severidad que muestra Trivy para las vulnerabilidades puede venir de distintos sitios. Se puede obetner de la NVD (National Vulnerability Database) o directamente del vendor o fabricate. 
+<p>La severidad que muestra Trivy para las vulnerabilidades puede venir de distintos sitios. Se puede obtener de la NVD (National Vulnerability Database) o directamente del vendor o fabricante. 
 Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnerabilidades que haya publicado la propia Canonical y favorecerá esta severidad respecto a la de la NVD.</p>
 </div>
 <p>Vemos que la mayoría de los <strong>CRITICAL</strong> y <strong>HIGH</strong> se los llevan algunas librerías de OpenSSL, incluyendo el famoso Heartbleed que permite que un usuario malicioso no autenticado pueda, en ciertos casos, leer la memoria de la máquina.</p>
@@ -985,9 +992,9 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <p>Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server que estará hospedado en la infraestructura de GitHub y podremos usarlo para auditar los cambios antes de subir la imagen al Docker Registry. Es más, podemos examinar el resultado del escaneo de Trivy e incluirlo en un Pull Request, permitiendo que se produzca una discusión antes de incorporar los cambios.</p>
 <p><img alt="" src="../../img/trivy_ghactions.png" style="height:425px;width:825px" /> </p>
 <p>En primer lugar, debéis hacer un <em>fork</em> en vuestra cuenta del repositorio</p>
-<p><code>https://</code></p>
+<p><code>https://https://github.com/raul-profesor/practica-de-trivy</code></p>
 <p>Y tras ello, en el terminal, os debéis clonar el repositorio que utilizaremos como referencia:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nombre-usuario/practica-de-trivy
 </code></pre></div>
 <p>Y como medida de seguridad, protegeremos la única rama que tenemos ahora mismo (<em>main</em>). Para ello bien hacéis click en el propio aviso que os aparece en el repositorio al entrar vía web:</p>
 <p><img alt="" src="../../img/branch_protection2.png" /></p>
@@ -1001,30 +1008,34 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>nano<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial/Dockerfile
 </code></pre></div>
 <p>Y descomentamos las líneas resaltadas:</p>
-<p><div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">debian</span>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<div class="highlight"><pre><span></span><code><span class="o">=======</span>
+<span class="sb">```</span>Dockerfile<span class="w"> </span><span class="nv">hl_lines</span><span class="o">=</span><span class="s2">&quot;11-13 18-22&quot;</span>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>121c2ba<span class="w"> </span><span class="o">(</span>solucion<span class="w"> </span>typos<span class="o">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">debian</span>
 
 <span class="k">ENV</span><span class="w"> </span>DEBIAN_FRONTEND<span class="w"> </span>noninteractive
 
 <span class="c"># +---------------------------------------------------------+</span>
 <span class="c"># INSTALACIÓN A NIVEL DE SISTEMA MEDIANTE GESTOR DE PAQUETES</span>
 <span class="c"># +---------------------------------------------------------+</span>
-
-<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="hll"><span class="c1">#    apt-get install -y apache2 \</span>
-</span><span class="hll"><span class="c1">#        wget \</span>
-</span><span class="hll"><span class="c1">#        build-essential &amp;&amp;\</span>
-</span><span class="hll"><span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-</span><span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
-
-<span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
-<span class="hll"><span class="c">#    dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb</span>
-</span><span class="hll"><span class="c">#</span>
-</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
-</span><span class="hll"><span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
+<span class="hll">
+</span><span class="hll"><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+</span><span class="hll"><span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+</span><span class="hll"><span class="c1">#    apt-get install -y apache2 \</span>
+</span><span class="c1">#        wget \</span>
+<span class="c1">#        build-essential &amp;&amp;\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+<span class="hll"><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
 </span><span class="hll">
-</span>
+</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
+</span><span class="hll"><span class="c">#    dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb</span>
+</span><span class="hll"><span class="c">#</span>
+</span><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
+<span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
+
+
 <span class="c"># +--------------------+</span>
 <span class="c"># INSTLACIÓN CON MAKE (Shellshock)</span>
 <span class="c"># (instalacióin a nivel de sistema SIN gestor de paquetes)</span>
@@ -1050,7 +1061,7 @@ Y una vez hecho esto, haremos el <em>commit</em> y el <em>push</em>  correspondi
 <p><img alt="" src="../../img/pullrequest.png" /></p>
 <div class="admonition warning">
 <p class="admonition-title">¡Ojo cuidao!</p>
-<p>Aseguráos de que el <em>pull request</em> lo haceís desde la rama <code>updates</code> de <strong>vuestro repositorio</strong> a la rama <code>main</code>de <strong>vuestro repositorio</strong>, como véis en lla imagen de abajo.-</p>
+<p>Aseguráos de que el <em>pull request</em> lo haceís desde la rama <code>updates</code> de <strong>vuestro repositorio</strong> a la rama <code>main</code>de <strong>vuestro repositorio</strong>, como véis en la imagen de abajo.-</p>
 </div>
 <p><img alt="" src="../../img/pullrequest2.png" /></p>
 <p>Comparará los cambios realizados e informará de que todo está bien y se puede hacer <em>merge</em> automáticamente de ambas ramas. </p>
@@ -1130,19 +1141,19 @@ Y una vez hecho esto, haremos el <em>commit</em> y el <em>push</em>  correspondi
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$vuln_result_code</span><span class="s2">&quot;</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1">#(11)</span>
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;La imagen Docker cumple con la política de seguridad!&quot;</span>
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Woo hoo!&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Empezado el escaneo de la nueva imagen Docker</span>
-<span class="s2">        continue</span>
-<span class="s2">    elif [[ &quot;</span><span class="nv">$vuln_result_code</span><span class="s2">&quot; -eq 2 ]]; then</span>
-<span class="s2">        echo &quot;</span>¡Esta<span class="w"> </span>imagen<span class="w"> </span>Docker<span class="w"> </span>contiene<span class="w"> </span>una<span class="w"> </span>vulnerabilidad!<span class="s2">&quot;</span>
-<span class="s2">        echo &quot;</span>¡Soluciónala<span class="w"> </span>por<span class="w"> </span>favor!<span class="s2">&quot;</span>
-<span class="s2">        echo &quot;</span>PATH:<span class="w"> </span><span class="nv">$docker_build_context_absolute_path</span><span class="s2">&quot;</span>
-<span class="s2">        exit 1 #(13)</span>
-<span class="s2">    else #(14)</span>
-<span class="s2">        echo &quot;</span>¡Ha<span class="w"> </span>habido<span class="w"> </span>un<span class="w"> </span>error<span class="w"> </span>inesperado!<span class="s2">&quot;</span>
-<span class="s2">        echo &quot;</span>Por<span class="w"> </span>favor,<span class="w"> </span>contacte<span class="w"> </span>con<span class="w"> </span>el<span class="w"> </span>equipo<span class="w"> </span>de<span class="w"> </span>seguridad<span class="s2">&quot;</span>
-<span class="s2">        exit 1</span>
-<span class="s2">    fi</span>
-<span class="s2">done</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Empezado el escaneo de la nueva imagen Docker&quot;</span>
+<span class="w">        </span><span class="k">continue</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$vuln_result_code</span><span class="s2">&quot;</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡Esta imagen Docker contiene una vulnerabilidad!&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡Soluciónala por favor!&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PATH: </span><span class="nv">$docker_build_context_absolute_path</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1">#(13)</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="c1">#(14)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡Ha habido un error inesperado!&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Por favor, contacte con el equipo de seguridad&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
 </code></pre></div>
 <ol>
 <li>El script espera esta convenciónd de nombres, donde <code>REPO_NAME</code> es el nombre de nuestro repositorio en el Docker Registry (Docker Hub). </li>
@@ -1263,7 +1274,7 @@ Y una vez hecho esto, haremos el <em>commit</em> y el <em>push</em>  correspondi
 <span class="nv">DOCKERHUB_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
 <span class="c1"># +--------------------+</span>
-<span class="c1"># FUNCONES</span>
+<span class="c1"># FUNCIONES</span>
 <span class="c1"># +--------------------+</span>
 
 generate_signature_and_upload_image<span class="o">()</span><span class="w"> </span><span class="o">{</span>
@@ -1310,7 +1321,11 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="w">    </span><span class="c1"># +--------------------------------------------------------------+</span>
 <span class="w">    </span><span class="c1"># LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)</span>
 <span class="w">    </span><span class="c1"># +--------------------------------------------------------------+</span>
+<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;<span class="w"> </span><span class="nv">HEAD</span>
 
+<span class="o">=======</span>
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>121c2ba<span class="w"> </span><span class="o">(</span>solucion<span class="w"> </span>typos<span class="o">)</span>
 <span class="w">    </span><span class="nv">signature_absolute_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$docker_build_context_absolute_path</span><span class="s2">/image_sha.txt&quot;</span>
 <span class="w">    </span><span class="nv">first_run</span><span class="o">=</span><span class="nb">false</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1"># (7)</span>
@@ -1335,43 +1350,43 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">remote_signature</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">previous_build_signature</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1"># (11)</span>
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;La firma remote NO coincidie con la de la última imagen que se construyó&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡Puede que se haya producido una modificación maliciosa en Docker Hub!</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡Puede que se haya producido una modificación maliciosa en Docker Hub!&quot;</span>
 
-<span class="s2">        echo &quot;</span>Firma<span class="w"> </span>remota:<span class="w"> </span><span class="nv">$remote_signature</span><span class="s2">&quot;</span>
-<span class="s2">        echo &quot;</span>Firma<span class="w"> </span>del<span class="w"> </span>último<span class="w"> </span>build:<span class="w"> </span><span class="nv">$previous_build_signature</span><span class="s2">&quot;</span>
-<span class="s2">        echo &quot;</span>Docker<span class="w"> </span>Registry<span class="w"> </span>Repo:<span class="w"> </span><span class="nv">$repo_name</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Firma remota: </span><span class="nv">$remote_signature</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Firma del último build: </span><span class="nv">$previous_build_signature</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Docker Registry Repo: </span><span class="nv">$repo_name</span><span class="s2">&quot;</span>
 
-<span class="s2">        echo &quot;</span>Corriendo<span class="w"> </span>el<span class="w"> </span>escáner<span class="w"> </span>de<span class="w"> </span>Trivy<span class="w"> </span>sobre<span class="w"> </span>la<span class="w"> </span>imagen<span class="w"> </span>Docker<span class="w"> </span>remota<span class="s2">&quot; # (12)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Corriendo el escáner de Trivy sobre la imagen Docker remota&quot;</span><span class="w"> </span><span class="c1"># (12)</span>
 
-<span class="s2">        trivy image --reset</span>
+<span class="w">        </span>trivy<span class="w"> </span>image<span class="w"> </span>--reset
 
-<span class="s2">        trivy image --no-progress --severity CRITICAL,HIGH,MEDIUM --ignore-unfixed &quot;</span><span class="si">${</span><span class="nv">remote_image_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span>trivy<span class="w"> </span>image<span class="w"> </span>--no-progress<span class="w"> </span>--severity<span class="w"> </span>CRITICAL,HIGH,MEDIUM<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">remote_image_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="s2">        echo &quot;</span>Buscando<span class="w"> </span>diferencias<span class="w"> </span>entre<span class="w"> </span>las<span class="w"> </span>imágenes<span class="w"> </span>de<span class="w"> </span>Docker<span class="s2">&quot; # (13)</span>
-<span class="s2">        container-diff diff \</span>
-<span class="s2">            --no-cache \</span>
-<span class="s2">            --order \</span>
-<span class="s2">            --type apt \</span>
-<span class="s2">            --type file \</span>
-<span class="s2">            --type history \</span>
-<span class="s2">            --type layer \</span>
-<span class="s2">            --type metadata \</span>
-<span class="s2">            --type pip \</span>
-<span class="s2">            --type size \</span>
-<span class="s2">            --type sizelayer \</span>
-<span class="s2">            daemon://</span><span class="nv">$local_image_name</span><span class="s2">\</span>
-<span class="s2">            daemon://</span><span class="nv">$remote_image_name</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Buscando diferencias entre las imágenes de Docker&quot;</span><span class="w"> </span><span class="c1"># (13)</span>
+<span class="w">        </span>container-diff<span class="w"> </span>diff<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--no-cache<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--order<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>apt<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>file<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span><span class="nb">history</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>layer<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>metadata<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>pip<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>size<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--type<span class="w"> </span>sizelayer<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>daemon://<span class="nv">$local_image_name</span><span class="se">\</span>
+<span class="w">            </span>daemon://<span class="nv">$remote_image_name</span>
 
-<span class="s2">        echo &quot;</span>¡No<span class="w"> </span>subimos<span class="w"> </span>la<span class="w"> </span>imagen!<span class="s2">&quot; # (14)</span>
-<span class="s2">        echo &quot;</span>Debe<span class="w"> </span>llevarse<span class="w"> </span>a<span class="w"> </span>cabo<span class="w"> </span>una<span class="w"> </span>investigación<span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡No subimos la imagen!&quot;</span><span class="w"> </span><span class="c1"># (14)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Debe llevarse a cabo una investigación&quot;</span>
 
-<span class="s2">        exit 1</span>
-<span class="s2">    else # (15)     </span>
-<span class="s2">        echo &quot;</span>¡No<span class="w"> </span>se<span class="w"> </span>ha<span class="w"> </span>producido<span class="w"> </span>tampering<span class="w"> </span>de<span class="w"> </span>la<span class="w"> </span>imagen<span class="w"> </span>Docker!<span class="s2">&quot;</span>
-<span class="s2">        generate_signature_and_upload_image &quot;</span><span class="nv">$local_image_name</span><span class="s2">&quot; &quot;</span><span class="nv">$remote_image_name</span><span class="s2">&quot; &quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span>
-<span class="s2">        commit_and_push_signature &quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span>
-<span class="s2">    fi</span>
-<span class="s2">done</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="c1"># (15)     </span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;¡No se ha producido tampering de la imagen Docker!&quot;</span>
+<span class="w">        </span>generate_signature_and_upload_image<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$local_image_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$remote_image_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span>
+<span class="w">        </span>commit_and_push_signature<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
 </code></pre></div>
 <ol>
 <li>
@@ -1459,23 +1474,23 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="c"># (system-level installation WITHOUT package manager)</span>
 <span class="c"># +--------------------+</span>
 
-<span class="c">#RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz &amp;&amp; \ # (1)</span>
-<span class="c">#    tar zxvf bash-4.3.tar.gz &amp;&amp; \</span>
-<span class="hll"><span class="c">#    cd bash-4.3 &amp;&amp; \</span>
+<span class="hll"><span class="c">#RUN wget https://ftp.gnu.org/gnu/bash/bash-4.3.tar.gz &amp;&amp; \ # (1)</span>
+</span><span class="hll"><span class="c">#    tar zxvf bash-4.3.tar.gz &amp;&amp; \</span>
+</span><span class="hll"><span class="c">#    cd bash-4.3 &amp;&amp; \</span>
 </span><span class="hll"><span class="c">#    ./configure &amp;&amp; \</span>
 </span><span class="hll"><span class="c">#    make &amp;&amp; \</span>
 </span><span class="hll"><span class="c">#    make install</span>
-</span><span class="hll">
-</span><span class="hll"><span class="c"># +------------------------------------------------------------------------+</span>
-</span><span class="c"># INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)</span>
+</span>
 <span class="c"># +------------------------------------------------------------------------+</span>
-<span class="c">#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock # (2)</span>
-</code></pre></div>
+<span class="c"># INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)</span>
+<span class="c"># +------------------------------------------------------------------------+</span>
+<span class="hll"><span class="c">#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock # (2)</span>
+</span></code></pre></div>
 <ol>
 <li>Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.</li>
 <li>Con esto introducimos una vulnerabilidad DoS mediante una expresión regular (ReDoS) en un paquete de Python (httplib2)</li>
 </ol>
-<p>Por poner en contexto: puede parecer que estas vulnerabilidades tampco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.</p>
+<p>Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.</p>
 <p>Pasamos a construir la imagen nosotros mismos:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>usuario-docker/nombre-repo-docker<span class="w"> </span>docker-builder/registry-repos/nombre-repo
 </code></pre></div>
@@ -1525,6 +1540,29 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../truffle/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Análisis de archivos con TruffleHog" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Análisis de archivos con TruffleHog
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1546,7 +1584,7 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate", "content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
