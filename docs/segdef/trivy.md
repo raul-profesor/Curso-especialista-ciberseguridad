@@ -11,7 +11,7 @@ En esta sección usaremos Trivy para auditar imágenes de contenedores y, ademá
 
 ### ¿Qué es Trivy?
 
-Trivi es un sencillo, rápido y completo escáner de vulnerabilidades para contenedores, muy adecuado para la integración continua y DevSecOps. Esta herramienta detecta vulnerabilidades en los paquetes de los sistemas operativos, sea éste Alpine, RHEL, Debian, Ubuntu, Amazon Linux o lo que proceda, además de en ependencias de aplicaciones (Node, Ruby, Python, Java...).
+Trivi es un sencillo, rápido y completo escáner de vulnerabilidades para contenedores, muy adecuado para la integración continua y DevSecOps. Esta herramienta detecta vulnerabilidades en los paquetes de los sistemas operativos, sea éste Alpine, RHEL, Debian, Ubuntu, Amazon Linux o lo que proceda, además de en dependencias de aplicaciones (Node, Ruby, Python, Java...).
 
 Debido a la rapidez de Trivy, podemos integrarlo fácilmente de forma directa en nuestros workflows de desarrollo. Dicho de otro modo, en cuánto un desarrollador actualice el código, éste puede ser escaneado en tiempo real en búsqueda de vulnerabilidades.
 
@@ -34,13 +34,20 @@ Así las cosas, Trivy nos ayudará a identificar y documentar las vulnerabilidad
 !!!info 
     Esta demostración ha sido realizada con Debian 11 Bullseye y se ha comprobado que funciona correctamente.
 
+    Prerrequisitos necesarios:
+
+    + Cuenta en GitHub
+    + Personal Access Token creado en GitHub
+    + Cuenta en DockerHub
+    + Personal Access Token creado en DockerHub
+
 Para esta demostración el primer paso es, como cabía esperar, instalar Trivy. Para ello:
 
-1. Debéis clonaros en vuestra máquina virtual el repositorio: `https://github.com/trivy-org/analisis-trivy`
+1. Debéis hacer un fork del repositorio: `https://github.com/raul-profesor/practica-de-trivy` y luego clonarlo en vuestra máquina virtual
 
 2. Si echamos un ojo al script `install.sh` vemos que:
       1. Obtiene el nombre de la distribución
-      2. Instala Trivy y las dependencias necearias
+      2. Instala Trivy y las dependencias necesarias
       3. También instala `container-diff` para inspeccionar y detectar imágenes que hayan sido manipuladas 
       4. Se instala Docker en caso de que sea necesario porque no esté instalado ya
 3. Ejecutamos el script de instalación y comprobamos que Trivy se ha instalado correctamente
@@ -58,7 +65,7 @@ $ trivy image zachroofsec/trivy-tutorial1
 
 + En primer lugar vemos que Tivy se queja de que estamos usando el tag `latest`. Para nuestros propósitos no hay problema alguno puesto que no estamos cambiando nada de las capas subyacentes de la imagen, más adelante ya nos preocuparemos de esto.
 
-+ Vemos que Trivy nos informa de más de mil vulnerabilidades en el momento en que se escriben estos apuntes. De locos. Inabarcable.
++ Vemos que Trivy nos informa de más de 400 vulnerabilidades en el momento en que se escriben estos apuntes. De locos. Inabarcable.
 
     ![](../img/trivy1.png)
 
@@ -72,7 +79,7 @@ $ trivy image zachroofsec/trivy-tutorial1
 
 
 !!!info
-    La severidad que muestra Trivy para las vulnerabilidades puede venir de distintos sitios. Se puede obetner de la NVD (National Vulnerability Database) o directamente del vendor o fabricate. 
+    La severidad que muestra Trivy para las vulnerabilidades puede venir de distintos sitios. Se puede obtener de la NVD (National Vulnerability Database) o directamente del vendor o fabricante. 
     Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnerabilidades que haya publicado la propia Canonical y favorecerá esta severidad respecto a la de la NVD.
 
 Vemos que la mayoría de los **CRITICAL** y **HIGH** se los llevan algunas librerías de OpenSSL, incluyendo el famoso Heartbleed que permite que un usuario malicioso no autenticado pueda, en ciertos casos, leer la memoria de la máquina.
@@ -109,12 +116,12 @@ Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server 
 
 En primer lugar, debéis hacer un *fork* en vuestra cuenta del repositorio
 
-`https://`
+`https://https://github.com/raul-profesor/practica-de-trivy`
 
 Y tras ello, en el terminal, os debéis clonar el repositorio que utilizaremos como referencia:
 
 ```console
-$ git clone 
+$ git clone https://github.com/nombre-usuario/practica-de-trivy
 ```
 
 Y como medida de seguridad, protegeremos la única rama que tenemos ahora mismo (*main*). Para ello bien hacéis click en el propio aviso que os aparece en el repositorio al entrar vía web:
@@ -141,7 +148,7 @@ $ nano docker-builder/registry-repos/trivy-tutorial/Dockerfile
 
 Y descomentamos las líneas resaltadas:
 
-```Dockerfile hl_lines="12-14 19-23"
+```Dockerfile hl_lines="11-13 18-22"
 FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -195,7 +202,7 @@ Tras ello, en el sitio web, crearemos un nuevo *Pull Request*:
 ![](../img/pullrequest.png)
 
 !!!warning "¡Ojo cuidao!"
-    Aseguráos de que el *pull request* lo haceís desde la rama `updates` de **vuestro repositorio** a la rama `main`de **vuestro repositorio**, como véis en lla imagen de abajo.-
+    Aseguráos de que el *pull request* lo haceís desde la rama `updates` de **vuestro repositorio** a la rama `main`de **vuestro repositorio**, como véis en la imagen de abajo.-
 
 ![](../img/pullrequest2.png)
 
@@ -297,7 +304,7 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do #(
     if [[ "$vuln_result_code" -eq 0 ]]; then #(11)
         echo "La imagen Docker cumple con la política de seguridad!"
         echo "Woo hoo!"
-        echo "Empezado el escaneo de la nueva imagen Docker
+        echo "Empezado el escaneo de la nueva imagen Docker"
         continue
     elif [[ "$vuln_result_code" -eq 2 ]]; then
         echo "¡Esta imagen Docker contiene una vulnerabilidad!"
@@ -434,7 +441,7 @@ TAG="$1" # (1)
 DOCKERHUB_USER="$2"
 
 # +--------------------+
-# FUNCONES
+# FUNCIONES
 # +--------------------+
 
 generate_signature_and_upload_image() {
@@ -481,10 +488,6 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do # 
     # +--------------------------------------------------------------+
     # LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)
     # +--------------------------------------------------------------+
-
-    # Is this the first build of the Docker Image?
-    # If so, we won't check for image tampering
-    # signature_absolute_path is only available AFTER the first build
     
     signature_absolute_path="$docker_build_context_absolute_path/image_sha.txt"
     first_run=false
@@ -510,7 +513,7 @@ for docker_build_context_relative_path in docker-builder/registry-repos/*; do # 
 
     if [[ "${remote_signature}" != "${previous_build_signature}" ]]; then # (11)
         echo "La firma remote NO coincidie con la de la última imagen que se construyó"
-        echo "¡Puede que se haya producido una modificación maliciosa en Docker Hub!
+        echo "¡Puede que se haya producido una modificación maliciosa en Docker Hub!"
                 
         echo "Firma remota: $remote_signature"
         echo "Firma del último build: $previous_build_signature"
@@ -596,7 +599,7 @@ Y si hacéis clic, podréis ver el nuevo valor de la firma.
 
 Visto que todo funciona correctamente, hagamos nuestra simulación introduciendo una imagen vulnerable de Docker en nuestro repositorio. Para ello vamos a descomentar las líneas resaltadas de nuestro Dockerfile:
 
-```Dockerfile title="Dockerfile" hl_lines="31-36 42"
+```Dockerfile title="Dockerfile" hl_lines="29-34 39"
 FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -641,7 +644,7 @@ RUN apt-get update -y &&\
 1. Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.
 2. Con esto introducimos una vulnerabilidad DoS mediante una expresión regular (ReDoS) en un paquete de Python (httplib2)
 
-Por poner en contexto: puede parecer que estas vulnerabilidades tampco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.
+Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.
 
 Pasamos a construir la imagen nosotros mismos:
 
