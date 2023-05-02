@@ -16,7 +16,7 @@ Os detallo los apartados que debéis documentar a la hora de entregar el informe
 2. A la hora de explotar la vulnerabilidad, podéis clonaros [este repositorio de Github](https://github.com/3ndG4me/AutoBlue-MS17-010), que contiene los scripts y archivos que necesitaremos.
    Leed atentamente las instrucciones que vienen explicadas en el repositorio, especialmente las del apartado *Usage*
 
-    + Utilizando el script eternal_checker.py, comprobad si la máquina objeto del ataque está parcheada.
+    + Utilizando el script eternal_checker.py, comprobad si la máquina objeto del ataque está parca.
   
     + Seguid los pasos y compilad el shellcode adecuado.
     !!!Info "Concepto"
