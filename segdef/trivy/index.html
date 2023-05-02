@@ -1008,33 +1008,29 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>nano<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial/Dockerfile
 </code></pre></div>
 <p>Y descomentamos las líneas resaltadas:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<div class="highlight"><pre><span></span><code><span class="o">=======</span>
-<span class="sb">```</span>Dockerfile<span class="w"> </span><span class="nv">hl_lines</span><span class="o">=</span><span class="s2">&quot;11-13 18-22&quot;</span>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>121c2ba<span class="w"> </span><span class="o">(</span>solucion<span class="w"> </span>typos<span class="o">)</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">debian</span>
+<p><div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">debian</span>
 
 <span class="k">ENV</span><span class="w"> </span>DEBIAN_FRONTEND<span class="w"> </span>noninteractive
 
 <span class="c"># +---------------------------------------------------------+</span>
 <span class="c"># INSTALACIÓN A NIVEL DE SISTEMA MEDIANTE GESTOR DE PAQUETES</span>
 <span class="c"># +---------------------------------------------------------+</span>
-<span class="hll">
-</span><span class="hll"><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-</span><span class="hll"><span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-</span><span class="hll"><span class="c1">#    apt-get install -y apache2 \</span>
-</span><span class="c1">#        wget \</span>
-<span class="c1">#        build-essential &amp;&amp;\</span>
-<span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+<span class="hll"><span class="c1">#    apt-get install -y apache2 \</span>
+</span><span class="hll"><span class="c1">#        wget \</span>
+</span><span class="hll"><span class="c1">#        build-essential &amp;&amp;\</span>
+</span><span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
 <span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="hll"><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
-</span><span class="hll">
-</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
+
+<span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
 </span><span class="hll"><span class="c">#    dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb</span>
 </span><span class="hll"><span class="c">#</span>
-</span><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
-<span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
-
+</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
+</span><span class="hll"><span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
+</span>
 
 <span class="c"># +--------------------+</span>
 <span class="c"># INSTLACIÓN CON MAKE (Shellshock)</span>
@@ -1321,11 +1317,7 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="w">    </span><span class="c1"># +--------------------------------------------------------------+</span>
 <span class="w">    </span><span class="c1"># LÓGICA PARA COMPROBAR LAS MODIFICACIONES MALICIOSAS (TAMPERING)</span>
 <span class="w">    </span><span class="c1"># +--------------------------------------------------------------+</span>
-<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;<span class="w"> </span><span class="nv">HEAD</span>
 
-<span class="o">=======</span>
-
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="w"> </span>121c2ba<span class="w"> </span><span class="o">(</span>solucion<span class="w"> </span>typos<span class="o">)</span>
 <span class="w">    </span><span class="nv">signature_absolute_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$docker_build_context_absolute_path</span><span class="s2">/image_sha.txt&quot;</span>
 <span class="w">    </span><span class="nv">first_run</span><span class="o">=</span><span class="nb">false</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$signature_absolute_path</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1"># (7)</span>
