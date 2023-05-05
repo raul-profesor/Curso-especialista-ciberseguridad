@@ -1074,7 +1074,7 @@ Y una vez hecho esto, haremos el <em>commit</em> y el <em>push</em>  correspondi
 <p>Hemos visto en una imagen más arriba que, puesto que soy administrador del repositorio, me permite sobreescribir esta regla y forzar el merge (<em>bypass branch protection</em>) pero es obvio que no todos los usuarios del repositorio tendrán esos privilegios.</p>
 <div class="admonition task">
 <p class="admonition-title">Tarea</p>
-<p>Vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucinar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de <code>libSSL</code> correcta). Tras ello repetiremos nuestro <code>commit</code> y nuestro <code>push</code>, y comprobaremos que ahora sí, consigue pasar el <code>status check</code> con un estupendo tick verde.</p>
+<p>Vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucionar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de <code>libSSL</code> correcta). Tras ello repetiremos nuestro <code>commit</code> y nuestro <code>push</code>, y comprobaremos que ahora sí, consigue pasar el <code>status check</code> con un estupendo tick verde.</p>
 </div>
 <p>Llegados a este punto sólo necesitaríamos la aprobación de un revisor para hacer nuestro <em>merge</em>. Alquien podría preguntarse que si Trivy ha dado su beneplácito con un escaneo sin vulnerabilidades, para qué ibamos a necesitar una interacción humana en vez de dejarlo todo completamente automatizado. La repuesta es que aunque Trivy tiene muchísimas posibilidades y el funcinamiento es más que aceptable, es incapaz de detectar <strong>todas</strong> las vulnerabilidades que podrían ser introducidas dentro de una imagen Docker. Es por ello que siempre se necesita de un ojo experto y humano que revise el <em>pull request.</em></p>
 <h3 id="explicacion-del-codigo">Explicación del código</h3>
@@ -1484,14 +1484,14 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 </ol>
 <p>Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.</p>
 <p>Pasamos a construir la imagen nosotros mismos:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>usuario-docker/nombre-repo-docker<span class="w"> </span>docker-builder/registry-repos/nombre-repo
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>***usuario-docker***/trivy-tutorial<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial
 </code></pre></div>
 <p>Así evitamos pasar por Git y ser detectados por los workflows anteriores.</p>
 <p>En este caso estamos suponiendo que un atacante ha conseguido nuestras credenciales del Docker Hub por cualquiera de las múltiples maneras posibles. Teniendo en cuenta esto, nos logueamos en Docker Hub:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>nombre-usuario-docker
 </code></pre></div>
 <p>Y subimos la nueva imagen:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>push<span class="w"> </span>nombre-usuario-docker/nombre-repo-docker
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>push<span class="w"> </span>***nombre-usuario-docker***/trivy-tutorial
 </code></pre></div>
 <p>Pues ya tendríamos simulado un ataque con una imagen modificada. Teniendo en cuenta que con anterioridad habíamos comentado el bloque del workflow que nos permitía ejecutarlo periódicamente (<em>schedule</em>) y para cumplir los propósitos de esta demo, vamos a ejecutar de nuevo los jobs manualmente, para ver si se detecta la problemática.</p>
 <p>En la pestaña <em>Actions</em>, en el workflow <code>Docker Registry Orchestator</code> que es el que nos interesa, le damos a re-ejecutar los jobs:</p>
@@ -1499,7 +1499,7 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <p>Si todo ha ido correctamente, el workflow fallará. Y si miráis los detalles, debéis ver que Trivy ha detectado una vulnerabilidad en <code>Pipfile.lock</code> pero no ha detectado <strong>Shellshock</strong>.</p>
 <div class="admonition question">
 <p class="admonition-title">Pregunta</p>
-<p>Shellshock no se ha detectado por una razón concreta y es una de las causas del tipo de vulnerabilidades que no detecta Trivy y se necesita la aprobación humana que comentábamos antes.¿Sabrías decir cuál es esta razón</p>
+<p>Shellshock no se ha detectado por una razón concreta y es una de las causas del tipo de vulnerabilidades que no detecta Trivy y se necesita la aprobación humana que comentábamos antes. ¿Sabrías decir cuál es esta razón?</p>
 </div>
 <h2 id="conclusion">Conclusión</h2>
 <p>Ninguna herramienta de ciberseguridad puede monitorizar TODOS los ataques. Sin embargo, una combinación de herramientas adecuadas pueden ofrecer pintas sobre qué ha cambiado</p>
