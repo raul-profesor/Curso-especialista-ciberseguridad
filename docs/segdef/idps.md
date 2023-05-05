@@ -86,11 +86,11 @@ Suricata es un sistema de detección de código abierto que puede actuar tanto c
 
 ## Suricata vs Snort
 
-Snort es el otro gran actor conocido en el juego de los IDS. También de código abierto, aunque posee dos sets de reglas principales: las communiti edition y las de suscriptor. Estas últimas son de pago y están desarrolladas, probadas y aprobadas por el grupo de seguridad de Cisco, Talos. 
+Snort es el otro gran actor conocido en el juego de los IDS. También de código abierto, aunque posee dos sets de reglas principales: las community edition y las de suscriptor. Estas últimas son de pago y están desarrolladas, probadas y aprobadas por el grupo de seguridad de Cisco, Talos. 
 
 ![](../img/idps_8.png)
 
-En esencia, Suricata permite acciones por defecto (principalmente relacinoadas con la funcionalidad de IPS), que Snort no. No obstante, con una serie de modificaciones es posible hacer que la funcionalidad de Snort pueda ser casi igual, sino igual, a la de Suricata. Aún con todo esto y siempre sin tener en cuenta preferencias personales, podemos destacar algunas **ventajas** de Suricata:
+En esencia, Suricata permite acciones por defecto (principalmente relacionadas con la funcionalidad de IPS), que Snort no. No obstante, con una serie de modificaciones es posible hacer que la funcionalidad de Snort pueda ser casi igual, sino igual, a la de Suricata. Aún con todo esto y siempre sin tener en cuenta preferencias personales, podemos destacar algunas **ventajas** de Suricata:
 
 + Trabaja con multithreading. Esto representa una gran ventaja puesto que a día de hoy es normal analizar grandes cantidades de tráfico que requieren un gran procesado, por lo que sin duda este punto marca una gran diferencia.
 + Es multitenancy. Esto quiere decir que podemos tener diferentes conjuntos de reglas aplicándose al mismo tiempo y asignar cada una de ellas a una VLAN diferente, por ejemplo.
@@ -99,7 +99,7 @@ En esencia, Suricata permite acciones por defecto (principalmente relacinoadas c
 
 Como todo, siempre hay **desventajas o inconvenientes**, quizás incluso aplicable a cualquier IDS/IPS:
 
-+ La configuración es ardúa y difícil. Tunearlo hasta que sea realmente útil puede llegar a ser un auténtico calvario que haga replantearse la utilidad vs esfuerzo.
++ La configuración es ardua y difícil. Tunearlo hasta que sea realmente útil puede llegar a ser un auténtico calvario que haga replantearse la utilidad vs esfuerzo.
 + Una de las causas del punto anterior sería la gran cantidad de falsos positivos debido a reglas, en ocasiones, demasiado genéricas. Las reglas de pago de Snort por ejemplo mejoran esto en gran medida.
 + Las empresas que se lo pueden permitir económicamente suelen desestimar Suricata en favor de soluciones comerciales como los NGFW (Next Generation Firewalls) o plataformas como las de Fortinet o IBM.
 + Hoy en día gran cantidad del tráfico va cifrado y el SSL Stripping puede convertirse en un [gran problema](https://www.calyptix.com/top-threats/nsa-warns-of-https-inspection-risks/), ya sea por condiciones de confidencialidad, como por la gran cantidad de recursos que supone de hardware, de adminstración de endpoints o errores de certificados en los firewalls.
