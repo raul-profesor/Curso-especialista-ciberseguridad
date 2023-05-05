@@ -129,11 +129,11 @@ En este ejercicio deberéis llevar a cabo las siguientes acciones:
         
         ![](../img/idps_10.png)
     
-    +  Para permitir que SUricata permita una recarga *en vivo* de las reglas, es decir, que se pueeda añadir, eliminar y editar las reglas sin la necesidad de reiniciar el proceso de Suricata:    
+    +  Para permitir que Suricata permita una recarga *en vivo* de las reglas, es decir, que se puedan añadir, eliminar y editar las reglas sin la necesidad de reiniciar el proceso de Suricata:    
     
         ![](../img/idps_11.png)
 
-        Y con este comando le diremos a SUricata que recargue todas las reglas sin reiniciar el proceso:
+        Y con este comando le diremos a Suricata que recargue todas las reglas sin reiniciar el proceso:
 
         ```console
         kill -usr2 $(pidof suricata)
@@ -182,8 +182,10 @@ En este ejercicio deberéis llevar a cabo las siguientes acciones:
         ```
 
         Y buscamos la alerta correspondiente:
+
         ```console
         jq 'select(.alert .signature_id==2100498)' /var/log/suricata/eve.json
+        ```
 
     !!!task "Tarea"
         Documenta adecuadamente todo este proceso con las capturas de pantalla y las explicaciones pertinentes que demuestren la realización y comprobación del mismo.
@@ -219,7 +221,7 @@ En este ejercicio deberéis llevar a cabo las siguientes acciones:
     ```console
     systemctl edit suricata.service
     ```
-    Y añadimos las líneas resañtadas:
+    Y añadimos las líneas resaltadas:
 
     ```linuxconfig hl_lines="4-7"
     ### Editing /etc/systemd/system/suricata.service.d/override.conf

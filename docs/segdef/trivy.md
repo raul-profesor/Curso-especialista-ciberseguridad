@@ -233,7 +233,7 @@ Gracias a este `status check` que conforma el escaneo de Trivy, podemos prevenir
 Hemos visto en una imagen más arriba que, puesto que soy administrador del repositorio, me permite sobreescribir esta regla y forzar el merge (*bypass branch protection*) pero es obvio que no todos los usuarios del repositorio tendrán esos privilegios.
 
 !!!task "Tarea"
-    Vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucinar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de `libSSL` correcta). Tras ello repetiremos nuestro `commit` y nuestro `push`, y comprobaremos que ahora sí, consigue pasar el `status check` con un estupendo tick verde.
+    Vamos a recomentar las líneas que teníamos comentadas en nuestro Dockerfile para solucionar nuestro fallo de haber incluido unas librería vulnerable (no hay que preocuparse, esta imagen por defecto lleva incluída la versión de `libSSL` correcta). Tras ello repetiremos nuestro `commit` y nuestro `push`, y comprobaremos que ahora sí, consigue pasar el `status check` con un estupendo tick verde.
 
 Llegados a este punto sólo necesitaríamos la aprobación de un revisor para hacer nuestro *merge*. Alquien podría preguntarse que si Trivy ha dado su beneplácito con un escaneo sin vulnerabilidades, para qué ibamos a necesitar una interacción humana en vez de dejarlo todo completamente automatizado. La repuesta es que aunque Trivy tiene muchísimas posibilidades y el funcinamiento es más que aceptable, es incapaz de detectar **todas** las vulnerabilidades que podrían ser introducidas dentro de una imagen Docker. Es por ello que siempre se necesita de un ojo experto y humano que revise el *pull request.*
 
@@ -649,7 +649,7 @@ Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para
 Pasamos a construir la imagen nosotros mismos:
 
 ```console
-$ docker build -t usuario-docker/nombre-repo-docker docker-builder/registry-repos/nombre-repo
+$ docker build -t ***usuario-docker***/trivy-tutorial docker-builder/registry-repos/trivy-tutorial
 ```
 
 Así evitamos pasar por Git y ser detectados por los workflows anteriores.
@@ -663,7 +663,7 @@ $ docker login --username nombre-usuario-docker
 Y subimos la nueva imagen:
 
 ```console
-$ docker push nombre-usuario-docker/nombre-repo-docker
+$ docker push ***nombre-usuario-docker***/trivy-tutorial
 ```
 
 Pues ya tendríamos simulado un ataque con una imagen modificada. Teniendo en cuenta que con anterioridad habíamos comentado el bloque del workflow que nos permitía ejecutarlo periódicamente (*schedule*) y para cumplir los propósitos de esta demo, vamos a ejecutar de nuevo los jobs manualmente, para ver si se detecta la problemática.
@@ -676,7 +676,7 @@ Si todo ha ido correctamente, el workflow fallará. Y si miráis los detalles, d
 
 
 !!!question "Pregunta"
-    Shellshock no se ha detectado por una razón concreta y es una de las causas del tipo de vulnerabilidades que no detecta Trivy y se necesita la aprobación humana que comentábamos antes.¿Sabrías decir cuál es esta razón
+    Shellshock no se ha detectado por una razón concreta y es una de las causas del tipo de vulnerabilidades que no detecta Trivy y se necesita la aprobación humana que comentábamos antes. ¿Sabrías decir cuál es esta razón?
 
 ## Conclusión
 
