@@ -8,9 +8,9 @@ description: Hablaremos de TruffleHog y cómo analizar archivos en repositorios 
 
 TruffleHog es una herramienta de código abierto dedicada al análisis de archivos desarrollada y mantenida por [Truffle Security](https://trufflesecurity.com/).
 
-Para asegurar la seguridad de nuestra empresa es importante poseer un control completo de nuestras credenciales y secretos. Puesto que un entorno completamente seguro es una utopía, uno de nuestros objetivos será reducir el tiempo entre una robo o filtración de credenciales y la detección por nuestra parte para ponerle remedio.
+Para dominar la seguridad de nuestra empresa es importante poseer un control completo de nuestras credenciales y secretos. Puesto que un entorno completamente seguro es una utopía, uno de nuestros objetivos será reducir el tiempo entre un robo o filtración de credenciales y la detección por nuestra parte para ponerle remedio.
 
-En esta sección veremos como usar TruffleHog para identificar y detectar estas credenciales o secretos que, por error, despiste o cualquier otra razón, están almacenados en nuestros repositorios de código fuente. Para este cometido nos centraremos específicamente en Github, probablemente el más usado. 
+En esta sección veremos como usar TruffleHog para identificar y detectar estas credenciales o secretos que, por error, despiste o cualquier otra razón están almacenados en nuestros repositorios de código fuente. Para este cometido nos centraremos específicamente en Github, probablemente el más usado. 
 
 ## TruffleHog
 
@@ -26,9 +26,9 @@ Hay dos puntos clave a la hora de utilizar TruffleHog:
    
     Se puede realizar una búsqueda utilizando la configuración por defecto o con cambios mínimos. Lo bueno de este punto es que permite hacerse una idea ninicial de la capacidad de Trufflehog para realizar un análisis rápido.
 
-2. Realizar un análisis customizado. Puesto que TruffleHog puede devolver una cantida de información tal que resulte abrumadora para el Blue Team correspondiente, se pueden realizar búsquedas muy específicas.
+2. Realizar un análisis customizado o personalizado. Puesto que TruffleHog puede devolver una cantidad de información tal que resulte abrumadora para el Blue Team correspondiente, se pueden realizar búsquedas muy específicas.
    
-   Customizar y configurar TruffleHog para casos muy específicos es una funcionalidad muy poderosa.
+   Personalizar y configurar TruffleHog para casos muy específicos es una funcionalidad muy interesante.
 
    Merece la pena comentar que se pueden utilizar distintas instancias de TruffleHog  en distintos entornos (test, preprod, prod...) con distintas configuraciones.
 
@@ -59,18 +59,18 @@ Cada categoría contiene otras subcategorías que están vinculadas a actividade
 
 ![](../img/NIST2.png)
 
-TruffleHog es una herramienta que ayuda a una organización con la categoría de anomalías y eventos. En general, esto ayuda a informar mejor a una organización para preparar futuras estrategias de seguridad, mejorar la seguridad y mitigar aún más el riesgo.
+TruffleHog es una herramienta que ayuda a una organización en la categoría de anomalías y eventos. En general, esto ayuda a una organización a tener mejor información para preparar futuras estrategias de seguridad, mejorarla y poder mitigar aún más el riesgo.
 
-TruffleHog forma parte del proceso de correlación y datos de eventos. El resultado de la herramienta puede determinar qué impacto pueden tener los eventos maliciosos y puede ayudar a determinar los umbrales adecuados para las alertas de seguridad.
+TruffleHog forma parte del proceso de correlación y datos de eventos. El resultado de la herramienta puede determinar qué impacto pueden tener los eventos maliciosos así como ayudar a determinar los umbrales adecuados para las alertas de seguridad.
 
 También tenemos nuestra ya conocido marco MITRE ATT&CK, que proporciona diferentes técnicas que un actor de amenaza (threat actor) puede utilizar contra nuestra organización. En esta sección trataremos las credenciales no seguras.
 
 ![](../img/mitre_truff.png)
 
 
-Queremos identificar qué repos desplegados en nuestro entorno contienen fugas de datos sensibles como secretos y credenciales.
+Queremos identificar qué repos desplegados en nuestro entorno contienen fugas de datos sensibles como secretos y/o credenciales.
 
-Vamos a ver cómo identificar credenciales no seguras en repos y como de común es para los potenciales atacantes poder realizar el reconocimiento del entorno, probable precursor de un ataque.
+Vamos a ver cómo identificar credenciales no seguras en repos y como de fácil es para los potenciales atacantes poder realizar el reconocimiento del entorno, probable precursor de un ataque.
 
 
 Por último, MITRE Shield es un marco que cubre las técnicas de ataque, así como la forma en que podemos defender nuestros entornos.
@@ -83,9 +83,9 @@ Es decir, hacer un commit con credenciales intencionadamente inseguras para iden
 
 Dependiendo de los procesos, madurez y prioridades de una empresa, TuffleHog puede ser desde ejecutado manualmente por los desarrolladores hasta formar parte de un [proceso automatizado de DevSecOps, donde se ejecute mediante GitHub actions](https://container-devsecops.awssecworkshops.com/), por ejemplo.
 
-### Auditantdo repositorioas para detectar filtrado de credenciales
+### Auditando repositorios para detectar filtrado de credenciales
 
-Unas credenciales filtradas o expuestas suponen, como es obvio, un gran riesgo para cualquier negocio. Si la empresa tiene suerte, estas credenciales expuestas pueden llevar a un uso razonable en tiempo y recurspos para tratar un incidente de seguridad con poco impacto. En el peor escenario puede desembocar en una gran pérdida, tanto económica como reputacional.
+Unas credenciales filtradas o expuestas suponen, como es obvio, un gran riesgo para cualquier negocio. Si la empresa tiene suerte, estas credenciales expuestas pueden llevar a un uso razonable en tiempo y recursos para tratar un incidente de seguridad con poco impacto. En el peor escenario puede desembocar en una gran pérdida, tanto económica como reputacional.
 
 Algunos de los riesgos de unas credenciales filradas son:
 

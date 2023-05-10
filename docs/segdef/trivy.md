@@ -161,6 +161,9 @@ RUN apt-get update -y &&\
     apt-get dist-upgrade -y &&\
 #    apt-get install -y apache2 \
 #        wget \
+#       libncursesw5-dev libssl-dev \
+#        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev &&\
+#         python3-pip\
 #        build-essential &&\
     apt-get autoremove &&\
     apt-get clean &&\
@@ -262,13 +265,13 @@ jobs:
       - name: Permitir acceso repositorio #(3)
         uses: actions/checkout@v2
 
-      - name: Instalar Trivy
+      - name: Instalar Trivy #(4)
         run: |
           bash install.sh
 
-      - name: Ejecutar escáner de Trivy
+      - name: Ejecutar escáner de Trivy #(5)
         run: |
-          bash docker-scan.sh #(5)
+          bash docker-scan.sh 
 ```
 
 1. El workflow se disparará cuando se proponga un nuevo cambio via *pull request*
