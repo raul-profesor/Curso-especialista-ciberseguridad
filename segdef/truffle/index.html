@@ -779,11 +779,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#auditantdo-repositorioas-para-detectar-filtrado-de-credenciales" class="md-nav__link">
-    Auditantdo repositorioas para detectar filtrado de credenciales
+  <a href="#auditando-repositorios-para-detectar-filtrado-de-credenciales" class="md-nav__link">
+    Auditando repositorios para detectar filtrado de credenciales
   </a>
   
-    <nav class="md-nav" aria-label="Auditantdo repositorioas para detectar filtrado de credenciales">
+    <nav class="md-nav" aria-label="Auditando repositorios para detectar filtrado de credenciales">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -865,8 +865,8 @@
 
 <h2 id="introduccion">Introducción</h2>
 <p>TruffleHog es una herramienta de código abierto dedicada al análisis de archivos desarrollada y mantenida por <a href="https://trufflesecurity.com/">Truffle Security</a>.</p>
-<p>Para asegurar la seguridad de nuestra empresa es importante poseer un control completo de nuestras credenciales y secretos. Puesto que un entorno completamente seguro es una utopía, uno de nuestros objetivos será reducir el tiempo entre una robo o filtración de credenciales y la detección por nuestra parte para ponerle remedio.</p>
-<p>En esta sección veremos como usar TruffleHog para identificar y detectar estas credenciales o secretos que, por error, despiste o cualquier otra razón, están almacenados en nuestros repositorios de código fuente. Para este cometido nos centraremos específicamente en Github, probablemente el más usado. </p>
+<p>Para dominar la seguridad de nuestra empresa es importante poseer un control completo de nuestras credenciales y secretos. Puesto que un entorno completamente seguro es una utopía, uno de nuestros objetivos será reducir el tiempo entre un robo o filtración de credenciales y la detección por nuestra parte para ponerle remedio.</p>
+<p>En esta sección veremos como usar TruffleHog para identificar y detectar estas credenciales o secretos que, por error, despiste o cualquier otra razón están almacenados en nuestros repositorios de código fuente. Para este cometido nos centraremos específicamente en Github, probablemente el más usado. </p>
 <h2 id="trufflehog">TruffleHog</h2>
 <p>TruffleHog sirve como complemento al trabajo de un Blue Team. Utiliza la línea de comandos para operar y es relativamente simple de configurar, usar y aprender.</p>
 <p><img alt="" src="../../img/truffle.png" /></p>
@@ -878,10 +878,10 @@
 <p>Se puede realizar una búsqueda utilizando la configuración por defecto o con cambios mínimos. Lo bueno de este punto es que permite hacerse una idea ninicial de la capacidad de Trufflehog para realizar un análisis rápido.</p>
 </li>
 <li>
-<p>Realizar un análisis customizado. Puesto que TruffleHog puede devolver una cantida de información tal que resulte abrumadora para el Blue Team correspondiente, se pueden realizar búsquedas muy específicas.</p>
+<p>Realizar un análisis customizado o personalizado. Puesto que TruffleHog puede devolver una cantidad de información tal que resulte abrumadora para el Blue Team correspondiente, se pueden realizar búsquedas muy específicas.</p>
 </li>
 </ol>
-<p>Customizar y configurar TruffleHog para casos muy específicos es una funcionalidad muy poderosa.</p>
+<p>Personalizar y configurar TruffleHog para casos muy específicos es una funcionalidad muy interesante.</p>
 <p>Merece la pena comentar que se pueden utilizar distintas instancias de TruffleHog  en distintos entornos (test, preprod, prod...) con distintas configuraciones.</p>
 <p>TruffleHog trabaja tanto con expresiones regulares como con un concepto conocido como entropía:</p>
 <div class="admonition quote">
@@ -901,19 +901,19 @@
 <p><img alt="" src="../../img/NIST.png" /></p>
 <p>Cada categoría contiene otras subcategorías que están vinculadas a actividades específicas que una organización necesita llevar a cabo para mejorar su nivel de madurez en ciberseguridad.</p>
 <p><img alt="" src="../../img/NIST2.png" /></p>
-<p>TruffleHog es una herramienta que ayuda a una organización con la categoría de anomalías y eventos. En general, esto ayuda a informar mejor a una organización para preparar futuras estrategias de seguridad, mejorar la seguridad y mitigar aún más el riesgo.</p>
-<p>TruffleHog forma parte del proceso de correlación y datos de eventos. El resultado de la herramienta puede determinar qué impacto pueden tener los eventos maliciosos y puede ayudar a determinar los umbrales adecuados para las alertas de seguridad.</p>
+<p>TruffleHog es una herramienta que ayuda a una organización en la categoría de anomalías y eventos. En general, esto ayuda a una organización a tener mejor información para preparar futuras estrategias de seguridad, mejorarla y poder mitigar aún más el riesgo.</p>
+<p>TruffleHog forma parte del proceso de correlación y datos de eventos. El resultado de la herramienta puede determinar qué impacto pueden tener los eventos maliciosos así como ayudar a determinar los umbrales adecuados para las alertas de seguridad.</p>
 <p>También tenemos nuestra ya conocido marco MITRE ATT&amp;CK, que proporciona diferentes técnicas que un actor de amenaza (threat actor) puede utilizar contra nuestra organización. En esta sección trataremos las credenciales no seguras.</p>
 <p><img alt="" src="../../img/mitre_truff.png" /></p>
-<p>Queremos identificar qué repos desplegados en nuestro entorno contienen fugas de datos sensibles como secretos y credenciales.</p>
-<p>Vamos a ver cómo identificar credenciales no seguras en repos y como de común es para los potenciales atacantes poder realizar el reconocimiento del entorno, probable precursor de un ataque.</p>
+<p>Queremos identificar qué repos desplegados en nuestro entorno contienen fugas de datos sensibles como secretos y/o credenciales.</p>
+<p>Vamos a ver cómo identificar credenciales no seguras en repos y como de fácil es para los potenciales atacantes poder realizar el reconocimiento del entorno, probable precursor de un ataque.</p>
 <p>Por último, MITRE Shield es un marco que cubre las técnicas de ataque, así como la forma en que podemos defender nuestros entornos.</p>
 <p>Utilizando esto podemos vincular las técnicas de ataque con los métodos de defensa:</p>
 <p><img alt="" src="../../img/mitre_shield.png" /></p>
 <p>Es decir, hacer un commit con credenciales intencionadamente inseguras para identificar a los atacantes.</p>
 <p>Dependiendo de los procesos, madurez y prioridades de una empresa, TuffleHog puede ser desde ejecutado manualmente por los desarrolladores hasta formar parte de un <a href="https://container-devsecops.awssecworkshops.com/">proceso automatizado de DevSecOps, donde se ejecute mediante GitHub actions</a>, por ejemplo.</p>
-<h3 id="auditantdo-repositorioas-para-detectar-filtrado-de-credenciales">Auditantdo repositorioas para detectar filtrado de credenciales</h3>
-<p>Unas credenciales filtradas o expuestas suponen, como es obvio, un gran riesgo para cualquier negocio. Si la empresa tiene suerte, estas credenciales expuestas pueden llevar a un uso razonable en tiempo y recurspos para tratar un incidente de seguridad con poco impacto. En el peor escenario puede desembocar en una gran pérdida, tanto económica como reputacional.</p>
+<h3 id="auditando-repositorios-para-detectar-filtrado-de-credenciales">Auditando repositorios para detectar filtrado de credenciales</h3>
+<p>Unas credenciales filtradas o expuestas suponen, como es obvio, un gran riesgo para cualquier negocio. Si la empresa tiene suerte, estas credenciales expuestas pueden llevar a un uso razonable en tiempo y recursos para tratar un incidente de seguridad con poco impacto. En el peor escenario puede desembocar en una gran pérdida, tanto económica como reputacional.</p>
 <p>Algunos de los riesgos de unas credenciales filradas son:</p>
 <ul>
 <li>Exfiltración de datos</li>
