@@ -1020,17 +1020,20 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
 <span class="hll"><span class="c1">#    apt-get install -y apache2 \</span>
 </span><span class="hll"><span class="c1">#        wget \</span>
-</span><span class="hll"><span class="c1">#        build-essential &amp;&amp;\</span>
-</span><span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
-<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
-
-<span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
+</span><span class="hll"><span class="c1">#       libncursesw5-dev libssl-dev \</span>
+</span><span class="c1">#        libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev &amp;&amp;\</span>
+<span class="c1">#         python3-pip\</span>
+<span class="c1">#        build-essential &amp;&amp;\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+<span class="hll"><span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
+</span><span class="hll"><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
+</span><span class="hll">
+</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/libssl1.0.0_1.0.1e-2_amd64.deb -O /tmp/libssl1.0.0_1.0.1e-2_amd64.deb &amp;&amp; \</span>
 </span><span class="hll"><span class="c">#    dpkg -i /tmp/libssl1.0.0_1.0.1e-2_amd64.deb</span>
-</span><span class="hll"><span class="c">#</span>
-</span><span class="hll"><span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
-</span><span class="hll"><span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
-</span>
+</span><span class="c">#</span>
+<span class="c">#RUN wget http://snapshot.debian.org/archive/debian/20130319T033933Z/pool/main/o/openssl/openssl_1.0.1e-2_amd64.deb -O /tmp/openssl_1.0.1e-2_amd64.deb &amp;&amp;\</span>
+<span class="c">#    dpkg -i /tmp/openssl_1.0.1e-2_amd64.deb</span>
+
 
 <span class="c"># +--------------------+</span>
 <span class="c"># INSTLACIÓN CON MAKE (Shellshock)</span>
@@ -1098,13 +1101,13 @@ Y una vez hecho esto, haremos el <em>commit</em> y el <em>push</em>  correspondi
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Permitir acceso repositorio</span><span class="w"> </span><span class="c1">#(3)</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
 
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instalar Trivy</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instalar Trivy</span><span class="w"> </span><span class="c1">#(4)</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">          </span><span class="no">bash install.sh</span>
 
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ejecutar escáner de Trivy</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ejecutar escáner de Trivy</span><span class="w"> </span><span class="c1">#(5)</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">          </span><span class="no">bash docker-scan.sh #(5)</span>
+<span class="w">          </span><span class="no">bash docker-scan.sh </span>
 </code></pre></div>
 <ol>
 <li>El workflow se disparará cuando se proponga un nuevo cambio via <em>pull request</em></li>

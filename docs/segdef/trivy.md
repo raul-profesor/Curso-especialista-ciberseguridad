@@ -602,7 +602,7 @@ Y si hacéis clic, podréis ver el nuevo valor de la firma.
 
 Visto que todo funciona correctamente, hagamos nuestra simulación introduciendo una imagen vulnerable de Docker en nuestro repositorio. Para ello vamos a descomentar las líneas resaltadas de nuestro Dockerfile:
 
-```Dockerfile title="Dockerfile" hl_lines="29-34 39"
+```Dockerfile title="Dockerfile" hl_lines="32-37 44"
 FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -615,6 +615,9 @@ RUN apt-get update -y &&\
     apt-get dist-upgrade -y &&\
     apt-get install -y apache2 \
         wget \
+        python3-pip\
+#	libncursesw5-dev libssl-dev \
+#	libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev \
         build-essential &&\
     apt-get autoremove &&\
     apt-get clean &&\
@@ -641,7 +644,9 @@ RUN apt-get update -y &&\
 # +------------------------------------------------------------------------+
 # INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)
 # +------------------------------------------------------------------------+
-#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock # (2)
+#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock 
+
+#RUN pip3 install httplib2==0.18.1 # (2)
 ```
 
 1. Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.
@@ -652,7 +657,7 @@ Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para
 Pasamos a construir la imagen nosotros mismos:
 
 ```console
-$ docker build -t ***usuario-docker***/trivy-tutorial docker-builder/registry-repos/trivy-tutorial
+$ docker build -t usuario-docker/trivy-tutorial docker-builder/registry-repos/trivy-tutorial
 ```
 
 Así evitamos pasar por Git y ser detectados por los workflows anteriores.
@@ -666,7 +671,7 @@ $ docker login --username nombre-usuario-docker
 Y subimos la nueva imagen:
 
 ```console
-$ docker push ***nombre-usuario-docker***/trivy-tutorial
+$ docker push nombre-usuario-docker/trivy-tutorial
 ```
 
 Pues ya tendríamos simulado un ataque con una imagen modificada. Teniendo en cuenta que con anterioridad habíamos comentado el bloque del workflow que nos permitía ejecutarlo periódicamente (*schedule*) y para cumplir los propósitos de esta demo, vamos a ejecutar de nuevo los jobs manualmente, para ver si se detecta la problemática.

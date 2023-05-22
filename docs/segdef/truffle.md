@@ -95,7 +95,7 @@ Algunos de los riesgos de unas credenciales filradas son:
 
 Aunque vayamos a centrarnos en Github, es importante saber que el código puede estar almacenado en muchos y muy diferentes lugares: gestores de paquetes de software como `pip` si se usa Python, el código de los sitios web con contraseñas "hardcodeadas", Sharepoint u otros sistemas de compartición de archivos como Teams, Slack o Discord. Y por último, en el historial de commits, que es donde haremos hincapié.
 
-Las credenciales pueden aparecer en los repositorios por diferentes motivos, como desarrolladores que suben código con credenciales por puro despist, código legacy, tras una revisión de código...
+Las credenciales pueden aparecer en los repositorios por diferentes motivos, como desarrolladores que suben código con credenciales por puro despiste, código legacy, tras una revisión de código...
 
 ##### ¿Qué hacer si aparecen credenciales filtradas?
 
@@ -121,7 +121,7 @@ Para esta práctica vamos a utilizar la configuración por defecto de TruffleHog
 
 Básicamente, buscaremos cadenas aleatorias que puedan ser una potencial credencial.
 
-Vamos a simular un repositorio privado donde vamos a colocar un archivo con unas credenciales señuelo falsas como método de protección activa, tal y como recomendaba el NIST. Lo ideal sería tener una pantalla de login donde puedan utilizarse estas credenciales de tal forma que, sabiendo que no funcionan, pudiésemos monitorizar el comportamiento, mediante su descubrimiento y eso, de los actores de amenazas.
+Vamos a simular un repositorio privado donde vamos a colocar un archivo con unas credenciales señuelo falsas como método de protección activa, tal y como recomendaba el Mitre Shield. Lo ideal sería tener una pantalla de login donde puedan utilizarse estas credenciales de tal forma que, sabiendo que no funcionan, pudiésemos monitorizar el comportamiento, mediante su descubrimiento, de los actores de amenazas.
 
 Así pues, analicemos el repositorio: 
 
@@ -129,7 +129,7 @@ Así pues, analicemos el repositorio:
 $ trufflehog --regex --entropy=False  https://github.com/raul-profesor/repositorio-interno
 ```
 
-Parece que TruffleHog no ha enconrado nada. Cuando esto ocurre, la aplicación simplemente no devuelve nada.
+Parece que TruffleHog no ha encontrado nada. Cuando esto ocurre, la aplicación simplemente no devuelve nada.
 
 !!!Task "Tarea"
     Probad ahora activando la entropía y comprobad qué se obtiene.
@@ -139,17 +139,17 @@ Parece que TruffleHog no ha enconrado nada. Cuando esto ocurre, la aplicación s
 
 En esta tarea lo que haremos será intentar que TruffleHog busque específicamente claves de Azure Storage.
 
-Personalizar o customizar los criterios de búsqeuda resulta tremendamente útil puesto que con ello reducimos la cantidad de resultados a un nivel realista que podemos manejar, así como los falsos positivos que nos harían perder mucho tiempo.
+Personalizar o customizar los criterios de búsqueda resulta tremendamente útil puesto que con ello reducimos la cantidad de resultados a un nivel realista que podemos manejar, así como los falsos positivos que nos harían perder mucho tiempo.
 
-Para este ejemplo vamos a suponer que asumimos el rol de un miembro del equipo de seguridad que ha observado que en la organización se emplean contenedores Azure Storage. Es por ello que, en previsión, queremos hacer una búsqueda en el repositori por si se pudiera filtrar una de las claves asociadas por error.
+Para este ejemplo vamos a suponer que asumimos el rol de un miembro del equipo de seguridad que ha observado que en la organización se emplean contenedores Azure Storage. Es por ello que, en previsión, queremos hacer una búsqueda en el repositorio por si se pudiera filtrar una de las claves asociadas por error.
 
 Para personalizar la búsqueda utilizaremos nuestra propia expresión regular. Las claves de Azure Storage son alfanuméricas, es decir, están formadas por letras y número y además al final de la clave nos encontramos con un símbolo de suma y dos símbolos "igual". Además, la longitud de la clave es de 88 carácteres.
 
 !!!task "Tarea"
-    Haciendo uso de sitios como [](https://regex101.com/) o [](https://regexr.com/), crea una expresión regular que haga match con una cadena formadas por números del 0 al 9, y letras (mayúsculas y minúsculas) de la a a la z. 
+    Haciendo uso de sitios como [este](https://regex101.com/) o [este](https://regexr.com/), crea una expresión regular que haga match con una cadena formadas por números del 0 al 9, y letras (mayúsculas y minúsculas) de la a a la z. 
     Si no recuerdas las expresiones regulares, puedes hacer uso de consultas en Internet como [esta](https://www.adictosaltrabajo.com/2015/01/29/regexsam/) u otras que encuentres.
 
-Para hacer que TruffleHog haga uso de esta expresión regular, debemos localizar y modificar el archivo `regexes.json`que es el que utiliza para este cometido. Este archivo puede variar su ubicación en función del sistema que estéis utilizando. En mi caso está aquí:
+Para hacer que TruffleHog haga uso de esta expresión regular, debemos localizar y modificar el archivo `regexes.json` que es el que utiliza para este cometido. Este archivo puede variar su ubicación en función del sistema que estéis utilizando. En mi caso está aquí:
 
 ```console
 /home/raul/.local/lib/python3.9/site-packages/truffleHogRegexes/regexes.json
