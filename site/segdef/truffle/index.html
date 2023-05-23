@@ -921,7 +921,7 @@
 <li>Escalada de privilegios</li>
 </ul>
 <p>Aunque vayamos a centrarnos en Github, es importante saber que el código puede estar almacenado en muchos y muy diferentes lugares: gestores de paquetes de software como <code>pip</code> si se usa Python, el código de los sitios web con contraseñas "hardcodeadas", Sharepoint u otros sistemas de compartición de archivos como Teams, Slack o Discord. Y por último, en el historial de commits, que es donde haremos hincapié.</p>
-<p>Las credenciales pueden aparecer en los repositorios por diferentes motivos, como desarrolladores que suben código con credenciales por puro despist, código legacy, tras una revisión de código...</p>
+<p>Las credenciales pueden aparecer en los repositorios por diferentes motivos, como desarrolladores que suben código con credenciales por puro despiste, código legacy, tras una revisión de código...</p>
 <h5 id="que-hacer-si-aparecen-credenciales-filtradas">¿Qué hacer si aparecen credenciales filtradas?</h5>
 <p>No hay una repuesta clara a esta pregunta, depende de cada caso.</p>
 <p>La respuesta más obvia sería eliminarlas del código y santas pascuas. Esto puede resultar sencillo en un código más o menos simple pero en un código más maduro y complejo podría resultar una tarea bastante titánica y habría que estudiarlo.</p>
@@ -934,26 +934,26 @@
 </code></pre></div>
 <p>Para esta práctica vamos a utilizar la configuración por defecto de TruffleHog. Deshabilitaremos el uso de la entropía y le indicaremos que haga uso de la funcionalidad <code>regex</code>, que trataremos con mayor profundidad más adelante pero básicamente busca tipos concretos de credenciales haciendo uso de expresiones regulares.</p>
 <p>Básicamente, buscaremos cadenas aleatorias que puedan ser una potencial credencial.</p>
-<p>Vamos a simular un repositorio privado donde vamos a colocar un archivo con unas credenciales señuelo falsas como método de protección activa, tal y como recomendaba el NIST. Lo ideal sería tener una pantalla de login donde puedan utilizarse estas credenciales de tal forma que, sabiendo que no funcionan, pudiésemos monitorizar el comportamiento, mediante su descubrimiento y eso, de los actores de amenazas.</p>
+<p>Vamos a simular un repositorio privado donde vamos a colocar un archivo con unas credenciales señuelo falsas como método de protección activa, tal y como recomendaba el Mitre Shield. Lo ideal sería tener una pantalla de login donde puedan utilizarse estas credenciales de tal forma que, sabiendo que no funcionan, pudiésemos monitorizar el comportamiento, mediante su descubrimiento, de los actores de amenazas.</p>
 <p>Así pues, analicemos el repositorio: </p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>trufflehog<span class="w"> </span>--regex<span class="w"> </span>--entropy<span class="o">=</span>False<span class="w">  </span>https://github.com/raul-profesor/repositorio-interno
 </code></pre></div>
-<p>Parece que TruffleHog no ha enconrado nada. Cuando esto ocurre, la aplicación simplemente no devuelve nada.</p>
+<p>Parece que TruffleHog no ha encontrado nada. Cuando esto ocurre, la aplicación simplemente no devuelve nada.</p>
 <div class="admonition task">
 <p class="admonition-title">Tarea</p>
 <p>Probad ahora activando la entropía y comprobad qué se obtiene.</p>
 </div>
 <h3 id="uso-de-analisis-personalizados">Uso de análisis personalizados</h3>
 <p>En esta tarea lo que haremos será intentar que TruffleHog busque específicamente claves de Azure Storage.</p>
-<p>Personalizar o customizar los criterios de búsqeuda resulta tremendamente útil puesto que con ello reducimos la cantidad de resultados a un nivel realista que podemos manejar, así como los falsos positivos que nos harían perder mucho tiempo.</p>
-<p>Para este ejemplo vamos a suponer que asumimos el rol de un miembro del equipo de seguridad que ha observado que en la organización se emplean contenedores Azure Storage. Es por ello que, en previsión, queremos hacer una búsqueda en el repositori por si se pudiera filtrar una de las claves asociadas por error.</p>
+<p>Personalizar o customizar los criterios de búsqueda resulta tremendamente útil puesto que con ello reducimos la cantidad de resultados a un nivel realista que podemos manejar, así como los falsos positivos que nos harían perder mucho tiempo.</p>
+<p>Para este ejemplo vamos a suponer que asumimos el rol de un miembro del equipo de seguridad que ha observado que en la organización se emplean contenedores Azure Storage. Es por ello que, en previsión, queremos hacer una búsqueda en el repositorio por si se pudiera filtrar una de las claves asociadas por error.</p>
 <p>Para personalizar la búsqueda utilizaremos nuestra propia expresión regular. Las claves de Azure Storage son alfanuméricas, es decir, están formadas por letras y número y además al final de la clave nos encontramos con un símbolo de suma y dos símbolos "igual". Además, la longitud de la clave es de 88 carácteres.</p>
 <div class="admonition task">
 <p class="admonition-title">Tarea</p>
-<p>Haciendo uso de sitios como <a href="https://regex101.com/"></a> o <a href="https://regexr.com/"></a>, crea una expresión regular que haga match con una cadena formadas por números del 0 al 9, y letras (mayúsculas y minúsculas) de la a a la z. 
+<p>Haciendo uso de sitios como <a href="https://regex101.com/">este</a> o <a href="https://regexr.com/">este</a>, crea una expresión regular que haga match con una cadena formadas por números del 0 al 9, y letras (mayúsculas y minúsculas) de la a a la z. 
 Si no recuerdas las expresiones regulares, puedes hacer uso de consultas en Internet como <a href="https://www.adictosaltrabajo.com/2015/01/29/regexsam/">esta</a> u otras que encuentres.</p>
 </div>
-<p>Para hacer que TruffleHog haga uso de esta expresión regular, debemos localizar y modificar el archivo <code>regexes.json</code>que es el que utiliza para este cometido. Este archivo puede variar su ubicación en función del sistema que estéis utilizando. En mi caso está aquí:</p>
+<p>Para hacer que TruffleHog haga uso de esta expresión regular, debemos localizar y modificar el archivo <code>regexes.json</code> que es el que utiliza para este cometido. Este archivo puede variar su ubicación en función del sistema que estéis utilizando. En mi caso está aquí:</p>
 <p><div class="highlight"><pre><span></span><code><span class="go">/home/raul/.local/lib/python3.9/site-packages/truffleHogRegexes/regexes.json</span>
 </code></pre></div>
 Aunque si no lo tuvieráis ahí, podéis hacer uso de la herramienta <code>locate</code> (deberéis instalarla) para buscarlo:</p>

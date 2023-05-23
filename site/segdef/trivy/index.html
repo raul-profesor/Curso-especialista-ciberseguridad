@@ -1453,6 +1453,9 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="w">    </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
 <span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apache2<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>wget<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>python3-pip<span class="se">\</span>
+<span class="c1">#   libncursesw5-dev libssl-dev \</span>
+<span class="c1">#   libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev \</span>
 <span class="w">        </span>build-essential<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
 <span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
 <span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="se">\</span>
@@ -1479,7 +1482,9 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 <span class="c"># +------------------------------------------------------------------------+</span>
 <span class="c"># INSTALACIÓN A NIVEL DE APLICACIÓN MEDIANTE GESTOR DE PAQUETES (regex DoS)</span>
 <span class="c"># +------------------------------------------------------------------------+</span>
-<span class="hll"><span class="c">#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock # (2)</span>
+<span class="c">#COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock </span>
+
+<span class="hll"><span class="c">#RUN pip3 install httplib2==0.18.1 # (2)</span>
 </span></code></pre></div>
 <ol>
 <li>Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.</li>
@@ -1487,14 +1492,14 @@ git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </
 </ol>
 <p>Por poner en contexto: puede parecer que estas vulnerabilidades tampoco son para tanto pero imaginemos que lo que se introduce es un minado de criptos. Las cientos o miles de personas que utilizasen esa imagen Docker serían potenciales víctimas de un lucrativo negocio.</p>
 <p>Pasamos a construir la imagen nosotros mismos:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>***usuario-docker***/trivy-tutorial<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>usuario-docker/trivy-tutorial<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial
 </code></pre></div>
 <p>Así evitamos pasar por Git y ser detectados por los workflows anteriores.</p>
 <p>En este caso estamos suponiendo que un atacante ha conseguido nuestras credenciales del Docker Hub por cualquiera de las múltiples maneras posibles. Teniendo en cuenta esto, nos logueamos en Docker Hub:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>nombre-usuario-docker
 </code></pre></div>
 <p>Y subimos la nueva imagen:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>push<span class="w"> </span>***nombre-usuario-docker***/trivy-tutorial
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>docker<span class="w"> </span>push<span class="w"> </span>nombre-usuario-docker/trivy-tutorial
 </code></pre></div>
 <p>Pues ya tendríamos simulado un ataque con una imagen modificada. Teniendo en cuenta que con anterioridad habíamos comentado el bloque del workflow que nos permitía ejecutarlo periódicamente (<em>schedule</em>) y para cumplir los propósitos de esta demo, vamos a ejecutar de nuevo los jobs manualmente, para ver si se detecta la problemática.</p>
 <p>En la pestaña <em>Actions</em>, en el workflow <code>Docker Registry Orchestator</code> que es el que nos interesa, le damos a re-ejecutar los jobs:</p>

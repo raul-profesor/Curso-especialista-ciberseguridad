@@ -114,7 +114,7 @@ Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server 
 
 ![](../img/trivy_ghactions.png){: style="height:425px;width:825px"} 
 
-En primer lugar, debéis hacer un *fork* en vuestra cuenta del repositorio
+En primer lugar, debéis hacer un *fork* en vuestra cuenta del repositorio, **únicamente de la rama main**.
 
 `https://https://github.com/raul-profesor/practica-de-trivy`
 
@@ -139,6 +139,9 @@ Supongamos ahora que somos un desarrollador con el propósito de realizar o prop
 ```console
 $ git checkout -b updates
 ```
+
+!!!warning "¡Atención!"
+    Es muy probable que en el repositorio del que habéis hecho *fork* os aparezca el archivo `image_sha.txt` dentro del directorio `docker-builder/registry-repos/trivy-tutorial`. Debéis eliminarlo antes de empezar la demo/práctica para que os funcione correctamente.
 
 Ahora, dentro de nuestro Dockerfile, realizaremos algunos cambios. En primer lugar, añadiremos algunos `apt-get installs`, como por ejemplo *Apache*, *wget* y *build-essential*. También instalaremos una versión de *libSSL*. Así pues, editamos el archivo:
 
