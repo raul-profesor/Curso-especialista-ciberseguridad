@@ -991,7 +991,7 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <p>En esta ocasión vamos a utilizar un enfoque proactivo para la integración de Trivy en el proceso de revisión de código mediante el uso de GitHub Actions.</p>
 <p>Básicamente, lo que vamos a hacer con GitHub Actions es crear un Ubuntu Server que estará hospedado en la infraestructura de GitHub y podremos usarlo para auditar los cambios antes de subir la imagen al Docker Registry. Es más, podemos examinar el resultado del escaneo de Trivy e incluirlo en un Pull Request, permitiendo que se produzca una discusión antes de incorporar los cambios.</p>
 <p><img alt="" src="../../img/trivy_ghactions.png" style="height:425px;width:825px" /> </p>
-<p>En primer lugar, debéis hacer un <em>fork</em> en vuestra cuenta del repositorio</p>
+<p>En primer lugar, debéis hacer un <em>fork</em> en vuestra cuenta del repositorio, <strong>únicamente de la rama main</strong>.</p>
 <p><code>https://https://github.com/raul-profesor/practica-de-trivy</code></p>
 <p>Y tras ello, en el terminal, os debéis clonar el repositorio que utilizaremos como referencia:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nombre-usuario/practica-de-trivy
@@ -1004,6 +1004,10 @@ Por ejemplo, para un paquete de Ubuntu, Trivy aprovehcará el reporte de vulnera
 <p>Supongamos ahora que somos un desarrollador con el propósito de realizar o proponer cambios en nuestro Dockerfile. En primer lugar, nos crearemos la rama <em>updates</em> para realizar los cambios con los que luego haremos el <em>merge</em> a la rama principal:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>updates
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">¡Atención!</p>
+<p>Es muy probable que en el repositorio del que habéis hecho <em>fork</em> os aparezca el archivo <code>image_sha.txt</code> dentro del directorio <code>docker-builder/registry-repos/trivy-tutorial</code>. Debéis eliminarlo antes de empezar la demo/práctica para que os funcione correctamente.</p>
+</div>
 <p>Ahora, dentro de nuestro Dockerfile, realizaremos algunos cambios. En primer lugar, añadiremos algunos <code>apt-get installs</code>, como por ejemplo <em>Apache</em>, <em>wget</em> y <em>build-essential</em>. También instalaremos una versión de <em>libSSL</em>. Así pues, editamos el archivo:</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>nano<span class="w"> </span>docker-builder/registry-repos/trivy-tutorial/Dockerfile
 </code></pre></div>
