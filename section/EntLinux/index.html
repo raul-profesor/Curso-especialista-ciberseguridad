@@ -862,6 +862,8 @@
         
           
         
+          
+        
       
       
         
@@ -962,6 +964,20 @@
     <li class="md-nav__item">
       <a href="../../segof/EternalBlue/" class="md-nav__link">
         Ejercicio práctico - Explotación de EternalBlue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/phising/" class="md-nav__link">
+        Spoofing & phising
       </a>
     </li>
   
@@ -1418,8 +1434,9 @@ Donde, en este último caso, los permisos rwx (lectura/escritura/ejecución) pue
 <p>u - propietario</p>
 <p>g - grupo</p>
 <p>o - otros</p>
-<p>a - todos los usuarios</p>
-<p>Si utilizamos el operador + estaremos agregando permisos, si usamos el - los eliminaremos:</p>
+<p>a - todos los usuarios
+000
+Si utilizamos el operador + estaremos agregando permisos, si usamos el - los eliminaremos:</p>
 <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>a-rw<span class="w"> </span>archivo1
 chmod<span class="w"> </span>u+rwx<span class="w"> </span>archivo2
 </code></pre></div>
@@ -1462,7 +1479,7 @@ chmod<span class="w"> </span>u+rwx<span class="w"> </span>archivo2
 </code></pre></div>
 Observamos que el permiso de ejecución para el propietario es una "s" minúscula en lugar de la "x" habitual. Esta "s" indica que el archivo tiene el bit setuid establecido. El comando passwd siempre se ejecutará con  privilegios de root sin importar quién lo inicie porque el propietario del archivo es root.</p>
 <p>Como ya sabemos, podemos usar el comando chmod para establecer el  bit setuid en un archivo:</p>
-<p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>u+x<span class="w"> </span>archivo
+<p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>u+s<span class="w"> </span>archivo
 </code></pre></div>
 <strong>Sólo el propietario el archivo o el usuario o el usuario <em>root<em> puede establecer el bit </em>setuid</em></strong></p>
 <p>Un ejemplo práctico de cómo configurar este bit setuid en un archivo, de forma simbólica:</p>
@@ -1600,7 +1617,7 @@ Después de configurar el sticky bit, los archivos en público solo pueden ser e
 <h2 id="contrasenas-en-linux">Contraseñas en Linux</h2>
 <p>En este apartado se describe cómo se implementan las contraseñas dentro del sistema operativo Unix tanto para sistemas administrados localmente como basados ​​en red.</p>
 <h3 id="el-archivo-etcpasswd">El archivo /etc/passwd</h3>
-<p>Tradicionalmente, Unix usa el archivo /etc/passwd para realizar un seguimiento de cada usuario en el sistema. El archivo / etc / passwd contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
+<p>Tradicionalmente, Unix usa el archivo <code>/etc/passwd`` para realizar un seguimiento de cada usuario en el sistema. El archivo</code>/etc/passwd` contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
 <p>Se puede usar el comando <code>cat</code> para mostrar el archivo <code>/etc/passwd</code> del sistema. Aquí algunas líneas de muestra de un archivo típico:</p>
 <div class="highlight"><pre><span></span><code>root:x:0:1:System<span class="w"> </span>Operator:/:/bin/ksh
 daemon:x:1:1::/tmp:
