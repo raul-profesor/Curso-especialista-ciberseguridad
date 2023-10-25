@@ -16,6 +16,19 @@
 
 [Microsoft - AD](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/active-directory-domain-services)
 
+[LM, NTLM, Net-NTLMv2, oh my!](https://medium.com/@petergombos/lm-ntlm-net-ntlmv2-oh-my-a9b235c58ed4)
+
 [GPOs](https://www.lepide.com/blog/what-is-group-policy-gpo-and-what-role-does-it-play-in-data-security/)
 
 [Escalada de privilegios](https://www.beyondtrust.com/blog/entry/privilege-escalation-attack-defense-explained)
+
+[NTLM vs. Kerberos: What’s the Difference?](https://rublon.com/blog/ntlm-vs-kerberos/)
+
+[Identity & Access Microsoft Improving Windows Authentication, Disabling NTLM](https://www.securityweek.com/microsoft-improving-windows-authentication-disabling-ntlm/)
+
+[LM, NTLM, Net-NTLMv2, oh my!](https://medium.com/@petergombos/lm-ntlm-net-ntlmv2-oh-my-a9b235c58ed4)
+
+[NTLM and other hash cracking techniques](https://mahim-firoj.medium.com/ntlm-and-other-hash-cracking-techniques-02d881107497)
+
+
+

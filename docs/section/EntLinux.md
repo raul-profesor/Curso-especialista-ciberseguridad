@@ -282,7 +282,7 @@ g - grupo
 o - otros
 
 a - todos los usuarios
-
+000
 Si utilizamos el operador + estaremos agregando permisos, si usamos el - los eliminaremos:
 
 ```sh
@@ -322,7 +322,7 @@ Observamos que el permiso de ejecución para el propietario es una "s" minúscul
 Como ya sabemos, podemos usar el comando chmod para establecer el  bit setuid en un archivo:
 
 ``` sh
-chmod u+x archivo
+chmod u+s archivo
 ```
 **Sólo el propietario el archivo o el usuario o el usuario *root* puede establecer el bit *setuid***
 
@@ -532,7 +532,7 @@ En este apartado se describe cómo se implementan las contraseñas dentro del si
 
 ### El archivo /etc/passwd
 
-Tradicionalmente, Unix usa el archivo /etc/passwd para realizar un seguimiento de cada usuario en el sistema. El archivo / etc / passwd contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).
+Tradicionalmente, Unix usa el archivo `/etc/passwd`` para realizar un seguimiento de cada usuario en el sistema. El archivo `/etc/passwd` contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).
 
 Se puede usar el comando `cat` para mostrar el archivo `/etc/passwd` del sistema. Aquí algunas líneas de muestra de un archivo típico:
 
@@ -569,7 +569,7 @@ Cuando Unix/Linux solicita su contraseña, necesita alguna forma de determinar q
 
 El peligro real que planteaban estos sistemas es que los usuarios pueden hacer copias del archivo de contraseñas y robarlas sin el conocimiento del administrador del sistema.
 
-Unix/Linux evitan este problema al no mantener las contraseñas reales en ninguna parte del sistema. En su lugar, Unix/Linux almacenan un valor que es generado mediante el uso de la contraseña para cifrar un bloque de bits con una función unidireccional llamada crypt(); el resultado del cálculo se almacenaba tradicionalmente en /etc/passwd. Cuando se intenta iniciar sesión, el programa /bin/login no descifra la contraseña almacenada. En su lugar, /bin/login toma la contraseña que ingresó, la usa para transformar otro bloque de ceros y compara el bloque recién transformado con el bloque almacenado en el archivo /etc/passwd. Si los dos resultados cirfrados coinciden, el sistema lo deja entrar.
+Unix/Linux evitan este problema al no mantener las contraseñas reales en ninguna parte del sistema. En su lugar, Unix/Linux almacenan un valor que es generado mediante el uso de la contraseña para cifrar un bloque de bits con una función unidireccional llamada crypt(); el resultado del cálculo se almacenaba tradicionalmente en /etc/passwd. Cuando se intenta iniciar sesión, el programa /bin/login no descifra la contraseña almacenada. En su lugar, /bin/login toma la contraseña que ingresó, la usa para transformar otro bloque de ceros y compara el bloque recién transformado con el bloque almacenado en el archivo /etc/passwd. Si los dos resultados cifrados coinciden, el sistema lo deja entrar.
 
 ##### La función de cifrado tradicional crypt()
 
@@ -906,7 +906,7 @@ En un esfuerzo por reducir estos problemas, muchas distribuciones de Linux comen
 
 Al minimizar la cantidad de tiempo que se pasa conectado como root , el uso de ```su``` reduce la ventana de oportunidad para cometer un error catastrófico. A pesar de eso, siendo la naturaleza humana lo que es, muchos administradores han sido culpables de dejar abiertos terminales de larga duración en los que solían hacer ```su``` para cambiar a la cuenta de root. En ese sentido, sufue solo un pequeño paso adelante en materia de seguridad.
 
-Cuando se utiliza ```su```  toda la sesión del terminal se cambia al otro usuario. Los comandos que no necesitan acceso de root, algo tan mundano como ```pwd``` o ```ls``, se ejecutarían bajo los auspicios y permisos del superusuario, aumentando el riesgo de que un error en el programa cause problemas importantes. Peor aún, si pierde la pista de qué usuario está actuando en cada momento, se puede eejecutar un comando que fuera bastante benigno cuando se ejecuta como usuario, pero que podría destruir todo el sistema si se ejecuta como root .
+Cuando se utiliza ```su```  toda la sesión del terminal se cambia al otro usuario. Los comandos que no necesitan acceso de root, algo tan mundano como ```pwd``` o ```ls```, se ejecutarían bajo los auspicios y permisos del superusuario, aumentando el riesgo de que un error en el programa cause problemas importantes. Peor aún, si pierde la pista de qué usuario está actuando en cada momento, se puede eejecutar un comando que fuera bastante benigno cuando se ejecuta como usuario, pero que podría destruir todo el sistema si se ejecuta como root .
 
 Es mejor deshabilitar la cuenta de root por completo y luego, en lugar de permitir sesiones de terminal de larga duración con poderes peligrosos, requerir que el usuario solicite específicamente derechos de superusuario por comando. La clave de este enfoque es un comando llamado ```sudo```( “**s**witch **u**ser and **do** this command”).
 

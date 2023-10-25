@@ -55,8 +55,16 @@
     !!!Task "Tarea" 
         El objetivo sería completar todos los niveles o, en su defecto, llegar lo más lejos posible.** Se habrá de aportar la contraseña de cada nivel así como una explicación de cómo se ha obtenido, a modo de prueba.**
 
+3. Como tercer ejercicio, la propuesta es completar los desafíos de [cmdchallenge](https://cmdchallenge.com/) y documentar las soluciones empleadas.
 
+    !!!Info
+        Fijáos que arriba a la derecha hay tres secciones para completar
 
+        ![](../img/cmdchallenge.png)
+
+4. La cuarta propuesta se trata de un juego en terminal. Debéis clonaros el siguiente repositorio: [https://gitlab.com/slackermedia/bashcrawl](https://gitlab.com/slackermedia/bashcrawl) mediante el comando `git clone` en vuestra máquina.
+
+    Una vez clonado las instrucciones de cada fase están en los distintos archivos "scroll" que vayamos encontrando. Así pues, para comenzar a recibir instrucciones no debemos hacer más que `cat scroll` dentro del directorio `entrance`
 
 
 
