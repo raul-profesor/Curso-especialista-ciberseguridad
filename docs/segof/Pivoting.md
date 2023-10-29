@@ -242,5 +242,122 @@ Si listamos los contenedores arrancados, deberíamos tener 5.
 
 # Ataque y pivoting
 
+En esta fase lo primero que vamos a hacer es escanear los puertos del host **helper**.
+
+!!!task "Tarea"
+    Accede por SSH a la máquina (contenedor) **attacker** y realiza un escaneo de puertos con *nmap*  contra l máquina **helper**.
+
+!!!task "Tarea"
+    En base a los descubrimientos del anterior punto, intenta obtener acceso a la máquina **helper**.
+
+    Puede ayudarte de *hydra* y del diccionario *rockyou* ubicado el el home.
+
+Una vez obtenido el acceso al cotenedor **helper** y haciendo uso del comando `ip a`, descubriremos que estamos conectados a dos redes diferentes, ya que tenemos dos interfaces, cada una conectada una de esas redes (`172.16.100.11` y `172.16.101.11`)
+
+También es posible utilizar el comando `hostname -I` para ver todas las IP del host.
+
+Con todos estos datos encima de la mesa, habiendo descubierto la infraestructura, podemos llevar a cabo una redirección de puertos utilizando un proxy SOCKS. Con esto conseguimos que todo el tráfico hacia un determinado puerto en el servidor destino, viaje a través de una conexión ssh. 
+
+Para ello debéis utilizar el comando, que deberéis completar, con la forma:
+
+```bash
+ssh __ 8500 _____@________ __ __
+```
+Donde, lo que debéis rellenar en los huecos, por estricto orden de aparición de izquierda a derecha:
+
++ Switch/opción que pondrá un puerto local a la escucha, de tal manera que todo lo dirigido a ese puerto se redirigirá por la conexión SSH a modo de proxy SOCKS, independientemente del destino
++ Usuario para SSH
++ IP para SSH
++ Switch/opción para que la ejecución sea en background
++ Switch/opción para deshabilitar la ejecución de comandos
+
+!!!task "Tarea"
+    Comprueba con el comando netstat que este comando se está ejecutando en background.
+
+Lo que necesitamos ahora es un proxy para poder enviar todo nuestro tráfico a través del puerto `8500` y que, por tanto, se produzca la redirección configurada anteriormente. 
+
+La herramienta que utilizaremos para este cometido es `proxychains` y por tanto hemos de configurarla en el archivo `/etc/proxychains.conf`, concretamente la línea del archivo que configura el *socks4*, debemos decirle que utilice el puerto `8500`.
+
+!!!note "Consejo"
+    Recordad que para cambiar valores en un fichero, podéis utilizar el comando:
+    ```bash
+    sed -i 's/Término a sustituir/Término nuevo' archivo   
+    ```
+
+## Localizando nuevas víctimas
+
+Nuestra prioridad ahora es encontrar nuevos hosts. Si tuviéramos *nmap* todo resultaría mucho más fácil pero siendo honestos, no es un escenario realista.
+
+!!!task "Tarea"
+    Comprueba que en la máquina **helper** no tenemos disponible nmap.
+
+De cualquier forma, sabemos que la máquina **helper** es parte de dos redes distintas. Ambas máquinas, **helper** y **attacker**, pertenecen a la misma red `172.16.100.0/24`. Por ello, lo más lógico es escanear la red `172.16.101.0/24` en busca de todos los hosts presentes en ella.
+
+!!!task "Tarea"
+    Para detectar los hosts presentes en `172.16.101.0/24`, vamos a utilizar una técnica llamada [ping sweep](http://www.tugurium.com/gti/termino.php?Tr=ping%20sweep).
+
+    Utiliza un [one-liner](https://en.wikipedia.org/wiki/One-liner_program) en `bash` que permita llevar a cabo esta técnica, documenta y examina los resultados.
+
+## Victim1
+
+Intenta realizar un ping desde la máquina `attacker` a `victim1`. 
+
+Recuerda que para pasar el tráfico de nuestros comandos por el proxy y luego redirigirlo por nuestra conexión SSH, debemos precederlos de la palabra "proxychains", tal que así:
+
+```bash
+proxychains ping x.x.x.x
+```
+
+!!!question "Pregunta"
+    ¿Por qué no podemos hacer ping utilizando proxychains?
+
+A pesar de no poder hacer ping, sí que podemos usar *Nmap* para escanear puertos, al menos las opciones que utilizan TCP o UDP.
+
+!!!task "Tarea"
+    Realiza desde la máquina `attacker`, haciendo uso de *proxychains*, un escaneo de puertos a la máquina `victim1` 
+
+      + El escaneo con `nmap` debe ser del tipo **connect scan**
+      + Se debe utilizar la opción de deshabilitar el descubrimiento de hosts (host discovery)
+      + Utilizad la opción de escaneo rápido para escanear únicamente los 100 puertos más comunes
+
+Si has descubierto algún puerto abierto, utiliza el comando `curl` a través de `proxychains`para comprobar si el host responde algo interesante en ese puerto.
+
+!!!task "Tarea"
+    Si obtuvieras una respuesta positiva, intenta acceder a través del navegador para descubrir de qué se trata y documentalo.
+
+Esta aplicación web posee una [vulnerabilidad](https://www.geeksforgeeks.org/zip-slip/) del tipo *zip slip* o *tar slip*.
+
+Para explotar esta vulnerabilidad, podéis seguir los siguientes pasos:
+
+1. [Descargar la herramienta generadora de POC (prueba de concepto)](https://github.com/ptoomey3/evilarc.git) 
+2. Crear el archivo que utilizaremos:
+  
+    ```bash
+    echo Vulnerabilidad explotada > test.css
+    ```
+    
+3. Generar el archivo *.tar* malicioso. Mirando la ayuda del script del repositorio que nos hemos clonado antes, generaremos el archivo malicioso atendiendo a:
+    + Para el sistema operativo lnux
+    + El nombre del tar será "pivoting.tar" y contendrá el archivo "test.css"
+    + El path o ruta será *static/css*
+    + Una profundidad o número de directorios de los que se hará *traversal*, será de 3
+
+```
+raul@deaw:~/borrar/sar2html-4.0.0/sar2html$ cat requirements.txt 
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: requirements.txt
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ uwsgi
+   2   │ db-sqlite3
+   3   │ Flask
+   4   │ Flask-Threads
+   5   │ altair
+   6   │ altair_data_server
+   7   │ pandas
+   8   │ vega_datasets
+   9   │ markdown
+  10 + │ Werkzeug==2.3.7
+
+```
 
 # Referencias 
