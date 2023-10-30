@@ -1053,8 +1053,8 @@
 <li>Ingeniería social</li>
 </ul>
 <h2 id="como-prevenir-y-mitigar-los-ataques-de-escalada-de-privilegios">¿Cómo prevenir y mitigar los ataques de escalada de privilegios?</h2>
-<p>Debido a que los ataques de escalada de privilegios pueden iniciarese y avanzar de muchas formas diferentes, se requieren múltiples estrategias y tácticas de defensa para protegernos.</p>
-<p>Sin embargo, la implementación de un enfoque centrado en la identidad y en controles de administración de acceso privilegiado permiten protegerse contra la gama más amplia de ataques, así como reducir la superficie de ataque. Estas son algunas de las mejores prácticas:</p>
+<p>Debido a que los ataques de escalada de privilegios pueden iniciarse y avanzar de muchas formas diferentes, se requieren múltiples estrategias y tácticas de defensa para protegernos.</p>
+<p>Sin embargo, la implementación de un enfoque centrado en la identidad y en controles para la administración de accesos privilegiados permiten protegerse contra la gama más amplia de ataques, así como reducir la superficie de ataque. Estas son algunas de las mejores prácticas:</p>
 <ul>
 <li>
 <p>Administrar completamente el ciclo de vida de la autenticación , incluido el aprovisionamiento y desaprovisionamiento de identidades y cuentas para garantizar que no haya cuentas huérfanas que puedan ser secuestradas.</p>
@@ -1072,14 +1072,14 @@
 <p>Fortalecer los sistemas y las aplicaciones: esto complementa el principio de privilegios mínimos y puede implicar cambios de configuración, eliminación de derechos y accesos innecesarios, cierre de puertos y más. Esto mejora la seguridad del sistema y las aplicaciones y ayuda a prevenir y mitigar los errores potenciales que puedan llevar a una vulnerabilidad de inyección de código malicioso, desbordamientos de búfer u otras puertas traseras que podrían permitir la escalada de privilegios.</p>
 </li>
 <li>
-<p>Gestión de vulnerabilidades: identifique y aborde de forma continua las vulnerabilidades, mediante parches, corrección de configuraciones incorrectas, eliminación de credenciales predeterminadas y/o integradas, entre otras.</p>
+<p>Gestión de vulnerabilidades: identificar y abordar de forma continua las vulnerabilidades, mediante parches, corrección de configuraciones incorrectas, eliminación de credenciales predeterminadas y/o integradas, entre otras.</p>
 </li>
 <li>
 <p>El acceso remoto seguro siempre debe monitorearse y administrarse para cualquier forma de acceso privilegiado, ya que los ataques pueden ocurrir horizontal y verticalmente para explotar los privilegios.</p>
 </li>
 </ul>
 <h2 id="escalada-de-privilegios-en-linux">Escalada de privilegios en Linux</h2>
-<p>En Linux nuestro objetivo con la escalada de privilegios va a ser siempre obetner una <a href="https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)">shell</a> corriendo con privilegios del usuario <strong>root</strong>.</p>
+<p>En Linux nuestro objetivo con la escalada de privilegios va a ser siempre obtener una <a href="https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)">shell</a> corriendo con privilegios del usuario <strong>root</strong>.</p>
 <p>En muchos casos la escalada de privilegios no recaerá simplemente en una simple mala configuración, sino que requererirá combinar varios métodos, debilidades y malas configuraciones para conseguirla.</p>
 <p>Todas las escaladas de privilegios son ejemplos fehacientes de una violación de los controles de acceso. Puesto ques los controles de acceso y los permisos de usuario están estrechamente ligados, es crucial entender como funcionan los permisos en Linux, tal y como ya hemos visto con anterioridad.</p>
 <p>Pasemos ahora a ver algunas de las técnicas que permiten la escalada de privilegios en sistemas Linux..</p>
@@ -1128,7 +1128,7 @@ Encontrar todos los directorios sobre los que tenemos permiso de escritura:
 <p>Para cada programa de la lista, comprobar si existe una secuencia de escape en GTFObins</p>
 </li>
 <li>
-<p>Si existe una secuencia de escapa, ejecutar el programa con <strong>sudo</strong> e intentar utilizar dcha secuencia para desplegar una shell de root.</p>
+<p>Si existe una secuencia de escape, ejecutar el programa con <strong>sudo</strong> e intentar utilizar dicha secuencia para desplegar una shell de root.</p>
 </li>
 </ol>
 <div class="admonition question">
@@ -1209,7 +1209,7 @@ objetos):</p>
 <p>Cada servicio tiene una ACL que define ciertos permisos específicos para ese servicio.</p>
 <ul>
 <li>
-<p>Algunos permisos son inocuos (por ejemplo, SeRVICE_QUERY_CONFIG, SERVICE_QUERY_STATUS).</p>
+<p>Algunos permisos son inocuos (por ejemplo, SERVICE_QUERY_CONFIG, SERVICE_QUERY_STATUS).</p>
 </li>
 <li>
 <p>Algunos pueden resultar útiles (p. Ej., SERVICE_STOP, SERVICE_START).</p>
