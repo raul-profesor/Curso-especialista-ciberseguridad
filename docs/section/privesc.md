@@ -32,9 +32,9 @@ Se suelen utilizar 5 métodos principalmente para llevar a cabo la escalada de p
 
 ## ¿Cómo prevenir y mitigar los ataques de escalada de privilegios?
 
-Debido a que los ataques de escalada de privilegios pueden iniciarese y avanzar de muchas formas diferentes, se requieren múltiples estrategias y tácticas de defensa para protegernos.
+Debido a que los ataques de escalada de privilegios pueden iniciarse y avanzar de muchas formas diferentes, se requieren múltiples estrategias y tácticas de defensa para protegernos.
 
-Sin embargo, la implementación de un enfoque centrado en la identidad y en controles de administración de acceso privilegiado permiten protegerse contra la gama más amplia de ataques, así como reducir la superficie de ataque. Estas son algunas de las mejores prácticas:
+Sin embargo, la implementación de un enfoque centrado en la identidad y en controles para la administración de accesos privilegiados permiten protegerse contra la gama más amplia de ataques, así como reducir la superficie de ataque. Estas son algunas de las mejores prácticas:
 
 * Administrar completamente el ciclo de vida de la autenticación , incluido el aprovisionamiento y desaprovisionamiento de identidades y cuentas para garantizar que no haya cuentas huérfanas que puedan ser secuestradas.
 
@@ -46,13 +46,13 @@ Sin embargo, la implementación de un enfoque centrado en la identidad y en cont
   
 * Fortalecer los sistemas y las aplicaciones: esto complementa el principio de privilegios mínimos y puede implicar cambios de configuración, eliminación de derechos y accesos innecesarios, cierre de puertos y más. Esto mejora la seguridad del sistema y las aplicaciones y ayuda a prevenir y mitigar los errores potenciales que puedan llevar a una vulnerabilidad de inyección de código malicioso, desbordamientos de búfer u otras puertas traseras que podrían permitir la escalada de privilegios.
 
-* Gestión de vulnerabilidades: identifique y aborde de forma continua las vulnerabilidades, mediante parches, corrección de configuraciones incorrectas, eliminación de credenciales predeterminadas y/o integradas, entre otras.
+* Gestión de vulnerabilidades: identificar y abordar de forma continua las vulnerabilidades, mediante parches, corrección de configuraciones incorrectas, eliminación de credenciales predeterminadas y/o integradas, entre otras.
 
 * El acceso remoto seguro siempre debe monitorearse y administrarse para cualquier forma de acceso privilegiado, ya que los ataques pueden ocurrir horizontal y verticalmente para explotar los privilegios.
 
 ## Escalada de privilegios en Linux
 
-En Linux nuestro objetivo con la escalada de privilegios va a ser siempre obetner una [shell](https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)) corriendo con privilegios del usuario **root**.
+En Linux nuestro objetivo con la escalada de privilegios va a ser siempre obtener una [shell](https://es.wikipedia.org/wiki/Shell_(inform%C3%A1tica)) corriendo con privilegios del usuario **root**.
 
 En muchos casos la escalada de privilegios no recaerá simplemente en una simple mala configuración, sino que requererirá combinar varios métodos, debilidades y malas configuraciones para conseguirla.
 
@@ -121,7 +121,7 @@ Procedimiento:
 
 2. Para cada programa de la lista, comprobar si existe una secuencia de escape en GTFObins
 
-3. Si existe una secuencia de escapa, ejecutar el programa con **sudo** e intentar utilizar dcha secuencia para desplegar una shell de root.
+3. Si existe una secuencia de escape, ejecutar el programa con **sudo** e intentar utilizar dicha secuencia para desplegar una shell de root.
 
 !!!Question "Task 6 de THM"
     Obtén un terminal de root haciendo uso al menos de 3 secuencias de escape diferentes
@@ -242,7 +242,7 @@ Cada una de las siguientes escaladas de privilegios la vamos a probar en la sala
 
 Cada servicio tiene una ACL que define ciertos permisos específicos para ese servicio.
 
-+ Algunos permisos son inocuos (por ejemplo, SeRVICE_QUERY_CONFIG, SERVICE_QUERY_STATUS).
++ Algunos permisos son inocuos (por ejemplo, SERVICE_QUERY_CONFIG, SERVICE_QUERY_STATUS).
 
 + Algunos pueden resultar útiles (p. Ej., SERVICE_STOP, SERVICE_START).
 
