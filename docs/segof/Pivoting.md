@@ -456,3 +456,13 @@ Ahora sólo estamos a un pequeñísimo paso de conseguir nuestra shell inversa. 
 # Referencias 
 
 [SSH Tunneling: Local & Remote Port Forwarding](https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/)
+
+[Túnel SSH port forwarding: Local, remote y dynamic [Explicado]](https://www.zonasystem.com/2019/01/tunel-ssh-port-forwarding-local-remote-dynamic.html)
+
+[🛠️ Port forwarding](https://www.thehacker.recipes/infra/pivoting/port-forwarding)
+
+[Total OSCP Guide](https://sushant747.gitbooks.io/total-oscp-guide/content/port_forwarding_and_tunneling.html)
+
+[Networking with standalone containers](https://docs.docker.com/network/network-tutorial-standalone/)
+
+[Pivoting in Docker](https://gkiran.com.np/blog/pivoting)
