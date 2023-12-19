@@ -6,24 +6,24 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Los ataques de phising cada vez son más elaborados con el fin de poder engañar con mayores garantías a las víctimas. En este caso vamos a simular ser un recurso compartido en una red, de tal forma que cuando un incauto intente acceder, se le redirigirá a una pantalla de login. En el hipotético proceso de login, se capturará usuario y contraseña.">
+        <meta name="description" content="En este apartado vamos a realizar los primeros ataques en entornos Active Directory para la captura de hashes NTLM y su posterior cracking offline mediante hashcat y ataques de diccionario. Pentesting, hacking, AD.">
       
       
       
-        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/phising/">
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/HackingAD1/">
       
       
-        <link rel="prev" href="../EternalBlue/">
+        <link rel="prev" href="../passw_manag/">
       
       
-        <link rel="next" href="../passw_manag/">
+        <link rel="next" href="../Pivoting/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Ataques de phising haciendo uso de un servidor SSDP falso - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Ataques en entornos Active Directory I - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ssdp-simple-service-discovery-protocol" class="md-skip">
+        <a href="#setup-del-laboratorio" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ataques de phising haciendo uso de un servidor SSDP falso
+              Ataques en entornos Active Directory I
             
           </span>
         </div>
@@ -591,69 +591,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Spoofing & phising
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../phising/" class="md-nav__link">
         Spoofing & phising
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ssdp-simple-service-discovery-protocol" class="md-nav__link">
-    SSDP (Simple Service Discovery Protocol)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phising" class="md-nav__link">
-    Phising
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tarea" class="md-nav__link">
-    Tarea
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#referencias" class="md-nav__link">
-    Referencias
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -677,11 +619,136 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../HackingAD1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Ataques en entornos Active Directory I
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Ataques en entornos Active Directory I
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-del-laboratorio" class="md-nav__link">
+    Setup del laboratorio
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup del laboratorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows-server-2022" class="md-nav__link">
+    Windows Server 2022
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-10" class="md-nav__link">
+    Windows 10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#responder" class="md-nav__link">
+    Responder
+  </a>
+  
+    <nav class="md-nav" aria-label="Responder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#procedimiento" class="md-nav__link">
+    Procedimiento
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacion-en-el-mundo-real" class="md-nav__link">
+    Aplicación en el mundo real
+  </a>
+  
+    <nav class="md-nav" aria-label="Aplicación en el mundo real">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-victima" class="md-nav__link">
+    La víctima
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atacante" class="md-nav__link">
+    Atacante
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicacion" class="md-nav__link">
+    Explicación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-esta-ocurriendo-entre-bambalinas" class="md-nav__link">
+    ¿Qué está ocurriendo entre bambalinas?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -883,40 +950,80 @@
                   
 
 
-  <h1>Spoofing & phising</h1>
+  <h1>Ataques en entornos Active Directory I</h1>
 
-<h2 id="ssdp-simple-service-discovery-protocol">SSDP (Simple Service Discovery Protocol)</h2>
-<p>SSDP es un protocolo de red basado en IP y UDP para anunciar y buscar/encontrar dispositivos en una red. Consigue este cometido sin la necesidad de mecanismos de configuración basados en un servidor (como pueda ser DHCP o DNS) y sin una configuración estática del host. Para su objetivo, SSDP se apoya en el protocolo <a href="https://en.wikipedia.org/wiki/Universal_Plug_and_Play">UPnP (Universal Plub and Play)</a>.</p>
-<p>UPnP es un set de protocolos de red que permite que dispositivos de red tales como ordenadores personales, impresoras, access-points, Chromecast, NAS, consolas, Smart TVs... descubran entre sí su presencia en la red y establezcan servicios de comunicación de red o compartición de datos. Un dispositivos compatible con UPnP no necesita ninguna configuración de red, puede integrarse en una red, obtener una IP, publicar su nombre y anunciar sus servicios bajo petición, todo de forma automática. De la misma forma, puede detectar la presencia y servicios de otros dispositivos.</p>
-<p><img alt="" src="../../img/ssdp_wifi.png" /></p>
-<p>En principio fue concebido para uso residencial o pequeños entornos de oficina.</p>
-<h2 id="phising">Phising</h2>
-<p>Los ataques de phishing son correos electrónicos, mensajes de texto, llamadas telefónicas o <strong>sitios web</strong> fraudulentos diseñados para engañar a los usuarios para que descarguen programas maliciosos, compartan información confidencial o datos personales (por ejemplo, números de la Seguridad Social y de tarjetas de crédito, números de cuentas bancarias, <strong>credenciales de inicio de sesión</strong>), o realicen otras acciones que les expongan a ellos mismos o a sus organizaciones a la ciberdelincuencia.</p>
-<p>El phishing es el tipo más común de ingeniería social, la práctica de engañar, presionar o manipular a las personas para que envíen información a las personas equivocadas. Los ataques de ingeniería social se basan en el error humano y en tácticas de presión para tener éxito. El atacante suele hacerse pasar por una persona u organización en la que la víctima confía -por ejemplo, un compañero de trabajo, un jefe, una empresa con la que la víctima o su empleador hacen negocios- y crea una sensación de urgencia que lleva a la víctima a actuar precipitadamente. Los hackers y estafadores utilizan estas tácticas porque es más fácil y menos costoso engañar a la gente que piratear un ordenador o una red.</p>
-<p>Según el FBI, los correos electrónicos de phishing son el método de ataque o vector más utilizado por los hackers para enviar ransomware a particulares y organizaciones. Según el informe Cost of a Data Breach 2022 de IBM, el phishing es la segunda causa más común de violación de datos.</p>
-<h2 id="tarea">Tarea</h2>
-<p>Vamos intentar simular un posible caso real en un ejercicio de red teaming.</p>
-<p>Nuestra tarea será realizar una prueba de concepto donde hagamos uso de dos técnicas muy asentadas. En primera instancia haremos <em>spoofing</em> de dispositivos en una supuesta red empresarial y tras ello, valiéndonos del <em>phishing</em>, obtendremos las credenciales de los usuarios.</p>
-<p>Necesitaréis dos máquinas:</p>
-<ul>
-<li>Windows/Linux como atacante</li>
-<li>Windows como víctima</li>
-</ul>
-<p>Podéis hacerlo con dos máquinas virtuales, con la vuestra física y otra virtual o como queráis, <u>lo importante es que se trate de dos máquinas diferente.</u></p>
-<p>Debéis buscar información de forma autónoma sobre cómo llevar a cabo este ataque con lad dos herramienta que os propongo. Os doy un par de referencias:</p>
-<ul>
-<li>Evil-SSDP</li>
-<li>On-the-fly</li>
-</ul>
-<p>En uno de los dos casos, dependiendo del SO que utilicéis, puede que no tengáis las <strong>net-tools</strong> instaladas, únicamente <strong>iproute2</strong> por lo que habrá que hacer una pequeña modificación en el código Python para que funcione correctamente.</p>
-<p>Recordad que debe haber una parte de <em>spoofing</em> y otra de <em>phising</em>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
-<p>Debéis realizar la modificación del código en Python, no instalar las net-tools. Recordemos que estamos simulando un escenario real y debemos pasar lo más desapercibidos posibles.</p>
+<h2 id="setup-del-laboratorio">Setup del laboratorio</h2>
+<h3 id="windows-server-2022">Windows Server 2022</h3>
+<h3 id="windows-10">Windows 10</h3>
+<h2 id="responder">Responder</h2>
+<p>Si os fijáis en <a href="https://adam-toscher.medium.com/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa">este</a> artículo, aunque un poco antiguo, da una idea de las formas más básicas de ataques contra Active Directory para capturar hashes.</p>
+<p>En la primera se habla de envenenamiento LLMNR. Este protocolo, bastante antiguo, permite identificar hosts cuando el DNS falla en esta tarea.</p>
+<p>Se conoce como envenenamiento LLMNR aquel ataque en el cual el cliente intenta acceder a un servicio de red inexistente y que por lo tanto no tiene una resolución DNS exitosa. En este caso, se lanza un mensaje broadcast LLMNR para resolver la dirección, cosa que el atacante aprovecha para hacerse pasar por ese servicio y solicitar la pertinenete autorización al cliente/víctima.</p>
+<p><img alt="" src="../../img/LLMNR-Poisoning.png" /></p>
+<p>De esta forma, es posible capturar hashes NLTMv2 y descifrarlos offline mediante diccionarios.</p>
+<p>Para llevar a cabo un ataque de este tipo quizás la herramienta más conocida sea <strong>Responder</strong>, la más famosa herramienta para envenenamiento LLMNR/LLMNR, NBT-NS Y MDNS (protocolos de función similar). Responder tiene además incorporado servidores HTTP/SMB/MSSQL/FTP/LDAP falsos que sportan NTLMv1/NTLMv2/LMv2, Extended Security NTLMSSP y Basic HTTP authentication.</p>
+<h3 id="procedimiento">Procedimiento</h3>
+<p>Responder sólo está disponible para Linux y viene preinstalado en Kali, Parrot y otras. Al ejecutarlo, podemos ver que se inician los <em>envenenadores</em> y los servidores falsos (podemos indicarlo mediante opciones por línea de comandos que se inicien o no según qué elementos):</p>
+<p><img alt="" src="../../img/responder1.png" /></p>
+<p>Obviamente el atacante ha de estar en la misma red que la víctima. Esta última, de alguna manera (¿os acordáis de la práctica anterior de phising?), ha de ser convencida de intentar acceder a un servicio inexistente.</p>
+<p>Por ejemplo, intentando acceder a un recurso compartido con un nombre inexistente, ocurre lo siguiente:</p>
+<p><img alt="" src="../../img/responder2.png" /></p>
+<p>Es decir, <strong>Responder</strong> está simulando ser un servidor SMB que requiere autorización para su acceso. Si la víctima no se da cuenta del engaño e introduce sus credenciales:</p>
+<p><img alt="" src="../../img/responder3.png" /></p>
+<p><strong>Responder</strong> las captura al instante en forma de Usuario, dominio y hash:</p>
+<p><img alt="" src="../../img/responder4.png" /></p>
+<p>Con esto, ya tendríamos la parte ardúa del trabajo hecha, quedaría descifrar este hash. La herramienta que nos puede ayudar en este menester es <strong>hashcat</strong>, por ejemplo. No obstante, lo comprobaremos.</p>
+<p>¿Puede hashcat hacer algo con los hashes NTLMv2? Veamos que nos dice el manual:</p>
+<p><img alt="" src="../../img/responder5-hashcat.png" /></p>
+<p>Todo parece indicar que hay una forma de indicarle a hashcat que se trata de un hash de este tipo y que actúe en consecuencia.</p>
+<div class="admonition task">
+<p class="admonition-title">Tarea</p>
+<p>Reproduce el escenario con un password en el cliente lo suficiente débil como para que no nos lleve mucho tiempo el proceso de descifrado con hashcat (<code>password.123</code> por ej.)</p>
+<p>Averigua como utilizar hashcat con la opción para hashes NTLMv2 y con el diccionario rockyou.txt (presente en cualquier distribución dedicada a la seguridad).</p>
 </div>
+<h2 id="aplicacion-en-el-mundo-real">Aplicación en el mundo real</h2>
+<p>Aunque algo antigua, resulta útil revisitar la vulnerabilidad <a href="https://www.incibe.es/incibe-cert/alerta-temprana/vulnerabilidades/cve-2018-13417">CVE-2018-13417</a>. </p>
+<p>Se trata de una vulnerabilidad  XXE (XML External Entity Processing) en el cliente de Bittorrent <em>Vuze</em>. Como podemos leer <a href="https://www.cronup.com/que-son-y-como-prevenir-los-ataques-xxe/">aquí</a>, "una vulnerabilidad de entidad externa XML se produce cuando el servicio que analiza (o en palabras más sencillas, lee y procesa) los mensajes XML enviados por el cliente, acepta una definición externa del propio mensaje XML."</p>
+<p>Vamos a intentar cómo explotar esta vulnerabilidad con los conceptos previos.</p>
+<h3 id="la-victima">La víctima</h3>
+<p>Se tratará de un Windows 10 con una instalación nueva de Vuze (<u><strong>ha de ser la versión 5.7.6.0</strong></u>):</p>
+<p><img alt="" src="../../img/vuze1.png" /></p>
+<h3 id="atacante">Atacante</h3>
+<p>Yo he utilizado Parrot pero podréis utilizar Kali o la que más os guste. En este caso vamos a llevar a cabo un remember y haremos uso de la herramienta <a href="https://gitlab.com/initstring/evil-ssdp">Evil-ssdp</a> para hacer spoofing de respuestas SSDP, creando dispositivos falsos UPnP y detectar vulnerabilidadews XXE en aplicaciones UPnP.</p>
+<p><img alt="" src="../../img/vuze2.png" /></p>
+<h3 id="explicacion">Explicación</h3>
+<p>Cuando Vuze intenta descubrir otros dispositivos en la red local, SSDP envía un mensaje UDP multicast a la dirección 239.255.255.250 y puerto <strong>1900</strong>. Esto permite a Vuze localizar dispositivos UPnP. Es por esto precisamente que el atacante será capza de responder a estos paquetes con una herramienta como evil-ssdp, diciéndole al cliente que es un dispositovo compartido llamado <em>Device Descriptor</em>.</p>
+<p>Tras esto, Vuze parsea el contenido del XML de <em>Device Descriptor</em> sobre HTTP, pudiendo así obtener archivos, hashes o inclusos shells del atacante. En nuestro caso particular, vamos a ejecutar un ataque XXE que producirá una conexión SMB, permitiéndonos capturar el hash del desafío/respuesta.</p>
+<p>Por defecto, evil-ssdp levanta un servidor web y <em>Device Descriptor</em> está alojado en:</p>
+<p><code>http://&lt;IP_Atacante&gt;:8888/ssdp/device-desc.xml</code></p>
+<p>La ruta de <strong>device-desc.xml</strong> obtiene los datos del archivo <em>device.xml</em>, ubicado en la carpeta <code>/templates/xxe-smb</code>. Por suerte, evil-ssdp  ya nos ha preconfigurado una línea para el ataque XXE que invocará la conexión SMB por nosotros:</p>
+<p><img alt="" src="../../img/vuze3.png" /></p>
+<p><img alt="" src="../../img/vuze4.png" /></p>
+<p><img alt="" src="../../img/vuze5.png" /></p>
+<p>Con todo ya dispuesto, iniciamos <strong>responder</strong>, iniciamos <strong>evil-ssdp</strong> y tras ello arrancamos Vuze en nuestra máquina víctima Windows 10:</p>
+<p><img alt="" src="../../img/vuze8.png" /></p>
+<p><img alt="" src="../../img/vuze6.png" /></p>
+<p><img alt="" src="../../img/vuze7.png" /></p>
+<p>Y la magia se produce casi al instante.</p>
+<h3 id="que-esta-ocurriendo-entre-bambalinas">¿Qué está ocurriendo entre bambalinas?</h3>
+<p>Si analizamos el escenario como mandan los canones con Wireshark, veremos cosas interesantes.</p>
+<ol>
+<li>
+<p>El primer paquete es un multicasting UDP vía SSSDP. También vemos su posterior respuesta informando al cliente de la localización del dispositivo <em>Device Descriptor</em></p>
+<p><img alt="" src="../../img/vuze9.png" /></p>
+</li>
+<li>
+<p>Después se roduce un <em>3-way handshake</em> y se lleva a cabo la petición HTTP GET por parte del cliente a <em>Device Descriptor</em></p>
+<p><img alt="" src="../../img/vuze10.png" /></p>
+</li>
+<li>
+<p>Se inicia entonces la conexión SMB por parte del cliente, tras una negociación a propósito de la versión SMB a utilizar. Finalmente el cliente envia su hash NTLMv2 para autenticarse en el servicio y es entonces cuando Responder lo captura:</p>
+<p><img alt="" src="../../img/vuze11.png" /></p>
+<p>El valor del hash mostrado en la imagen de la captura de Wireshark debe coincidir con el captura por Responder.</p>
+</li>
+</ol>
 <h2 id="referencias">Referencias</h2>
-<p><a href="https://www.ibm.com/topics/phishing">IBM</a></p>
-<p><a href="https://www.imperva.com/learn/application-security/phishing-attack-scam/">Imperva</a></p>
+<p><a href="https://portswigger.net/web-security/xxehttps://portswigger.net/web-security/xx`">Portswigger - XML external entity (XXE) injection</a></p>
 
 
   
@@ -947,7 +1054,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../EternalBlue/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Ejercicio práctico - Explotación de EternalBlue" rel="prev">
+          <a href="../passw_manag/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Gestión y almacenamiento de credenciales en Windows" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -956,20 +1063,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Ejercicio práctico - Explotación de EternalBlue
+                Gestión y almacenamiento de credenciales en Windows
               </div>
             </div>
           </a>
         
         
           
-          <a href="../passw_manag/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Gestión y almacenamiento de credenciales en Windows" rel="next">
+          <a href="../Pivoting/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Laboratorio de pivoting" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Gestión y almacenamiento de credenciales en Windows
+                Laboratorio de pivoting
               </div>
             </div>
             <div class="md-footer__button md-icon">
