@@ -1,5 +1,5 @@
 ---
-title: Ataques en entornos Active Directory I
+title: Ataques en entornos Active Directory
 
 description: En este apartado vamos a realizar los primeros ataques en entornos Active Directory para la captura de hashes NTLM y su posterior cracking offline mediante hashcat y ataques de diccionario. Pentesting, hacking, AD.
 ---
@@ -203,6 +203,83 @@ nmap --script=smb2-security-mode -p445 192.168.18.0/24
     + <u>Contrapartida</u>: Con toda probabilidad aumentará las llamadas a soporte informático en la empresa
 
 
+
+## Ataques IPv6
+
+Hace muchos años ya que venimos escuchando que la implantación de IPv6 es inminente, que no quedan direcciones IPv4 disponibles y que ese es el destino inmediato e inexorable.
+
+No obstante, la realidad es un tanto distinta. Mientras que sí es cierto que IPv6, aunque muy lentamente, se abre paso en Internet, en las redes internas de las empreass es bastante raro verlo. Sin embargo, muchas de estas empresas desconocen que a pesar de su desuso, Windows desde su versión Vista, así como sus versiones de servidor, **tienen IPv6 activado por defecto y éste tiene preferencia sobre IPv4**.
+
+### DNS Spoofing
+
+Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un hosts se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.
+
+### WPAD
+
+Web Proxy Autodiscovery Protocol (WPAD) es un método mediante el cual los clientes pueden descubrir la URL en la que se haya ubicado el archivo de configuración que deben utilizar en la red en la que se encuentran ubicados.
+
+Como podemos ver en el siguiente esquema sacado de [esta wiki](https://wiki.articatech.com/proxy-service/proxy-pac/auto-discovery):
+
+![](../img/wpad1.png)
+
+Los clientes a la hora de utilizar la red, preguntan si existe algún proxy a utilizar y dónde pueden encontrar la configuración del mismo para hacer uso de él.
+
+Antiguamente la dirección IP del servidor que proporcionama el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.
+
+Así las cosas, en 2016 Microsoft publicó un [boletín de seguridad](https://support.microsoft.com/en-us/topic/ms16-077-security-update-for-wpad-june-14-2016-2490f086-dc17-4a6e-2799-a974d1af385e) que intentaba mitigar estos ataques con dos nuevas medidas:
+
++ La localización del archivo WPAD sólo podía proporcionarse mediante DNS únicamente, excluyendo protocolos de broadcast
++ La autenticación ya no se realiza automáticamente sin interacción del usuario
+
+### Nuevos mecanismos para explotar WPAD
+
+De las medidas mencionadas anteriormente, la primera puede ser fácilmente bypasseada haciendo uso de la aplicación [mitm6](https://github.com/dirkjanm/mitm6). 
+
+En cuánto el atacante se postule como el servidor DNS IPv6 de la red, los clientes empezarán a preguntarle por la dirección del archivo WPAD. Es tan sencillo como que este servidor diga que dicho archivo se encuentra alojado en su misma IP. Este método funciona incluso si la organización realmente tiene un archivo WPAD propio (aunque cortará todo acceso a Internet).
+
+En cuanto a la segunda protección, requiere un poco más de trabajo. Cuando el cliente solicite el archivo WPAD, no se le requerirá en ese instante ninguna autorización sino que se le proveerá un archivo WPAD válido en el que se establece la máquina atacante como proxy. Así, cuando la máquina víctima lleve a cabo alguna acción que requiera con una conexión a Internet, utilizará al atacante como proxy y éste le devolverá un *HTTP 407 Proxy Authentication required*.
+
+El error HTTP 407 es similar al error 401, que se produce por un acceso no autorizado. La única diferencia es que en el error 407 falla la autenticación con un proxy y no con una conexión directa al servidor. 
+
+De esta forma y casi sin enterarnos, Windows enviará con gusto el desafío/respuesta NTLM al atacante para que pueda hacer relay a cualquier otro servicio.
+
+En [este enlace](https://redfoxsec.com/blog/ipv6-dns-takeover/) encontramos la siguiente imagen que lo describe muy bien:
+
+![](../img/wpad2.png){: style="height:500px;width:700px", align=center }
+
+!!!task "Tarea"
+    Vuestra tarea será buscar información sobre cómo llevar a cabo este ataque y ponerlo en práctica para, posteriormente, entregar un informe detallando el proceso que habéis seguido. Algunas pistas que os servirán:
+
+      +  Debéis partir del escenario que ya tenéis configurado
+      +  **Debéis instalar los servicios de certificado en el DC (controlador de dominio)**
+      +  Necesitaréis dos herramientas, *mitm6* y *ntlmrelayx*
+      +  Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene
+      +  Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido
+
+Si todo sale bien, iréis viendo pantallas similares a esta:
+
+![](../img/wpad3.png)
+
+![](../img/wpad4.png)
+
+![](../img/wpad5.png)
+
+![](../img/wpad6.png)
+
+
+### Defensas o mitigaciones ante este ataque
+
+1. La primera, como es de esperar, sería deshabilitar IPv6 si no está siendo utilizado en nuestra red empresarial.
+2. La segunda sería deshabilitar la autodetección de configuración de proxy (WPAD) mediante GPO. Muchas veces las redes empresariales realmente sí utilizan un archivo PAC con la configuració del proxy, así que es recomendable configurar directamente la URL de este archivo en lugar de confiar en la detección automática.
+3. Por último, la única solución adecuada para evitar los NTLM relay es deshabilitar NTLM y utilizar íntegramente Kerberos. Aunque ya hemos visto que muchas veces esto no es posible. En estos casos ya hemos dicho que es muy recomendable tener configuada la firma de mensajes SMB y/o LDAP.
+
+
+## Kerberoasting
+
 ## Referencias
 
 [Portswigger - XML external entity (XXE) injection](https://portswigger.net/web-security/xxehttps://portswigger.net/web-security/xx`)
+
+[mitm6 – compromising IPv4 networks via IPv6](https://blog.fox-it.com/2018/01/11/mitm6-compromising-ipv4-networks-via-ipv6/)
+
+[MITM6 Strikes Again: The Dark Side of IPv6  ](https://www.blackhillsinfosec.com/mitm6-strikes-again-the-dark-side-of-ipv6/)

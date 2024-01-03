@@ -66,7 +66,7 @@ nav:
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
     - Spoofing & phising: segof/phising.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
-    - Ataques en entornos Active Directory I: segof/HackingAD1.md
+    - Ataques en entornos Active Directory: segof/HackingAD1.md
     - Laboratorio de pivoting: segof/Pivoting.md
     - Webgrafía: segof/webgrafia.md
   - Seguridad defensiva:
