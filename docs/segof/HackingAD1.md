@@ -13,6 +13,11 @@ description: En este apartado vamos a realizar los primeros ataques en entornos 
 + Copiar usuario raso 2 con otro nombre 
 + Copiar usuario administrador con otro nombre
 + Copiar el usuario copiado de administrador como cuenta de servicio SQL
+ 
+    Para esta cuenta, con el fin de utilizarla más adelante para demostrar el ataque `Kerberoasting`, debemos establecerle un SPN. Así pues, en un cmd que abriremos como administrador, debemos introducir lo siguiente:
+
+    ![](../img/ServicioSQL.png)
+
 
 Crear una compartición de archivos: `Server Manager > File and Storage Service > Shares > Task > New Share > SMB Quick`
 ### Clientes Windows 10 
@@ -276,6 +281,80 @@ Si todo sale bien, iréis viendo pantallas similares a esta:
 
 ## Kerberoasting
 
+### Kerberos
+Lo primero que debemos abordar es cómo funciona el servicio de autenticación Kerberos. Para ello, más que reinventar la rueda, os remito a algunos links que lo explican bastante bien:
+
++ En [este](https://www.tarlogic.com/es/blog/tickets-de-kerberos-explotacion/) artículo de **Tarlogic**, se explica el funcionamiento, con la explicación de los mensajes intercambiados y algunos ataques. De esa misma página, un resumen gráfico sería:
+    
+    ![](../img/kerberos.webp)
+
+    1. El cliente envía una petición de autenticación al controlador de dominio
+    2. Si es exitosa, la respuesta contiene un *Ticket Granting Ticket (TGT)*. Este ticket únicamente sirve para demostrar que la autenticación ha sido exitosa y que el cliente tiene permiso para solicitar un *TGS (Ticke Granting Service)*, que no es más que un ticket para un servicio concreto de la red.
+    3. Se solicita el *TGS* deseado. Antes de emitir el *TGS*, se valida el *TGT*. Si la validación es correcta, se envía el *TGS* con una clave secreta conocida como clave de sesión. Esta clave se utilizará para cifrar el tráfico entre el cliente y el servicio solicitado.
+    4. Se solicita acceso al servicio concreto presentando el *TGS*.
+
++ Otra fuente de información interesante es la siguiente charla (en español):
+
+<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/5uhk2PKkDdw?si=BATcRUBvUaeq1Qv7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+
+### ¿Cómo funciona kerberoasting?
+
+Kerberoasting, explota el protocolo de autenticación Kerberos y los nombres principales de servicio (SPN). Cualquier usuario del dominio puede solicitar un *TGS* para acceder a un servicio. A partir de este *TGS*, se recuperará el hash de la cuenta de servicio que cifra el *TGS* y se llevará a cabo un ataque de fuerza bruta offline al hash de la contraseña del servicio para poder, finalmente, obtener ésta misma.
+
+Para este ataque es imprescindible que la cuenta de servicio tenga establecido un SPN.
+
+#### ¿Qué son los nombres de entidad principal de servicio (SPN)?
+
+Un SPN es un identificador único para una instancia de servicio, que asocia ese servicio con una cuenta de servicio específica en Active Directory. Las cuentas de servicio en Active Directory son vitales, ya que a menudo ejecutan aplicaciones y servicios críticos.
+
+Cuando un usuario o un servicio desea acceder a otro servicio, hace referencia al SPN pertinente para solicitar el ticket de servicio necesario, que el servicio de destino valida a continuación. Los SPN incluyen (pero no se limitan a):
+
++ Servicios web: Un servidor web como IIS puede utilizar un SPN como HTTP/servidor web.dominio.com para autenticarse con AD.
++ Servicios SQL: Las instancias de Microsoft SQL Server registran un SPN como MSSQLSvc/servername.domain.com:1433 para habilitar la autenticación Kerberos.
++ Servicios de archivos: Un servidor de archivos puede tener un SPN como HOST/servidorarchivos.dominio.com.
++ Aplicaciones personalizadas: Las empresas suelen desarrollar aplicaciones internas que utilizan AD para la autenticación. Estas aplicaciones también pueden registrar sus SPN.
+
+### Hands-on
+
+!!!task "Tarea"
+    Buscad información en los cientos de recursos disponibles en la red sobre cómo llevar a cabo este ataque de forma exitosa y documentadlo en un informe a entregar.
+
++ Obtenemos el *TGS* del servicio
+
+![](../img/kerberoasting1-1.png)
+
++ Lo almacenamos en un fichero de texto para proceder al descifrado *offline*. Con la ayuda de hashcat, averiguamos que código debemos utilizar para el descifrado de este tipo de hashes:
+
+![](../img/kerberoasting2.png)
+
++ Utilizando hashcat adecuadamente, obtenemos el password de la cuenta de servicio:
+
+![](../img/kerberoasting3.png)
+
+#### Password spraying
+
+Una forma de comprobar el alcance que tiene esta contraseña en los equipos del dominio es realizar un *password spraying* sobre ellos. Históricamente se ha utilizado la aplicación **crackmapexec (cme)** para este cometido y, de hecho, en la mayoría de la literatura sobre este tema es el más nombrado.
+
+Sin embargo, el desarrollo de **cme** se ha paralizado recientemente. En su lugar, tenemos a un sucesor natural como es **NetExec (nxc)**, con prácticamente su misma forma de uso y sintaxis.
+
+Haciendo uso de esta herramienta y de la técnica mencionada, vemos como hemos comprometido prácticamente todo el dominio (cuando la autenticación es exitosa, lo indica con `Pwn3d!`):
+
+![](../img/nxcpwned_recortado.png)
+
+!!!task "Tarea"
+    Investiga cómo llevar a cabo este *password spraying* con **nxc** y documéntalo.
+
+También podemos hacer uso de algún programa para acceso remoto, como por ejemplo **evil-winrm**, para aprovecharnos de la interfaz de administración remota y acceder al DC:
+
+![](../img/evilwirnm.png)
+
+![](../img/evilwirnm2.png)
+
+!!!task "Tarea"
+    Averigua cómo hacer uso de **evil-winrm** u otro programa para obtener una shell en el DC comprometido.
+
+
+
 ## Referencias
 
 [Portswigger - XML external entity (XXE) injection](https://portswigger.net/web-security/xxehttps://portswigger.net/web-security/xx`)
@@ -283,3 +362,7 @@ Si todo sale bien, iréis viendo pantallas similares a esta:
 [mitm6 – compromising IPv4 networks via IPv6](https://blog.fox-it.com/2018/01/11/mitm6-compromising-ipv4-networks-via-ipv6/)
 
 [MITM6 Strikes Again: The Dark Side of IPv6  ](https://www.blackhillsinfosec.com/mitm6-strikes-again-the-dark-side-of-ipv6/)
+
+[Kerberos Fundamentals](https://www.qomplx.com/blog/about-kerberos/)
+
+[Cómo proteger Active Directory contra Kerberoasting: Seguridad AD 101](https://www.semperis.com/es/blog/protecting-active-directory-from-kerberoasting/)

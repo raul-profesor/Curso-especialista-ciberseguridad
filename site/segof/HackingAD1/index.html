@@ -23,7 +23,7 @@
     
     
       
-        <title>Ataques en entornos Active Directory I - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Ataques en entornos Active Directory - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ataques en entornos Active Directory I
+              Ataques en entornos Active Directory
             
           </span>
         </div>
@@ -629,12 +629,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ataques en entornos Active Directory I
+          Ataques en entornos Active Directory
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Ataques en entornos Active Directory I
+        Ataques en entornos Active Directory
       </a>
       
         
@@ -769,6 +769,54 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ataques-ipv6" class="md-nav__link">
+    Ataques IPv6
+  </a>
+  
+    <nav class="md-nav" aria-label="Ataques IPv6">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-spoofing" class="md-nav__link">
+    DNS Spoofing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpad" class="md-nav__link">
+    WPAD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-mecanismos-para-explotar-wpad" class="md-nav__link">
+    Nuevos mecanismos para explotar WPAD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defensas-o-mitigaciones-ante-este-ataque" class="md-nav__link">
+    Defensas o mitigaciones ante este ataque
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kerberoasting" class="md-nav__link">
+    Kerberoasting
+  </a>
   
 </li>
       
@@ -984,7 +1032,7 @@
                   
 
 
-  <h1>Ataques en entornos Active Directory I</h1>
+  <h1>Ataques en entornos Active Directory</h1>
 
 <h2 id="setup-del-laboratorio">Setup del laboratorio</h2>
 <h3 id="windows-server">Windows Server</h3>
@@ -1128,8 +1176,57 @@
 </ul>
 </li>
 </ul>
+<h2 id="ataques-ipv6">Ataques IPv6</h2>
+<p>Hace muchos años ya que venimos escuchando que la implantación de IPv6 es inminente, que no quedan direcciones IPv4 disponibles y que ese es el destino inmediato e inexorable.</p>
+<p>No obstante, la realidad es un tanto distinta. Mientras que sí es cierto que IPv6, aunque muy lentamente, se abre paso en Internet, en las redes internas de las empreass es bastante raro verlo. Sin embargo, muchas de estas empresas desconocen que a pesar de su desuso, Windows desde su versión Vista, así como sus versiones de servidor, <strong>tienen IPv6 activado por defecto y éste tiene preferencia sobre IPv4</strong>.</p>
+<h3 id="dns-spoofing">DNS Spoofing</h3>
+<p>Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un hosts se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.</p>
+<h3 id="wpad">WPAD</h3>
+<p>Web Proxy Autodiscovery Protocol (WPAD) es un método mediante el cual los clientes pueden descubrir la URL en la que se haya ubicado el archivo de configuración que deben utilizar en la red en la que se encuentran ubicados.</p>
+<p>Como podemos ver en el siguiente esquema sacado de <a href="https://wiki.articatech.com/proxy-service/proxy-pac/auto-discovery">esta wiki</a>:</p>
+<p><img alt="" src="../../img/wpad1.png" /></p>
+<p>Los clientes a la hora de utilizar la red, preguntan si existe algún proxy a utilizar y dónde pueden encontrar la configuración del mismo para hacer uso de él.</p>
+<p>Antiguamente la dirección IP del servidor que proporcionama el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.</p>
+<p>Así las cosas, en 2016 Microsoft publicó un <a href="https://support.microsoft.com/en-us/topic/ms16-077-security-update-for-wpad-june-14-2016-2490f086-dc17-4a6e-2799-a974d1af385e">boletín de seguridad</a> que intentaba mitigar estos ataques con dos nuevas medidas:</p>
+<ul>
+<li>La localización del archivo WPAD sólo podía proporcionarse mediante DNS únicamente, excluyendo protocolos de broadcast</li>
+<li>La autenticación ya no se realiza automáticamente sin interacción del usuario</li>
+</ul>
+<h3 id="nuevos-mecanismos-para-explotar-wpad">Nuevos mecanismos para explotar WPAD</h3>
+<p>De las medidas mencionadas anteriormente, la primera puede ser fácilmente bypasseada haciendo uso de la aplicación <a href="https://github.com/dirkjanm/mitm6">mitm6</a>. </p>
+<p>En cuánto el atacante se postule como el servidor DNS IPv6 de la red, los clientes empezarán a preguntarle por la dirección del archivo WPAD. Es tan sencillo como que este servidor diga que dicho archivo se encuentra alojado en su misma IP. Este método funciona incluso si la organización realmente tiene un archivo WPAD propio (aunque cortará todo acceso a Internet).</p>
+<p>En cuanto a la segunda protección, requiere un poco más de trabajo. Cuando el cliente solicite el archivo WPAD, no se le requerirá en ese instante ninguna autorización sino que se le proveerá un archivo WPAD válido en el que se establece la máquina atacante como proxy. Así, cuando la máquina víctima lleve a cabo alguna acción que requiera con una conexión a Internet, utilizará al atacante como proxy y éste le devolverá un <em>HTTP 407 Proxy Authentication required</em>.</p>
+<p>El error HTTP 407 es similar al error 401, que se produce por un acceso no autorizado. La única diferencia es que en el error 407 falla la autenticación con un proxy y no con una conexión directa al servidor. </p>
+<p>De esta forma y casi sin enterarnos, Windows enviará con gusto el desafío/respuesta NTLM al atacante para que pueda hacer relay a cualquier otro servicio.</p>
+<p>En <a href="https://redfoxsec.com/blog/ipv6-dns-takeover/">este enlace</a> encontramos la siguiente imagen que lo describe muy bien:</p>
+<p><img _="," align="center" alt="" src="../../img/wpad2.png" style="height:500px;width:700px" /></p>
+<div class="admonition task">
+<p class="admonition-title">Tarea</p>
+<p>Vuestra tarea será buscar información sobre cómo llevar a cabo este ataque y ponerlo en práctica para, posteriormente, entregar un informe detallando el proceso que habéis seguido. Algunas pistas que os servirán:</p>
+<ul>
+<li>Debéis partir del escenario que ya tenéis configurado</li>
+<li><strong>Debéis instalar los servicios de certificado en el DC (controlador de dominio)</strong></li>
+<li>Necesitaréis dos herramientas, <em>mitm6</em> y <em>ntlmrelayx</em></li>
+<li>Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene</li>
+<li>Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido</li>
+</ul>
+</div>
+<p>Si todo sale bien, iréis viendo pantallas similares a esta:</p>
+<p><img alt="" src="../../img/wpad3.png" /></p>
+<p><img alt="" src="../../img/wpad4.png" /></p>
+<p><img alt="" src="../../img/wpad5.png" /></p>
+<p><img alt="" src="../../img/wpad6.png" /></p>
+<h3 id="defensas-o-mitigaciones-ante-este-ataque">Defensas o mitigaciones ante este ataque</h3>
+<ol>
+<li>La primera, como es de esperar, sería deshabilitar IPv6 si no está siendo utilizado en nuestra red empresarial.</li>
+<li>La segunda sería deshabilitar la autodetección de configuración de proxy (WPAD) mediante GPO. Muchas veces las redes empresariales realmente sí utilizan un archivo PAC con la configuració del proxy, así que es recomendable configurar directamente la URL de este archivo en lugar de confiar en la detección automática.</li>
+<li>Por último, la única solución adecuada para evitar los NTLM relay es deshabilitar NTLM y utilizar íntegramente Kerberos. Aunque ya hemos visto que muchas veces esto no es posible. En estos casos ya hemos dicho que es muy recomendable tener configuada la firma de mensajes SMB y/o LDAP.</li>
+</ol>
+<h2 id="kerberoasting">Kerberoasting</h2>
 <h2 id="referencias">Referencias</h2>
 <p><a href="https://portswigger.net/web-security/xxehttps://portswigger.net/web-security/xx`">Portswigger - XML external entity (XXE) injection</a></p>
+<p><a href="https://blog.fox-it.com/2018/01/11/mitm6-compromising-ipv4-networks-via-ipv6/">mitm6 – compromising IPv4 networks via IPv6</a></p>
+<p><a href="https://www.blackhillsinfosec.com/mitm6-strikes-again-the-dark-side-of-ipv6/">MITM6 Strikes Again: The Dark Side of IPv6  </a></p>
 
 
   
