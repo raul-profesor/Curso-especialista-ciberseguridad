@@ -1237,13 +1237,13 @@
 <p>Hace muchos años ya que venimos escuchando que la implantación de IPv6 es inminente, que no quedan direcciones IPv4 disponibles y que ese es el destino inmediato e inexorable.</p>
 <p>No obstante, la realidad es un tanto distinta. Mientras que sí es cierto que IPv6, aunque muy lentamente, se abre paso en Internet, en las redes internas de las empreass es bastante raro verlo. Sin embargo, muchas de estas empresas desconocen que a pesar de su desuso, Windows desde su versión Vista, así como sus versiones de servidor, <strong>tienen IPv6 activado por defecto y éste tiene preferencia sobre IPv4</strong>.</p>
 <h3 id="dns-spoofing">DNS Spoofing</h3>
-<p>Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un hosts se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.</p>
+<p>Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un host se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.</p>
 <h3 id="wpad">WPAD</h3>
 <p>Web Proxy Autodiscovery Protocol (WPAD) es un método mediante el cual los clientes pueden descubrir la URL en la que se haya ubicado el archivo de configuración que deben utilizar en la red en la que se encuentran ubicados.</p>
 <p>Como podemos ver en el siguiente esquema sacado de <a href="https://wiki.articatech.com/proxy-service/proxy-pac/auto-discovery">esta wiki</a>:</p>
 <p><img alt="" src="../../img/wpad1.png" /></p>
 <p>Los clientes a la hora de utilizar la red, preguntan si existe algún proxy a utilizar y dónde pueden encontrar la configuración del mismo para hacer uso de él.</p>
-<p>Antiguamente la dirección IP del servidor que proporcionama el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.</p>
+<p>Antiguamente la dirección IP del servidor que proporcionaba el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.</p>
 <p>Así las cosas, en 2016 Microsoft publicó un <a href="https://support.microsoft.com/en-us/topic/ms16-077-security-update-for-wpad-june-14-2016-2490f086-dc17-4a6e-2799-a974d1af385e">boletín de seguridad</a> que intentaba mitigar estos ataques con dos nuevas medidas:</p>
 <ul>
 <li>La localización del archivo WPAD sólo podía proporcionarse mediante DNS únicamente, excluyendo protocolos de broadcast</li>
@@ -1262,10 +1262,10 @@
 <p>Vuestra tarea será buscar información sobre cómo llevar a cabo este ataque y ponerlo en práctica para, posteriormente, entregar un informe detallando el proceso que habéis seguido. Algunas pistas que os servirán:</p>
 <ul>
 <li>Debéis partir del escenario que ya tenéis configurado</li>
-<li><strong>Debéis instalar los servicios de certificado en el DC (controlador de dominio)</strong></li>
+<li><strong>Debéis instalar los servicios de certificado en el DC (controlador de dominio)</strong>. Buscad información o utilizad el link en la sección de Referencias.</li>
 <li>Necesitaréis dos herramientas, <em>mitm6</em> y <em>ntlmrelayx</em></li>
-<li>Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene</li>
-<li>Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido</li>
+<li>Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene. Buscad algún "descuido" que dé información demasiado sensible de alguna cuenta.</li>
+<li>Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido. Comprobadlo en el DC.</li>
 </ul>
 </div>
 <p>Si todo sale bien, iréis viendo pantallas similares a esta:</p>
@@ -1288,7 +1288,7 @@
 <p><img alt="" src="../../img/kerberos.webp" /></p>
 <ol>
 <li>El cliente envía una petición de autenticación al controlador de dominio</li>
-<li>Si es exitosa, la respuesta contiene un <em>Ticket Granting Ticket (TGT)</em>. Este ticket únicamente sirve para demostrar que la autenticación ha sido exitosa y que el cliente tiene permiso para solicitar un <em>TGS (Ticke Granting Service)</em>, que no es más que un ticket para un servicio concreto de la red.</li>
+<li>Si es exitosa, la respuesta contiene un <em>Ticket Granting Ticket (TGT)</em>. Este ticket únicamente sirve para demostrar que la autenticación ha sido exitosa y que el cliente tiene permiso para solicitar un <em>TGS (Ticket Granting Service)</em>, que no es más que un ticket para un servicio concreto de la red.</li>
 <li>Se solicita el <em>TGS</em> deseado. Antes de emitir el <em>TGS</em>, se valida el <em>TGT</em>. Si la validación es correcta, se envía el <em>TGS</em> con una clave secreta conocida como clave de sesión. Esta clave se utilizará para cifrar el tráfico entre el cliente y el servicio solicitado.</li>
 <li>Se solicita acceso al servicio concreto presentando el <em>TGS</em>.</li>
 </ol>
@@ -1350,6 +1350,7 @@
 <p><a href="https://www.blackhillsinfosec.com/mitm6-strikes-again-the-dark-side-of-ipv6/">MITM6 Strikes Again: The Dark Side of IPv6  </a></p>
 <p><a href="https://www.qomplx.com/blog/about-kerberos/">Kerberos Fundamentals</a></p>
 <p><a href="https://www.semperis.com/es/blog/protecting-active-directory-from-kerberoasting/">Cómo proteger Active Directory contra Kerberoasting: Seguridad AD 101</a></p>
+<p><a href="https://support.n4l.co.nz/s/article/How-to-install-Certificate-Authority-CA-server-and-create-certificates">How to install Certificate Authority (CA) server and create certificates</a></p>
 
 
   
