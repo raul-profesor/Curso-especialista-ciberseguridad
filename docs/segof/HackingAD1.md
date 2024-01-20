@@ -217,7 +217,7 @@ No obstante, la realidad es un tanto distinta. Mientras que sí es cierto que IP
 
 ### DNS Spoofing
 
-Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un hosts se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.
+Si tenemos una red montada en IPv4, como es el caso de nuestro laboratorio, es probable que tengamos IPv6 también activo. En ese caso, cuando un host se loguea en una red, intentará pedir la configuración por DHCPv6 y es aquí cuando nos aprovecharemos de ello, ya que como atacantes nos autodesignaremos como DNS primario para IPv6.
 
 ### WPAD
 
@@ -229,7 +229,7 @@ Como podemos ver en el siguiente esquema sacado de [esta wiki](https://wiki.arti
 
 Los clientes a la hora de utilizar la red, preguntan si existe algún proxy a utilizar y dónde pueden encontrar la configuración del mismo para hacer uso de él.
 
-Antiguamente la dirección IP del servidor que proporcionama el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.
+Antiguamente la dirección IP del servidor que proporcionaba el archivo wpad.dat se resolvía usando el DNS y, si éste no devolvía ninguna dirección, se podía resolver de forma insegura con protocolos de broadcast como LLMNR. Un atacante podía contestar a este broadcast, fingir ser el servidor que alojaba el archivo wpad y pedir autenticación al cliente para servírselo. Esta autenticación era proporcionada por Windows sin interacción del usuario. De esta forma el atacante obtenía unas credenciales NTLM de las que podía hacer relay.
 
 Así las cosas, en 2016 Microsoft publicó un [boletín de seguridad](https://support.microsoft.com/en-us/topic/ms16-077-security-update-for-wpad-june-14-2016-2490f086-dc17-4a6e-2799-a974d1af385e) que intentaba mitigar estos ataques con dos nuevas medidas:
 
@@ -256,10 +256,10 @@ En [este enlace](https://redfoxsec.com/blog/ipv6-dns-takeover/) encontramos la s
     Vuestra tarea será buscar información sobre cómo llevar a cabo este ataque y ponerlo en práctica para, posteriormente, entregar un informe detallando el proceso que habéis seguido. Algunas pistas que os servirán:
 
       +  Debéis partir del escenario que ya tenéis configurado
-      +  **Debéis instalar los servicios de certificado en el DC (controlador de dominio)**
+      +  **Debéis instalar los servicios de certificado en el DC (controlador de dominio)**. Buscad información o utilizad el link en la sección de Referencias.
       +  Necesitaréis dos herramientas, *mitm6* y *ntlmrelayx*
-      +  Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene
-      +  Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido
+      +  Realizad primero el ataque con un usuario normal y echad un vistazo a toda la información que se obtiene. Buscad algún "descuido" que dé información demasiado sensible de alguna cuenta.
+      +  Tras utilizar un usuario sin privilegios, proceded ahora a realizar el ataque con un usuario administrador de dominio y explicad qué ha sucedido. Comprobadlo en el DC.
 
 Si todo sale bien, iréis viendo pantallas similares a esta:
 
@@ -289,7 +289,7 @@ Lo primero que debemos abordar es cómo funciona el servicio de autenticación K
     ![](../img/kerberos.webp)
 
     1. El cliente envía una petición de autenticación al controlador de dominio
-    2. Si es exitosa, la respuesta contiene un *Ticket Granting Ticket (TGT)*. Este ticket únicamente sirve para demostrar que la autenticación ha sido exitosa y que el cliente tiene permiso para solicitar un *TGS (Ticke Granting Service)*, que no es más que un ticket para un servicio concreto de la red.
+    2. Si es exitosa, la respuesta contiene un *Ticket Granting Ticket (TGT)*. Este ticket únicamente sirve para demostrar que la autenticación ha sido exitosa y que el cliente tiene permiso para solicitar un *TGS (Ticket Granting Service)*, que no es más que un ticket para un servicio concreto de la red.
     3. Se solicita el *TGS* deseado. Antes de emitir el *TGS*, se valida el *TGT*. Si la validación es correcta, se envía el *TGS* con una clave secreta conocida como clave de sesión. Esta clave se utilizará para cifrar el tráfico entre el cliente y el servicio solicitado.
     4. Se solicita acceso al servicio concreto presentando el *TGS*.
 
@@ -366,3 +366,5 @@ También podemos hacer uso de algún programa para acceso remoto, como por ejemp
 [Kerberos Fundamentals](https://www.qomplx.com/blog/about-kerberos/)
 
 [Cómo proteger Active Directory contra Kerberoasting: Seguridad AD 101](https://www.semperis.com/es/blog/protecting-active-directory-from-kerberoasting/)
+
+[How to install Certificate Authority (CA) server and create certificates](https://support.n4l.co.nz/s/article/How-to-install-Certificate-Authority-CA-server-and-create-certificates)
