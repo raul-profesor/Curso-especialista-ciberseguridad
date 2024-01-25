@@ -281,7 +281,7 @@ La herramienta que utilizaremos para este cometido es `proxychains` y por tanto 
 !!!note "Consejo"
     Recordad que para cambiar valores en un fichero, podéis utilizar el comando:
     ```bash
-    sed -i 's/Término a sustituir/Término nuevo' archivo   
+    sed -i 's/Término a sustituir/Término nuevo/g' archivo   
     ```
 
 ## Localizando nuevas víctimas
