@@ -77,6 +77,7 @@ nav:
     - Monitorización de red con Arkime: segdef/arkime.md
     - Análisis de archivos con TruffleHog: segdef/truffle.md
     - Análisis de infraestructura (contenedores) con Trivy: segdef/trivy.md
+    - Wazuh: segdef/wazuh.md
 
 extra_css:
   - stylesheets/extra.css
