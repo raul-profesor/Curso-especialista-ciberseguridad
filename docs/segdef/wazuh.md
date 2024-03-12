@@ -42,14 +42,14 @@ Para este laboratorio utilizaremos AWS, por la versatilidad que nos ofrece y as�
 
 La instalación del servidor de Wazuh o Wazuh manager se puede realizar siguiendo [este](https://documentation.wazuh.com/current/quickstart.html) sencillo tutorial.
 
-### Agente Wazuh en Ubuntu
+### Agente Wazuh en Ubuntu 22.04
 
 Los pasos vienen detallados [aquí](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html)
 
 !!!warning "Atención"
         Elegid la pestaña ***APT***, que es la que os dará las indicaciones para realizar las acciones con el gestor de paquetes correspondiente.
 
-### Agente de Wazuh en Windows Server
+### Agente de Wazuh en Windows Server 2022
 
 En este caso las instrucciones están [aquí](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html) y os dará la opción, en las pestañas, de elegir una instalación gráfica o por línea de comandos.
 
@@ -57,8 +57,73 @@ En este caso las instrucciones están [aquí](https://documentation.wazuh.com/cu
         Recordad poner como IP de Wazuh manager la de vuestro server de Wazuh.
 
 
+### Servidor web Apache en endpoint Ubuntu
+
+Pasos a seguir:
+
+1. Instalar Apache:
+
+    ```console
+    $ sudo apt-get update
+    $ sudo apt-get install apache2
+    ```
+
+2. Instalar PHP 8.1 para poder correr aplicaciones PHP
+
+    ```console
+    $ sudo apt-get install --no-install-recommends php8.1
+    ```
+
+    Así evitaremos instalar paquetes adicionales.
+
+3. Para verificar la instalación podemos acceder a la URL: `http://IP_UBUNTU_ENDPOINT`y nos mostrará la página por defecto de Apache.
 
 
+### Servidor web IIS en endpoint Windows Server
 
+Para proceder con esta instalación:
 
+1. En el menú de inicio de Windows, escribimos `appwiz.cpl` y le decimos *Turn Windows features on or off*:
 
+    ![](../img/windows-server-wazuh2.png)
+
+2. En *Server Roles* instalamos **Web Server (IIS)** conm, al menos, las siguientes funciones:
+    
+    ![](../img/windows-server-wazuh.png)
+
+3. Para verificar la instalación accedemos a la URL: `http://IP_WINDOWS_ENDPOINT`
+
+## Escenario hipotético
+
+El endpoint Ubuntu corre un Apache con PHP instalado y el endpoint Windows Server corre un servidor web IIS, capaz de interpretar código ASP.NET.
+
+Puesto que las web shells se consideran malware post-explotación, hemos de asumir que el atcante ya posee acceso inicial a los endpoints. Lo que el atacante desea conseguir es la persistencia en el sistema comprometido con el fin de llevar a cabo estas labores de  post-explotación.
+
+## Técnicas de detección
+
+Utilizaremos distintas capacidades de Wazuh para detectar la presencia de web shells en PHP o ASP.NET.
+
+### Integridad de ficheros
+
+Utilizaremos **FIM (File Integritiy Monitorint)** para deteta rla creación y modificación de archivos que contengan web shells.
+
+El módulo FIM de Wazuih puede detectar, casi en tiempo real, cambios en los archivos accesibles via web y de esta forma alertar a los administradores.
+
+Usaremos este módulo para detectar cuando se han creado o odificado archivos en `/var/wwww/html`y en `C:\inetpub\wwwroot`, directorios raiz por defecto en Ubuntu y Windows respectivamente.
+
+Además, FIM escanea los contenidos de los archivos para monitorizar la aparción de firmas de web shells cuando los archivos se modifican.
+
+#### Configuración de Ubuntu
+
+1. Añadir la siguiente configuración al agente de Wazuh en el archivo `/var/ossec/etc/ossec.conf`, dentro del bloque `<syscheck>`:
+
+    ```html
+    <directories realtime="yes" check_all="yes" report_changes="yes">/var/www/html</directories>
+    ```
+    Esto detecta los cambios en el directorio `/var/www/html`.
+
+2. Reiniciar el agente de Wazuh para aplicar los cambios en la configuración:
+
+    ```console
+    $ sudo systemctl restart wazuh-agent
+    ```
