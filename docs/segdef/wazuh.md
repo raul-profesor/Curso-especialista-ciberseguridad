@@ -127,3 +127,68 @@ Además, FIM escanea los contenidos de los archivos para monitorizar la aparció
     ```console
     $ sudo systemctl restart wazuh-agent
     ```
+
+#### Configuración de Windows
+
+1. Añadir la siguiente configuración al agente de Wazu en el archivo `C:\Program Files (x86)\ossec-agent\ossec.conf`, dentro del bloque `<syscheck>`:
+
+    ```html
+    <directories realtime="yes" check_all="yes" report_changes="yes">C:\inetpub\wwwroot</directories>
+    ```
+
+2. Corriendo una terminal de Powershell como administrador, reinicia el agente de Wazuh para aplicar los cambios en la configuración:
+
+    ```powershell
+    > Restart-Service -Name wazuh
+    ```
+
+#### Configuración del servidor de Wazuh
+
+1. Crear un archivo de reglas personalizado `reglas_webshell.xml` en el directorio `/var/ossec/etc/rules/` y colocar en él las siguientes reglas:
+
+    ```xml title="reglas_Webshell.xml" linenums="1"
+    <group name="linux, webshell, windows,">
+    <!-- Esta regla detecta la creación de archivos -->
+    <rule id="100500" level="12">
+    <if_sid>554</if_sid>
+    <field name="file" type="pcre2">(?i).php$|.phtml$|.php3$|.php4$|.php5$|.phps$|.phar$|.asp$|.aspx$|.jsp$|.cshtml$|.vbhtml$</field>
+    <description>[File creation]: Possible web shell scripting file ($(file)) created</description>
+    <mitre>
+    <id>T1105</id>
+    <id>T1505</id>
+    </mitre>
+    </rule>
+
+    <!-- Esta regla detecta la modificación de archivos -->
+    <rule id="100501" level="12">
+    <if_sid>550</if_sid>
+    <field name="file" type="pcre2">(?i).php$|.phtml$|.php3$|.php4$|.php5$|.phps$|.phar$|.asp$|.aspx$|.jsp$|.cshtml$|.vbhtml$</field>    
+    <description>[File modification]: Possible web shell content added in $(file)</description>
+    <mitre>
+    <id>T1105</id>
+    <id>T1505</id>
+    </mitre>
+    </rule>
+
+    <!-- Esta regla detecta la modificación de archivos con firmas asociadas a web shells de PHP -->
+    <rule id="100502" level="15">
+    <if_sid>100501</if_sid>
+    <field name="changed_content" type="pcre2">(?i)passthru|exec|eval|shell_exec|assert|str_rot13|system|phpinfo|base64_decode|chmod|mkdir|fopen|fclose|readfile|show_source|proc_open|pcntl_exec|execute|WScript.Shell|WScript.Network|FileSystemObject|Adodb.stream</field>
+    <description>[File Modification]: File $(file) contains a web shell</description>
+    <mitre>
+    <id>T1105</id>
+    <id>T1505.003</id>
+    </mitre>
+    </rule>
+    </group>
+    ```
+
+2. Reiniciar Wazuh manager para aplicar la configuración de los cambios
+   
+     ```console
+     $ sudo systemctl restart wazuh-manager
+     ```
+
+### Usando reglas personalizadas para detectar indicios de web shells
+
+Wazuh permite escribir reglas personalizadas que disparan alertas cuando se detectan determinadas características en logs. Además integraremos Wazuh con **auditd** en endpoints Linux y **Sysmon** en Windows para enriquecer los fuentes de logs, para así mejorar la seguridad.
