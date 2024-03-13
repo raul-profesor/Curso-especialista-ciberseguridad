@@ -497,3 +497,14 @@ Ejecutar los siguientes pasos en una terminal de PowerShell ejecutándose como a
 #### Ver las alertas
 
 En el dashboard de Wazuh, navegar a ***Security events*** y visualizar las alertas generadas:
+
+
+## Recapitulación y conclusiones
+
++ Las web shells de cualquier tipo suelen tener comportamientos similares, esto es, crean o modifican archivos presentes en los directorios de los servidores web, realizando conexiones de red para establecer shells inversas y ejecutando comandos para tareas post-explotación.
+
++ Con Wazuh podemos ser capaces de detectar estas web shells, usando FIM y la monitorización de comandos
+
++ También hemos realizado la integración de *auditd* y *Sysmon* con Wazuh, aportando así más información a los logs, siendo capaces de realizar una mejor detección en los endpoints comprometidos
+
++ No obstante, es recomendable que las organizaciones además tengan en marcha defensas contra las tareas de post-explotación como puedan ser el escaneo y parcheo de sistemas y aplicaciones vulnerables, así como políticas de seguridad que monitoricen malas configuraciones de los sistemas.
