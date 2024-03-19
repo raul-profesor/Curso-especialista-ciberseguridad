@@ -2,7 +2,7 @@
 
 Wazuh, en palabras de su creador, el español Santiago Basset, es una proyecto open source que trata de prevenir, detectar y responder a amenazas.
 
-Técnicamente podría considerarse un HIDS (Host Intrusion Detection System). Estos dispositivos centraban la importancia en los eventos en la red. Sin embargo ésta es una tendencia cambiante, como vemos en este gráfico de ejemplo de MITRE:
+Técnicamente podría considerarse un HIDS (Host Intrusion Detection System). Estos dispositivos usualmente centraban la importancia en los eventos en la red. Sin embargo esta es una tendencia cambiante, como vemos en este gráfico de ejemplo de MITRE:
 
 ![](../img/threats.webp)
 
@@ -508,3 +508,121 @@ En el dashboard de Wazuh, navegar a ***Security events*** y visualizar las alert
 + También hemos realizado la integración de *auditd* y *Sysmon* con Wazuh, aportando así más información a los logs, siendo capaces de realizar una mejor detección en los endpoints comprometidos
 
 + No obstante, es recomendable que las organizaciones además tengan en marcha defensas contra las tareas de post-explotación como puedan ser el escaneo y parcheo de sistemas y aplicaciones vulnerables, así como políticas de seguridad que monitoricen malas configuraciones de los sistemas.
+
+## Anexo: despliegue de instancias EC2 Linux y Windows en AWS
+
+Una vez tenemos creados nuestro laboratorio (*Learner Lab*)en AWS Academy, podremos hacer uso de varios servicios de Amazon Web Services, dentro de unos límites, aunque estos límites no nos afectan para nuestro propósito.
+
+Amazon ofrece una cantidad ingente de servicios que podéis consultar en los capítulos 1, 3 y 9 del curso de AWS Foundations. Uno de estos servicios es el de computación, es decir, la creación de instancias EC2 (Elastic Compute Cloud). Esto no es más que la creación de máquinas virtuales en la nube, lo cual nos es de extrema utilidad para el caso que nos ocupa.
+
+A continuación se mostrará detalladamente el proceso de creación de instancias Linux y Windows, así como la forma de conectarse a dichas instancias.
+
+### EC2 Linux
+
+En primer lugar debéis entrar en vuestro Learner Lab y acceder a los contenidos:
+
+![](../img/aws1.png)
+
+E ir a la pantalla de lanzamiento del laboratorio:
+
+![](../img/aws2.png)
+
+Le daremos a iniciar laboratorio y esperaremos a que el icono marcado se ponga en verde. Una vez lo esté, haremos click en él para que nos lleve a la página de administración de servicios de AWS:
+
+![](../img/aws3.png)
+
+Una vez en esta página, el servicio que a nosotros nos interesa en este momento son las instancias EC2. Así pues, escribimos esto en la caja de búsqueda:
+
+![](../img/aws4.png)
+
+Le decimos que queremos lanzar una nueva instancia:
+
+![](../img/aws5.png)
+
+E iremos completando los detalles necesarios, como nombre o imagen de la máquina que se creará (Amazon Linux, Ubuntu, Debian, Windows...). En esta caso se ilustra el ejemplo de la máquina cliente Ubuntu pero habría que seleccionar según el caso:
+
+![](../img/aws6.png)
+
+Podemos elegir distintos tipos de instancias, con distintos precios por uso, así como propiedades (CPU+RAM). **Para el caso de las instancias Linux, nos basta una *t2.micro*. Para el caso de las Windows, debemos elegir t2.medium para no quedarnos demasiado cortos.**
+
+![](../img/aws7.png)
+
+En el apartado de *Claves de sesión*, elegiremos **vockey**. Esto nos permitirá más tarde conectarnos a las instancias:
+
+![](../img/aws8.png)
+
+En configuraciones de red lo único que debemos hacer es dejar marcada la opción por defecto ***Crear grupo de seguridad*** y marcarle que permita tanto el tráfico SSH desde cualquier lugar, como el tráfico HTTP desde Internet.
+
+Los grupos de seguridad son, de forma aproximada, una especie de Firewall que filtra las conexiones desde y hacia nuestras instancias.
+
+Tras lanzar la instancia, se encontrará en estado *Iniciando* y después pasará a *En ejecución*.
+
+### EC2 Windows
+
+Lanzamos otra vez una nueva instancia, indicando el nombre que queramos y diciéndole que se tratará de un Windows:
+
+![](../img/aws9.png)
+
+Puesto que carecemos de la opción de un Windows 10/11, utilizaremos entonces un Windows Server como cliente.
+
+Como se indicó anteriormente, ha de ser *t2.medium*: 
+
+![](../img/aws10.png)
+
+De nuevo, indicamos las claves *vockey* y permitimos tanto tráfico SSH, como HTTP:
+
+![](../img/aws11.png)
+
+
+Tras lanzar la instancia, se encontrará en estado *Iniciando* y después pasará a *En ejecución*.
+
+
+### Cuestiones genéricas
+
+#### Más reglas en los grupos de seguridad
+
+Para el servidor de Wazuh y para la máquina atacante, vamos a modificar sus grupos de seguridad para que puedan comunicarse con cualquier máquina de la red sin problemas.
+
+Marcamos la instancia que queramos modificar y seleccionamos la pestaña *Seguridad*:
+
+![](../img/aws12.png)
+
+Localizamos el grupo de seguridad y haremos click sobre él:
+
+![](../img/aws13.png)
+
+Una vez dentro del grupo, editamos las reglas **de entrada**:
+
+![](../img/aws14.png)
+
+Las instancias se crean por defecto en la red `172.31.0.0/16`. Permitiremos entonces todo el tráfico de entrada proveniente de dicha red, añadiendo una regla a tal efecto:
+
+![](../img/aws15.png)
+
+#### Conexión remota a las máquinas
+
+##### Linux
+
+Accedemos a la pantalla primigénia desde donde lanzamos nuestro laboratorio y en la sección de *AWS Details* tendremos la posibilidad de descargarnos unas claves para la conexión que queremos llevar a cabo. Así pues, las descargamos, tal y como indica el paso 2:
+
+![](../img/aws16.png)
+
+Es importante darle los permisos adecuados a la clave privada recién descargada, de otra forma no nos permitirá conectarnos. Una vez hecho, basta con realizar una conexión normal por SSH pero indicando con el parámetro `-i`que utilizaremos el archivo de claves que nos desacargamos en el paso anterior:
+
+![](../img/aws17.png)
+
+La IP **pública** de cada instancia al a que queramos conectarnos podemos consultarla así:
+
+![](../img/aws18.png)
+
+Y de esta forma ya podemos realizar cualquier acción que necesitásemos llevar a cabo, tal y como si se tratase de una máquina virtual en nuestra máquina.
+
+##### Window
+
+![](../img/aws.png)
+
+
+!!!warning "¡Atención!"
+    El laboratorio se apaga automáticamente a las 4 horas, tiempo más que suficiente para llevar a cabo la práctica. En caso contrario, podréis reiniciarlo puesto que sólo se apagan las instancias pero no se pierde el trabajo.
+
+    Si trabajáis en varias tandas o acabáis antes de las 4 horas, apagadlo vosotros para evitar gastos innecearios en vuestro crédito de 100$. Para ello, en la página de lanzamiento del laboratorio, esta vez le daremos a ***End lab***
