@@ -555,6 +555,13 @@ En configuraciones de red lo único que debemos hacer es dejar marcada la opció
 
 Los grupos de seguridad son, de forma aproximada, una especie de Firewall que filtra las conexiones desde y hacia nuestras instancias.
 
+!!!warning "¡Atención!"
+    Los clientes Linux y Windows que contendrán sendos agentes, alojan su contenido mediante servidores web en el puerto (80), HTTP. Sin embargo, el servidor de Wazuh o Wazuh manager, utiliza sólo HTTPS con certificado autofirmado para su interfaz web. 
+
+    Tened esto en cuenta a la hora de crear la instancia y marcad la casilla correspondiente. 
+
+    Si os despistáis, más adelante se explica cómo modificar grupos de seguridad.
+
 Tras lanzar la instancia, se encontrará en estado *Iniciando* y después pasará a *En ejecución*.
 
 ### EC2 Windows
@@ -617,9 +624,50 @@ La IP **pública** de cada instancia al a que queramos conectarnos podemos consu
 
 Y de esta forma ya podemos realizar cualquier acción que necesitásemos llevar a cabo, tal y como si se tratase de una máquina virtual en nuestra máquina.
 
-##### Window
+##### Windows
 
-![](../img/aws.png)
+Para el caso de Windows, en lugar de conectarnos usando SSH, lo haremos mediante escritorio remoto (RDP). Para ello el proceso es un poco distinto, veámoslo.
+
+Igual que para el caso de Linux, necesitaremos la clave privada que nos podemos descargar. No obstante, la conexión se realizará utilizando algún cliente RDP. Si utilizáis Windows para conectaros, el cliente lo tendréis nativo. Si por otra parte utilizáis Linux, necesitaréis alguna aplicación tipo Remmina o similar.
+
+El primer paso será seleccionar nuestra instancia Windows y darle a *Conectar*:
+
+![](../img/aws19.png)
+
+
+En esta sección le diremos que nos vamos a conectar mediante un cliente RDP:
+
+![](../img/aws20.png)
+
+Nos descargaremos el archivo *.rdp* que utilizaremos para conectarnos y, tras ello, le daremos a *Obtener contraseña* para obtener las credenciales a utilizar:
+
+![](../img/aws21.png)
+
+Para poder obtener nuestra contraseña debemos hacer uso del archivo de clave privada que nos descargamos en seccines anteriores (es el mismo para todas las instancias).
+
+Lo cargaremos y, una vez hecho, le daremos a descifrar contraseña:
+
+![](../img/aws22.png)
+
+Una vez obtenida la contraseña no queda más que utilizar el cliente RDP elegido (en mi caso Remmina) para abrir el archivo *.rdp* y conectarnos utilizando la contraseña obtenida:
+
+
+![](../img/aws23.png)
+
+
+![](../img/aws24.png)
+
+
+![](../img/aws25.png)
+
+
+![](../img/aws26.png)
+
+
+
+![](../img/aws27.png)
+
+
 
 
 !!!warning "¡Atención!"
