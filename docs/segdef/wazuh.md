@@ -631,7 +631,6 @@ La IP **pública** de cada instancia al a que queramos conectarnos podemos consu
 Y de esta forma ya podemos realizar cualquier acción que necesitásemos llevar a cabo, tal y como si se tratase de una máquina virtual en nuestra máquina.
 
 ##### Windows
-<<<<<<< Updated upstream
 
 Para el caso de Windows, en lugar de conectarnos usando SSH, lo haremos mediante escritorio remoto (RDP). Para ello el proceso es un poco distinto, veámoslo.
 

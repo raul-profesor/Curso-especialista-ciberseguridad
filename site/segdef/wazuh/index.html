@@ -1175,8 +1175,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#window" class="md-nav__link">
-    Window
+  <a href="#windows_2" class="md-nav__link">
+    Windows
   </a>
   
 </li>
@@ -1303,6 +1303,11 @@
 <p>Para verificar la instalación accedemos a la URL: <code>http://IP_WINDOWS_ENDPOINT</code></p>
 </li>
 </ol>
+<div class="admonition danger">
+<p class="admonition-title">¡Atención, importante!</p>
+<p>En la comunicación entre los agentes y el servidor intervienen distintos puertos. <u><strong>La forma fácil de evitaros todo problema</strong></u> es añadir una regla de seguridad a todas las máquinas donde se permite cualquier conexión entrante (TCP/UDP, cualquier puerto) desde la red 172.31.0.0/16. </p>
+<p>Esto no supone un gran problema de seguridad puesto que es el segmento de red <strong>privado</strong> que nos asigna AWS Academy por defecto. En esencia lo que hacemos es dejar que todas las máquinas dentro de esa red se comuniquen sin cortapisas.</p>
+</div>
 <h2 id="escenario-hipotetico">Escenario hipotético</h2>
 <p>El endpoint Ubuntu corre un Apache con PHP instalado y el endpoint Windows Server corre un servidor web IIS, capaz de interpretar código ASP.NET.</p>
 <p>Puesto que las web shells se consideran malware post-explotación, hemos de asumir que el atcante ya posee acceso inicial a los endpoints. Lo que el atacante desea conseguir es la persistencia en el sistema comprometido con el fin de llevar a cabo estas labores de  post-explotación.</p>
@@ -1737,6 +1742,12 @@ Define:<span class="w"> </span>DUMP_RUN_CFG
 <p><img alt="" src="../../img/aws8.png" /></p>
 <p>En configuraciones de red lo único que debemos hacer es dejar marcada la opción por defecto <strong><em>Crear grupo de seguridad</em></strong> y marcarle que permita tanto el tráfico SSH desde cualquier lugar, como el tráfico HTTP desde Internet.</p>
 <p>Los grupos de seguridad son, de forma aproximada, una especie de Firewall que filtra las conexiones desde y hacia nuestras instancias.</p>
+<div class="admonition warning">
+<p class="admonition-title">¡Atención!</p>
+<p>Los clientes Linux y Windows que contendrán sendos agentes, alojan su contenido mediante servidores web en el puerto (80), HTTP. Sin embargo, el servidor de Wazuh o Wazuh manager, utiliza sólo HTTPS con certificado autofirmado para su interfaz web. </p>
+<p>Tened esto en cuenta a la hora de crear la instancia y marcad la casilla correspondiente. </p>
+<p>Si os despistáis, más adelante se explica cómo modificar grupos de seguridad.</p>
+</div>
 <p>Tras lanzar la instancia, se encontrará en estado <em>Iniciando</em> y después pasará a <em>En ejecución</em>.</p>
 <h3 id="ec2-windows">EC2 Windows</h3>
 <p>Lanzamos otra vez una nueva instancia, indicando el nombre que queramos y diciéndole que se tratará de un Windows:</p>
@@ -1767,8 +1778,25 @@ Define:<span class="w"> </span>DUMP_RUN_CFG
 <p>La IP <strong>pública</strong> de cada instancia al a que queramos conectarnos podemos consultarla así:</p>
 <p><img alt="" src="../../img/aws18.png" /></p>
 <p>Y de esta forma ya podemos realizar cualquier acción que necesitásemos llevar a cabo, tal y como si se tratase de una máquina virtual en nuestra máquina.</p>
-<h5 id="window">Window</h5>
-<p><img alt="" src="../img/aws.png" /></p>
+<h5 id="windows_2">Windows</h5>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
+<p>Para el caso de Windows, en lugar de conectarnos usando SSH, lo haremos mediante escritorio remoto (RDP). Para ello el proceso es un poco distinto, veámoslo.</p>
+<p>Igual que para el caso de Linux, necesitaremos la clave privada que nos podemos descargar. No obstante, la conexión se realizará utilizando algún cliente RDP. Si utilizáis Windows para conectaros, el cliente lo tendréis nativo. Si por otra parte utilizáis Linux, necesitaréis alguna aplicación tipo Remmina o similar.</p>
+<p>El primer paso será seleccionar nuestra instancia Windows y darle a <em>Conectar</em>:</p>
+<p><img alt="" src="../../img/aws19.png" /></p>
+<p>En esta sección le diremos que nos vamos a conectar mediante un cliente RDP:</p>
+<p><img alt="" src="../../img/aws20.png" /></p>
+<p>Nos descargaremos el archivo <em>.rdp</em> que utilizaremos para conectarnos y, tras ello, le daremos a <em>Obtener contraseña</em> para obtener las credenciales a utilizar:</p>
+<p><img alt="" src="../../img/aws21.png" /></p>
+<p>Para poder obtener nuestra contraseña debemos hacer uso del archivo de clave privada que nos descargamos en seccines anteriores (es el mismo para todas las instancias).</p>
+<p>Lo cargaremos y, una vez hecho, le daremos a descifrar contraseña:</p>
+<p><img alt="" src="../../img/aws22.png" /></p>
+<p>Una vez obtenida la contraseña no queda más que utilizar el cliente RDP elegido (en mi caso Remmina) para abrir el archivo <em>.rdp</em> y conectarnos utilizando la contraseña obtenida:</p>
+<p><img alt="" src="../../img/aws23.png" /></p>
+<p><img alt="" src="../../img/aws24.png" /></p>
+<p><img alt="" src="../../img/aws25.png" /></p>
+<p><img alt="" src="../../img/aws26.png" /></p>
+<p><img alt="" src="../../img/aws27.png" /></p>
 <div class="admonition warning">
 <p class="admonition-title">¡Atención!</p>
 <p>El laboratorio se apaga automáticamente a las 4 horas, tiempo más que suficiente para llevar a cabo la práctica. En caso contrario, podréis reiniciarlo puesto que sólo se apagan las instancias pero no se pierde el trabajo.</p>
