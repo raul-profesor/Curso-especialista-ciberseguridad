@@ -93,6 +93,12 @@ Para proceder con esta instalación:
 
 3. Para verificar la instalación accedemos a la URL: `http://IP_WINDOWS_ENDPOINT`
 
+!!!danger "¡Atención, importante!"
+
+     En la comunicación entre los agentes y el servidor intervienen distintos puertos. <u>**La forma fácil de evitaros todo problema**</u> es añadir una regla de seguridad a todas las máquinas donde se permite cualquier conexión entrante (TCP/UDP, cualquier puerto) desde la red 172.31.0.0/16. 
+
+    Esto no supone un gran problema de seguridad puesto que es el segmento de red **privado** que nos asigna AWS Academy por defecto. En esencia lo que hacemos es dejar que todas las máquinas dentro de esa red se comuniquen sin cortapisas.
+
 ## Escenario hipotético
 
 El endpoint Ubuntu corre un Apache con PHP instalado y el endpoint Windows Server corre un servidor web IIS, capaz de interpretar código ASP.NET.
@@ -625,6 +631,7 @@ La IP **pública** de cada instancia al a que queramos conectarnos podemos consu
 Y de esta forma ya podemos realizar cualquier acción que necesitásemos llevar a cabo, tal y como si se tratase de una máquina virtual en nuestra máquina.
 
 ##### Windows
+<<<<<<< Updated upstream
 
 Para el caso de Windows, en lugar de conectarnos usando SSH, lo haremos mediante escritorio remoto (RDP). Para ello el proceso es un poco distinto, veámoslo.
 
@@ -666,8 +673,6 @@ Una vez obtenida la contraseña no queda más que utilizar el cliente RDP elegid
 
 
 ![](../img/aws27.png)
-
-
 
 
 !!!warning "¡Atención!"
