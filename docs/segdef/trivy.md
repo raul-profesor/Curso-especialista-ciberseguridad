@@ -649,7 +649,7 @@ RUN apt-get update -y &&\
 # +------------------------------------------------------------------------+
 #COPY lang_dependencies/Pipfile.lock /app/Pipfile.lock 
 
-#RUN pip3 install httplib2==0.18.1 # (2)
+#RUN pip3 install httplib2==0.18.1 --break-system-packages # (2)
 ```
 
 1. Esta versión de Bash es vulnerable a Shellshock. Ésta es una vulnerabilidad crítica de Bash que permitiría la ejecución arbitraria de comandos y que ya hemos visto con anterioridad.
