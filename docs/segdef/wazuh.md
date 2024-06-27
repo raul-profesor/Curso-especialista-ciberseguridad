@@ -678,3 +678,9 @@ Una vez obtenida la contraseña no queda más que utilizar el cliente RDP elegid
     El laboratorio se apaga automáticamente a las 4 horas, tiempo más que suficiente para llevar a cabo la práctica. En caso contrario, podréis reiniciarlo puesto que sólo se apagan las instancias pero no se pierde el trabajo.
 
     Si trabajáis en varias tandas o acabáis antes de las 4 horas, apagadlo vosotros para evitar gastos innecearios en vuestro crédito de 100$. Para ello, en la página de lanzamiento del laboratorio, esta vez le daremos a ***End lab***
+
+## Despliegue automatizado del escenario
+
+Para desplegar este escenario de forma automatizada en AWS se puede hacer uso del siguiente repositorio: 
+
+[https://github.com/raul-profesor/wazuh-webshells-terraform.git](https://github.com/raul-profesor/wazuh-webshells-terraform.git)
