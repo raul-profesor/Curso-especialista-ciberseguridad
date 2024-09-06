@@ -1,3 +1,9 @@
+---
+title: Laboratorio de pivoting en Docker
+
+description: Pivoting, Docker, movimiento lateral, túnel SSH, proxychains. Pentesting, hacking, AD. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 # Pivoting
 
 El pivoting hace referencia a una técnica donde tras comprometer un equipo, nos damos cuenta de que éste nos da acceso a otros equipos o redes a los que de una forma directa no podríamos acceder. Así pues, nuestra máquina comprometida o máquina de salto nos sirve para seguir obteniendo nuevos accesos.

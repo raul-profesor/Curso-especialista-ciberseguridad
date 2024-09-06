@@ -1,7 +1,7 @@
 ---
 title: Análisis de archivos/repositorios con TruffleHog
 
-description: Hablaremos de TruffleHog y cómo analizar archivos en repositorios de Github para descubrir claves, contraseñas y otro tipo de información sensible filtrada en los archivos de los mismos.
+description: Hablaremos de TruffleHog y cómo analizar archivos en repositorios de Github para descubrir claves, contraseñas y otro tipo de información sensible filtrada en los archivos de los mismos. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
 ---
 
 ## Introducción 

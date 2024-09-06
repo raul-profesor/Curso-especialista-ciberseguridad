@@ -1,3 +1,8 @@
+---
+title: Ejercicios básicos manejo Linux
+description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. Ejercicio de comandos Linux.
+---
+
 1. En el primer ejercicio propuesto, vamos a hacer uso de la plataforma [Tryhackme](https://tryhackme.com/). TryHackMe es una plataforma web en la que podremos aprender hacking desde 0, a base de resolver retos con una filosofía de CTF y gamificación.
 
     Deberemos registrarnos para poder acceder a todas las máquinas y salas de la plataforma.

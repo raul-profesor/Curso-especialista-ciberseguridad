@@ -1,3 +1,9 @@
+---
+title: Detección de webshells con Wazuh
+
+description: Configuración escenario Wazuh server, clientes Linux y Windows. Reglas para detectar webshells. AWS, Amazon, Terraform, ansible, automatizado, automatización. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 ## ¿Qué es Wazuh?
 
 Wazuh, en palabras de su creador, el español Santiago Basset, es una proyecto open source que trata de prevenir, detectar y responder a amenazas.

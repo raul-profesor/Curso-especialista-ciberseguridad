@@ -1,3 +1,8 @@
+---
+title: Ejercicios básicos manejo Windows
+description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. Ejercicio de comandos Windows.
+---
+
 El ejercicio propuesto para esta parte es muy sencillo:
 
 1. Debéis instalar un Windows Server 2019 ( o 2016 en su defecto) y un cliente Windows 10 (Windows 8.1 en su defecto) en sendas máquinas virtuales en VirtualBox

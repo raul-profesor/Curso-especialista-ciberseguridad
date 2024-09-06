@@ -1,7 +1,7 @@
 ---
 title: Análisis de logs en seguridad defensiva y respuesta a incidentes
 
-description: En este caso vamos a ver qué son los logs de un sistema, para qué sirven y cómo se pueden o deben analizar para realizar una correcta respuesta a incidentes, investigando los índices de compromiso, formando parte de la seguridad defensiva. Aquí hablaremos del Elastic Stack, es decir, ElasticSearch + Logstash + Kibana + Beats.
+description: Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura. En este caso vamos a ver qué son los logs de un sistema, para qué sirven y cómo se pueden o deben analizar para realizar una correcta respuesta a incidentes, investigando los índices de compromiso, formando parte de la seguridad defensiva. Aquí hablaremos del Elastic Stack, es decir, ElasticSearch + Logstash + Kibana + Beats.
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Monitorización utilizando Security Onion
 
-description: En este capítulo vamos a utilizar la distribución Security Onion para realizar la monitorización y respuesta/administración de incidentes de ciberseguridad mediante la integración de logs de distintas aplicaciones como Zeek, Suricata o Wazuh, de acuerdo a este periodo dedicado a la seguridad defensiva o Blue Team
+description: Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura. En este capítulo vamos a utilizar la distribución Security Onion para realizar la monitorización y respuesta/administración de incidentes de ciberseguridad mediante la integración de logs de distintas aplicaciones como Zeek, Suricata o Wazuh, de acuerdo a este periodo dedicado a la seguridad defensiva o Blue Team
 ---
 
 ## Introducción

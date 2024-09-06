@@ -1,3 +1,9 @@
+---
+title: Explotación de vulnerabilidad EternalBlue (MS17-010) 
+
+description: Explotación manual y automática de EternalBlue, Windows. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 ## Explotación de EternalBlue sin Metasploit
 
 Para este ejercicio vamos a hacer uso de una máquina de TryHackMe, especialmente diseñada para ser vulnerable a EternalBlue: [Sala de THM](https://tryhackme.com/room/blue)

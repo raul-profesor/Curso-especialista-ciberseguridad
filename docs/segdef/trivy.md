@@ -1,7 +1,7 @@
 ---
 title: Análisis de vulnerabilidades en contenedores con Trivy
 
-description: 
+description: Trivy, Docker, devsecops, puesta en producción segura, análisis de vulnerabilidades, hacking ético. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
 ---
 ## Introducción
 

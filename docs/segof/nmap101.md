@@ -1,3 +1,9 @@
+---
+title: Nmap básico
+
+description: Nmap, puertos, escáner, scanner, window, linux, scripts, opciones. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 ## ¿Qué son los puertos?
 
 Ya hemos comentado que Nmap es el estándar de facto a la hora de realizar un escáner de puertos pero... ¿qué entendemos por puertos?

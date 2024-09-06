@@ -1,3 +1,9 @@
+---
+title: Teoría básica gestión contraseñas en Windows
+
+description: Credenciales, passwords, contraseñas, windows, SAM, LSA, LSASS, NTLM, hash, NTDS. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 ## Credenciales en Windows
 
 El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *cachea* sus credenciales. A continuación se nombran algunos de los tipos de credenciales de Windows que almacena y las ubicaciones donde se pueden encontrar estas credenciales:

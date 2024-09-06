@@ -1,3 +1,8 @@
+---
+title: Fuentes utilizadas en los apuntes
+description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. 
+---
+
 [Árbol de directorios en Linux](https://computernewage.com/2015/06/14/el-arbol-de-directorios-de-linux-al-detalle-que-contiene-cada-carpeta) 
  
 [Archwiki - Usuarios y grupos](https://wiki.archlinux.org/title/Users_and_groups_(Espa%C3%B1ol))

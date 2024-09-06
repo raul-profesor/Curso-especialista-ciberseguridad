@@ -1,3 +1,8 @@
+---
+title: Escalada privilegios en Linux y en Windows
+description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. 
+---
+
 ## Qué es una escalada de privilegios?
 
 La escalada de privilegios ocurre cuando un usuario malicioso o malintencionado aprovecha una vulnerabilidad, un defecto de diseño o un error de configuración en una aplicación o sistema operativo para obtener un acceso elevado a los recursos que normalmente no deberían estar disponibles para ellos.

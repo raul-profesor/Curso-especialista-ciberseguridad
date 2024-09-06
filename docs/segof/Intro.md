@@ -1,3 +1,9 @@
+---
+title: Teoría pentesting
+
+description: Fases de un pentest, test de intrusión, test de penetración. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
 ## Recordatorio de conceptos básicos
 
 Un pentesting o test de intrusión puede ser definido como una forma legal y autorizada de localizar y "explotar" satisfacotriamente sistemas informáticos con el propósito de hacerlos más seguros.

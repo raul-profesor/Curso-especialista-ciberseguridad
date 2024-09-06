@@ -1,4 +1,10 @@
-A día de hoy, 2022, se podría decir que el incidente de seguridad más sufrido por las empresas es sin duda la infección de ransomware, normalmente mediante algún ataque previo exitoso de phising.
+---
+title: Servicios desactualizados
+
+description: Update, upgrade, servicio, parche, patch. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
+---
+
+A día de hoy se podría decir que el incidente de seguridad más sufrido por las empresas es sin duda la infección de ransomware, normalmente mediante algún ataque previo exitoso de phising.
 
 Sin embargo, otro vector de ataque muy importante viene dado por los sistemas desactualizados. 
 

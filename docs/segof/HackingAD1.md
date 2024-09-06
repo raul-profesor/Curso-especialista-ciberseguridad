@@ -1,7 +1,7 @@
 ---
 title: Ataques en entornos Active Directory
 
-description: En este apartado vamos a realizar los primeros ataques en entornos Active Directory para la captura de hashes NTLM y su posterior cracking offline mediante hashcat y ataques de diccionario. Pentesting, hacking, AD.
+description: En este apartado vamos a realizar los primeros ataques en entornos Active Directory para la captura de hashes NTLM y su posterior cracking offline mediante hashcat y ataques de diccionario. Pentesting, hacking, AD. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
 ---
 
 ## Setup del laboratorio

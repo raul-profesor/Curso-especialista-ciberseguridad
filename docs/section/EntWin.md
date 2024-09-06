@@ -1,3 +1,7 @@
+---
+title: Ejercicios básicos manejo Windows
+description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. Ejercicio de comandos Windows.
+---
 
 # Entornos Windows
 
