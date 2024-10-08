@@ -23,7 +23,7 @@
     
     
       
-        <title>Ejercicios básicos manejo Linux - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Conceptos básicos entornos Linux - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ejercicios básicos manejo Linux
+              Conceptos básicos entornos Linux
             
           </span>
         </div>
@@ -1667,7 +1667,7 @@ Después de configurar el sticky bit, los archivos en público solo pueden ser e
 <h2 id="contrasenas-en-linux">Contraseñas en Linux</h2>
 <p>En este apartado se describe cómo se implementan las contraseñas dentro del sistema operativo Unix tanto para sistemas administrados localmente como basados ​​en red.</p>
 <h3 id="el-archivo-etcpasswd">El archivo /etc/passwd</h3>
-<p>Tradicionalmente, Unix usa el archivo <code>/etc/passwd`` para realizar un seguimiento de cada usuario en el sistema. El archivo</code>/etc/passwd` contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
+<p>Tradicionalmente, Unix usa el archivo <code>/etc/passwd</code> para realizar un seguimiento de cada usuario en el sistema. El archivo <code>/etc/passwd</code> contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).</p>
 <p>Se puede usar el comando <code>cat</code> para mostrar el archivo <code>/etc/passwd</code> del sistema. Aquí algunas líneas de muestra de un archivo típico:</p>
 <div class="highlight"><pre><span></span><code>root:x:0:1:System<span class="w"> </span>Operator:/:/bin/ksh
 daemon:x:1:1::/tmp:
@@ -1792,7 +1792,7 @@ ls
 ls
 <span class="nb">cd</span><span class="w"> </span>../..
 </code></pre></div>
-<p>Ahora que ya sabemos cómo crear varios directorios simplemente pasándolos como argumentos separados al mkdircomando. Pero supongamos que queremos crear un directorio con un espacio en el nombre. Vamos a intentarlo:</p>
+<p>Ahora ya sabemos cómo crear varios directorios simplemente pasándolos como argumentos separados al comando mkdir. Pero supongamos que queremos crear un directorio con un espacio en el nombre. Vamos a intentarlo:</p>
 <p><div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>otro<span class="w"> </span>directorio
 ls
 </code></pre></div>
@@ -1828,7 +1828,7 @@ cat<span class="w"> </span>test_?.txt
 cat<span class="w"> </span>test_*
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Atención<p>Precisamente por las carácteres comodín en los comandos, tampoco es recomendable usar signos de puntuación en los nombres de los archivos, de otra forma habría que "escapar" estos caracteres a la hora de trabajar en la línea de comandos con los nombres de los archivos</p>
+<p class="admonition-title">Atención<p>Precisamente por los carácteres comodín en los comandos, tampoco es recomendable usar signos de puntuación en los nombres de los archivos, de otra forma habría que "escapar" estos caracteres a la hora de trabajar en la línea de comandos con los nombres de los archivos</p>
 </p>
 </div>
 <p>Observando la salida de <code>ls</code>, se puede ver que los únicos archivos o carpetas que comienzan por "t" son los tres archivos de prueba que acabamos de crear, por lo que incluso se podría simplificar ese último comando aún más <code>cat t*</code>, lo que significa "concatenar todos los archivos cuyos nombres comienzan con una t y van seguidos de cero o más caracteres ”. Usemos esta capacidad para unir todos nuestros archivos en un solo archivo nuevo y luego verlo:</p>

@@ -997,8 +997,17 @@
 <p>Empresas de todos los tamaños en todo el mundo utilizan Active Directory para administrar los permisos y controlar el acceso a los recursos críticos de la red empresarial. Pero, ¿qué es exactamente y cómo afecta al negocio?</p>
 <h3 id="que-es-active-directory">¿Qué es Active Directory?</h3>
 <p>Active Directory (AD) es un servicio de directorio que se ejecuta en Microsoft Windows Server. Un directorio es una estructura jerárquica que almacena información sobre los objetos en la red. </p>
-<p>La función principal de Active Directory es permitir que los administradores del sistema manejen permisos y controlen el acceso a los recursos de la red. En Active Directory, los datos se almacenan como objetos, que incluyen usuarios, grupos, aplicaciones, servicios o dispositivos, y estos objetos se clasifican según su nombre y atributos.</p>
+<p>La función principal de Active Directory (AD) es proporcionar un servicio de directorio centralizado para la administración y autenticación de usuarios y recursos en una red. Desarrollado por Microsoft, Active Directory permite gestionar información y controlar el acceso a recursos dentro de una red empresarial</p>
 <p>Active Directory usa un almacén de datos estructurado como base para una organización jerárquica lógica de la información del directorio.</p>
+<p>Sus funciones principales son:</p>
+<ol>
+<li><strong>Gestión de identidades y autenticación:</strong> Active Directory almacena información sobre los usuarios, como nombres, contraseñas y permisos, facilitando la autenticación de los usuarios cuando inician sesión en una red. Utiliza el protocolo Kerberos para garantizar una autenticación segura.</li>
+<li><strong>Control de acceso:</strong> Permite a los administradores definir quién tiene acceso a recursos específicos, como archivos, impresoras, o aplicaciones. Las políticas de grupo (Group Policy) en AD permiten administrar configuraciones de seguridad y restricciones a nivel de usuario o de equipo.</li>
+<li><strong>Centralización:</strong> AD permite una administración centralizada de toda la red. Desde un solo punto (el Controlador de Dominio), los administradores pueden gestionar cuentas de usuarios, permisos, y políticas de seguridad en todos los dispositivos conectados al dominio.</li>
+<li><strong>Organización jerárquica de objetos:</strong> Active Directory organiza los recursos de la red, como usuarios, grupos, computadoras y dispositivos, en una estructura jerárquica. Esta estructura incluye dominios, árboles y bosques, lo que facilita el acceso y la gestión de los recursos.</li>
+<li><strong>Escalabilidad:</strong> Es adecuado tanto para pequeñas redes como para grandes entornos empresariales con múltiples sitios y miles de usuarios. La replicación de AD permite mantener sincronizados los controladores de dominio en diferentes ubicaciones.</li>
+<li><strong>Autorización y seguridad:</strong> Además de la autenticación, AD también controla la autorización para determinar qué recursos pueden usar los usuarios una vez autenticados. AD refuerza la seguridad mediante políticas de contraseñas y otros métodos de autenticación avanzada.</li>
+</ol>
 <div class="admonition tip">
 <p class="admonition-title">Definición</p>
 <p>El directorio activo o Active Directory (AD) es una manera de organizar y gestionar todos los elementos de una red informática: ordenadores, grupos, usuarios, dominios, políticas de seguridad, y cualquier tipo de objetos definidos para el usuario. </p>
@@ -1008,7 +1017,7 @@
 <p>Además, los archivos se almacenan en un repositorio central donde se pueden compartir con otros usuarios para facilitar la colaboración y los equipos de TI pueden  respaldarlos adecuadamente para garantizar la continuidad del negocio.</p>
 <p><img alt="" src="../../img/microsoft-active-directory.webp" style="height:400px;width:800px" /></p>
 <h3 id="antes-de-nada-que-es-un-dominio">Antes de nada, ¿qué es un dominio?</h3>
-<p>Un dominio representa una agrupación lógica de un conjunto ordenadores conectados en una red los cuales comparten una base de datos de Active Directory. La base de base de datos es probablemente el elemento más importante en un AD (Active Directory) y es gestionada por los servidores centrales del dominio, también conocidos como Domain Controllers. </p>
+<p>Un dominio representa una agrupación lógica de un conjunto ordenadores, usuarios y servicios conectados en una red los cuales comparten una base de datos de Active Directory. La base de base de datos es probablemente el elemento más importante en un AD (Active Directory) y es gestionada por los servidores centrales del dominio, también conocidos como Domain Controllers. </p>
 <p>Un dominio básicamente es una etiqueta que típicamente representa un nombre DNS, el cual en algunas organizaciones es el mismo que su sitio web, pero no tiene porque ser así en todos los casos y es posible que la organización prefiera utilizar otro nombre de dominio que será al que se unirán las estaciones de trabajo.</p>
 <h3 id="que-son-los-domain-services-sevicios-de-dominio-de-active-directory">¿Qué son los Domain Services (sevicios de dominio) de Active Directory?</h3>
 <p>Los servicios de dominio de Active Directory (AD DS) son un componente central de Active Directory y proporcionan el mecanismo principal para autenticar a los usuarios y determinar a qué recursos de red pueden acceder. Los servidores que ejecutan AD DS se denominan controladores de dominio (DC). Éstos son sistemas basados en Windows Server que pueden acceder y manipular la base de datos del AD. Cada dominio tiene como mínimo un controlador, por lo que si por ejemplo, un departamento o unidad de negocio crece más de lo esperado, es posible instalar más controladores de dominio dedicados a procesar las solicitudes de las estaciones de trabajo en ese departamento. También es posible crear subdominios para que los usuarios puedan acceder a los recursos en otros subdominios que hagan parte del mismo Forest.</p>
@@ -1028,11 +1037,11 @@
 </li>
 <li>
 <p><ins><strong>Bosque:</strong></ins> un bosque es el nivel más alto de organización dentro de AD y contiene un grupo de árboles. Los árboles de un bosque también pueden confiar entre sí y también compartirán esquemas de directorio, catálogos, información de aplicaciones y configuraciones de dominio.</p>
-<p>Un bosque representa un límite de seguridad. Los objetos de diferentes bosques no pueden interactuar entre sí a menos que los administradores de cada bosque creen una relación de confianza entre ellos</p>
+<p>El bosque define los límites de seguridad y los confines de confianza en una red. Todos los objetos dentro de un bosque comparten una configuración de seguridad común. Los objetos de diferentes bosques no pueden interactuar entre sí a menos que los administradores de cada bosque creen una relación de confianza entre ellos</p>
 </li>
 <li>
-<p><ins><strong>Unidades organizativas:</strong></ins> una unidad organizativa permite, como su propio nombre indica, organizar y agrupar usuarios, grupos, equipos y otras unidades organizativas.</p>
-<p>Las unidades organizativas (OU) de un dominio administrado de Active Directory Domain Services (AD DS) permiten agrupar lógicamente objetos como cuentas de usuario, cuentas de servicio o cuentas de equipo. Después, se puede asignar administradores a unidades organizativas específicas y aplicar la directiva de grupo para aplicar los valores de configuración de destino.</p>
+<p><ins><strong>Unidades organizativas:</strong></ins> una unidad organizativa permite, como su propio nombre indica, organizar y agrupar usuarios, grupos, equipos y otras unidades organizativas. Son contenedores dentro de un dominio que permiten organizar de manera lógica los objetos (usuarios, equipos, grupos) para una administración más fácil</p>
+<p>Las OUs se pueden anidar, lo que facilita la creación de una estructura jerárquica que refleja la organización real (por ejemplo, departamentos o ubicaciones geográficas).</p>
 </li>
 <li>
 <p><ins><strong>Contenedores:</strong></ins> un contenedor es similar a una unidad organizativa; sin embargo, a diferencia de una unidad organizativa, no es posible vincular un objeto de directiva de grupo (GPO) a un contenedor genérico de Active Directory.</p>
@@ -1044,11 +1053,59 @@
 <p><img alignt="right" alt="" src="../../img/ADestructura3.jpg" style="height:250px;width:450px" /></p>
 <h3 id="otros-servicios-de-active-directory">Otros servicios de Active Directory</h3>
 <p>Además de los servicios de dominio de Active Directory, hay varios otros servicios críticos que proporciona AD. Algunos de esos servicios se enumeran a continuación:</p>
-<p><strong>Servicios de directorio ligeros:</strong> AD LDS es un servicio de directorio del Protocolo ligero de acceso a directorios (LDAP). Proporciona solo un subconjunto de las funciones de AD DS, lo que lo hace más versátil en términos de dónde se puede ejecutar. Por ejemplo, se puede ejecutar como un servicio de directorio independiente sin necesidad de integrarse con una implementación completa de Active Directory.</p>
-<p><strong>Servicios de certificados:</strong> puede crear, administrar y compartir certificados de cifrado, que permiten a los usuarios intercambiar información de forma segura a través de Internet.</p>
+<p><strong>Servicios de directorio ligeros:</strong> AD LDS es un servicio de directorio del Protocolo ligero de acceso a directorios (LDAP). Proporciona solo un subconjunto de las funciones de AD DS, lo que lo hace más versátil en términos de dónde se puede ejecutar. Por ejemplo, se puede ejecutar como un servicio de directorio independiente sin necesidad de integrarse con una implementación completa de Active Directory.
+Se utiliza para aplicaciones que necesitan un servicio de directorio pero que no requieren el entorno completo de un dominio, como aplicaciones de autenticación de usuarios para sistemas o aplicaciones específicas.</p>
+<p><strong>Servicios de certificados:</strong> AD CS gestiona la infraestructura de claves públicas (PKI), lo que permite emitir, gestionar y validar certificados digitales. Estos certificados pueden utilizarse para la autenticación de usuarios, dispositivos y aplicaciones, así como para cifrado de datos y comunicaciones.</p>
 <p><strong>Servicios de federación de Active Directory:</strong> ADFS es una solución de inicio de sesión único (SSO) para AD que permite a los empleados acceder a múltiples aplicaciones con un único conjunto de credenciales, lo que simplifica la experiencia del usuario.</p>
-<p><strong>Servicios de administración de derechos:</strong> AD RMS es un conjunto de herramientas que ayuda con la administración de tecnologías de seguridad que ayudarán a las organizaciones a mantener sus datos seguros. Dichas tecnologías incluyen cifrado, certificados y autenticación, y cubren una variedad de aplicaciones y tipos de contenido, como correos electrónicos y documentos de Word.</p>
+<p><strong>Servicios de administración de derechos:</strong> AD RMS es un servicio que proporciona protección de la información mediante la aplicación de políticas de derechos digitales (DRM) a documentos y correos electrónicos. Esto garantiza que solo los usuarios autorizados puedan ver o editar la información protegida.
+AD RMS se utiliza para proteger la propiedad intelectual y datos sensibles en archivos, correos electrónicos y documentos, al limitar quién puede acceder a, editar o reenviar esa información, incluso después de ser descargada o copiada.</p>
 <p>El servidor que aloja AD DS se denomina <strong>controlador de dominio (DC)</strong>. También se puede usar un controlador de dominio para autenticarse con otros productos de MS, como Exchange Server, SharePoint Server, SQL Server, File Server u otros.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Servicio</strong></th>
+<th><strong>Función</strong></th>
+<th><strong>Uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AD DS</strong> (Domain Services)</td>
+<td>Autenticación y gestión de identidades</td>
+<td>Administrar usuarios y recursos en redes empresariales</td>
+</tr>
+<tr>
+<td><strong>AD LDS</strong> (Lightweight Directory)</td>
+<td>Versión ligera de AD, usa LDAP para aplicaciones</td>
+<td>Aplicaciones que requieren un directorio, sin necesidad de dominio</td>
+</tr>
+<tr>
+<td><strong>AD CS</strong> (Certificate Services)</td>
+<td>Infraestructura de claves públicas y certificados</td>
+<td>Autenticación con certificados, SSL/TLS, cifrado</td>
+</tr>
+<tr>
+<td><strong>AD FS</strong> (Federation Services)</td>
+<td>Federación de identidades, Single Sign-On (SSO)</td>
+<td>Integración con aplicaciones externas, SSO entre dominios</td>
+</tr>
+<tr>
+<td><strong>AD RMS</strong> (Rights Management)</td>
+<td>Protección de datos y derechos digitales (DRM)</td>
+<td>Control de acceso y protección de documentos y correos electrónicos</td>
+</tr>
+<tr>
+<td><strong>LDAP</strong></td>
+<td>Protocolo para acceder y gestionar servicios de directorio</td>
+<td>Autenticación y gestión de recursos desde aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Replication Services</strong></td>
+<td>Replicación de datos entre controladores de dominio</td>
+<td>Consistencia de la base de datos de AD en todas las ubicaciones</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition danger">
 <p class="admonition-title">Atención</p>
 <p>El controlador de dominio, hablando de ciberseguridad en entornos Windows, <strong><em>es la joya de la corona</em></strong>. </p>
@@ -1059,13 +1116,14 @@
 <p>Entre otras cosas, Active Directory gestiona los usuarios del entorno tratándolos como un tipo de objeto especial que se almacena en la base de datos central. A continuación se listan algunas cuestiones importantes a tener en cuenta sobre los usuarios de un dominio.</p>
 <ul>
 <li>
-<p>Aunque el nombre de usuario sirve para identificarle, el SID (Security Identifier) también puede ser utilizado para dicho fin. El SID es la combinación del Domain SID y el RID (Relative Identifier). Algunas herramientas enseñan el SID en lugar del nombre de usuario, por ese motivo es importante saber esto.</p>
+<p>Aunque el nombre de usuario sirve para identificarle, el SID (Security Identifier) también puede ser utilizado para dicho fin. El SID es la combinación del Domain SID y el RID (Relative Identifier). Algunas herramientas enseñan el SID en lugar del nombre de usuario, por ese motivo es importante saber esto. </p>
+<p>El SID asegura la correcta aplicación de permisos y controles de acceso en entornos Windows. Es fundamental para la administración de la seguridad y la gestión de identidades en redes corporativas.</p>
 </li>
 <li>
 <p>Los user secrets son elementos utilizados por el Domain Controller para realizar el proceso de autenticación. Las contraseñas no se guardan en texto plano, pero los user secrets derivados de ellas sí, los cuales son Hashes NT y claves Kerberos.</p>
 </li>
 <li>
-<p><strong>Los hashes LM y NT son almacenados en dos sitios: La SAM (Security Account Manager) de Windows y la base de datos del AD, la cual por defecto se encuentra disponible en los DC en la ruta C:\Windows\NTDS\ntds.dit.</strong></p>
+<p><strong>Los hashes LM y NT son almacenados en dos sitios: La SAM (Security Account Manager) de Windows y (en entornos de dominio) en la base de datos del AD, la cual por defecto se encuentra disponible en los DC en la ruta C:\Windows\NTDS\ntds.dit.</strong></p>
 </li>
 <li>
 <p>Aunque los hashes NT no son contraseñas, se pueden utilizar en algunos casos para ataques del tipo Pass-The-Hash/Overpass-The-Hash</p>
@@ -1082,8 +1140,10 @@
 <ul>
 <li>Es una base de datos distribuida.</li>
 <li>Cuenta con una estructura basada en objetos y jerarquías de clases.</li>
-<li>El archivo NTDS.dit es una base de datos que almacena datos de Active Directory, incluida información sobre objetos de usuario, grupos y pertenencia a grupos. Incluye los hashes NTLM  de las contraseñas para todos los usuarios y computadores.</li>
 </ul>
+<p>El archivo NTDS.dit es una base de datos que almacena datos de Active Directory, incluida información sobre objetos de usuario, grupos y pertenencia a grupos. Incluye los hashes NTLM  de las contraseñas para todos los usuarios y computadores.</p>
+<p>En entornos con múltiples controladores de dominio, NTDS.dit permite la replicación de datos entre estos controladores, asegurando que todos tengan copias actualizadas de la base de datos de Active Directory.</p>
+<p>Este archivo utiliza un formato de base de datos basado en Extensible Storage Engine (ESE), que es el mismo motor de base de datos utilizado en otras aplicaciones de Microsoft, como Microsoft Exchange.</p>
 <p>Al extraer estos hashes, es posible utilizar herramientas como Mimikatz para realizar ataques de pass-the-hash o herramientas como Hashcat para descifrar estas contraseñas. La extracción y el descifrado de estas contraseñas se pueden realizar sin conexión, por lo que serán indetectables. Una vez que un atacante ha extraído estos hashes, puede actuar como cualquier usuario, incluidos los administradores de dominio.</p>
 <h2 id="gpos">GPOs</h2>
 <h3 id="que-es-una-directiva-de-grupo">¿Qué es una directiva de grupo?</h3>
