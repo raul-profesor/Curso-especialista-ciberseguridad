@@ -1,5 +1,5 @@
 ---
-title: Ejercicios básicos manejo Linux
+title: Conceptos básicos entornos Linux
 description: Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. Ejercicio de comandos Linux.
 ---
 
@@ -537,7 +537,7 @@ En este apartado se describe cómo se implementan las contraseñas dentro del si
 
 ### El archivo /etc/passwd
 
-Tradicionalmente, Unix usa el archivo `/etc/passwd`` para realizar un seguimiento de cada usuario en el sistema. El archivo `/etc/passwd` contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).
+Tradicionalmente, Unix usa el archivo `/etc/passwd` para realizar un seguimiento de cada usuario en el sistema. El archivo `/etc/passwd` contiene el nombre de usuario, el nombre real, la información de identificación y la información básica de la cuenta de cada usuario. Cada línea del archivo contiene un registro de base de datos; los campos de registro están separados por dos puntos (:).
 
 Se puede usar el comando `cat` para mostrar el archivo `/etc/passwd` del sistema. Aquí algunas líneas de muestra de un archivo típico:
 
@@ -652,7 +652,7 @@ ls
 cd ../..
 ```
 
-Ahora que ya sabemos cómo crear varios directorios simplemente pasándolos como argumentos separados al mkdircomando. Pero supongamos que queremos crear un directorio con un espacio en el nombre. Vamos a intentarlo:
+Ahora ya sabemos cómo crear varios directorios simplemente pasándolos como argumentos separados al comando mkdir. Pero supongamos que queremos crear un directorio con un espacio en el nombre. Vamos a intentarlo:
 
 ```sh
 mkdir otro directorio
@@ -706,7 +706,7 @@ cat test_?.txt
 cat test_*
 ```
 !!!Warning "Atención"
-        Precisamente por las carácteres comodín en los comandos, tampoco es recomendable usar signos de puntuación en los nombres de los archivos, de otra forma habría que "escapar" estos caracteres a la hora de trabajar en la línea de comandos con los nombres de los archivos
+        Precisamente por los carácteres comodín en los comandos, tampoco es recomendable usar signos de puntuación en los nombres de los archivos, de otra forma habría que "escapar" estos caracteres a la hora de trabajar en la línea de comandos con los nombres de los archivos
 
 Observando la salida de ```ls```, se puede ver que los únicos archivos o carpetas que comienzan por "t" son los tres archivos de prueba que acabamos de crear, por lo que incluso se podría simplificar ese último comando aún más ```cat t*```, lo que significa "concatenar todos los archivos cuyos nombres comienzan con una t y van seguidos de cero o más caracteres ”. Usemos esta capacidad para unir todos nuestros archivos en un solo archivo nuevo y luego verlo:
 

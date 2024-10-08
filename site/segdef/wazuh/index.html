@@ -6,6 +6,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Configuración escenario Wazuh server, clientes Linux y Windows. Reglas para detectar webshells. AWS, Amazon, Terraform, ansible, automatizado, automatización. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
+      
       
       
         <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/wazuh/">
@@ -19,7 +21,7 @@
     
     
       
-        <title>Detección de web shells con Wazuh - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Detección de webshells con Wazuh - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Detección de web shells con Wazuh
+              Detección de webshells con Wazuh
             
           </span>
         </div>
@@ -1196,6 +1198,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#despliegue-automatizado-del-escenario" class="md-nav__link">
+    Despliegue automatizado del escenario
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1801,6 +1810,9 @@ Define:<span class="w"> </span>DUMP_RUN_CFG
 <p>El laboratorio se apaga automáticamente a las 4 horas, tiempo más que suficiente para llevar a cabo la práctica. En caso contrario, podréis reiniciarlo puesto que sólo se apagan las instancias pero no se pierde el trabajo.</p>
 <p>Si trabajáis en varias tandas o acabáis antes de las 4 horas, apagadlo vosotros para evitar gastos innecearios en vuestro crédito de 100$. Para ello, en la página de lanzamiento del laboratorio, esta vez le daremos a <strong><em>End lab</em></strong></p>
 </div>
+<h2 id="despliegue-automatizado-del-escenario">Despliegue automatizado del escenario</h2>
+<p>Para desplegar este escenario de forma automatizada en AWS se puede hacer uso del siguiente repositorio: </p>
+<p><a href="https://github.com/raul-profesor/wazuh-webshells-terraform.git">https://github.com/raul-profesor/wazuh-webshells-terraform.git</a></p>
 
 
   
