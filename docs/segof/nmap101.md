@@ -31,7 +31,7 @@ Con Nmap:
 
 Como se ha indicado al principio, Nmap es, con mucho, la herramienta de escaneo de red más utilizada. Es una herramienta de escaneo de puertos, lo que significa que recopila información de estos puertos. 
 
-Nmap es un detector de puertos. Puede escuchar las respuestas en el proceso. Puede determinar si un puerto está abierto o cerrado o filtrado de una forma u otra por el firewall (un sistema diseñado para denegar el acceso de usuarios no autorizados hacia o desde una red privada).
+Nmap puede escucha las repsuestas de los sistemas y así determinar si un puerto está abierto, cerrado o filtrado de una forma u otra por el firewall (un sistema diseñado para denegar el acceso de usuarios no autorizados hacia o desde una red privada).
 
 Es una herramienta flexible y versátil, lo que significa que puede adaptarse a diferentes actividades y funciones.
 
@@ -40,19 +40,18 @@ Es una herramienta flexible y versátil, lo que significa que puede adaptarse a 
 
 Tal y como podemos leer en el propio site de [Nmap](https://nmap.org/book/intro.html):
 
-Nmap utiliza paquetes IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes/firewalls están en uso y decenas de otras características.
+!!!quote "Cita"
+    Nmap utiliza paquetes IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes/firewalls están en uso y decenas de otras características.
 
-Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Nmap se ejecuta en todos los principales sistemas operativos de computadoras, y están disponibles versiones gráficas y de consola.
+    Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Nmap se ejecuta en todos los principales sistemas operativos de computadoras, y están disponibles versiones gráficas y de consola.
 
 ## Windows o Linux
 
-Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Unix. La versión de Windows se lanzó en 2000, pero con algunas limitaciones que incluyen:
+Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Unix. La versión de Windows se lanzó en 2000, pero actualmente cuenta con algunas limitaciones que incluyen:
 
-+ Microsoft eliminó el soporte para el socket TCP/IP sin procesar, ha demostrado ser difícil escanear varios clientes VPN ya que Nmap solo admite interfaces Ethernet.
-
-+ Se sabe que las API de red de Windows tienen varias deficiencias, por lo que no son lo suficientemente eficientes.
-
-+ Escanear la propia máquina desde sí misma se ha demostrado ser difícil de ejecutar y, por lo tanto, imposible.
++ No se pueden realizar escaneos tan en profundidad como en un sistema Unix (por ejemplo puede haber problemas con clientes VPN)
++ No se puede escanear la propia máquina 
++ Los escaneos en Windows, por la manera que tiene de formar los paquetes, puede resultar un poco más lenta en algunos casos
 
 !!!Info "Info"
     Por lo tanto, se recomienda el uso de Nmap en Linux por una mayor rapidez, eficiencia y experiencia de uso.
@@ -60,6 +59,88 @@ Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Uni
     Es posible instalar la interfaz gráfica "Zenmap" como frontend de Nmap aunque en este curso únicamente veremos su manejo en línea de comandos en Linux.
 
     Este curso no cubre el proceso de instalación de ninguna de las dos herramientas en ninguno de los dos SSOO ya que se da por sabido este proceso.
+
+## ¿Cómo es una cabecera TCP?
+
+![](../img/CabeceraTCP.png)
+
+## ¿Qué es el 3-way-handshake?
+
+El **3-way handshake** (o **apretón de manos de tres vías**) es el proceso utilizado en el protocolo **TCP** (Transmission Control Protocol) para establecer una conexión confiable entre un cliente y un servidor antes de transmitir datos. Este proceso es clave para garantizar que ambas partes estén listas para enviar y recibir datos, y que la conexión sea confiable.
+
+### Proceso del **3-way handshake**:
+
+1. **SYN (Solicitud de sincronización)**:
+      - El cliente inicia la conexión enviando un segmento TCP con el **flag SYN** activado.
+      - El segmento incluye un número de secuencia (sequence number), que en este caso será un valor inicial (digamos, `seq = x`).
+   
+   **Propósito**: El cliente informa al servidor que quiere iniciar una comunicación y establece su número de secuencia.
+
+2. **SYN-ACK (Sincronización y reconocimiento)**:
+      - El servidor recibe el mensaje SYN del cliente y responde con un segmento que tiene dos flags activados: **SYN** y **ACK**.
+      - El **SYN** indica que el servidor también quiere sincronizar la conexión, y el **ACK** es para confirmar que recibió correctamente el SYN del cliente.
+      - El servidor envía su propio número de secuencia (`seq = y`) y reconoce el número de secuencia del cliente con un **acknowledgment number** (por ejemplo, `ack = x + 1`).
+      
+   **Propósito**: El servidor confirma que recibió la solicitud del cliente y envía su propio número de secuencia para la sincronización.
+
+3. **ACK (Confirmación del cliente)**:
+      - El cliente recibe el segmento **SYN-ACK** del servidor y responde con un segmento **ACK**.
+      - Este segmento contiene el **acknowledgment number** (`ack = y + 1`), que confirma que recibió el número de secuencia del servidor.
+   
+   **Propósito**: El cliente confirma que ha recibido el SYN del servidor, y la conexión se establece.
+
+Una vez que el **3-way handshake** se ha completado, la conexión está completamente establecida y se pueden intercambiar datos de manera confiable.
+
+### Explicación gráfica
+
+A continuación te describo cómo se verían las tres fases del 3-way handshake. Aunque no puedo insertar imágenes directamente, te puedo describir cómo podrías visualizarlo:
+
+#### Paso 1: Cliente envía SYN
+```
+Cliente                       Servidor
+   |                              |
+   | --- [SYN, seq = x] --->      |
+   |                              |
+```
+- El cliente envía un paquete SYN con el número de secuencia `x`.
+
+#### Paso 2: Servidor responde con SYN-ACK
+```
+Cliente                                    Servidor
+   |                                           |
+   | --- [SYN, seq = x] --->                   |
+   |                                           |
+   | <--- [SYN, ACK, seq = y, ack = x + 1] --- |
+   |                                           |
+```
+- El servidor responde con un SYN y ACK, reconociendo el número de secuencia del cliente (con `ack = x + 1`) y enviando su propio número de secuencia (`seq = y`).
+
+#### Paso 3: Cliente responde con ACK
+```
+Cliente                                     Servidor
+   |                                            |
+   | --- [SYN, seq = x] --->                    |
+   |                                            |
+   | <--- [SYN, ACK, seq = y, ack = x + 1] ---  |
+   |                                            |
+   | --- [ACK, ack = y + 1] --->                |
+   |                                            |
+```
+- El cliente envía el último paquete, un **ACK** que confirma el número de secuencia del servidor (`ack = y + 1`).
+
+Con esto, la conexión TCP está establecida y lista para transmitir datos.
+
+---
+
+### Resumen 
+
+1. **SYN**: El cliente dice "Quiero iniciar una conexión, este es mi número de secuencia."
+2. **SYN-ACK**: El servidor responde "Confirmo que recibí tu solicitud, aquí está mi número de secuencia."
+3. **ACK**: El cliente responde "He recibido tu número de secuencia, comencemos a enviar datos."
+
+### Concepto clave
+
+- El intercambio de números de secuencia y **acknowledgments** (confirmaciones) asegura que ambos lados saben qué datos han sido enviados y recibidos, permitiendo que la transmisión de información sea confiable y ordenada. 
 
 ## Uso de Nmap
 
@@ -215,7 +296,7 @@ $nmap -sS objetivo
 ```
 #### Escaneo TCP connect (-sT)
 
-El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción.Este es el caso cuando un usuario no tiene privilegios de paquetes sin procesar.
+El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción. Este es el caso cuando un usuario no tiene privilegios para fabricar mensajes a medida con los flags necesarios.
 
 En lugar de escribir paquetes sin procesar como hacen la mayoría de los otros tipos de escaneo, Nmap le pide al sistema operativo subyacente que establezca una conexión con la máquina y el puerto de destino emitiendo la llamada al sistema de conexión.
 
@@ -323,7 +404,7 @@ Es imposible comentar todas las opciones que se pueden usar con Nmap, pero algun
 
 + ```-A```: Esta opción hace que Nmap se esfuerce en identificar el sistema operativo, los servicios y las versiones de destino. También hace traceroute y **aplica scripts NSE para detectar información adicional**. Este es un escaneo bastante ruidoso ya que aplica muchos escaneos diferentes. Los scripts NSE aplicados son los de la configuración por defecto.
 
-* ```-v```: Mayor verbosidad. Esto nos dará información adicional en los datos generados por Nmap.
+* ```-v```: Mayor detalle. Esto nos dará información adicional en los datos generados por Nmap.
 
 * ```-sV```: Se utiliza para sondear activamente los puertos abiertos para intentar determinar qué servicio y versión están ejecutando. 
 
@@ -495,6 +576,134 @@ Se actualizarán los script contra la base de datos de Nmap y los script nuevos 
     ```sh
     nmap -sV --script smb* <Objetivo>
     ```
-## Ejercicios de Nmap
 
-Completar la sala dedicada a Nmap en TryHackMe: [Furthernmap](https://tryhackme.com/room/furthernmap)
+
+## Evasión de firewall con Nmap
+
+Como ya hemos visto, Nmap permite escaneos con diferentes parámetros del protocolo TCP, un pequeño resumen que tendremos en cuenta para esta sección es:
+
+| Escaneo       | Flags TCP     | Tamaño (Bytes) | TTL |
+|---------------|---------------|----------------|-----|
+| -sT           | SYN           | 60             | 64  |
+| -sS (Stealth) | SYN           | 44             | <64 |
+| -sF (Fin)     | FIN           | 40             | <64 |
+| -sN (Null)    | NULL          | 40             | <64 |
+| -sX (Xmas)    | FIN, PSH, URG | 40             | <64 |
+
+### ¿Qué es un firewall o cortafuegos?
+Un cortafuegos es una medida de seguridad contra intentos de conexión no autorizados desde redes externas. Todo sistema de seguridad de cortafuegos se basa en un componente de software que supervisa el tráfico de red entre el cortafuegos y las conexiones de datos entrantes y decide cómo gestionar la conexión en función de las reglas establecidas.
+
+Comprueba si los paquetes de red individuales se pasan, se ignoran o se bloquean. Este mecanismo está diseñado para evitar conexiones no deseadas que podrían ser 
+potencialmente peligrosas.
+
+#### Determinar los cortafuegos y sus reglas
+Ya sabemos que cuando un puerto aparece como filtrado, puede deberse a varias razones. En la mayoría de los casos, los cortafuegos tienen ciertas reglas establecidas para manejar conexiones específicas. Los paquetes pueden ser descartados o rechazados. Los paquetes rechazados son ignorados y no se devuelve ninguna respuesta desde el host.
+
+Esto es diferente para los paquetes rechazados que se devuelven con una bandera RST. Estos paquetes contienen diferentes tipos de códigos de error ICMP o no contienen nada en absoluto.
+
+Tales errores pueden ser:
+
+ + Net Unreachable
+ + Net Prohibited
+ + Host Unreachable
+ + Host Prohibited
+ + Port Unreachable
+ + Proto Unreachable
+
+El método de sondeo TCP ACK (-sA) de Nmap es mucho más difícil de filtrar para los cortafuegos y sistemas IDS/IPS que los sondeos regulares SYN (-sS) o Connect (-sT) porque sólo envían un paquete TCP con la bandera ACK. 
+
+Cuando un puerto está cerrado o abierto, el host debe responder con una bandera `RST`. A diferencia de las conexiones salientes, todos los intentos de conexión (con la bandera SYN ) procedentes de redes externas suelen ser bloqueados por los cortafuegos. Sin embargo, los paquetes con la bandera ACK a menudo pasan a través del cortafuegos porque éste no puede determinar si la conexión se estableció primero desde la red externa o desde la red interna.
+
+### Dockerfile
+
+```Dockerfile
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary packages, including iproute2
+RUN apt-get update && \
+    apt-get install -y iproute2 iputils-ping curl tcpdump iptables nginx openssh-server && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+RUN mkdir /var/run/sshd
+
+
+RUN echo 'root:root' | chpasswd
+
+EXPOSE 80 22
+
+CMD ["sh", "-c", "service nginx start && /usr/sbin/sshd -D"]
+```
+
+```bash
+docker build -t nmap-demo .
+
+docker run --privileged -d -p 8080:80 -p 2220:22 --name nmap-demo-c nmap-demo
+```
+
+
+### Bypass del bloqueo de paquetes SYN
+
+```bash
+iptables -I INPUT -p tcp --tcp-flags ALL SYN -j REJECT --reject-with tcp-reset
+
+nmap -p22,80 -sT
+
+sudo nmap -p22,80 -sS
+
+sudo nmap -p22,80 -sX
+```
+
+
+### Bypass del bloqueo por tamaño de paquete con Stealth scan
+
+```bash
+iptables -F INPUT
+
+iptables -I INPUT -p tcp -m length --length 60 -j REJECT --reject-with tcp-reset
+
+nmap -p22,80 -sT
+
+sudo nmap -p22,80 -sS
+
+iptables -nvL INPUT
+
+iptables -I INPUT -p tcp -m length --length 44 -j REJECT --reject-with tcp-reset
+iptables -I INPUT -p tcp -m length --length 40 -j REJECT --reject-with tcp-reset
+
+nmap -p22,80 -sT
+
+sudo nmap -p22,80 -sX
+
+sudo nmap -p22,80 --data-length 41 
+
+iptables -I INPUT -p tcp -m length --length 1:150 -j REJECT --reject-with tcp-reset
+```
+
+### Bypass de bloqueo por filtrado de puerto de origen
+
+```bash
+iptables -I INPUT -p tcp --sport 11222 -j ACCEPT
+iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+
+sudo nmap -p22,80 -g 11222
+```
+
+### Bypass de bloqueo por filtrado de direcciones MAC (MAC spoofing)
+
+```bash
+iptables -I INPUT -p tcp -m mac --mac-source "73:3b:3a:98:fc:4d" -j ACCEPT
+iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+
+sudo nmap -p22,80 --spoof-mac 73:3b:3a:98:fc:4d
+```
+
+### Bypass de bloqueo por filtrado de direcciones IP (IP spoofing)
+
+```bash
+.2
+
+sudo nmap -p22,80 -e eth0 -S x.x.x.x -sS x.x.x.x
+```
