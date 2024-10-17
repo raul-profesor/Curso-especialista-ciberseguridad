@@ -574,6 +574,81 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#como-es-una-cabecera-tcp" class="md-nav__link">
+    ¿Cómo es una cabecera TCP?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-el-3-way-handshake" class="md-nav__link">
+    ¿Qué es el 3-way-handshake?
+  </a>
+  
+    <nav class="md-nav" aria-label="¿Qué es el 3-way-handshake?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proceso-del-3-way-handshake" class="md-nav__link">
+    Proceso del 3-way handshake:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicacion-grafica" class="md-nav__link">
+    Explicación gráfica
+  </a>
+  
+    <nav class="md-nav" aria-label="Explicación gráfica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-cliente-envia-syn" class="md-nav__link">
+    Paso 1: Cliente envía SYN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-servidor-responde-con-syn-ack" class="md-nav__link">
+    Paso 2: Servidor responde con SYN-ACK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-cliente-responde-con-ack" class="md-nav__link">
+    Paso 3: Cliente responde con ACK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    Resumen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concepto-clave" class="md-nav__link">
+    Concepto clave
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#uso-de-nmap" class="md-nav__link">
     Uso de Nmap
   </a>
@@ -744,9 +819,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicios-de-nmap" class="md-nav__link">
-    Ejercicios de Nmap
+  <a href="#evasion-de-firewall-con-nmap" class="md-nav__link">
+    Evasión de firewall con Nmap
   </a>
+  
+    <nav class="md-nav" aria-label="Evasión de firewall con Nmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-firewall-o-cortafuegos" class="md-nav__link">
+    ¿Qué es un firewall o cortafuegos?
+  </a>
+  
+    <nav class="md-nav" aria-label="¿Qué es un firewall o cortafuegos?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#determinar-los-cortafuegos-y-sus-reglas" class="md-nav__link">
+    Determinar los cortafuegos y sus reglas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    Dockerfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-del-bloqueo-de-paquetes-syn" class="md-nav__link">
+    Bypass del bloqueo de paquetes SYN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-del-bloqueo-por-tamano-de-paquete-con-stealth-scan" class="md-nav__link">
+    Bypass del bloqueo por tamaño de paquete con Stealth scan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-de-bloqueo-por-filtrado-de-puerto-de-origen" class="md-nav__link">
+    Bypass de bloqueo por filtrado de puerto de origen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-de-bloqueo-por-filtrado-de-direcciones-mac-mac-spoofing" class="md-nav__link">
+    Bypass de bloqueo por filtrado de direcciones MAC (MAC spoofing)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-de-bloqueo-por-filtrado-de-direcciones-ip-ip-spoofing" class="md-nav__link">
+    Bypass de bloqueo por filtrado de direcciones IP (IP spoofing)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1088,27 +1231,24 @@
 <li>Un administrador puede escanear/monitorear un solo host o miles de dispositivos conectados.</li>
 </ul>
 <p>Como se ha indicado al principio, Nmap es, con mucho, la herramienta de escaneo de red más utilizada. Es una herramienta de escaneo de puertos, lo que significa que recopila información de estos puertos. </p>
-<p>Nmap es un detector de puertos. Puede escuchar las respuestas en el proceso. Puede determinar si un puerto está abierto o cerrado o filtrado de una forma u otra por el firewall (un sistema diseñado para denegar el acceso de usuarios no autorizados hacia o desde una red privada).</p>
+<p>Nmap puede escucha las repsuestas de los sistemas y así determinar si un puerto está abierto, cerrado o filtrado de una forma u otra por el firewall (un sistema diseñado para denegar el acceso de usuarios no autorizados hacia o desde una red privada).</p>
 <p>Es una herramienta flexible y versátil, lo que significa que puede adaptarse a diferentes actividades y funciones.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>El escaneo de puertos también se puede denominar enumeración o descubrimiento de puertos. Usaremos estos términos indistintamente, mientras que significan lo mismo.</p>
 </div>
 <p>Tal y como podemos leer en el propio site de <a href="https://nmap.org/book/intro.html">Nmap</a>:</p>
+<div class="admonition quote">
+<p class="admonition-title">Cita</p>
 <p>Nmap utiliza paquetes IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes/firewalls están en uso y decenas de otras características.</p>
 <p>Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Nmap se ejecuta en todos los principales sistemas operativos de computadoras, y están disponibles versiones gráficas y de consola.</p>
+</div>
 <h2 id="windows-o-linux">Windows o Linux</h2>
-<p>Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Unix. La versión de Windows se lanzó en 2000, pero con algunas limitaciones que incluyen:</p>
+<p>Nmap se desarrolló inicialmente para ejecutarse solo en sistemas basados en Unix. La versión de Windows se lanzó en 2000, pero actualmente cuenta con algunas limitaciones que incluyen:</p>
 <ul>
-<li>
-<p>Microsoft eliminó el soporte para el socket TCP/IP sin procesar, ha demostrado ser difícil escanear varios clientes VPN ya que Nmap solo admite interfaces Ethernet.</p>
-</li>
-<li>
-<p>Se sabe que las API de red de Windows tienen varias deficiencias, por lo que no son lo suficientemente eficientes.</p>
-</li>
-<li>
-<p>Escanear la propia máquina desde sí misma se ha demostrado ser difícil de ejecutar y, por lo tanto, imposible.</p>
-</li>
+<li>No se pueden realizar escaneos tan en profundidad como en un sistema Unix (por ejemplo puede haber problemas con clientes VPN)</li>
+<li>No se puede escanear la propia máquina </li>
+<li>Los escaneos en Windows, por la manera que tiene de formar los paquetes, puede resultar un poco más lenta en algunos casos</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1116,6 +1256,78 @@
 <p>Es posible instalar la interfaz gráfica "Zenmap" como frontend de Nmap aunque en este curso únicamente veremos su manejo en línea de comandos en Linux.</p>
 <p>Este curso no cubre el proceso de instalación de ninguna de las dos herramientas en ninguno de los dos SSOO ya que se da por sabido este proceso.</p>
 </div>
+<h2 id="como-es-una-cabecera-tcp">¿Cómo es una cabecera TCP?</h2>
+<p><img alt="" src="../../img/CabeceraTCP.png" /></p>
+<h2 id="que-es-el-3-way-handshake">¿Qué es el 3-way-handshake?</h2>
+<p>El <strong>3-way handshake</strong> (o <strong>apretón de manos de tres vías</strong>) es el proceso utilizado en el protocolo <strong>TCP</strong> (Transmission Control Protocol) para establecer una conexión confiable entre un cliente y un servidor antes de transmitir datos. Este proceso es clave para garantizar que ambas partes estén listas para enviar y recibir datos, y que la conexión sea confiable.</p>
+<h3 id="proceso-del-3-way-handshake">Proceso del <strong>3-way handshake</strong>:</h3>
+<ol>
+<li><strong>SYN (Solicitud de sincronización)</strong>:<ul>
+<li>El cliente inicia la conexión enviando un segmento TCP con el <strong>flag SYN</strong> activado.</li>
+<li>El segmento incluye un número de secuencia (sequence number), que en este caso será un valor inicial (digamos, <code>seq = x</code>).</li>
+</ul>
+</li>
+</ol>
+<p><strong>Propósito</strong>: El cliente informa al servidor que quiere iniciar una comunicación y establece su número de secuencia.</p>
+<ol>
+<li><strong>SYN-ACK (Sincronización y reconocimiento)</strong>:<ul>
+<li>El servidor recibe el mensaje SYN del cliente y responde con un segmento que tiene dos flags activados: <strong>SYN</strong> y <strong>ACK</strong>.</li>
+<li>El <strong>SYN</strong> indica que el servidor también quiere sincronizar la conexión, y el <strong>ACK</strong> es para confirmar que recibió correctamente el SYN del cliente.</li>
+<li>El servidor envía su propio número de secuencia (<code>seq = y</code>) y reconoce el número de secuencia del cliente con un <strong>acknowledgment number</strong> (por ejemplo, <code>ack = x + 1</code>).</li>
+</ul>
+</li>
+</ol>
+<p><strong>Propósito</strong>: El servidor confirma que recibió la solicitud del cliente y envía su propio número de secuencia para la sincronización.</p>
+<ol>
+<li><strong>ACK (Confirmación del cliente)</strong>:<ul>
+<li>El cliente recibe el segmento <strong>SYN-ACK</strong> del servidor y responde con un segmento <strong>ACK</strong>.</li>
+<li>Este segmento contiene el <strong>acknowledgment number</strong> (<code>ack = y + 1</code>), que confirma que recibió el número de secuencia del servidor.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Propósito</strong>: El cliente confirma que ha recibido el SYN del servidor, y la conexión se establece.</p>
+<p>Una vez que el <strong>3-way handshake</strong> se ha completado, la conexión está completamente establecida y se pueden intercambiar datos de manera confiable.</p>
+<h3 id="explicacion-grafica">Explicación gráfica</h3>
+<p>A continuación te describo cómo se verían las tres fases del 3-way handshake. Aunque no puedo insertar imágenes directamente, te puedo describir cómo podrías visualizarlo:</p>
+<h4 id="paso-1-cliente-envia-syn">Paso 1: Cliente envía SYN</h4>
+<p><div class="highlight"><pre><span></span><code>Cliente                       Servidor
+   |                              |
+   | --- [SYN, seq = x] ---&gt;      |
+   |                              |
+</code></pre></div>
+- El cliente envía un paquete SYN con el número de secuencia <code>x</code>.</p>
+<h4 id="paso-2-servidor-responde-con-syn-ack">Paso 2: Servidor responde con SYN-ACK</h4>
+<p><div class="highlight"><pre><span></span><code>Cliente                                    Servidor
+   |                                           |
+   | --- [SYN, seq = x] ---&gt;                   |
+   |                                           |
+   | &lt;--- [SYN, ACK, seq = y, ack = x + 1] --- |
+   |                                           |
+</code></pre></div>
+- El servidor responde con un SYN y ACK, reconociendo el número de secuencia del cliente (con <code>ack = x + 1</code>) y enviando su propio número de secuencia (<code>seq = y</code>).</p>
+<h4 id="paso-3-cliente-responde-con-ack">Paso 3: Cliente responde con ACK</h4>
+<p><div class="highlight"><pre><span></span><code>Cliente                                     Servidor
+   |                                            |
+   | --- [SYN, seq = x] ---&gt;                    |
+   |                                            |
+   | &lt;--- [SYN, ACK, seq = y, ack = x + 1] ---  |
+   |                                            |
+   | --- [ACK, ack = y + 1] ---&gt;                |
+   |                                            |
+</code></pre></div>
+- El cliente envía el último paquete, un <strong>ACK</strong> que confirma el número de secuencia del servidor (<code>ack = y + 1</code>).</p>
+<p>Con esto, la conexión TCP está establecida y lista para transmitir datos.</p>
+<hr />
+<h3 id="resumen">Resumen</h3>
+<ol>
+<li><strong>SYN</strong>: El cliente dice "Quiero iniciar una conexión, este es mi número de secuencia."</li>
+<li><strong>SYN-ACK</strong>: El servidor responde "Confirmo que recibí tu solicitud, aquí está mi número de secuencia."</li>
+<li><strong>ACK</strong>: El cliente responde "He recibido tu número de secuencia, comencemos a enviar datos."</li>
+</ol>
+<h3 id="concepto-clave">Concepto clave</h3>
+<ul>
+<li>El intercambio de números de secuencia y <strong>acknowledgments</strong> (confirmaciones) asegura que ambos lados saben qué datos han sido enviados y recibidos, permitiendo que la transmisión de información sea confiable y ordenada. </li>
+</ul>
 <h2 id="uso-de-nmap">Uso de Nmap</h2>
 <p>Podemos ver la infinidad de opciones que nos ofrece Nmap simplemente escribiendo <code>$ nmap</code> en el terminal:</p>
 <p><img alt="" src="../../img/nmap_opciones.png" style="height:600px;width:500px" /></p>
@@ -1250,7 +1462,7 @@ SEE<span class="w"> </span>THE<span class="w"> </span>MAN<span class="w"> </span
 <div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sS<span class="w"> </span>objetivo
 </code></pre></div>
 <h4 id="escaneo-tcp-connect-st">Escaneo TCP connect (-sT)</h4>
-<p>El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción.Este es el caso cuando un usuario no tiene privilegios de paquetes sin procesar.</p>
+<p>El escaneo de conexión TCP es el tipo de escaneo TCP predeterminado cuando el escaneo SYN no es una opción. Este es el caso cuando un usuario no tiene privilegios para fabricar mensajes a medida con los flags necesarios.</p>
 <p>En lugar de escribir paquetes sin procesar como hacen la mayoría de los otros tipos de escaneo, Nmap le pide al sistema operativo subyacente que establezca una conexión con la máquina y el puerto de destino emitiendo la llamada al sistema de conexión.</p>
 <p><div class="highlight"><pre><span></span><code><span class="nv">$nmap</span><span class="w"> </span>-sT<span class="w"> </span>objetivo
 </code></pre></div>
@@ -1328,7 +1540,7 @@ Características:</p>
 <p><code>-A</code>: Esta opción hace que Nmap se esfuerce en identificar el sistema operativo, los servicios y las versiones de destino. También hace traceroute y <strong>aplica scripts NSE para detectar información adicional</strong>. Este es un escaneo bastante ruidoso ya que aplica muchos escaneos diferentes. Los scripts NSE aplicados son los de la configuración por defecto.</p>
 </li>
 <li>
-<p><code>-v</code>: Mayor verbosidad. Esto nos dará información adicional en los datos generados por Nmap.</p>
+<p><code>-v</code>: Mayor detalle. Esto nos dará información adicional en los datos generados por Nmap.</p>
 </li>
 <li>
 <p><code>-sV</code>: Se utiliza para sondear activamente los puertos abiertos para intentar determinar qué servicio y versión están ejecutando. </p>
@@ -1481,10 +1693,142 @@ Nmap<span class="w"> </span><span class="k">done</span>:<span class="w"> </span>
 <p>Para haber buscado vulnerabilidad específicas de SMB, podíamos haber utilizado también:</p>
 <div class="highlight"><pre><span></span><code>nmap<span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span>smb*<span class="w"> </span>&lt;Objetivo&gt;
 </code></pre></div>
-<h2 id="ejercicios-de-nmap">Ejercicios de Nmap</h2>
 </li>
 </ol>
-<p>Completar la sala dedicada a Nmap en TryHackMe: <a href="https://tryhackme.com/room/furthernmap">Furthernmap</a></p>
+<h2 id="evasion-de-firewall-con-nmap">Evasión de firewall con Nmap</h2>
+<p>Como ya hemos visto, Nmap permite escaneos con diferentes parámetros del protocolo TCP, un pequeño resumen que tendremos en cuenta para esta sección es:</p>
+<table>
+<thead>
+<tr>
+<th>Escaneo</th>
+<th>Flags TCP</th>
+<th>Tamaño (Bytes)</th>
+<th>TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-sT</td>
+<td>SYN</td>
+<td>60</td>
+<td>64</td>
+</tr>
+<tr>
+<td>-sS (Stealth)</td>
+<td>SYN</td>
+<td>44</td>
+<td>&lt;64</td>
+</tr>
+<tr>
+<td>-sF (Fin)</td>
+<td>FIN</td>
+<td>40</td>
+<td>&lt;64</td>
+</tr>
+<tr>
+<td>-sN (Null)</td>
+<td>NULL</td>
+<td>40</td>
+<td>&lt;64</td>
+</tr>
+<tr>
+<td>-sX (Xmas)</td>
+<td>FIN, PSH, URG</td>
+<td>40</td>
+<td>&lt;64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="que-es-un-firewall-o-cortafuegos">¿Qué es un firewall o cortafuegos?</h3>
+<p>Un cortafuegos es una medida de seguridad contra intentos de conexión no autorizados desde redes externas. Todo sistema de seguridad de cortafuegos se basa en un componente de software que supervisa el tráfico de red entre el cortafuegos y las conexiones de datos entrantes y decide cómo gestionar la conexión en función de las reglas establecidas.</p>
+<p>Comprueba si los paquetes de red individuales se pasan, se ignoran o se bloquean. Este mecanismo está diseñado para evitar conexiones no deseadas que podrían ser 
+potencialmente peligrosas.</p>
+<h4 id="determinar-los-cortafuegos-y-sus-reglas">Determinar los cortafuegos y sus reglas</h4>
+<p>Ya sabemos que cuando un puerto aparece como filtrado, puede deberse a varias razones. En la mayoría de los casos, los cortafuegos tienen ciertas reglas establecidas para manejar conexiones específicas. Los paquetes pueden ser descartados o rechazados. Los paquetes rechazados son ignorados y no se devuelve ninguna respuesta desde el host.</p>
+<p>Esto es diferente para los paquetes rechazados que se devuelven con una bandera RST. Estos paquetes contienen diferentes tipos de códigos de error ICMP o no contienen nada en absoluto.</p>
+<p>Tales errores pueden ser:</p>
+<ul>
+<li>Net Unreachable</li>
+<li>Net Prohibited</li>
+<li>Host Unreachable</li>
+<li>Host Prohibited</li>
+<li>Port Unreachable</li>
+<li>Proto Unreachable</li>
+</ul>
+<p>El método de sondeo TCP ACK (-sA) de Nmap es mucho más difícil de filtrar para los cortafuegos y sistemas IDS/IPS que los sondeos regulares SYN (-sS) o Connect (-sT) porque sólo envían un paquete TCP con la bandera ACK. </p>
+<p>Cuando un puerto está cerrado o abierto, el host debe responder con una bandera <code>RST</code>. A diferencia de las conexiones salientes, todos los intentos de conexión (con la bandera SYN ) procedentes de redes externas suelen ser bloqueados por los cortafuegos. Sin embargo, los paquetes con la bandera ACK a menudo pasan a través del cortafuegos porque éste no puede determinar si la conexión se estableció primero desde la red externa o desde la red interna.</p>
+<h3 id="dockerfile">Dockerfile</h3>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:latest</span>
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+
+<span class="c"># Install necessary packages, including iproute2</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>iproute2<span class="w"> </span>iputils-ping<span class="w"> </span>curl<span class="w"> </span>tcpdump<span class="w"> </span>iptables<span class="w"> </span>nginx<span class="w"> </span>openssh-server<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PermitRootLogin yes&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/ssh/sshd_config
+
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>/var/run/sshd
+
+
+<span class="k">RUN</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;root:root&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>chpasswd
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">80 22</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;service nginx start &amp;&amp; /usr/sbin/sshd -D&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>nmap-demo<span class="w"> </span>.
+
+docker<span class="w"> </span>run<span class="w"> </span>--privileged<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">2220</span>:22<span class="w"> </span>--name<span class="w"> </span>nmap-demo-c<span class="w"> </span>nmap-demo
+</code></pre></div>
+<h3 id="bypass-del-bloqueo-de-paquetes-syn">Bypass del bloqueo de paquetes SYN</h3>
+<div class="highlight"><pre><span></span><code>iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--tcp-flags<span class="w"> </span>ALL<span class="w"> </span>SYN<span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+
+nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sT
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sS
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sX
+</code></pre></div>
+<h3 id="bypass-del-bloqueo-por-tamano-de-paquete-con-stealth-scan">Bypass del bloqueo por tamaño de paquete con Stealth scan</h3>
+<div class="highlight"><pre><span></span><code>iptables<span class="w"> </span>-F<span class="w"> </span>INPUT
+
+iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-m<span class="w"> </span>length<span class="w"> </span>--length<span class="w"> </span><span class="m">60</span><span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+
+nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sT
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sS
+
+iptables<span class="w"> </span>-nvL<span class="w"> </span>INPUT
+
+iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-m<span class="w"> </span>length<span class="w"> </span>--length<span class="w"> </span><span class="m">44</span><span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-m<span class="w"> </span>length<span class="w"> </span>--length<span class="w"> </span><span class="m">40</span><span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+
+nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sT
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-sX
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>--data-length<span class="w"> </span><span class="m">41</span><span class="w"> </span>
+
+iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-m<span class="w"> </span>length<span class="w"> </span>--length<span class="w"> </span><span class="m">1</span>:150<span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+</code></pre></div>
+<h3 id="bypass-de-bloqueo-por-filtrado-de-puerto-de-origen">Bypass de bloqueo por filtrado de puerto de origen</h3>
+<div class="highlight"><pre><span></span><code>iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>--sport<span class="w"> </span><span class="m">11222</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-g<span class="w"> </span><span class="m">11222</span>
+</code></pre></div>
+<h3 id="bypass-de-bloqueo-por-filtrado-de-direcciones-mac-mac-spoofing">Bypass de bloqueo por filtrado de direcciones MAC (MAC spoofing)</h3>
+<div class="highlight"><pre><span></span><code>iptables<span class="w"> </span>-I<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-m<span class="w"> </span>mac<span class="w"> </span>--mac-source<span class="w"> </span><span class="s2">&quot;73:3b:3a:98:fc:4d&quot;</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-j<span class="w"> </span>REJECT<span class="w"> </span>--reject-with<span class="w"> </span>tcp-reset
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>--spoof-mac<span class="w"> </span><span class="m">73</span>:3b:3a:98:fc:4d
+</code></pre></div>
+<h3 id="bypass-de-bloqueo-por-filtrado-de-direcciones-ip-ip-spoofing">Bypass de bloqueo por filtrado de direcciones IP (IP spoofing)</h3>
+<div class="highlight"><pre><span></span><code>.2
+
+sudo<span class="w"> </span>nmap<span class="w"> </span>-p22,80<span class="w"> </span>-e<span class="w"> </span>eth0<span class="w"> </span>-S<span class="w"> </span>x.x.x.x<span class="w"> </span>-sS<span class="w"> </span>x.x.x.x
+</code></pre></div>
 
 
   
