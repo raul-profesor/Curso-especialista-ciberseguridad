@@ -61,8 +61,9 @@ nav:
     - segof/index.md
     - Introducción: segof/Intro.md
     - Introducción a Nmap: segof/nmap101.md
-    - Explotación de vulnerabilidades: segof/exploit.md
+    - Enumeración de servicios: segof/enumeracion.md
     - Causas de vulnerabilidades en sistemas: segof/servicios_desact.md
+    - Explotación de vulnerabilidades: segof/exploit.md
     - Metasploit: segof/metasploit.md
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
     - Spoofing & phising: segof/phising.md
