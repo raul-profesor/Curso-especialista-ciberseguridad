@@ -10,6 +10,8 @@ Metasploit es un proyecto de código abierto para la seguridad informática, que
 
 Su subproyecto más conocido es el Metasploit Framework, una herramienta para desarrollar y ejecutar exploits contra una máquina remota.
 
+![](../img/metasploit.png)
+
 ### Metasploit framework (MSF)
 
 Metasploit framework es una herramienta desarrollada en Perl y Ruby en su mayor parte, que está enfocada a auditores de seguridad y equipos Red Team y Blue Team.
@@ -40,17 +42,36 @@ A continuación una brevísima reseña de los componentes individuales.
 
 #### Ruby Extension Library (REX)
 
-La biblioteca de extensión de Ruby (Ruby Extension Library) es el componente básico del framework. Contiene una variedad de clases que pueden ser utilizadas por las capas subyacentes o directamente por otras herramientas. Las funciones proporcionadas por la biblioteca incluyen, por ejemplo, programas de servidor y cliente de diversos protocolos de red.
+La biblioteca de extensión de Ruby (Ruby Extension Library) es el componente básico del framework. Contiene una variedad de clases que pueden ser utilizadas por las capas subyacentes o directamente por otras herramientas. 
 
+Se utiliza para manejar diversas funciones de bajo nivel dentro de la plataforma. Esta biblioteca es fundamental para el funcionamiento de Metasploit, ya que proporciona herramientas y métodos esenciales que permiten la interacción con redes, el manejo de sockets, la codificación de datos y otras tareas críticas. Algunas de las características principales de Rex incluyen:
+
++** Manejo de Sockets**: Proporciona herramientas para crear y gestionar conexiones de red, incluyendo TCP, UDP y SSL, esenciales para realizar ataques y explotación de vulnerabilidades.
+
++ **Codificación y Decodificación de Datos**: Incluye métodos para convertir datos a diferentes formatos como base64, hexadecimal, y otros, permitiendo que los exploits se transmitan de manera encubierta y compatible.
+
++ **Manipulación de Archivos y Sistema Operativo**: Facilita la creación y gestión de archivos y directorios en sistemas comprometidos, así como el acceso y la ejecución de comandos en esos sistemas.
+
++ **Soporte de Protocolos**: Implementa módulos para trabajar con protocolos de red comunes, como HTTP, FTP, SMB, y DNS, entre otros, lo cual es crucial para realizar exploración y explotación de sistemas de forma avanzada.
+
++ **Criptografía y Compresión**: Incluye herramientas para encriptar, desencriptar y comprimir datos, ayudando a mantener la confidencialidad y eficiencia de la transmisión de payloads.
+
+En resumen, Rex permite a los módulos de Metasploit realizar operaciones de red y manipulación de datos que serían muy complejas de implementar de forma individual en cada módulo.
 #### MSF-Core
 
-El núcleo del framework proporciona funciones para el manejo de eventos y gestión de sesiones, proporcionando funciones importantes para el manejo del framework.
-MSF-Base, es decir, proporciona una API básica.
+msf-core es el núcleo de Metasploit Framework, una colección de bibliotecas y módulos esenciales que forman la base sobre la cual se ejecutan todas las funcionalidades de Metasploit. Este núcleo facilita la gestión de todos los componentes de Metasploit, incluidos los módulos de exploits, payloads, auxiliares, y post-explotación. Algunas de sus principales características incluyen:
 
-El framework permite acceder más fácilmente al núcleo y forma la interfaz con el exterior. Las interfaces de usuario acceden directamente a esta biblioteca. Vale la pena mencionar la función del plug-in de Metasploit, que permite una extensión flexible del framework agregando nuevos comandos a los componentes existentes.
-Módulos
++ **Gestión de módulos**: msf-core organiza y carga módulos de manera estructurada, permitiendo que Metasploit tenga un catálogo organizado de exploits, payloads, encoders, y nops (no-operation).
 
-La estructura en módulo de las funciones del framework permite un manejo claro del programa, ya que los nombres de los módulos también son reflejados en la estructura en carpetas del programa.
++ **Compatibilidad con múltiples plataformas**: Facilita la portabilidad de Metasploit, permitiendo que funcione en distintos sistemas operativos (Linux, Windows, macOS) sin problemas de compatibilidad.
+
++ **Conexión con nibliotecas**: msf-core se comunica con otras bibliotecas como Rex y msf-lib para manejar la lógica de bajo nivel (manejo de sockets, encriptación, etc.), permitiendo que los desarrolladores de módulos se enfoquen en el desarrollo de exploits sin preocuparse de estos aspectos técnicos.
+
++ **Control de desiones y gestión de estado**: Ayuda a manejar sesiones, como las generadas por payloads como Meterpreter, permitiendo la interacción con sistemas comprometidos y la ejecución de comandos remotos.
+
++ **Soporte para plugins y extensibilidad**: msf-core permite la inclusión de plugins que amplían sus funcionalidades, como integraciones con bases de datos y herramientas de gestión de vulnerabilidades, facilitando la extensibilidad de Metasploit.
+
+En pocas palabras, msf-core es el esqueleto de Metasploit, sobre el cual se construyen y gestionan todas sus funcionalidades, asegurando una integración fluida de todos los componentes y módulos del framework
 
 
 #### Exploits
@@ -59,7 +80,7 @@ Este modulo contiene programas y scripts diseñados para explotar vulnerabilidad
 
 #### Payloads
 
-Los payloads se proporcionan aquí, estos pueden ser usados tras una exitosa intrusión (explotación) en el sistema objetivo.
+Los payloads se proporcionan aquí, estos pueden ser usados tras una intrusión exitosa (explotación) en el sistema objetivo.
 
 Un exploit es una vulnerabilidad, y el payload es la carga que se ejecuta en esa vulnerabilidad, es decir, la carga que activamos a la hora de aprovechar dicha vulnerabilidad.
 
