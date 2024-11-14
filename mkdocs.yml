@@ -66,6 +66,7 @@ nav:
     - Explotación de vulnerabilidades: segof/exploit.md
     - Metasploit: segof/metasploit.md
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
+    - Shells: segof/rev_shell.md
     - Spoofing & phising: segof/phising.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Ataques en entornos Active Directory: segof/HackingAD1.md
