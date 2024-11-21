@@ -107,20 +107,35 @@ Cuando un programa se ejecuta con privilegios de root, también lo hace la shell
 
 Se puede consultar una lista de programas con sus secuencias de escape correspondientes en [GTFObins](https://gtfobins.github.io/)
 
+GTFOBins es un proyecto y una base de datos en línea que recopila técnicas de escalación de privilegios y explotación de aplicaciones en sistemas Unix/Linux mediante el uso de binarios legítimos que están preinstalados en muchas distribuciones. 
+
+El nombre proviene de la expresión *GTFO* ("Get The F*** Out") y *bins* (abreviatura de binarios).
+
+#### ¿Qué incluye GTFOBins?
+
+1. Binarios aprovechables: Son programas que pueden ser utilizados de manera inesperada para realizar acciones maliciosas, como escapar de restricciones de seguridad, ejecutar comandos como otro usuario o incluso obtener acceso root.
+
+2. Categorías de uso: Cada binario incluye ejemplos clasificados según el objetivo que se busca alcanzar, tales como:
+   + Escaparse de entornos restringidos (jails o sandboxes).
+   + Leer o escribir archivos sensibles.
+   + Escalar privilegios.
+   + Establecer conexiones de red.
+   + Ejecutar comandos como superusuario o utilizando SUID/SGID.
+
 Procedimiento:
 
 1. Listar los programas que un usuario tiene permitido ejecutar como ^^sudo^^:
 
 
-    ```sh
+    ```shell-session
     $ sudo -l
     ...
-        (root) NOPASSWD: /usr/sbin/iftop
-        (root) NOPASSWD: /usr/bin/find
-        (root) NOPASSWD: /usr/bin/nano
-        (root) NOPASSWD: /usr/bin/vim
-        (root) NOPASSWD: /usr/bin/man
-        (root) NOPASSWD: /usr/bin/awk
+    (root) NOPASSWD: /usr/sbin/iftop
+    (root) NOPASSWD: /usr/bin/find
+    (root) NOPASSWD: /usr/bin/nano
+    (root) NOPASSWD: /usr/bin/vim
+    (root) NOPASSWD: /usr/bin/man
+    (root) NOPASSWD: /usr/bin/awk
     ...
     ```
 

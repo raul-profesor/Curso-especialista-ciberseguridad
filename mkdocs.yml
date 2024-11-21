@@ -55,7 +55,6 @@ nav:
     - Ejercicios propuestos Linux: section/Ej_Linux.md
     - Entornos Windows: section/EntWin.md
     - Ejercicios propuestos Windows: section/Ej_Win.md
-    - Escalada de privilegios: section/privesc.md
     - Webgrafía: section/webgrafia.md
   - Seguridad ofensiva:
     - segof/index.md
@@ -67,6 +66,7 @@ nav:
     - Metasploit: segof/metasploit.md
     - Ejercicio práctico - Explotación de EternalBlue: segof/EternalBlue.md
     - Shells: segof/rev_shell.md
+    - Escalada de privilegios: segof/privesc.md
     - Spoofing & phising: segof/phising.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
     - Ataques en entornos Active Directory: segof/HackingAD1.md

