@@ -19,6 +19,18 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
       + El archivo SAM está cifrado usando claves almacenadas en LSA (Local Security Authority).
       + No es accesible directamente mientras el sistema está activo.
   
+        **¿Cómo funciona?**
+
+        Cuando un usuario intenta iniciar sesión, el sistema toma la contraseña introducida y la compara con la versión cifrada almacenada en la SAM. Si coincide, se concede acceso al sistema. Si la SAM se corrompe o no puede accederse, los usuarios no podrán iniciar sesión.
+
+        **Acceso a la SAM:**
+
+        El acceso a la SAM está restringido a los administradores y el sistema operativo.
+
+        Herramientas de hacking como "pwdump" intentan obtener las contraseñas desde la SAM al obtener acceso a su archivo, pero esto generalmente requiere acceso físico o privilegios de administrador, ya que el archivo está protegido.
+
+        Es una de las piezas fundamentales para la gestión de seguridad en sistemas operativos Windows.
+  
 + **Otros archivos**
 
     Las contraseñas también se pueden encontrar en una gran variedad de archivos, incluidos los archivos de configuración y los archivos creados por el usuario (generalmente en texto plano).
@@ -32,6 +44,10 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
     El sistema de Windows almacena en caché los últimos 10 hashes de inicio de sesión y algunos almacenan hasta 25 de forma predeterminada. Este número es configurable en el registro.
 
     Como ya se ha dicho, esto permite que si se pierda la conectividad con el Domain Controller de Active Directory, por la razón que sea, podamos al menos acceder a nuestro sistema.
+
+    Las credenciales en caché están físicamente guardadas en el archivo %SystemRoot%\System32\config\SECURITY.
+    
+    Este archivo es parte de la base de datos del registro de Windows y contiene datos relacionados con las políticas de seguridad locales, incluidas las credenciales en caché.
 
 + **LSA (Local Security Authority)**
 
@@ -51,6 +67,15 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
     
     Los formatos almacenados pueden ser texto sin formato (cifrado reversible), hash NT y LM y tickets Kerberos.
 
+### Resumen de las diferencias:
+
+  + ***SAM***: Base de datos local que almacena las credenciales de los usuarios y sus contraseñas cifradas.
+  + ***Credenciales en caché***: Copia local de las credenciales de los usuarios que permite la autenticación sin conexión a un controlador de dominio.
+  + ***LSA***: Entidad que maneja la seguridad local y las políticas de autenticación de usuarios, interactuando con la SAM y el LSASS.
+  + ***LSASS***: Proceso encargado de la autenticación y autorización de los usuarios, creando tokens de acceso y aplicando políticas de seguridad.
+
+En definitiva, la SAM almacena las credenciales de usuario, la LSA gestiona la seguridad y las políticas locales, el LSASS maneja la autenticación de los usuarios y la generación de tokens de seguridad, y las credenciales en caché permiten a los usuarios autenticarse sin conexión al controlador de dominio.
+
 + **Credential Manager**
   
     El administrador viene preinstalado ya en Windows 7 y superiores.
@@ -60,6 +85,11 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
     Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...).
 
     Las credenciales están cifradas usando DPAPI (Data Protection API) y asociadas al perfil del usuario.
+
+    Podría pensarse que el Credential Manager y la SAM almacenan información duplicada, pero no es así:
+
+      + El Credential Manager está orientado a credenciales que los usuarios guardan manualmente para servicios específicos.
+      + La SAM almacena las contraseñas de las cuentas de usuario locales en Windows, utilizadas en el inicio de sesión.
 
 + **Base de datos de dominio de Active Directory (NTDS.DIT)**
   
@@ -187,11 +217,15 @@ Un atacante puede obtener credenciales de diferentes áreas de un sistema. Con a
 
 * **WDigest**
 
-Este es un protocolo heredado utilizado para autenticar usuarios en Windows. Cuando está habilitado, LSASS mantiene una copia de texto sin formato de la contraseña del usuario registrado en la memoria. Si bien el servicio está deshabilitado de forma predeterminada hoy en día, todavía existe en las últimas versiones de Windows y los atacantes a menudo lo habilitan para robar credenciales.
+Este es un protocolo heredado utilizado para autenticar usuarios en Windows. 
+
+CUando está habilitado, peermite la transmisión de credenciales en texto plano durante ciertos procesos de autenticación. Su lugar en el ecosistema de seguridad de Windows se relaciona con el manejo de contraseñas en memoria y su interacción con otros componentes de seguridad como LSASS, pero su uso ha sido desalentado debido a sus implicaciones de seguridad.
+
+Si bien el servicio está deshabilitado de forma predeterminada hoy en día, todavía existe en las últimas versiones de Windows y los atacantes a menudo lo habilitan para robar credenciales.
 
 * **Administrador de cuentas de seguridad (SAM)**
 
-Este es un archivo de base de datos que existe en Windows desde los días de XP. SAM se usa para autenticar a los usuarios, tanto locales como remotos, lo que permite el acceso cuando las credenciales proporcionadas coinciden con lo que SAM tiene en el archivo. Si los atacantes roban este archivo, potencialmente se puede descifrar y se pueden extraer los nombres de usuario y las contraseñas almacenados en él.
+Ya hemos hablado largo y tendido anteriormente de este archivo. Si los atacantes roban este fichero, potencialmente se puede descifrar y se pueden extraer los nombres de usuario y las contraseñas almacenados en él.
 
 * **LSA secrets**
 
@@ -207,13 +241,24 @@ Si un atacante logra ingresar a un controlador de dominio, el servidor de red re
 
 Aquí es donde Active Directory almacena información sobre los miembros de un dominio para verificar usuarios y credenciales.
 
+* **DCSync**
+
+En lugar de una ubicación, DCSync es una técnica en la que un atacante aprovecha la forma en que los controladores de dominio manejan las llamadas API disponibles. En resumen, el atacante imita el comportamiento de otro controlador de dominio a través de llamadas a la API y consigue que el controlador envíe hashes de credenciales que se pueden usar en otros ataques.
+
 * **Archivos de preferencias de directivas de grupo**
 
 Esta herramienta de Windows permite a los administradores implementar directivas de dominio para incluir credenciales incrustadas, lo que facilita la administración. Estas políticas generalmente se almacenan en un recurso compartido llamado SYSVOL, que cualquier usuario del dominio puede ver y potencialmente descifrar.
 
-* **DCSync**
+  ***Mitigaciones y medidas correctivas***
 
-En lugar de una ubicación, DCSync es una técnica en la que un atacante aprovecha la forma en que los controladores de dominio manejan las llamadas API disponibles. En resumen, el atacante imita el comportamiento de otro controlador de dominio a través de llamadas a la API y consigue que el controlador envíe hashes de credenciales que se pueden usar en otros ataques.
+   1. Eliminar las credenciales de GPP:
+       + Microsoft dejó de soportar la funcionalidad para configurar credenciales en GPP en Windows Server 2012 R2 y posteriores.
+       + Los administradores deben buscar y eliminar cualquier archivo de GPP que contenga credenciales.
+   1. Implementar directivas de privilegios mínimos
+   2. Actualizar los controladores de dominio
+   3. Uso de alternativas más seguras:
+      + Configurar cuentas o accesos a través de otros métodos más seguros, como PowerShell DSC (Desired State Configuration) o herramientas de gestión centralizada de credenciales (por ejemplo, soluciones de Privileged Access Management, PAM).
+
 
 ### Mimikatz
 
@@ -233,7 +278,7 @@ Una de las herramientas más utilizadas para realizar el dumping de credenciales
 
 + Utilizar un gestor de contraseñas con una contraseña fuerte y no almacenada.
 
-+ Implementar un hash y un encriptados fuertes.
++ Implementar un hash y un cifrado fuertes.
 
 + Supervisar el acceso a servicios como LSASS y bases de datos como SAM con regularidad.
 

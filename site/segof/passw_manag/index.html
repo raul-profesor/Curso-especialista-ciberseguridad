@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/passw_manag/">
       
       
-        <link rel="prev" href="../phising/">
+        <link rel="prev" href="../ad_enumeration/">
       
       
-        <link rel="next" href="../HackingAD1/">
+        <link rel="next" href="../phising/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
@@ -639,20 +639,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../phising/" class="md-nav__link">
-        Spoofing & phising
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -810,6 +796,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../phising/" class="md-nav__link">
+        Spoofing & phising
+      </a>
     </li>
   
 
@@ -1048,8 +1048,13 @@
 <ul>
 <li>
 <p><strong>Base de datos del administrador de cuentas de seguridad (SAM).</strong></p>
-<p>La base de datos SAM es un archivo que está presente en <ins>todos</ins> los sistemas Windows.</p>
-<p>Este archivo contiene todas las cuentas creadas, así como todas las cuentas integradas que se encuentran en un sistema operativo Windows (XP, Vista, Win7, 8.1 y 10). Las contraseñas se almacenan aquí como hashes. (hash de contraseña NT)</p>
+<p>La base de datos SAM es un archivo que está presente en <ins>todos</ins> los sistemas Windows en la ubicación <code>C:\Windows\System32\config\SAM</code></p>
+<p>Este archivo contiene todas las cuentas locales creadas, así como todas las cuentas locales integradas que se encuentran en un sistema operativo Windows (XP, Vista, Win7, 8.1 y 10). Las contraseñas se almacenan aquí como hashes. (hash de contraseña NT).</p>
+<p>Protección:</p>
+<ul>
+<li>El archivo SAM está cifrado usando claves almacenadas en LSA (Local Security Authority).</li>
+<li>No es accesible directamente mientras el sistema está activo.</li>
+</ul>
 </li>
 <li>
 <p><strong>Otros archivos</strong></p>
@@ -1063,8 +1068,14 @@
 <p>Como ya se ha dicho, esto permite que si se pierda la conectividad con el Domain Controller de Active Directory, por la razón que sea, podamos al menos acceder a nuestro sistema.</p>
 </li>
 <li>
-<p><strong>Secreto de la autoridad de seguridad local (LSA)</strong></p>
-<p>Los secretos de LSA se almacenan en el registro y permiten que los servicios se ejecuten con privilegios de usuario. Esto incluye VPN, tareas programadas, inicios de sesión automáticos, cuentas de servicio de copia de seguridad, sitios web de IIS, etc. Se incluyen en el registro de Seguridad/Política/Secretos en forma cifrada.</p>
+<p><strong>LSA (Local Security Authority)</strong></p>
+<p>El LSA (Local Security Authority) es un componente central de seguridad en Windows que gestiona la autenticación, autorización y políticas de seguridad del sistema.</p>
+<ul>
+<li>Es responsable de validar las credenciales de usuarios y servicios.</li>
+<li>Proporciona tokens de acceso para determinar qué recursos puede usar cada usuario.</li>
+<li>Funciona a través del proceso LSASS (lsass.exe), que protege y gestiona datos sensibles en memoria.</li>
+</ul>
+<p>Los <em>secretos de LSA</em> son datos sensibles que almacena y protege el LSA para garantizar la autenticación y el acceso seguro. Esto incluye VPN, tareas programadas, inicios de sesión automáticos, cuentas de servicio de copia de seguridad, sitios web de IIS, etc. Se incluyen en el registro de Seguridad/Política/Secretos en forma cifrada.</p>
 </li>
 <li>
 <p><strong>Proceso de servicio del subsistema de la autoridad de seguridad local (LSASS)</strong></p>
@@ -1074,18 +1085,30 @@
 </li>
 <li>
 <p><strong>Credential Manager</strong></p>
-<p>El administrador viene preinstalado ya en Windows 7 y superiores</p>
+<p>El administrador viene preinstalado ya en Windows 7 y superiores.</p>
 <p>Básicamente es un almacén digital que permite a los usuarios almacenar las credenciales de usuario de forma <em>"segura"</em>. Todas las credenciales se almacenan en una carpeta específica en el sistema de Windows. </p>
-<p>Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...)
-+ <strong>Base de datos de dominio de Active Directory (NTDS.DIT)</strong></p>
+<p>Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...).</p>
+<p>Las credenciales están cifradas usando DPAPI (Data Protection API) y asociadas al perfil del usuario.</p>
+</li>
+<li>
+<p><strong>Base de datos de dominio de Active Directory (NTDS.DIT)</strong></p>
 <p>Esta base de datos almacena todas las credenciales de los usuarios y equipos ubicados en cada servidor de controlador de dominio de Active Directory, en un entorno de dominio de Active Directory. </p>
-<p>Este archivo está ubicado en el directorio: <code>%SystemRoot%\NTDS)</code></p>
+<p>Este archivo está ubicado en el directorio: <code>C:\Windows\NTDS\NTDS.dit</code></p>
+<p>Es más complejo que el SAM, ya que soporta una infraestructura completa de dominio.</p>
+<p>Seguridad:</p>
+<ul>
+<li>
+<p>Los datos están cifrados usando claves maestras almacenadas en el subsistema LSA.</p>
+</li>
+<li>
+<p>Requiere privilegios elevados para ser accedido.</p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="tipos-de-hashes-de-credenciales-en-windows">Tipos de hashes de credenciales en Windows</h2>
 <h3 id="hash-lm">Hash LM</h3>
 <p>El hash <strong>LAN Manager</strong> fue uno de los primeros algoritmos de hash de contraseñas que usaron los sistemas operativos Windows y la única versión compatible, hasta la llegada de NTLM, que se usaba en Windows 2000, XP, Vista y 7. Los sistemas operativos más nuevos aún admiten el uso de hash LM con fines de compatibilidad con versiones anteriores. Sin embargo, está deshabilitado de forma predeterminada para Windows Vista y Windows 7.</p>
-<p>Como ya se ha indicado, LM se desactivó de manera predeterminada a partir de Windows Vista/Server 2008, pero aún podría permanecer en una red si todavía se usan </p>
 <p>Si realizaramos un volcado de la base de datos SAM/NTDS, se muestran junto con NTHash, antes de los dos puntos.</p>
 <p><ins>Ejemplo</ins></p>
 <ul>
@@ -1186,7 +1209,7 @@
 <p><ins>Ejemplo</ins></p>
 <p><code>admin::n46isnekpt:08CA45B7D7EA58EE:88DCBE4446168966A153A0064958DAC6: 5C7830315C78303100100000000000b45c67103d07d7b95acd12fa11230E0000000052920b85f78d013c31cdb3b92f5d765c783030</code></p>
 <h2 id="dumping-de-credenciales">Dumping de credenciales</h2>
-<p>El dumping de credenciales es un tipo de ciberataque en el que se vulnera un ordenador y el atacante obtiene los nombres de usuario y las contraseñas. Esto puede ser perjudicial si le ocurre a su ordenador personal, pero puede ser absolutamente devastador si un atacante es capaz de realizar el vertido de credenciales en un ordenador que forma parte de una red mayor.</p>
+<p>El dumping de credenciales es un tipo de ciberataque en el que se vulnera un ordenador y el atacante obtiene los nombres de usuario y las contraseñas. Esto puede ser perjudicial si le ocurre a su ordenador personal, pero puede ser absolutamente devastador si un atacante es capaz de realizar el dumping de credenciales en un ordenador que forma parte de una red más grande.</p>
 <p>Esta técnica de hacking se implementa después de que un ordenador haya sido comprometido por el atacante. Los nombres de usuario y las contraseñas son extremadamente valiosos para los ciberdelincuentes y pueden utilizarse para adquirir información sensible, así como para obtener acceso a las credenciales de administrador y otras cuentas privilegiadas o a otros ordenadores de una red.</p>
 <p>Después de obtener acceso a un ordenador, un atacante llevará a cabo el dumping o volcado de credenciales accediendo a la caché de contraseñas que se almacenan en la memoria de su ordenador.</p>
 <p>Para la comodidad del usuario, los sistemas operativos y los navegadores tienen la capacidad de guardar los nombres de usuario y las contraseñas y luego rellenar automáticamente su información de acceso a los sitios y programas que frecuenta. Desgraciadamente, esta comodidad tiene un coste y puede dejar la información más vulnerable al robo de credenciales y al dumping.</p>
@@ -1253,6 +1276,9 @@
 <li>
 <p>No mezclar las cuentas de administrador de dominio con las de grupos de administradores locales</p>
 </li>
+<li>
+<p>Habilitar Credential Guard en entornos modernos (Windows 10+).</p>
+</li>
 </ul>
 
 
@@ -1284,7 +1310,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../phising/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Spoofing &amp; phising" rel="prev">
+          <a href="../ad_enumeration/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Enumeración en entornos AD (Active Directory)" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1293,20 +1319,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Spoofing & phising
+                Enumeración en entornos AD (Active Directory)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../HackingAD1/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ataques en entornos Active Directory" rel="next">
+          <a href="../phising/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Spoofing &amp; phising" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Ataques en entornos Active Directory
+                Spoofing & phising
               </div>
             </div>
             <div class="md-footer__button md-icon">
