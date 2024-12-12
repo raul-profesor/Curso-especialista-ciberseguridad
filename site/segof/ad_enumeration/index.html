@@ -6,24 +6,22 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Fases de un pentest, test de intrusión, test de penetración. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
       
       
-      
-        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/Intro/">
-      
-      
-        <link rel="prev" href="../">
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/ad_enumeration/">
       
       
-        <link rel="next" href="../nmap101/">
+        <link rel="prev" href="../privesc/">
+      
+      
+        <link rel="next" href="../phising/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Teoría pentesting - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Enumeración en entornos AD (Active Directory) - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -89,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#conceptos-basicos" class="md-skip">
+        <a href="#introduccion-a-la-fase-de-enumeracion-en-un-pentesting-de-active-directory-ad" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -122,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Teoría pentesting
+              Enumeración en entornos AD (Active Directory)
             
           </span>
         </div>
@@ -499,89 +497,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Introducción
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Intro/" class="md-nav__link">
         Introducción
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#conceptos-basicos" class="md-nav__link">
-    Conceptos básicos
-  </a>
-  
-    <nav class="md-nav" aria-label="Conceptos básicos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fases-de-un-pentest" class="md-nav__link">
-    Fases de un pentest
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pentesting-vs-red-teaming" class="md-nav__link">
-    Pentesting vs Red teaming
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pentesting-pruebas-de-intrusion" class="md-nav__link">
-    Pentesting (Pruebas de intrusión)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#red-teaming" class="md-nav__link">
-    Red Teaming
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#diferencias-clave" class="md-nav__link">
-    Diferencias clave
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -703,11 +623,90 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../ad_enumeration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Enumeración en entornos AD (Active Directory)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Enumeración en entornos AD (Active Directory)
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-la-fase-de-enumeracion-en-un-pentesting-de-active-directory-ad" class="md-nav__link">
+    Introducción a la Fase de Enumeración en un Pentesting de Active Directory (AD)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-la-enumeracion-en-active-directory" class="md-nav__link">
+    ¿Qué es la enumeración en Active Directory?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-de-la-enumeracion" class="md-nav__link">
+    Objetivos de la enumeración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-y-metodos-de-enumeracion" class="md-nav__link">
+    Herramientas y métodos de enumeración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#informacion-critica-a-recopilar" class="md-nav__link">
+    Información Crítica a Recopilar
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riesgos-comunes-durante-la-enumeracion" class="md-nav__link">
+    Riesgos Comunes Durante la Enumeración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusión
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -967,106 +966,203 @@
                   
 
 
-  <h1>Introducción</h1>
+  <h1>Enumeración en entornos AD (Active Directory)</h1>
 
-<h2 id="conceptos-basicos">Conceptos básicos</h2>
-<p>Un pentesting o test de intrusión puede ser definido como una forma legal y autorizada de localizar y "explotar" satisfactoriamente sistemas informáticos con el propósito de hacerlos más seguros.</p>
-<p>El proceso incluye un sondeo en busca de vulnerabilidades así como proporcionar una serie de pruebas de concepto de los ataques para así demostrar que las vulnerabilidades son reales.</p>
-<p>Un adecuado pentest siempre acaba con una serie de recomendaciones específicas para solucionar los problemas que se han descubierto en la prueba. La idea general es encontrar problemas de seguridad usando las mismas herramientas y técnicas que un atacante. Estos descubrimientos podrán ser mitigados antes de que un cibercriminal real abuse de ellos.</p>
-<p>Los test de intrusión suelen conocerse de varias maneras:</p>
+<h2 id="introduccion-a-la-fase-de-enumeracion-en-un-pentesting-de-active-directory-ad">Introducción a la Fase de Enumeración en un Pentesting de Active Directory (AD)</h2>
+<p>La enumeración es una de las fases más críticas en un pentesting en entornos Active Directory, ya que permite al atacante (o auditor de seguridad) recopilar información clave sobre el dominio y sus componentes. </p>
+<p>Este conocimiento se utiliza para identificar vulnerabilidades, planificar movimientos laterales y, en última instancia, comprometer el dominio.</p>
+<h2 id="que-es-la-enumeracion-en-active-directory">¿Qué es la enumeración en Active Directory?</h2>
+<p>La enumeración en AD consiste en recopilar datos estructurados sobre los recursos de la red, como:</p>
 <ul>
-<li>Pentesting</li>
-<li>PT</li>
-<li>Ethical hacking</li>
-<li>White hacking</li>
-<li>Offensive security</li>
-<li>Red teaming</li>
+<li>Usuarios y grupos. </li>
+<li>Diferentes máquinas y servidores. </li>
+<li>Relaciones de confianza entre dominios. </li>
+<li>Permisos y configuraciones. </li>
+<li>Políticas de seguridad. </li>
+<li>Estos datos se obtienen utilizando protocolos y servicios estándar de Windows (como LDAP, SMB y Kerberos), lo que hace que muchas actividades de enumeración sean difíciles de detectar sin herramientas avanzadas de monitorización.</li>
 </ul>
-<p><strong>NO</strong> es lo mismo un pentest que un análisis de vulnerabilidades.</p>
-<h3 id="fases-de-un-pentest">Fases de un pentest</h3>
-<p>Un Penetration Test comprende múltiples etapas con diferentes tipos de actividades en distintos ámbitos y entornos. La profundidad con que se lleven a cabo las actividades dependerá de ciertos factores, entre los que se destaca el riesgo que puede generar hacia el cliente alguno de los métodos que se apliquen durante la evaluación.</p>
-<p>Se establece un previo acuerdo con el cliente para llevar a cabo las diferentes fases del análisis. Dependiendo de la fuente consultada, el nombre o algunos detalles de las fases pueden diferir, pero en rasgos generales pueden nombrarse:</p>
+<h2 id="objetivos-de-la-enumeracion">Objetivos de la enumeración</h2>
 <ol>
-<li>
-<p><ins><strong>Fase de reconocimiento:</strong></ins> Posiblemente, esta sea una de las etapas que más tiempo demande. Asimismo, se definen objetivos y se recopila toda la información posible que luego será utilizada a lo largo de las siguientes fases. La información que se busca abarca desde nombres y direcciones de correo de los empleados de la organización, hasta la topología de la red, direcciones IP, entre otros. Cabe destacar que el tipo de información o la profundidad de la pesquisa dependerán de los objetivos que se hayan fijado en la auditoría.</p>
+<li><u>Mapear la estructura del dominio:</u><ul>
+<li>Identificar controladores de dominio (Domain Controllers, DCs) y su configuración. </li>
+<li>Enumerar relaciones entre dominios (dominios padres e hijos, relaciones de confianza, etc.). </li>
+</ul>
 </li>
-<li>
-<p><ins><strong>Fase de escaneo:</strong></ins> Utilizando la información obtenida previamente se buscan posibles vectores de ataque. Esta etapa involucra el escaneo de puertos y servicios. Posteriormente se realiza el escaneo de vulnerabilidades que permitirá definir los vectores de ataque.</p>
+<li><u>Identificar cuentas críticas:</u><ul>
+<li>Administradores del dominio. </li>
+<li>Cuentas de servicio y sus privilegios. </li>
+<li>Cuentas con contraseñas débiles o configuraciones inseguras. </li>
+</ul>
 </li>
-<li>
-<p><ins><strong>Fase de enumeración:</strong></ins> El objetivo de esta etapa es la obtención de los datos referente a los usuarios, nombres de equipos, servicios de red, entre otros. A esta altura de la auditoría, se realizan conexiones activas con el sistema y se ejecutan consultas dentro del mismo.</p>
+<li><u>Obtener información sobre configuraciones de seguridad:</u><ul>
+<li>Políticas de contraseñas y bloqueos. </li>
+<li>Grupos privilegiados y sus miembros. </li>
+</ul>
 </li>
-<li>
-<p><ins><strong>Fase de acceso:</strong></ins> En esta etapa finalmente se realiza el acceso al sistema. Esta tarea se logra a partir de la explotación de aquellas vulnerabilidades detectadas que fueron aprovechadas por el auditor para comprometer el sistema.</p>
-</li>
-<li>
-<p><ins><strong>Fase de mantenimiento de acceso:</strong></ins> Luego de haberse obtenido el acceso al sistema, se busca la manera de preservar el sistema comprometido a disposición de quien lo ha atacado. El objetivo es mantener el acceso al mencionado sistema perdurable en el tiempo.</p>
+<li><u>Descubrir puntos débiles:</u><ul>
+<li>Permisos mal configurados en objetos del directorio. </li>
+<li>Contraseñas almacenadas en texto plano o en archivos compartidos. </li>
+</ul>
 </li>
 </ol>
-<p><a href="https://www.welivesecurity.com/la-es/2012/07/24/penetration-test-en-que-consiste/">Fuente</a></p>
-<p><img alt="" src="../../img/pentestfases.png" /></p>
-<p><img alt="" src="../../img/pentestfases2.png" style="height:600px;width:500px" /></p>
-<p>Se usan muchas y muy diferentes herramientas, incluso dependiendo del pentester o analista de seguridad, para cada fase. En las siguientes secciones nos centraremos en el archiconocido escáner de puertos Nmap que, como su nombre hace pensar, se utilizaría en la fase de escaneo, tras haber recopilado la mayor cantidad de informaciónd el objetivo.</p>
-<h3 id="pentesting-vs-red-teaming">Pentesting vs Red teaming</h3>
-<p><strong>Pentesting</strong> y <strong>red teaming</strong> son dos enfoques utilizados en la seguridad informática para evaluar la resistencia de los sistemas y redes contra ciberataques. Aunque ambos tienen el objetivo común de identificar vulnerabilidades, existen diferencias clave en su alcance, metodología y objetivos. Aquí te dejo un resumen de cada uno:</p>
-<h3 id="pentesting-pruebas-de-intrusion"><strong>Pentesting (Pruebas de intrusión)</strong></h3>
-<ul>
-<li><strong>Objetivo</strong>: Identificar y explotar vulnerabilidades específicas en un sistema o aplicación.</li>
-<li><strong>Enfoque</strong>: Simula ataques para descubrir posibles puntos de entrada o fallos de seguridad, como vulnerabilidades en aplicaciones web, redes, o sistemas operativos.</li>
-<li><strong>Alcance</strong>: Suele ser más limitado y específico, centrado en una o varias áreas o componentes de la infraestructura.</li>
-<li><strong>Duración</strong>: Generalmente corto (desde unos días a algunas semanas).</li>
-<li><strong>Metodología</strong>: Evaluación técnica basada en un conjunto de pruebas previamente acordadas (black-box, white-box, grey-box).</li>
-<li><strong>Reportes</strong>: Detalla las vulnerabilidades encontradas y cómo explotarlas, pero no suele incluir el comportamiento del equipo de seguridad ni la respuesta ante ataques.</li>
-<li><strong>Resultados esperados</strong>: Un listado técnico de vulnerabilidades y recomendaciones de mitigación.</li>
+<h2 id="herramientas-y-metodos-de-enumeracion">Herramientas y métodos de enumeración</h2>
+<ol>
+<li><u>Comandos Nativos de Windows:</u><ul>
+<li><strong>nltest</strong>: Descubre el nombre del dominio, servidores activos y relaciones de confianza. </li>
+<li><strong>net user /domain</strong>: Enumera usuarios en el dominio. </li>
+<li><strong>net group /domain</strong>: Lista grupos y sus miembros. </li>
+<li><strong>gpresult</strong>: Consulta las políticas de grupo aplicadas. </li>
 </ul>
-<h3 id="red-teaming"><strong>Red Teaming</strong></h3>
+</li>
+<li>
+<p><u>Uso de Protocolos:</u></p>
 <ul>
-<li><strong>Objetivo</strong>: Evaluar la capacidad de la organización para detectar, responder y prevenir ataques reales en un entorno lo más cercano posible a la realidad.</li>
-<li><strong>Enfoque</strong>: Simula ciberataques de un adversario real, utilizando múltiples vectores de ataque (físico, social, cibernético) para comprometer la seguridad de la organización.</li>
-<li><strong>Alcance</strong>: Amplio, abarca todo el entorno de la organización, incluyendo personas, procesos y tecnología.</li>
-<li><strong>Duración</strong>: Suele ser más largo (varias semanas o meses) y menos acotado.</li>
-<li><strong>Metodología</strong>: Implica la planificación y ejecución de ataques sofisticados que pueden incluir phishing, ingeniería social, explotación de redes y dispositivos físicos, entre otros.</li>
-<li><strong>Reportes</strong>: Además de las vulnerabilidades técnicas, incluye la evaluación de la respuesta del equipo de seguridad, puntos débiles en la detección y recomendaciones estratégicas.</li>
-<li><strong>Resultados esperados</strong>: Evaluación integral de la resiliencia de la organización frente a amenazas reales, más que solo la identificación de fallos técnicos.</li>
+<li>
+<p><strong>LDAP (Lightweight Directory Access Protocol)</strong>: </p>
+<p>▪ Protocolo utilizado por Active Directory para acceder a los datos. </p>
+<p>▪ Utilizado para consultar la base de datos del dominio, como cuentas de usuario y grupos. </p>
+</li>
+<li>
+<p><strong>SMB (Server Message Block)</strong>: </p>
+<p>▪ Enumeración de recursos compartidos y políticas de acceso. </p>
+</li>
+<li>
+<p><strong>Kerberos</strong>: </p>
+<p>▪ Permite identificar servicios y cuentas relacionadas con SPNs (Service Principal Names). </p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Los SPNs (Service Principal Names) son identificadores únicos que se utilizan en entornos de Active Directory para asociar servicios a cuentas específicas. Son esenciales para que el protocolo Kerberos funcione correctamente, ya que permiten que un cliente encuentre y autentique servicios en una red de manera segura.</p>
+<p>Por ejemplo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="go">HTTP/server01.example.com</span>
+<span class="go">MSSQLSvc/sqlserver01.example.com:1433</span>
+</code></pre></div>
+Cuando un cliente necesita acceder a un servicio, utiliza el SPN para solicitar un ticket de servicio (Service Ticket) al KDC (Key Distribution Center). Esto permite la autenticación mutua entre el cliente y el servicio.</p>
+</div>
+</li>
 </ul>
-<h3 id="diferencias-clave">Diferencias clave</h3>
-<table>
-<thead>
-<tr>
-<th><strong>Aspecto</strong></th>
-<th><strong>Pentesting</strong></th>
-<th><strong>Red Teaming</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Alcance</strong></td>
-<td>Específico, limitado</td>
-<td>Amplio, abarca toda la organización</td>
-</tr>
-<tr>
-<td><strong>Duración</strong></td>
-<td>Corta</td>
-<td>Prolongada</td>
-</tr>
-<tr>
-<td><strong>Enfoque</strong></td>
-<td>Vulnerabilidades técnicas</td>
-<td>Evaluación de la respuesta y resiliencia</td>
-</tr>
-<tr>
-<td><strong>Métodos de ataque</strong></td>
-<td>Técnicas directas y específicas</td>
-<td>Ataques simulados de adversarios reales</td>
-</tr>
-<tr>
-<td><strong>Resultados</strong></td>
-<td>Reporte técnico de vulnerabilidades</td>
-<td>Evaluación estratégica y táctica</td>
-</tr>
-</tbody>
-</table>
-<p>Ambos enfoques son complementarios, y las organizaciones suelen utilizar ambos para cubrir distintas áreas de seguridad. Mientras el <strong>pentesting</strong> se centra en identificar fallos concretos en sistemas, el <strong>red teaming</strong> ofrece una visión más amplia de cómo un atacante podría explotar esos fallos y cómo respondería el equipo de seguridad.</p>
+</li>
+<li>
+<p><u>Herramientas Especializadas:</u></p>
+<ul>
+<li>
+<p><strong>BloodHound</strong>: </p>
+<p>▪ Herramienta gráfica que analiza relaciones de confianza, privilegios y rutas de ataque en AD. </p>
+<p><img alt="" src="../../img/bloodhoud.webp" /></p>
+</li>
+<li>
+<p><strong>PowerView (parte de PowerSploit)</strong>: </p>
+<p>▪ Framework de enumeración avanzada escrito en PowerShell. </p>
+<p>▪ Ejemplo: <em>Get-NetUser</em> para listar usuarios, <em>Get-NetGroupMember</em> para miembros de grupos. </p>
+<p><img alt="" src="../../img/ted-netuser.jpg" /></p>
+</li>
+<li>
+<p><strong>Impacket</strong>: </p>
+<p>▪ Biblioteca de Python con herramientas como <strong>GetADUsers.py</strong> para enumerar usuarios en AD. </p>
+<p><img alt="" src="../../img/impacket.png" /></p>
+</li>
+<li>
+<p><strong>CrackMapExec</strong>: </p>
+<p>▪ Herramienta de enumeración y explotación para redes Windows. </p>
+<p>▪ Ejemplo: <code>cme smb &lt;ip&gt; -u usuario -p contraseña --shares para listar recursos compartidos.</code></p>
+<div class="admonition nota">
+<p class="admonition-title">Nota</p>
+<p>Ya no se encuentra activamente mantenida en su repositorio original. El proyecto fue archivado en diciembre de 2023 debido a conflictos relacionados con un "fork hostil". </p>
+<p>Sin embargo, su desarrollo continúa bajo un nuevo nombre: <strong>NetExec</strong>, que busca mantener y ampliar las capacidades de CME con actualizaciones regulares y una mayor participación de la comunidad.</p>
+<p>NetExec, liderado por contribuidores como NeffIsBack y Marshall-Hallenbeck, se posiciona como un sucesor gratuito y de código abierto. Este proyecto hereda las funcionalidades principales de CME, corrige problemas previos y está diseñado para satisfacer las necesidades actuales de los pentesters con un enfoque más colaborativo</p>
+<p><img alt="" src="../../img/nxc.png" /></p>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><u>Enumeración Anónima:</u></p>
+<ul>
+<li>En configuraciones incorrectas, es posible obtener información sin autenticación. </li>
+<li>Herramientas como <strong>rpcclient</strong> o <strong>enum4linux</strong> pueden explotar configuraciones débiles de SMB. </li>
+</ul>
+</li>
+</ol>
+<h2 id="informacion-critica-a-recopilar">Información Crítica a Recopilar</h2>
+<ol>
+<li>
+<p>Usuarios y Cuentas</p>
+<ul>
+<li>Usuarios del dominio: Nombres de usuarios y detalles como cuentas deshabilitadas, bloqueadas o con contraseñas nunca expiradas.</li>
+<li>Cuentas privilegiadas: Identificación de miembros del grupo Domain Admins o Enterprise Admins.</li>
+<li>Cuentas de servicio: Cuentas asociadas a servicios, a menudo configuradas con permisos elevados y contraseñas débiles o reutilizadas.</li>
+</ul>
+</li>
+<li>
+<p>Grupos y Relaciones</p>
+<ul>
+<li>Grupos del dominio: Identificación de grupos administrativos y sus miembros.</li>
+<li>Relaciones de confianza: Enumeración de relaciones entre dominios o bosques, que pueden usarse para ataques de trust exploitation.</li>
+<li>Políticas de grupos (GPOs): Configuraciones que podrían revelar credenciales, rutas de inicio de sesión o configuraciones inseguras.</li>
+</ul>
+</li>
+<li>
+<p>Equipos y Servidores</p>
+<ul>
+<li>Controladores de dominio (DCs): Identificar servidores críticos que gestionan el directorio.</li>
+<li>Servidores y estaciones de trabajo: Inventario de máquinas del dominio y sus roles.</li>
+<li>Servicios expuestos: Enumerar servicios como SMB, LDAP, y RPC para posibles puntos de entrada.</li>
+</ul>
+</li>
+<li>
+<p>SPNs (Service Principal Names)</p>
+<ul>
+<li>Cuentas con SPNs registrados: Esto es fundamental para identificar posibles objetivos de ataques de Kerberoasting, donde se extraen tickets Kerberos para descifrar contraseñas.</li>
+</ul>
+</li>
+<li>
+<p>Políticas y Configuraciones</p>
+<ul>
+<li>Política de contraseñas: Reglas sobre longitud, complejidad y caducidad.</li>
+<li>Delegación de cuentas: Detectar cuentas configuradas para delegación, que pueden ser explotadas para ataques como Kerberos delegation abuse.</li>
+<li>Restricciones de inicio de sesión: Determinar si hay restricciones basadas en horarios o estaciones.</li>
+</ul>
+</li>
+<li>
+<p>Credenciales y Secretos</p>
+<ul>
+<li>Contraseñas expuestas: Buscar contraseñas almacenadas en descripciones de cuentas, GPOs o scripts.</li>
+<li>Hash de contraseñas: Obtener hashes para ataques de pass-the-hash o password cracking.</li>
+<li>Vaults o secretos en AD: Información almacenada en atributos de cuentas como description o comment.</li>
+</ul>
+</li>
+<li>
+<p>ACLs y Permisos</p>
+<ul>
+<li>Permisos personalizados: Evaluar permisos en objetos críticos del dominio (usuarios, grupos, políticas) para detectar posibles vulnerabilidades.</li>
+<li>Permisos delegados: Identificar delegaciones inseguras que permitan la elevación de privilegios.</li>
+</ul>
+</li>
+<li>
+<p>Relaciones de Red</p>
+<ul>
+<li>Sesiones activas: Identificar conexiones entre usuarios y máquinas que podrían usarse para ataques de lateral movement.</li>
+<li>Mapeo de subredes: Conocer las segmentaciones internas del dominio para planificar movimientos.</li>
+</ul>
+</li>
+</ol>
+<h2 id="riesgos-comunes-durante-la-enumeracion">Riesgos Comunes Durante la Enumeración</h2>
+<ol>
+<li>Detección por parte de sistemas SIEM o EDR:<ul>
+<li>Consultas excesivas o escaneos podrían activar alarmas. </li>
+<li>Herramientas como BloodHound pueden generar tráfico sospechoso. </li>
+</ul>
+</li>
+<li>Interacción con configuraciones sensibles:<ul>
+<li>Algunos comandos podrían impactar en los servicios o generar logs innecesarios. </li>
+</ul>
+</li>
+<li>Falta de contexto en la interpretación de resultados:<ul>
+<li>No todas las configuraciones identificadas como débiles son explotables sin contexto adicional. </li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusion">Conclusión</h2>
+<p>La fase de enumeración en un pentesting de Active Directory es fundamental para mapear el entorno y descubrir posibles rutas de ataque. Un enfoque metódico, combinado con herramientas potentes como BloodHound y PowerView, permite maximizar la recolección de datos mientras se minimiza el riesgo de detección.</p>
 
 
   
@@ -1097,7 +1193,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Apuntes y ejercicios prácticos del curso de especialización de ciberseguridad en IES Severo Ochoa (Elche)" rel="prev">
+          <a href="../privesc/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Escalada de privilegios" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1106,20 +1202,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Apuntes y ejercicios prácticos del curso de especialización de ciberseguridad en IES Severo Ochoa (Elche)
+                Escalada de privilegios
               </div>
             </div>
           </a>
         
         
           
-          <a href="../nmap101/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Introducción a Nmap" rel="next">
+          <a href="../phising/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Spoofing &amp; phising" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Introducción a Nmap
+                Spoofing & phising
               </div>
             </div>
             <div class="md-footer__button md-icon">

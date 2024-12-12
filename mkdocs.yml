@@ -68,8 +68,8 @@ nav:
     - Shells: segof/rev_shell.md
     - Escalada de privilegios: segof/privesc.md
     - Enumeración en entornos AD (Active Directory): segof/ad_enumeration.md
-    - Spoofing & phising: segof/phising.md
     - Gestión y almacenamiento de credenciales en Windows: segof/passw_manag.md
+    - Spoofing & phising: segof/phising.md    
     - Ataques en entornos Active Directory: segof/HackingAD1.md
     - Laboratorio de pivoting: segof/Pivoting.md
     - Webgrafía: segof/webgrafia.md

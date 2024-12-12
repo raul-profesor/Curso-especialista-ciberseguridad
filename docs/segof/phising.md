@@ -33,7 +33,7 @@ Necesitaréis dos máquinas:
 
 Podéis hacerlo con dos máquinas virtuales, con la vuestra física y otra virtual o como queráis, <u>lo importante es que se trate de dos máquinas diferente.</u>
 
-Debéis buscar información de forma autónoma sobre cómo llevar a cabo este ataque con lad dos herramienta que os propongo. Os doy un par de referencias:
+Debéis buscar información de forma autónoma sobre cómo llevar a cabo este ataque con las dos herramienta que os propongo. Os doy un par de referencias:
 
 - Evil-SSDP
 - On-the-fly

@@ -10,10 +10,15 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
 + **Base de datos del administrador de cuentas de seguridad (SAM).**
   
-    La base de datos SAM es un archivo que está presente en ^^todos^^ los sistemas Windows.
+    La base de datos SAM es un archivo que está presente en ^^todos^^ los sistemas Windows en la ubicación `C:\Windows\System32\config\SAM`
     
-    Este archivo contiene todas las cuentas creadas, así como todas las cuentas integradas que se encuentran en un sistema operativo Windows (XP, Vista, Win7, 8.1 y 10). Las contraseñas se almacenan aquí como hashes. (hash de contraseña NT)
+    Este archivo contiene todas las cuentas locales creadas, así como todas las cuentas locales integradas que se encuentran en un sistema operativo Windows (XP, Vista, Win7, 8.1 y 10). Las contraseñas se almacenan aquí como hashes. (hash de contraseña NT).
 
+    Protección:
+
+      + El archivo SAM está cifrado usando claves almacenadas en LSA (Local Security Authority).
+      + No es accesible directamente mientras el sistema está activo.
+  
 + **Otros archivos**
 
     Las contraseñas también se pueden encontrar en una gran variedad de archivos, incluidos los archivos de configuración y los archivos creados por el usuario (generalmente en texto plano).
@@ -28,9 +33,15 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
     Como ya se ha dicho, esto permite que si se pierda la conectividad con el Domain Controller de Active Directory, por la razón que sea, podamos al menos acceder a nuestro sistema.
 
-+ **Secreto de la autoridad de seguridad local (LSA)**
++ **LSA (Local Security Authority)**
+
+    El LSA (Local Security Authority) es un componente central de seguridad en Windows que gestiona la autenticación, autorización y políticas de seguridad del sistema.
+
+      + Es responsable de validar las credenciales de usuarios y servicios.
+      + Proporciona tokens de acceso para determinar qué recursos puede usar cada usuario.
+      + Funciona a través del proceso LSASS (lsass.exe), que protege y gestiona datos sensibles en memoria.
   
-    Los secretos de LSA se almacenan en el registro y permiten que los servicios se ejecuten con privilegios de usuario. Esto incluye VPN, tareas programadas, inicios de sesión automáticos, cuentas de servicio de copia de seguridad, sitios web de IIS, etc. Se incluyen en el registro de Seguridad/Política/Secretos en forma cifrada.
+    Los *secretos de LSA* son datos sensibles que almacena y protege el LSA para garantizar la autenticación y el acceso seguro. Esto incluye VPN, tareas programadas, inicios de sesión automáticos, cuentas de servicio de copia de seguridad, sitios web de IIS, etc. Se incluyen en el registro de Seguridad/Política/Secretos en forma cifrada.
 
 + **Proceso de servicio del subsistema de la autoridad de seguridad local (LSASS)**
   
@@ -42,24 +53,35 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
 + **Credential Manager**
   
-    El administrador viene preinstalado ya en Windows 7 y superiores
+    El administrador viene preinstalado ya en Windows 7 y superiores.
     
     Básicamente es un almacén digital que permite a los usuarios almacenar las credenciales de usuario de forma *"segura"*. Todas las credenciales se almacenan en una carpeta específica en el sistema de Windows. 
 
-    Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...)
+    Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...).
+
+    Las credenciales están cifradas usando DPAPI (Data Protection API) y asociadas al perfil del usuario.
+
 + **Base de datos de dominio de Active Directory (NTDS.DIT)**
   
     Esta base de datos almacena todas las credenciales de los usuarios y equipos ubicados en cada servidor de controlador de dominio de Active Directory, en un entorno de dominio de Active Directory. 
     
-    Este archivo está ubicado en el directorio: `%SystemRoot%\NTDS)`
+    Este archivo está ubicado en el directorio: `C:\Windows\NTDS\NTDS.dit`
+
+    Es más complejo que el SAM, ya que soporta una infraestructura completa de dominio.
+
+    Seguridad:
+
+      + Los datos están cifrados usando claves maestras almacenadas en el subsistema LSA.
+
+      + Requiere privilegios elevados para ser accedido.
+
+
 
 ## Tipos de hashes de credenciales en Windows
 
 ### Hash LM
 
 El hash **LAN Manager** fue uno de los primeros algoritmos de hash de contraseñas que usaron los sistemas operativos Windows y la única versión compatible, hasta la llegada de NTLM, que se usaba en Windows 2000, XP, Vista y 7. Los sistemas operativos más nuevos aún admiten el uso de hash LM con fines de compatibilidad con versiones anteriores. Sin embargo, está deshabilitado de forma predeterminada para Windows Vista y Windows 7.
-
-Como ya se ha indicado, LM se desactivó de manera predeterminada a partir de Windows Vista/Server 2008, pero aún podría permanecer en una red si todavía se usan 
 
 Si realizaramos un volcado de la base de datos SAM/NTDS, se muestran junto con NTHash, antes de los dos puntos.
 
@@ -151,7 +173,7 @@ NTLMv2 necesita además que la posible diferencia horaria entre clientes y servi
 
 ## Dumping de credenciales
 
-El dumping de credenciales es un tipo de ciberataque en el que se vulnera un ordenador y el atacante obtiene los nombres de usuario y las contraseñas. Esto puede ser perjudicial si le ocurre a su ordenador personal, pero puede ser absolutamente devastador si un atacante es capaz de realizar el vertido de credenciales en un ordenador que forma parte de una red mayor.
+El dumping de credenciales es un tipo de ciberataque en el que se vulnera un ordenador y el atacante obtiene los nombres de usuario y las contraseñas. Esto puede ser perjudicial si le ocurre a su ordenador personal, pero puede ser absolutamente devastador si un atacante es capaz de realizar el dumping de credenciales en un ordenador que forma parte de una red más grande.
 
 Esta técnica de hacking se implementa después de que un ordenador haya sido comprometido por el atacante. Los nombres de usuario y las contraseñas son extremadamente valiosos para los ciberdelincuentes y pueden utilizarse para adquirir información sensible, así como para obtener acceso a las credenciales de administrador y otras cuentas privilegiadas o a otros ordenadores de una red.
 
@@ -220,5 +242,7 @@ Una de las herramientas más utilizadas para realizar el dumping de credenciales
 + Supervisar los registros de actividades no programadas en el DC
 
 + No mezclar las cuentas de administrador de dominio con las de grupos de administradores locales
+  
++ Habilitar Credential Guard en entornos modernos (Windows 10+).
 
 
