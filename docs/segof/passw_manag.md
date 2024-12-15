@@ -27,7 +27,7 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
         El acceso a la SAM está restringido a los administradores y el sistema operativo.
 
-        Herramientas de hacking como "pwdump" intentan obtener las contraseñas desde la SAM al obtener acceso a su archivo, pero esto generalmente requiere acceso físico o privilegios de administrador, ya que el archivo está protegido.
+        Herramientas de hacking como `pwdump` intentan obtener las contraseñas desde la SAM al obtener acceso a su archivo, pero esto generalmente requiere acceso físico o privilegios de administrador, ya que el archivo está protegido.
 
         Es una de las piezas fundamentales para la gestión de seguridad en sistemas operativos Windows.
   
@@ -45,7 +45,7 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
     Como ya se ha dicho, esto permite que si se pierda la conectividad con el Domain Controller de Active Directory, por la razón que sea, podamos al menos acceder a nuestro sistema.
 
-    Las credenciales en caché están físicamente guardadas en el archivo %SystemRoot%\System32\config\SECURITY.
+    Las credenciales en caché están físicamente guardadas en el archivo `%SystemRoot%\System32\config\SECURITY`.
     
     Este archivo es parte de la base de datos del registro de Windows y contiene datos relacionados con las políticas de seguridad locales, incluidas las credenciales en caché.
 
@@ -61,7 +61,7 @@ El sistema operativo Windows tiene muchos lugares diferentes donde almacena o *c
 
 + **Proceso de servicio del subsistema de la autoridad de seguridad local (LSASS)**
   
-    Al iniciar sesión en una máquina con Windows, ya sea localmente o en un dominio, las credenciales se almacenan en el proceso LSASS en la memoria.
+    Al iniciar sesión en una máquina con Windows, ya sea localmente o en un dominio, las credenciales se almacenan en el proceso LSASS en la memoria (lsass.exe) y reside en la memoria RAM del sistema operativo mientras el proceso está en ejecución. Las credenciales no se escriben directamente en disco en esta etapa.
     
     ^^Esto se usa principalmente para permitir que el usuario acceda a otros recursos en la red a los que está autorizado a acceder sin tener que volver a autenticarse.^^ 
     

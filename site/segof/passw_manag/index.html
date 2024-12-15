@@ -675,6 +675,19 @@
     Credenciales en Windows
   </a>
   
+    <nav class="md-nav" aria-label="Credenciales en Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-las-diferencias" class="md-nav__link">
+    Resumen de las diferencias:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1053,7 +1066,15 @@
 <p>Protección:</p>
 <ul>
 <li>El archivo SAM está cifrado usando claves almacenadas en LSA (Local Security Authority).</li>
-<li>No es accesible directamente mientras el sistema está activo.</li>
+<li>
+<p>No es accesible directamente mientras el sistema está activo.</p>
+<p><strong>¿Cómo funciona?</strong></p>
+<p>Cuando un usuario intenta iniciar sesión, el sistema toma la contraseña introducida y la compara con la versión cifrada almacenada en la SAM. Si coincide, se concede acceso al sistema. Si la SAM se corrompe o no puede accederse, los usuarios no podrán iniciar sesión.</p>
+<p><strong>Acceso a la SAM:</strong></p>
+<p>El acceso a la SAM está restringido a los administradores y el sistema operativo.</p>
+<p>Herramientas de hacking como "pwdump" intentan obtener las contraseñas desde la SAM al obtener acceso a su archivo, pero esto generalmente requiere acceso físico o privilegios de administrador, ya que el archivo está protegido.</p>
+<p>Es una de las piezas fundamentales para la gestión de seguridad en sistemas operativos Windows.</p>
+</li>
 </ul>
 </li>
 <li>
@@ -1066,6 +1087,8 @@
 <p><ins>Las credenciales de dominio se almacenan en caché en el registro para permitir que los usuarios inicien sesión en su sistema cuando no está conectado al dominio.</ins></p>
 <p>El sistema de Windows almacena en caché los últimos 10 hashes de inicio de sesión y algunos almacenan hasta 25 de forma predeterminada. Este número es configurable en el registro.</p>
 <p>Como ya se ha dicho, esto permite que si se pierda la conectividad con el Domain Controller de Active Directory, por la razón que sea, podamos al menos acceder a nuestro sistema.</p>
+<p>Las credenciales en caché están físicamente guardadas en el archivo %SystemRoot%\System32\config\SECURITY.</p>
+<p>Este archivo es parte de la base de datos del registro de Windows y contiene datos relacionados con las políticas de seguridad locales, incluidas las credenciales en caché.</p>
 </li>
 <li>
 <p><strong>LSA (Local Security Authority)</strong></p>
@@ -1083,12 +1106,27 @@
 <p><ins>Esto se usa principalmente para permitir que el usuario acceda a otros recursos en la red a los que está autorizado a acceder sin tener que volver a autenticarse.</ins> </p>
 <p>Los formatos almacenados pueden ser texto sin formato (cifrado reversible), hash NT y LM y tickets Kerberos.</p>
 </li>
+</ul>
+<h3 id="resumen-de-las-diferencias">Resumen de las diferencias:</h3>
+<ul>
+<li><strong><em>SAM</em></strong>: Base de datos local que almacena las credenciales de los usuarios y sus contraseñas cifradas.</li>
+<li><strong><em>Credenciales en caché</em></strong>: Copia local de las credenciales de los usuarios que permite la autenticación sin conexión a un controlador de dominio.</li>
+<li><strong><em>LSA</em></strong>: Entidad que maneja la seguridad local y las políticas de autenticación de usuarios, interactuando con la SAM y el LSASS.</li>
+<li><strong><em>LSASS</em></strong>: Proceso encargado de la autenticación y autorización de los usuarios, creando tokens de acceso y aplicando políticas de seguridad.</li>
+</ul>
+<p>En definitiva, la SAM almacena las credenciales de usuario, la LSA gestiona la seguridad y las políticas locales, el LSASS maneja la autenticación de los usuarios y la generación de tokens de seguridad, y las credenciales en caché permiten a los usuarios autenticarse sin conexión al controlador de dominio.</p>
+<ul>
 <li>
 <p><strong>Credential Manager</strong></p>
 <p>El administrador viene preinstalado ya en Windows 7 y superiores.</p>
 <p>Básicamente es un almacén digital que permite a los usuarios almacenar las credenciales de usuario de forma <em>"segura"</em>. Todas las credenciales se almacenan en una carpeta específica en el sistema de Windows. </p>
 <p>Se almacenan passwords de inicio de sesión en Windows, así como credenciales web (credenciales del navegador, Skype, Office...).</p>
 <p>Las credenciales están cifradas usando DPAPI (Data Protection API) y asociadas al perfil del usuario.</p>
+<p>Podría pensarse que el Credential Manager y la SAM almacenan información duplicada, pero no es así:</p>
+<ul>
+<li>El Credential Manager está orientado a credenciales que los usuarios guardan manualmente para servicios específicos.</li>
+<li>La SAM almacena las contraseñas de las cuentas de usuario locales en Windows, utilizadas en el inicio de sesión.</li>
+</ul>
 </li>
 <li>
 <p><strong>Base de datos de dominio de Active Directory (NTDS.DIT)</strong></p>
@@ -1218,11 +1256,13 @@
 <ul>
 <li><strong>WDigest</strong></li>
 </ul>
-<p>Este es un protocolo heredado utilizado para autenticar usuarios en Windows. Cuando está habilitado, LSASS mantiene una copia de texto sin formato de la contraseña del usuario registrado en la memoria. Si bien el servicio está deshabilitado de forma predeterminada hoy en día, todavía existe en las últimas versiones de Windows y los atacantes a menudo lo habilitan para robar credenciales.</p>
+<p>Este es un protocolo heredado utilizado para autenticar usuarios en Windows. </p>
+<p>CUando está habilitado, peermite la transmisión de credenciales en texto plano durante ciertos procesos de autenticación. Su lugar en el ecosistema de seguridad de Windows se relaciona con el manejo de contraseñas en memoria y su interacción con otros componentes de seguridad como LSASS, pero su uso ha sido desalentado debido a sus implicaciones de seguridad.</p>
+<p>Si bien el servicio está deshabilitado de forma predeterminada hoy en día, todavía existe en las últimas versiones de Windows y los atacantes a menudo lo habilitan para robar credenciales.</p>
 <ul>
 <li><strong>Administrador de cuentas de seguridad (SAM)</strong></li>
 </ul>
-<p>Este es un archivo de base de datos que existe en Windows desde los días de XP. SAM se usa para autenticar a los usuarios, tanto locales como remotos, lo que permite el acceso cuando las credenciales proporcionadas coinciden con lo que SAM tiene en el archivo. Si los atacantes roban este archivo, potencialmente se puede descifrar y se pueden extraer los nombres de usuario y las contraseñas almacenados en él.</p>
+<p>Ya hemos hablado largo y tendido anteriormente de este archivo. Si los atacantes roban este fichero, potencialmente se puede descifrar y se pueden extraer los nombres de usuario y las contraseñas almacenados en él.</p>
 <ul>
 <li><strong>LSA secrets</strong></li>
 </ul>
@@ -1237,13 +1277,27 @@
 </ul>
 <p>Aquí es donde Active Directory almacena información sobre los miembros de un dominio para verificar usuarios y credenciales.</p>
 <ul>
-<li><strong>Archivos de preferencias de directivas de grupo</strong></li>
-</ul>
-<p>Esta herramienta de Windows permite a los administradores implementar directivas de dominio para incluir credenciales incrustadas, lo que facilita la administración. Estas políticas generalmente se almacenan en un recurso compartido llamado SYSVOL, que cualquier usuario del dominio puede ver y potencialmente descifrar.</p>
-<ul>
 <li><strong>DCSync</strong></li>
 </ul>
 <p>En lugar de una ubicación, DCSync es una técnica en la que un atacante aprovecha la forma en que los controladores de dominio manejan las llamadas API disponibles. En resumen, el atacante imita el comportamiento de otro controlador de dominio a través de llamadas a la API y consigue que el controlador envíe hashes de credenciales que se pueden usar en otros ataques.</p>
+<ul>
+<li><strong>Archivos de preferencias de directivas de grupo</strong></li>
+</ul>
+<p>Esta herramienta de Windows permite a los administradores implementar directivas de dominio para incluir credenciales incrustadas, lo que facilita la administración. Estas políticas generalmente se almacenan en un recurso compartido llamado SYSVOL, que cualquier usuario del dominio puede ver y potencialmente descifrar.</p>
+<p><strong><em>Mitigaciones y medidas correctivas</em></strong></p>
+<ol>
+<li>Eliminar las credenciales de GPP:<ul>
+<li>Microsoft dejó de soportar la funcionalidad para configurar credenciales en GPP en Windows Server 2012 R2 y posteriores.</li>
+<li>Los administradores deben buscar y eliminar cualquier archivo de GPP que contenga credenciales.</li>
+</ul>
+</li>
+<li>Implementar directivas de privilegios mínimos</li>
+<li>Actualizar los controladores de dominio</li>
+<li>Uso de alternativas más seguras:<ul>
+<li>Configurar cuentas o accesos a través de otros métodos más seguros, como PowerShell DSC (Desired State Configuration) o herramientas de gestión centralizada de credenciales (por ejemplo, soluciones de Privileged Access Management, PAM).</li>
+</ul>
+</li>
+</ol>
 <h3 id="mimikatz">Mimikatz</h3>
 <p>Una de las herramientas más utilizadas para realizar el dumping de credenciales es Mimikatz. Esta herramienta fue creada por Benjamin Delphy en 2007 para demostrar un fallo de seguridad en Windows. Su código tuvo éxito y convenció a Microsoft para que acabara corrigiendo el fallo, y Mimikatz siguió utilizándose para realizar pruebas de penetración y seguridad.</p>
 <p>Desafortunadamente, también se ha convertido en una herramienta popular para los actores malintencionados.</p>
@@ -1262,7 +1316,7 @@
 <p>Utilizar un gestor de contraseñas con una contraseña fuerte y no almacenada.</p>
 </li>
 <li>
-<p>Implementar un hash y un encriptados fuertes.</p>
+<p>Implementar un hash y un cifrado fuertes.</p>
 </li>
 <li>
 <p>Supervisar el acceso a servicios como LSASS y bases de datos como SAM con regularidad.</p>
