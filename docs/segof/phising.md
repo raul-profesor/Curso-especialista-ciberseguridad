@@ -14,6 +14,28 @@ UPnP es un set de protocolos de red que permite que dispositivos de red tales co
 
 En principio fue concebido para uso residencial o pequeños entornos de oficina.
 
+### ¿Qué es SSDP?
+
+SSDP es un protocolo basado en HTTP que se utiliza para descubrir dispositivos y servicios en redes locales. Es parte del conjunto de protocolos UPnP y permite a los dispositivos anunciar su presencia en la red o buscar otros dispositivos disponibles.
+
+Funcionamiento de SSDP:
+
++ **Anuncio (Advertise)**: Un dispositivo en la red que ofrece servicios (como una impresora o un servidor de medios) envía mensajes multicast SSDP al grupo multicast estándar (239.255.255.250 en IPv4 o FF02::C en IPv6) en el puerto 1900. Estos mensajes contienen información sobre el dispositivo y los servicios que ofrece.
++ **Búsqueda (Search)**: Un dispositivo que desea encontrar servicios envía una solicitud SSDP multicast (mensaje M-SEARCH) para buscar dispositivos específicos o servicios en la red.
++ **Respuesta**: Los dispositivos que coinciden con la búsqueda responden directamente al dispositivo solicitante con un mensaje unicast, proporcionando detalles de los servicios disponibles.
+
+### ¿Qué es UPnP?
+
+UPnP es un conjunto de protocolos que facilita la configuración automática de dispositivos en una red. Incluye SSDP para el descubrimiento, pero también abarca mecanismos para descripción, control, eventos y presentación de dispositivos.
+
+Componentes principales de UPnP:
+
++ **Descubrimiento**: Utiliza SSDP para encontrar dispositivos en la red.
++ **Descripción**: Una vez descubierto, un dispositivo proporciona detalles adicionales a través de un archivo de descripción XML (generalmente llamado device-desc.xml).
++ **Control**: Permite enviar comandos a dispositivos utilizando protocolos como SOAP (Simple Object Access Protocol).
++ **Eventos**: Los dispositivos notifican a otros sobre cambios en su estado.
++ **Presentación**: Permite interfaces de usuario, como páginas web, para interactuar con dispositivos.
+
 ## Phising
 
 Los ataques de phishing son correos electrónicos, mensajes de texto, llamadas telefónicas o **sitios web** fraudulentos diseñados para engañar a los usuarios para que descarguen programas maliciosos, compartan información confidencial o datos personales (por ejemplo, números de la Seguridad Social y de tarjetas de crédito, números de cuentas bancarias, **credenciales de inicio de sesión**), o realicen otras acciones que les expongan a ellos mismos o a sus organizaciones a la ciberdelincuencia.
