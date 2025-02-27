@@ -689,6 +689,26 @@
     SSDP (Simple Service Discovery Protocol)
   </a>
   
+    <nav class="md-nav" aria-label="SSDP (Simple Service Discovery Protocol)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-ssdp" class="md-nav__link">
+    ¿Qué es SSDP?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-es-upnp" class="md-nav__link">
+    ¿Qué es UPnP?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -954,6 +974,24 @@
 <p>UPnP es un set de protocolos de red que permite que dispositivos de red tales como ordenadores personales, impresoras, access-points, Chromecast, NAS, consolas, Smart TVs... descubran entre sí su presencia en la red y establezcan servicios de comunicación de red o compartición de datos. Un dispositivos compatible con UPnP no necesita ninguna configuración de red, puede integrarse en una red, obtener una IP, publicar su nombre y anunciar sus servicios bajo petición, todo de forma automática. De la misma forma, puede detectar la presencia y servicios de otros dispositivos.</p>
 <p><img alt="" src="../../img/ssdp_wifi.png" /></p>
 <p>En principio fue concebido para uso residencial o pequeños entornos de oficina.</p>
+<h3 id="que-es-ssdp">¿Qué es SSDP?</h3>
+<p>SSDP es un protocolo basado en HTTP que se utiliza para descubrir dispositivos y servicios en redes locales. Es parte del conjunto de protocolos UPnP y permite a los dispositivos anunciar su presencia en la red o buscar otros dispositivos disponibles.</p>
+<p>Funcionamiento de SSDP:</p>
+<ul>
+<li><strong>Anuncio (Advertise)</strong>: Un dispositivo en la red que ofrece servicios (como una impresora o un servidor de medios) envía mensajes multicast SSDP al grupo multicast estándar (239.255.255.250 en IPv4 o FF02::C en IPv6) en el puerto 1900. Estos mensajes contienen información sobre el dispositivo y los servicios que ofrece.</li>
+<li><strong>Búsqueda (Search)</strong>: Un dispositivo que desea encontrar servicios envía una solicitud SSDP multicast (mensaje M-SEARCH) para buscar dispositivos específicos o servicios en la red.</li>
+<li><strong>Respuesta</strong>: Los dispositivos que coinciden con la búsqueda responden directamente al dispositivo solicitante con un mensaje unicast, proporcionando detalles de los servicios disponibles.</li>
+</ul>
+<h3 id="que-es-upnp">¿Qué es UPnP?</h3>
+<p>UPnP es un conjunto de protocolos que facilita la configuración automática de dispositivos en una red. Incluye SSDP para el descubrimiento, pero también abarca mecanismos para descripción, control, eventos y presentación de dispositivos.</p>
+<p>Componentes principales de UPnP:</p>
+<ul>
+<li><strong>Descubrimiento</strong>: Utiliza SSDP para encontrar dispositivos en la red.</li>
+<li><strong>Descripción</strong>: Una vez descubierto, un dispositivo proporciona detalles adicionales a través de un archivo de descripción XML (generalmente llamado device-desc.xml).</li>
+<li><strong>Control</strong>: Permite enviar comandos a dispositivos utilizando protocolos como SOAP (Simple Object Access Protocol).</li>
+<li><strong>Eventos</strong>: Los dispositivos notifican a otros sobre cambios en su estado.</li>
+<li><strong>Presentación</strong>: Permite interfaces de usuario, como páginas web, para interactuar con dispositivos.</li>
+</ul>
 <h2 id="phising">Phising</h2>
 <p>Los ataques de phishing son correos electrónicos, mensajes de texto, llamadas telefónicas o <strong>sitios web</strong> fraudulentos diseñados para engañar a los usuarios para que descarguen programas maliciosos, compartan información confidencial o datos personales (por ejemplo, números de la Seguridad Social y de tarjetas de crédito, números de cuentas bancarias, <strong>credenciales de inicio de sesión</strong>), o realicen otras acciones que les expongan a ellos mismos o a sus organizaciones a la ciberdelincuencia.</p>
 <p>El phishing es el tipo más común de ingeniería social, la práctica de engañar, presionar o manipular a las personas para que envíen información a las personas equivocadas. Los ataques de ingeniería social se basan en el error humano y en tácticas de presión para tener éxito. El atacante suele hacerse pasar por una persona u organización en la que la víctima confía -por ejemplo, un compañero de trabajo, un jefe, una empresa con la que la víctima o su empleador hacen negocios- y crea una sensación de urgencia que lleva a la víctima a actuar precipitadamente. Los hackers y estafadores utilizan estas tácticas porque es más fácil y menos costoso engañar a la gente que piratear un ordenador o una red.</p>
