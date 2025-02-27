@@ -2,157 +2,281 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/Ej_Linux/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/Ej_Win/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/EntLinux/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/EntWin/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/section/webgrafia/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/arkime/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/idps/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/logs/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/seconion/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/trivy/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/trivy_test/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/truffle/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/wazuh/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/EternalBlue/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/HackingAD1/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/Intro/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/Pivoting/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/ad_enumeration/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/enumeracion/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/exploit/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/metasploit/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/nmap101/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/passw_manag/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/phising/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/privesc/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/rev_shell/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/servicios_desact/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/webgrafia/</loc>
+<<<<<<< HEAD
          <lastmod>2025-02-27</lastmod>
+=======
+         <lastmod>2025-01-22</lastmod>
+>>>>>>> 9b4097169c9372d0966e923692cee765a1237ebb
          <changefreq>daily</changefreq>
     </url>
 </urlset>

