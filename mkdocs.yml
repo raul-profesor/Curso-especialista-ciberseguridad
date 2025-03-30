@@ -19,6 +19,7 @@ theme:
     - content.code.annotate
     - content.code.copy
     - navigation.footer
+    
   palette:
       - scheme: default
         primary: light green
@@ -39,6 +40,7 @@ theme:
       
 markdown_extensions: 
   - admonition
+  - pymdownx.extra
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.tabbed
@@ -47,6 +49,7 @@ markdown_extensions:
   - pymdownx.details 
   - attr_list
   - md_in_html
+  - footnotes
 
 nav:
   - Warm up:
@@ -77,11 +80,13 @@ nav:
     - segdef/index.md
     - Análisis de Logs: segdef/logs.md
     - Monitorización con IDS/IPS: segdef/idps.md
+    - Hardening SSH: segdef/hardening.ssh.md
     - Monitorización con Security Onion: segdef/seconion.md
     - Monitorización de red con Arkime: segdef/arkime.md
     - Análisis de archivos con TruffleHog: segdef/truffle.md
     - Análisis de infraestructura (contenedores) con Trivy: segdef/trivy.md
     - Detección de web shells con Wazuh: segdef/wazuh.md
+
 
 extra_css:
   - stylesheets/extra.css
