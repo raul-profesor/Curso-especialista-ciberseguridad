@@ -1137,6 +1137,8 @@
         
           
         
+          
+        
       
       
         
@@ -1181,6 +1183,20 @@
     <li class="md-nav__item">
       <a href="../../segdef/idps/" class="md-nav__link">
         Monitorización con IDS/IPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/hardening.ssh/" class="md-nav__link">
+        Hardening SSH
       </a>
     </li>
   
@@ -1579,7 +1595,7 @@ Observamos que el permiso de ejecución para el propietario es una "s" minúscul
 <p>Como ya sabemos, podemos usar el comando chmod para establecer el  bit setuid en un archivo:</p>
 <p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>u+s<span class="w"> </span>archivo
 </code></pre></div>
-<strong>Sólo el propietario el archivo o el usuario o el usuario <em>root<em> puede establecer el bit </em>setuid</em></strong></p>
+<strong>Sólo el propietario el archivo o el usuario o el usuario <em>root</em> puede establecer el bit *setuid</strong>*</p>
 <p>Un ejemplo práctico de cómo configurar este bit setuid en un archivo, de forma simbólica:</p>
 <p><div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>archivo
 -rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>raul<span class="w"> </span>raul<span class="w"> </span><span class="m">0</span><span class="w"> </span>Feb<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">12</span>:22<span class="w"> </span>archivo
@@ -1911,8 +1927,8 @@ Se debe tener precaución con esto puesto que Windows es "case insensitive" y no
 <p><div class="highlight"><pre><span></span><code>mv<span class="w"> </span>combinado.txt<span class="w"> </span>dir1
 </code></pre></div>
 Para confirmar que el comando se ha ejecutado con éxito podemos utilizar el comando <code>ls</code> para ver que el fichero ya no está en el directorio de trabajo, luego con  <code>cd dir1</code> cambiar a ese directorio, hacer  <code>ls</code> para ver que ahora el fichero está allí, y luego <code>cd ..</code> para movernos al directorio de trabajo nuevamente. </p>
-<p><strong>Los dos puntos nos permiten indicarle a un comando el directorio inmediatamente superior al que estamos.
-</strong>
+<p>**Los dos puntos nos permiten indicarle a un comando el directorio inmediatamente superior al que estamos.
+**
 O también podemos ahorrarnos la mayor parte de este trabajo de escritura pasando una ruta directamente al comando <code>ls</code> consultar directamente el contenido de ese directorio:</p>
 <p><div class="highlight"><pre><span></span><code>ls<span class="w"> </span>dir1
 </code></pre></div>

