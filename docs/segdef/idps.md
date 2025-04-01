@@ -26,7 +26,7 @@ Típicamente se utilizan tres metodologías para detectar incidentes:
 * <u>Basada en firmas:</u> compara las firmas con los eventos observados para identificar posibles incidentes. Se trata del método de detección más sencillo, ya que compara únicamente la unidad de actividad actual (como por ejemplo un paquete o una entrada de log) contra una lista de firmas mediante operaciones de comparación de cadenas. 
     Estas firmas permiten al IDS distinguir entre el uso normal del PC y el uso fraudulento, y/o entre el tráfico normal de la red y el tráfico que puede ser resultado de un ataque o intento del mismo y sonpatrones de ataque preconfigurados y predeterminados.
 
-    ![](../img/idps_2.png){: style="t:275px;width:600px"}
+    ![](../img/idps_2.png){: style="height:275px;width:600px"}
 
 * <u>Detección basada en anomalías:</u> compara las definiciones de lo que se considera una actividad normal con los eventos observados para identificar desviaciones significativas. Este método de detección puede ser muy eficaz para detectar amenazas desconocidas hasta ahora.
   

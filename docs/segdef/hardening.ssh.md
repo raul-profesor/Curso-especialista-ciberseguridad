@@ -37,7 +37,9 @@ Linux ya viene con un cliente SSH preinstalado, por lo que no sería necesaria m
 
 + Para conectaros desde un ordenador con Windows deberéis instalaros un cliente SSH como [Putty](https://www.aemilius.net/ayuda/articulos/acceso-ssh-ssl-secure-shell-telnet- putty.html)
 
-La primera vez que os conectéis, os aparecerá algo como esto:
+La primera vez que os conectéis, os aparecerá algo como esto
+
+![](../img/ssh_key_fingerprint.png)
 
 Se nos está informando de que el equipo al que nos estamos conectando por SSH podría no ser el nuestro o el que pensamos que es. Para estar 100% seguros, habría que ir al servidor, comprobar su *huella* (*fingerprint*) que lo identifica y compararla con la que aquí se nos muestra.
 
@@ -358,7 +360,9 @@ Ya  hemos  visto  en  [un  apartado anterior ](#que-archivos-de-configuracion-te
 
 Como siempre que vayamos a modificar una configuración, lo primero será hacer una copia de `sshd_config` a `sshd_config.bak`, por si algo no saliera bien.
 
-+ Para empezar, si os habéis fijado, al hacer login en un Ubuntu Server (u otro), se nos muestra una gran cantidad e información, algo así:
++ Para empezar, si os habéis fijado, al hacer login en un Ubuntu Server (p. ej.), se nos muestra una gran cantidad e información, algo así
+
+![](../img/ssh_login_info.jpg)
 
 Esto, como hemos visto en las directivas, es lo que conocemos como ***motd o “message of the day”***.
 
@@ -425,18 +429,20 @@ Este paso añade una capa más de seguridad a nuestro servicio, sin embargo tamb
 
   + Le ponemos el password a la clave privada porque la vamos a guardar cifrada en el disco y esta será la contraseña necesaria para descifrarla y poder utilizarla.
 
+    ![](../img/ssh_par_claves.png)
+
 
   + Para copiar la clave pública al servidor, podemos hacerlo manualmente o utilizando SSH (más fácil):
   
     + Utilizando SSH:
   
-        `ssh-copy-id usuario_servidor@IP_servido` 
+        `ssh-copy-id usuario_servidor@IP_servidor` 
 
     + Manualmente:
      
         Copiáis el valor de la clave.
      
-        `cat ~/.ssh/id_rsa.pub`
+        `cat ~/.ssh/id_rsa_ciber.pub`
 
         Hacéis login por SSH al servidor y copiáis ese valor de la clave en el siguiente archivo (creadlo si no existe):
 
@@ -458,10 +464,261 @@ chmod 600 ~/.ssh/authorized_keys
 Cuando repitamos toda esta operación con Windows, podemos utilizar o WSL2 o bien un cliente nativo de Windows, pudiendo elegir entre toda la miríada de ellos.
 
 En cualquier, para el más típico de ellos, *PuTTY*, podemos seguir el siguiente tutorial para la configuración de las claves, no siendo excluyente la utilización de cualquier otro.
-### Protección con sshguard
+
+## Protección con sshguard
+
+Los servidores expuestos a Internet suelen sufrir con gran frecuencia **ataques por fuerza bruta**. Un ataque por fuerza bruta sobre SSH consiste en intentar iniciar sesión en el sistema con todas las combinaciones de nombres y contraseñas posibles.
+
+Se deben tomar las precauciones adecuadas para evitar que se produzca un acceso no autorizado al sistema mediante este ataque.
+
+Es muy famoso el uso de *fail2ban* para protegernos frente a esto. Sin embargo en esta práctica utilizaremos [sshguard](https://wiki.archlinux.org/title/Sshguard_(Espa%C3%B1ol)) ya que admite fácilmente la integración con *systemd*, además de con múltiples firewalls diferentes. Además, está escrito en C, por lo que es mucho más ligero.
+
+Con *sshguard*, cuando se realizan un número (establecido en la configuración) de intentos de autenticación fallidos en el sistema, se bloquea la dirección IP desde donde se está llevando a cabo el ataque.
+
+Procedamos pues a instalar y configurar *sshguard*.
+
+!!!danger "¡Atención!"
+    Podríamos protegernos contra ataques de fuerza bruta con claves erróneas pero es un escenario que rara vez se producirá. Lo que realmente queremos es protegernos de los ataques de diccionario con diferentes contraseñas.
+
+    Puesto que anteriormente hemos configurado el servicio para que la autenticación se produzca usando claves, vamos a desactivar este tipo de autenticación temporalmente hasta que hayamos configurado y comprobado el funcionamiento de *sshguard*.
+
+    Basta con añadir esta directiva al archivo de configuración de ssh: `PubkeyAuthentication no`
+
+    ***Recuerda reactivar la autenticación con claves al acabar con la parte de sshguard***
+
+### Instalación de *sshguard*
+
+En primer lugar actualizamos los repositorios:
+
+`sudo apt update`
+
+Instalamos el paquete de sshguard.
+
+`sudo apt install sshguard`
+
+Comprobamos que el servicio funciona sin problemas:
+
+`systemctl status sshguard`
+
+### Configuración de *sshguard*
+
+Lo primero que debemos hacer es instalar algún firewall que bloquee las IPs que *sshguard* le indique cuando sea necesario. Procedamos con el clásico y archiconocido ***iptables*** si no lo tuvieráis instalado todavía:
+
+```bash
+sudo apt install sshguard
+```
+
+Y le decimos al firewall que todo el tráfico que le entre con el puerto destino TCP 22 (SSH), lo redirija a la cadena sshguard que creamos en el primer paso y que es donde se introducirán las reglas de bloqueo pertinente:
+
+```bash
+sudo iptables -N sshguard
+sudo iptables -A INPUT -m multiport -p tcp --destination-ports 8022 -j sshguard
+sudo iptables-save > /home/raul/iptables.rules
+```
+
+El archivo de configuración de este servicio se llama *sshguard.conf* y lo encontraréis en el siguiente directorio: `/etc/sshguard`
+
+*Sshguard* se basa en revisar los logs en busca de registros de intentos de login fallidos. Si detecta más de *X* intentos fallidos en *Y* tiempo (ambas cosas configurables), introduce una regla en el firewall para bloquear a la IP origen de esos ataques.
+
+<u>Existe un error conocido de *sshguard*</u> como es que también busca en sus propios logs intentos fallidos de login, haciendo que cada vez que registra un intento erróneo, lo vuelve a detectar y a registrar en un bucle que continúa hasta que se bloquea la IP.[^2]
+
+[^2]: [Parece estar solucionado](https://bugs.launchpad.net/ubuntu/+source/sshguard/+bug/1881459)
+
+¿En qué se traduce esto? Pues que con un único intento fallido de login SSH, que puede ser no intencionado (me he equivocado al poner el password), se bloqueará la IP origen.
+
++ Para solucionarlo, en el archivo de configuración debemos cambiar el valor del parámetro LOGREADER` para que quede así:
+
+    ```bash
+    LOGREADER="LANG=C.UTF8 /bin/journalctl -afb -p info -n1 -o cat -t sshd
+    ```
+
++ Además, aunque sshguard permite utilizar múltiples firewalls como ya hemos dicho, vamos a utilizar **iptables**. Para ello hay que cambiar el valor del parámetro BACKEND para que quede así:
+    
+    ```bash
+    BACKEND="/usr/libexec/sshguard/sshg-fw-iptables"
+    ```
+En definitiva, el fichero sshguard.conf debe quedar así
+
+![](../img/ssh_sshguard_conf.png)
+
+
+Donde, aparte de lo ya dicho:
+
++ **THRESHOLD:** cada ataque tiene un valor de peligrosidad (normalmente 10). El threshold es el valor acumulado de esos ataques que se ha de superar para bloquear la IP.
++ **BLOCK_TIME:** es el tiempo (en segundos) durante el que se bloquea una IP.
++ **DETECTIONS_TIME:**el tiempo (en segundos) dentro del cual se van acumulando el valor de los ataques que se producen (si la suma supera al threshold, se bloquea la IP).
+
+Así las cosas, lo que hemos configurado es lo siguiente:
+
+  1. Si en un periodo de 30 segundos (*DETECTION_TIME*) se producen una serie de ataques que, sumando su peligrosidad, superen el valor 30 (*THRESHOLD*), se bloqueará la IP durante 10 segundos (*BLOCK_TIME*).
+   
+  2. Cabe decir que si la IP insiste, cada nueva vez que se vuelva a bloquear, lo hará durante el doble de tiempo que la anterior ocasión (primero 10s, luego 20s, luego 40s…)
+   
+!!!task "Comprobación"
+    Conéctate por SSH al servidor desde tu terminal Linux: `ssh usuraio@servidor`
+
+    O desde Putty en Windows.
+
+    Ejecuta el siguiente comando para ver los logs de *sshguard* en tiempo real: `journalctl -u sshguard -f`
+
+    Ahora, desde el cliente, intenta conectarte por SSH al servidor pero introduciendo un nombre de usuario incorrecto o una contraseña incorrecta.
+
+     + En los logs aparecerán estos intentos de conexión como ataques y se informará del bloqueo de esa IP. Adjunta captura de pantalla.
+     + Además, comprueba desde el cliente que, efectivamente, se te ha bloqueado el acceso y no te deja hacer un SSH al servidor. Adjunta captura de pantalla.
+
+!!!tip "Notas importantes"
+    Si en un principio ssguard no bloquea las IP, es posible que haya que informar al firewall con los siguientes comandos:
+    ```bash
+    iptables -N sshguard
+    iptables -A INPUT -m multiport -p tcp --destination-ports 8022 -j sshguard
+    ```
+
+    Si sshguard, por lo que sea, os bloquea la IP permanentemente y no la desbloquea al cabo del tiempo que os indica, la podéis desbloquear a mano con el siguiente comando:
+
+    ```bash
+    sudo iptables -F sshguard
+    ```
+
 ### ¿Qué es la autenticación multifactor?
+
+La autentificación multifactor (MFA) es un método en el que se proporciona acceso a un sistema o servicio solo después de que puedas demostrar que efectivamente eres tú quien dices ser. Lo harás presentando dos o más evidencias (o factores).
+
+Estos pueden ser una contraseña que tenga un código de verificación secundario, un certificado digital instalado en el equipo, una pregunta personal, etc. Está claro que cuantas más capas de protección pongas mejor vas a poder proteger tus cuentas.
+
+Normalmente se suelen compaginar los siguientes factores:
+
++ **Algo que conozco:** una contraseña, respuesta a una pregunta, un PIN, etc.
++ **Algo que obtengo:** una notificación que recibo en el móvil, un código de seguridad, etc.
++ **Algo único que tengo:** en este caso es la biometría, como tu huella digital y/o el reconocimiento facial.
+
 ### ¿Cómo vamos a implementar la MFA?
+
+Vamos a partir de la práctica anterior, donde ya podemos conectarnos por SSH a nuestro servidor.
+
+Necesitaremos instalar en nuestro móvil la aplicación **Google Authenticator**.
+
 ## Instalación y configuración de MFA para OpenSSH
-### Instalación y configuración del módulo PAM de Google
+
+Ahora que ya hemos configurado SSH para no necesitar introducir el password cada vez que hagamos login, vamos a implementar el 2FA o segundo factor de autenticación para mayor seguridad. 
+
+Esto es lo que se conoce como hacer *hardening* o fortificación de servidores.
+
+!!!warning "Atención"
+    Vamos a conectarnos por SSH al servidor y vamos a realizar toda la configuración de esta práctica estando conectados por SSH.
+    
+    Si necesitáis hacer pruebas de nuevas conexiones, podéis abrir otra pestaña del terminal sin desconectaros.
+
+Los pasos que se deben seguir son los siguientes:
+
+1. Hacer un update del sistema
+    ```bash
+    sudo apt update
+    ```
+2. Instalar el módulo de autenticación de Google para Ubuntu
+    ```bash
+    sudo apt install libpam-google-authenticator
+    ```
+3. Una vez instalado, se ejecuta
+    ```bash
+    google-authenticator
+    ```
+ 
+    y os irá haciendo una serie de preguntas que debéis responder. La primera os pregunta si el código debe de cambiar aleatoriamente en el tiempo, a lo cual debéis responder sí. Os generará el código QR que debéis escanear con el móvil y los códigos de recuperación.
+
+    ![](../img/ssh_qr.png){: style="height:570px;width:800px"}
+
+4. En la app Google-authenticator debéis darle al icono ***+*** y luego escanear el código QR que os ha aparecido antes
+    ![](../img/ssh_authenticator.png){: style="height:370px;width:200px"}
+5. La siguiente os pregunta si queréis que actualice automáticamente el achivo google_authenticator, cosa necesaria para que funcione el 2FA, ergo debéis responder sí nuevamente
+    ![](../img/ssh_authenticator2.png)
+6. En la siguiente pregunta, al responder que sí, le indicáis que el código que uséis caduque en ese mismo instante. Esto quiere decir que sólo se podrá realizar un login cada 30 segundos pero aumentará la protección frente a ataques automatizados
+    ![](../img/ssh_authenticator3.png)
+7. Por defecto los códigos se generan cada 30 segundos, dejando un pequeño margen temporal donde el código anterior y el posterior seguirán siendo válidos. Esto es para compensar ciertos desajustes temporales entre la hora del servidor y del cliente.
+    Aquí responderemos que no pues este margen es suficiente y podría comprometer la seguridad del aumentarlo
+    ![](../img/ssh_authenticator4.png)
+9.  Para proteger nuestro servidor contra ataques de fuerza bruta responderemos que sí a la pregunta de permitir un máximo de 3 intentos de login cada 30 segundos
+    ![](../img/ssh_authenticator2.png)
+
 ### Configurar OpenSSH
+!!!warning "Nota importante"
+    Puesto que vamos a realizar cambios para SSH estando conectados por SSH, es muy importante no cerrar nunca la conexión SSH inicial para no correr el riesgo de perder el acceso al servidor.
+
+Para hacer pruebas, estableceremos una nueva conexión SSH y cuando comprobemos que todo funciona, podrán cerrarse todas las sesiones.
+
+Ahora debemos configurar el servicio de autenticación de Linux para que sea consciente de que puede utilizar la autenticación de Google. Editamos `/etc/pam.d/sshd`
+
+Y añadiremos al final del archivo la línea
+
+![](../img/ssh_authenticator6.png)
+
+El “nullok” del final sirve para indicarle al mecanismo de autorización centralizado de Linux, PAM (Pluggable Authentication Modules) que este método de autenticación es opcional. De esta forma permitiremos que los usuarios que no utilicen el 2FA, puedan seguir haciendo login todavía usando sus claves.
+
+A continuación debemos configurar el archivo de configuración del servicio SSH para que soporte este tipo de autenticación, editando el archivo `/etc/ssh/ssdh_config` para añadir:
+
+![](../img/ssh_authenticator7.png)
+
+Guardamos el archivo y reiniciamos el servicio: `systemctl restart sshd`
+
+### Haciendo que SSH sea consciente de la autenticación multifactor
+
+Reabrimos el archivo de configuración del servicio ssh `/etc/ssh/sshd_config`
+
+Y añadimos esta línea al final del archivo, para indicarle al SSH que métodos de autenticación se requieren. Esto le indica a SSH que necesitamos o una clave SSH, o un password o un código de verificación (o las tres cosas)
+
+![](../img/ssh_authenticator8.png)
+
+Cerramos y guardamos este archivo. Ahora volvemos a abrir el archivo de configuración de PAM `/etc/pam.d/sshd`
+
+Debemos buscar y comentar la línea indicada para decirle a PAM que no muestre la opción de introducir password
+
+![](../img/ssh_authenticator9.png)
+
+Guardamos y cerramos el archivo. Acto seguido reiniciamos el servicio `systemctl restart sshd`
+
+Ahora debéis intentar hacer login de nuevo en el server. En esta ocasión debería pediros el código de verificación.
+
+Este código de verificación es el que aparece en Google-authenticator cada 30 segundos, así que deberéis consultarlo en el móvil, introducirlo y si todo va bien, estaréis logueados.
+
+![](../img/ssh_authenticator10.png)
+
+A pesar de que no se explicita, se han usado tanto las claves SSH como el código de verificación, es decir, dos factores. Para verificarlo, haced el ssh con la opción -v (de verbose) para poder comprobarlo
+
+![](../img/ssh_authenticator11.png)
+![](../img/ssh_authenticator12.png)
+
+En el **recuadro rojo** podéis ver que se produce la **autenticación mediante claves**, resultando en una autenticación parcial.
+
+Quedaría la segunda parte, que se corresponde con la parte configurada como interactiva con el teclado (keyboard-interactive), que no es mas que introducir el **código temporal de Google-authenticator**, como os dice en el fragmento **recuadrado en verde**.
+
+!!!task "Tarea"
+    Comprueba que te funciona este doble factor de autenticación.
+
+    Adjunta unas capturas de pantallas, utilizando la opción “-v” e indica, recuadrándolo, dónde se puede ver que ha utilizado ambos factores de autenticación.
+
 ### Añadiendo un tercer factor de autenticación
+
+En la fase 3 hemos listado varios tipos de autenticación permitidas, en el archivo de configuración sshd_config:
++ Claves públicas (publickey)
++ Password (password publickey)
++ Código de verificación (keyboard-interactive)
+
+Pero a pesar de ello, sólo hemos permitido el login mediante clave pública + código de verificación.
+
+Si quisiéramos tener los tres factores, se podría realizar con un cambio rápido. Simpleente habría que descomentar la línea que hemos comentado antes en el archivo `/etc/pam.d/sshd`
+
+![](../img/ssh_authenticator13.png)
+
+Y reiniciar el servicio.
+
+Después de esto, al intentar hacer el ssh, nos pedirá el password además del código de verificación.
+
+![](../img/ssh_authenticator14.png)
+
+!!!task "Tarea"
+    Comprueba  que te funciona  correctamente el login con  los tres factores de autenticación.
+    
+    Adjunta una captura con la opción “-v” donde indiques, con un recuadro, dónde se están utilizando cada uno de los tres factores.
+
+## Referencias
+
+[SSHGUARD](https://wiki.archlinux.org/title/Sshguard#)
