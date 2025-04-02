@@ -152,9 +152,14 @@ Estas cadenas son generalmente detectadas mediante un análisis de patrones o de
 
 ### Demos
 
+
+
 !!!task "Tarea"
-    1. Comprueba la diferencia entre un resultado verificado: `trufflehog git https://github.com/LuD1161/secrets_pub_repo`
-    2. Y otro sin verificar: `trufflehog --repo=https://github.com/lyft/clouddriver.git`
+    1. Comprueba la diferencia entre un resultado verificado: `trufflehog git https://github.com/LuD1161/secrets_pub_repo --no-update`
+    2. Y otro sin verificar: `trufflehog github --repo=https://github.com/lyft/clouddriver.git --no-update`
+   
+    !!!warning "Atención"
+        Necesitarás estar autenticado con tus credenciales de GitHub para que no te dé error al intentar escanear el repositorio.
     
     Adjunta captura de pantalla y comenta las diferencias.
 
@@ -166,7 +171,7 @@ Un hook en Git es un script que se ejecuta automáticamente en respuesta a ciert
 
 ##### Pre-commit
 
-Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están cometiendo secretos o credenciales sensibles.
+Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están exponiendo secretos o credenciales sensibles.
 
 + <u>Ejemplo de Uso</u>
 
@@ -191,7 +196,6 @@ mkdir demo
 cd demo
 git init
 ```
-
 Nos crearemos un archivo que contendrá lo que sería nuestro código
 
 ```bash
