@@ -174,7 +174,7 @@ Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se
 
     **Pre-Commit Hook:** Puedes tener un pre-commit hook que verifique que todos los archivos Python cumplen con las normas de estilo PEP8 antes de permitir el commit.
 
-Estos hooks se configuran en el directorio .git/hooks/ de tu repositorio.
+Estos hooks se configuran en el directorio `.git/hooks/` de tu repositorio.
 
 ##### Demo
 
