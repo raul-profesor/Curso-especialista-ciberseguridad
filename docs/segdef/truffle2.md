@@ -163,17 +163,16 @@ Estas cadenas son generalmente detectadas mediante un análisis de patrones o de
 ##### Hook
 
 Un hook en Git es un script que se ejecuta automáticamente en respuesta a ciertos eventos en un repositorio. Estos eventos pueden incluir acciones como commits, merges, pushes, etc. Los hooks permiten automatizar tareas y asegurar que ciertas condiciones se cumplan antes o después de que se realicen estas acciones.
-Pre-Commit Hook
-
 
 ##### Pre-commit
 
 Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están cometiendo secretos o credenciales sensibles.
 
-+ Ejemplo de Uso
++ <u>Ejemplo de Uso</u>
 
     **Hook:** Puedes tener un hook que envíe una notificación a Slack cada vez que se haga un push al repositorio.
-    Pre-Commit Hook: Puedes tener un pre-commit hook que verifique que todos los archivos Python cumplen con las normas de estilo PEP8 antes de permitir el commit.
+
+    **Pre-Commit Hook:** Puedes tener un pre-commit hook que verifique que todos los archivos Python cumplen con las normas de estilo PEP8 antes de permitir el commit.
 
 Estos hooks se configuran en el directorio .git/hooks/ de tu repositorio.
 
