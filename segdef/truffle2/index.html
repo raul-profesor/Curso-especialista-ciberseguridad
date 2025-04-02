@@ -19,7 +19,7 @@
         <link rel="next" href="../trivy/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
@@ -77,7 +77,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo">
   
     
     
@@ -129,25 +129,31 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
+      
+        <form class="md-header__option" data-md-component="palette">
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent=""  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
           
-            <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            </label>
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
           
-        
-          
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent=""  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
-            </label>
-          
-        
-      </form>
+        </form>
+      
     
     
     
@@ -1182,16 +1188,20 @@
 <div class="admonition task">
 <p class="admonition-title">Tarea</p>
 <ol>
-<li>Comprueba la diferencia entre un resultado verificado: <code>trufflehog git https://github.com/LuD1161/secrets_pub_repo</code></li>
-<li>Y otro sin verificar: <code>trufflehog --repo=https://github.com/lyft/clouddriver.git</code></li>
+<li>Comprueba la diferencia entre un resultado verificado: <code>trufflehog git https://github.com/LuD1161/secrets_pub_repo --no-update</code></li>
+<li>Y otro sin verificar: <code>trufflehog github --repo=https://github.com/lyft/clouddriver.git --no-update</code></li>
 </ol>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Necesitarás estar autenticado con tus credenciales de GitHub para que no te dé error al intentar escanear el repositorio.</p>
+</div>
 <p>Adjunta captura de pantalla y comenta las diferencias.</p>
 </div>
 <h4 id="usando-trufflehog-con-un-hook-pre-commit-para-prevenir-la-publicacion-accidental-de-secretos">Usando Trufflehog con un hook pre-commit para prevenir la publicación accidental de secretos</h4>
 <h5 id="hook">Hook</h5>
 <p>Un hook en Git es un script que se ejecuta automáticamente en respuesta a ciertos eventos en un repositorio. Estos eventos pueden incluir acciones como commits, merges, pushes, etc. Los hooks permiten automatizar tareas y asegurar que ciertas condiciones se cumplan antes o después de que se realicen estas acciones.</p>
 <h5 id="pre-commit">Pre-commit</h5>
-<p>Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están cometiendo secretos o credenciales sensibles.</p>
+<p>Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están exponiendo secretos o credenciales sensibles.</p>
 <ul>
 <li>
 <p><u>Ejemplo de Uso</u></p>
@@ -1206,11 +1216,11 @@
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pre-commit<span class="w"> </span>
 </code></pre></div>
 Tras ello nos crearemos un directorio y lo inicializaremos como repositorio de GitHub</p>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>demo
+<p><div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>demo
 <span class="nb">cd</span><span class="w"> </span>demo
 git<span class="w"> </span>init
 </code></pre></div>
-<p>Nos crearemos un archivo que contendrá lo que sería nuestro código</p>
+Nos crearemos un archivo que contendrá lo que sería nuestro código</p>
 <div class="highlight"><pre><span></span><code>nano<span class="w"> </span>test.py
 </code></pre></div>
 <p>Y colocaremos dentro de él nuestro código de ejemplo:</p>
