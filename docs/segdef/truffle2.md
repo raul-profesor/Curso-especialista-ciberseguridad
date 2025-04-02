@@ -160,6 +160,141 @@ Estas cadenas son generalmente detectadas mediante un análisis de patrones o de
 
 #### Usando Trufflehog con un hook pre-commit para prevenir la publicación accidental de secretos
 
+##### Hook
+
+Un hook en Git es un script que se ejecuta automáticamente en respuesta a ciertos eventos en un repositorio. Estos eventos pueden incluir acciones como commits, merges, pushes, etc. Los hooks permiten automatizar tareas y asegurar que ciertas condiciones se cumplan antes o después de que se realicen estas acciones.
+Pre-Commit Hook
 
 
+##### Pre-commit
 
+Un pre-commit hook es un tipo específico de hook que se ejecuta antes de que se realice un commit. Su propósito es verificar que el código cumple con ciertos estándares o reglas antes de que se añada al repositorio. Por ejemplo, un pre-commit hook puede verificar el estilo del código, ejecutar pruebas unitarias, o asegurarse de que no se están cometiendo secretos o credenciales sensibles.
+
++ Ejemplo de Uso
+
+    **Hook:** Puedes tener un hook que envíe una notificación a Slack cada vez que se haga un push al repositorio.
+    Pre-Commit Hook: Puedes tener un pre-commit hook que verifique que todos los archivos Python cumplen con las normas de estilo PEP8 antes de permitir el commit.
+
+Estos hooks se configuran en el directorio .git/hooks/ de tu repositorio.
+
+##### Demo
+
+En primer lugar, debemos instalar *pre-commit*
+
+```bash
+sudo apt update
+sudo apt install pre-commit 
+```
+Tras ello nos crearemos un directorio y lo inicializaremos como repositorio de GitHub
+
+```bash
+mkdir demo
+cd demo
+git init
+```
+
+Nos crearemos un archivo que contendrá lo que sería nuestro código
+
+```bash
+nano test.py
+```
+
+Y colocaremos dentro de él nuestro código de ejemplo:
+
+```python
+import os
+import mysql.connector
+from fastapi import FastAPI
+
+app = FastAPI()
+
+def _get_db_connection():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        database="CarDatabase",
+        password=os.environ.get("MYSQL_ROOT_PASSWORD"))
+
+
+@app.get("/")
+def read_root():
+    return { "message": "Hello World!"}
+
+
+@app.get("/cars")
+def read_cars():
+    conn = _get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Cars")
+    cars = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return cars
+```
+
+Ahora procedemos a crear el archivo ***.yaml*** que configurará nuestro *pre-commit*. Este archivo estará en la raíz del directorio del respositorio
+
+```yaml title=".pre-commit-config.yaml"
+repos:
+  - repo: local
+    hooks:
+      - id: trufflehog
+        name: TruffleHog
+        description: Descubre secretos expuestos en tu repositorio
+        entry: bash -c 'trufflehog git file://. --since-commit HEAD --no-verification --fail --no-update'
+        language: system
+        stages: ["commit", "push"]
+```
+
+E instalamos este pre-commit
+
+```bash
+pre-commit install
+```
+
+Hacemos un primer commit:
+
+```bash
+git add .
+git commit -m "Commit inicial"
+```
+Tras ello, modificamos el secreto simulando una credencial expuesta por accidente en el código
+
+```python hl_lines="30-33"
+import os
+import mysql.connector
+from fastapi import FastAPI
+
+app = FastAPI()
+
+def _get_db_connection():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        database="CarDatabase",
+        password=os.environ.get("MYSQL_ROOT_PASSWORD"))
+
+
+@app.get("/")
+def read_root():
+    return { "message": "Hello World!"}
+
+
+@app.get("/cars")
+def read_cars():
+    conn = _get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Cars")
+    cars = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return cars
+
+@app.get("/test")
+def read_root():
+    secret = "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"
+    return { "message": "Hello World!"}
+```
+
+!!!task "Tarea"
+    Realiza un nuevo commit, observa y describe lo que ves.
