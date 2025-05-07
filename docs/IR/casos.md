@@ -29,7 +29,7 @@ Durante una monitorización rutinaria, el SOC observa actividad inusual en la re
 | 10:06:12 AM | Nota de rescate creada | user_123 | Nota: «Pague 5 BTC para recuperar sus datos». |
 
 
-# Fase 1: Detección inicial y triaje
+## Fase 1: Detección inicial y triaje
 
 ### Inyección 1: Actividad sospechosa descubierta
 
