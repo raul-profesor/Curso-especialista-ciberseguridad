@@ -6,24 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Explicación teórica exploits. Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
       
       
-      
-        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segof/exploit/">
-      
-      
-        <link rel="prev" href="../servicios_desact/">
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/IR/casos/">
       
       
-        <link rel="next" href="../metasploit/">
+        <link rel="prev" href="../intro/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Teoría sobre exploits - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Casos prácticos de respuesta a incidentes - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
@@ -89,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#que-es-un-exploit" class="md-skip">
+        <a href="#casos-practicos-de-respuesta-a-incidentes" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -122,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Teoría sobre exploits
+              Casos prácticos de respuesta a incidentes
             
           </span>
         </div>
@@ -224,15 +220,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../segof/" class="md-tabs__link">
         Seguridad ofensiva
       </a>
     </li>
@@ -258,13 +252,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../IR/intro/" class="md-tabs__link">
+      <a href="../intro/" class="md-tabs__link md-tabs__link--active">
         Respuesta a incidentes (IR)
       </a>
     </li>
@@ -442,16 +438,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
       
       
         
@@ -494,7 +490,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../">Seguridad ofensiva</a>
+          <a href="../../segof/">Seguridad ofensiva</a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -502,7 +498,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Seguridad ofensiva
@@ -517,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Intro/" class="md-nav__link">
+      <a href="../../segof/Intro/" class="md-nav__link">
         Introducción
       </a>
     </li>
@@ -531,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nmap101/" class="md-nav__link">
+      <a href="../../segof/nmap101/" class="md-nav__link">
         Introducción a Nmap
       </a>
     </li>
@@ -545,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../enumeracion/" class="md-nav__link">
+      <a href="../../segof/enumeracion/" class="md-nav__link">
         Enumeración de servicios
       </a>
     </li>
@@ -559,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../servicios_desact/" class="md-nav__link">
+      <a href="../../segof/servicios_desact/" class="md-nav__link">
         Causas de vulnerabilidades en sistemas
       </a>
     </li>
@@ -571,246 +567,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Explotación de vulnerabilidades
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../segof/exploit/" class="md-nav__link">
         Explotación de vulnerabilidades
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#que-es-un-exploit" class="md-nav__link">
-    ¿Qué es un exploit?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tipos-de-exploits" class="md-nav__link">
-    Tipos de exploits
-  </a>
-  
-    <nav class="md-nav" aria-label="Tipos de exploits">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploits-conocidos" class="md-nav__link">
-    Exploits conocidos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exploits-desconocidos" class="md-nav__link">
-    Exploits desconocidos
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#principales-bases-de-datos-de-exploits" class="md-nav__link">
-    Principales bases de datos de exploits
-  </a>
-  
-    <nav class="md-nav" aria-label="Principales bases de datos de exploits">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exploit-db" class="md-nav__link">
-    Exploit DB
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rapid7" class="md-nav__link">
-    Rapid7
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cxsecurity" class="md-nav__link">
-    CXSecurity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vulnerability-lab" class="md-nav__link">
-    Vulnerability Lab
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#0day" class="md-nav__link">
-    0day
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#securityfocus" class="md-nav__link">
-    SecurityFocus
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#packet-storm-security" class="md-nav__link">
-    Packet Storm Security
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#google-hacking-database" class="md-nav__link">
-    Google Hacking Database
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exploit-db-y-searchsploit" class="md-nav__link">
-    Exploit-db y searchsploit
-  </a>
-  
-    <nav class="md-nav" aria-label="Exploit-db y searchsploit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#searchsploit" class="md-nav__link">
-    Searchsploit
-  </a>
-  
-    <nav class="md-nav" aria-label="Searchsploit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#uso-de-searchsploit" class="md-nav__link">
-    Uso de searchsploit
-  </a>
-  
-    <nav class="md-nav" aria-label="Uso de searchsploit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#busqueda-por-titulo" class="md-nav__link">
-    Búsqueda por título
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#busqueda-avanzada-de-titulos" class="md-nav__link">
-    Búsqueda avanzada de títulos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copiar-al-portapapeles" class="md-nav__link">
-    Copiar al portapapeles
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copiar-al-directorio" class="md-nav__link">
-    Copiar al directorio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#examinar-un-exploit" class="md-nav__link">
-    Examinar un exploit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mostrar-url-de-exploit-db" class="md-nav__link">
-    Mostrar URL de Exploit-DB
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#excluir-resultados-no-deseados" class="md-nav__link">
-    Excluir resultados no deseados
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#distinguir-mayusculas-y-minusculas" class="md-nav__link">
-    Distinguir mayúsculas y minúsculas
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ejercicios-exploit" class="md-nav__link">
-    Ejercicios exploit
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -822,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metasploit/" class="md-nav__link">
+      <a href="../../segof/metasploit/" class="md-nav__link">
         Metasploit
       </a>
     </li>
@@ -836,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../EternalBlue/" class="md-nav__link">
+      <a href="../../segof/EternalBlue/" class="md-nav__link">
         Ejercicio práctico - Explotación de EternalBlue
       </a>
     </li>
@@ -850,7 +611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rev_shell/" class="md-nav__link">
+      <a href="../../segof/rev_shell/" class="md-nav__link">
         Shells
       </a>
     </li>
@@ -864,7 +625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../privesc/" class="md-nav__link">
+      <a href="../../segof/privesc/" class="md-nav__link">
         Escalada de privilegios
       </a>
     </li>
@@ -878,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_enumeration/" class="md-nav__link">
+      <a href="../../segof/ad_enumeration/" class="md-nav__link">
         Enumeración en entornos AD (Active Directory)
       </a>
     </li>
@@ -892,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../passw_manag/" class="md-nav__link">
+      <a href="../../segof/passw_manag/" class="md-nav__link">
         Gestión y almacenamiento de credenciales en Windows
       </a>
     </li>
@@ -906,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../phising/" class="md-nav__link">
+      <a href="../../segof/phising/" class="md-nav__link">
         Spoofing & phising
       </a>
     </li>
@@ -920,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../HackingAD1/" class="md-nav__link">
+      <a href="../../segof/HackingAD1/" class="md-nav__link">
         Ataques en entornos Active Directory
       </a>
     </li>
@@ -934,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Pivoting/" class="md-nav__link">
+      <a href="../../segof/Pivoting/" class="md-nav__link">
         Laboratorio de pivoting
       </a>
     </li>
@@ -948,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../webgrafia/" class="md-nav__link">
+      <a href="../../segof/webgrafia/" class="md-nav__link">
         Webgrafía
       </a>
     </li>
@@ -1163,16 +924,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
         
@@ -1187,7 +948,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Respuesta a incidentes (IR)
@@ -1200,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IR/intro/" class="md-nav__link">
+      <a href="../intro/" class="md-nav__link">
         Introdución a la respuesta a incidentes
       </a>
     </li>
@@ -1212,11 +973,80 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../IR/casos/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Casos prácticos de respuesta a incidentes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Casos prácticos de respuesta a incidentes
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ejercicio-de-simulacion-de-ransomware" class="md-nav__link">
+    1. Ejercicio de simulación de ransomware
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario" class="md-nav__link">
+    Escenario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerta-de-red-siem" class="md-nav__link">
+    Alerta de red (SIEM)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-del-endpoint-edr" class="md-nav__link">
+    Log del Endpoint (EDR)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1243,92 +1073,129 @@
                   
 
 
-<h2 id="que-es-un-exploit">¿Qué es un exploit?</h2>
-<p>Un exploit es un programa o fragmento de código diseñado para encontrar y aprovechar un fallo o vulnerabilidad de seguridad en una aplicación o sistema informático, generalmente con fines maliciosos, como instalar malware. </p>
-<p>Un exploit no es un malware en sí mismo, sino que es un método utilizado por los ciberdelincuentes para distribuir malware.</p>
-<h2 id="tipos-de-exploits">Tipos de exploits</h2>
-<h3 id="exploits-conocidos">Exploits conocidos</h3>
-<p>Una vez que un exploit se da a conocer a los autores del software afectado, la vulnerabilidad a menudo se soluciona mediante un parche para inutilizar el exploit. </p>
-<p>Esta información también se pone a disposición de los proveedores de seguridad. Para las vulnerabilidades de ciberseguridad conocidas públicamente hay organizaciones que enumeran cada vulnerabilidad y proporcionan un número de identificación, una descripción y al menos una referencia pública.</p>
-<h3 id="exploits-desconocidos">Exploits desconocidos</h3>
-<p>Los exploits desconocidos para todos, excepto para las personas que los desarrollaron, se denominan exploits de día cero. Estos son, con mucho, los exploits más peligrosos, ya que ocurren cuando un software o una arquitectura de sistema contiene una vulnerabilidad de seguridad crítica que el proveedor desconoce.</p>
-<p>La vulnerabilidad se da a conocer cuando se detecta que un cibercriminal explota la vulnerabilidad, de ahí el término explotación de día cero.</p>
-<p>Una vez que se produce una explotación de este tipo, los sistemas que ejecutan el exploit son vulnerables a un ciberataque. O bien el proveedor finalmente lanzará un parche para corregir la vulnerabilidad o el software de seguridad detecta y bloquea el exploit y el malware resultante.</p>
-<h2 id="principales-bases-de-datos-de-exploits">Principales bases de datos de exploits</h2>
-<h3 id="exploit-db"><a href="https://www.exploit-db.com/">Exploit DB</a></h3>
-<p>Esta es una de las bases de datos de exploits gratuitos más populares, conocida como “Exploit DB“. Este proyecto de Offensive Security tiene como objetivo ser una colección de exploits públicos y software vulnerable disponible para la investigación de vulnerabilidades y pruebas de intrusión.</p>
-<p><img alt="" src="../../img/exploitdb.png" /></p>
-<p>Día a día, la lista de exploits se crea recopilando exploits de fuentes públicas y privadas, y se presenta en una interfaz fácil de usar que le permite buscar rápidamente en la base de datos. Desde esta área podrás buscar exclusivamente exploits, o tanto exploits como aplicaciones vulnerables, e incluso crear filtros para personalizar tu búsqueda por autor, tipo de plataforma, tags y mucho más.</p>
-<p><img alt="" src="../../img/exploitdb2.png" /></p>
-<h3 id="rapid7"><a href="https://www.rapid7.com/db/">Rapid7</a></h3>
-<p>Las personas detrás de Metasploit son conocidas por la alta calidad en sus productos de infosec, y lo mismo ocurre con las vulnerabilidades y la base de datos de exploits de su sitio web.</p>
-<p>Rapid7 ofrece una forma rápida y práctica de buscar vulnerabilidades y exploits (módulos), lo que le permite explorar los resultados de cualquier consulta determinada.</p>
-<p>Una vez que obtenga los resultados, podrás descubrir más información sobre la vulnerabilidad, con instrucciones exactas para ejecutar este exploit desde la consola de metasploit.</p>
-<h3 id="cxsecurity"><a href="https://cxsecurity.com/exploit/">CXSecurity</a></h3>
-<p>Esta base de datos ofrece acceso directo a los exploits más recientes desde una interfaz web, donde se podrá filtrar y encontrar exploits para vulnerabilidades locales o remotas, obtener el nivel de riesgo y otros detalles, como el autor y la fecha de publicación.</p>
-<h3 id="vulnerability-lab"><a href="https://www.vulnerability-lab.com/">Vulnerability Lab</a></h3>
-<p>Vulnerability Lab ofrece acceso a una gran base de datos de vulnerabilidades con exploits y PoC (Proof of Concept) con fines de investigación.</p>
-<p>Incluye detalles completos sobre la vulnerabilidad, como fecha, puntaje de riesgo, versión afectada, tipo de vulnerabilidad (remota o local), autor, clase de vulnerabilidad y más.</p>
-<h3 id="0day"><a href="https://en.0day.today/">0day</a></h3>
-<p>También conocido como Inj3ct0r, 0day afirma ser la BD de explotación más grande del mundo, una forma de servicio completo para descubrir, comprar y vender exploits de forma anónima a cualquier persona mediante el uso de monedas digitales como Bitcoin, Litecoin y Ethereum.</p>
-<p>El tipo de exploits que se pueden encontrar en esta base de datos incluye local, remoto DoS, PoC, shellcode y otros.</p>
-<p>Al navegar por su base de datos, se pueden ver detalles de exploits, como la fecha de publicación, la descripción, la plataforma afectada, los hits, la puntuación de riesgo, el costo del exploit y el autor. El sitio web está traducido a más de una docena de idiomas y afirma que se publicó únicamente con fines educativos.</p>
-<h3 id="securityfocus"><a href="https://www.securityfocus.com/vulnerabilities">SecurityFocus</a></h3>
-<p>SecurityFocus es una comunidad basada en Symantec creada para compartir CVE e información de exploits con desarrolladores e investigadores de seguridad en una ubicación centralizada.</p>
-<p>Ofrece acceso directo a CVE y exploits desde una interfaz web fácil de navegar donde puede encontrar vulnerabilidades y filtrar los resultados por proveedor, título y versión de software.</p>
-<p>Si bien SecurityFocus es un servicio útil, no se ha actualizado desde julio de 2019. No se encontrarán las últimas vulnerabilidades en él.</p>
-<h3 id="packet-storm-security"><a href="https://packetstormsecurity.com/files/tags/exploit/">Packet Storm Security</a></h3>
-<p>Packet Storm Security es una comunidad de exploits dedicada a compartir vulnerabilidades y avisos, así como información sobre PoC, demostraciones y exploits en funcionamiento para vulnerabilidades locales y remotas.</p>
-<p>Una de las mejores cosas de este sitio es que siempre está actualizado para incluir las últimas vulnerabilidades para una amplia gama de aplicaciones.</p>
-<h3 id="google-hacking-database"><a href="https://www.exploit-db.com/google-hacking-database">Google Hacking Database</a></h3>
-<p>Si bien estos no son “exploits” oficiales sino más bien Google Dorks, funcionan de la misma manera que un exploit tradicional, pero en lugar de usar código en sus propias aplicaciones o servicios, confía en el lenguaje de sintaxis del motor de búsqueda de Google para ejecutar comandos. y obtener la información que necesita.</p>
-<p>Google Hacking Database es un proyecto del dominio Exploit-DB.com, una forma alternativa de encontrar aplicaciones vulnerables y extraer información o de obtener privilegios.</p>
-<h2 id="exploit-db-y-searchsploit">Exploit-db y searchsploit</h2>
-<p>Esta base de datos de exploits es mantenida por Offensive Security, una empresa de formación en ciberseguridad que ofrece diversas certificaciones de seguridad de la información (siendo OSCP la más famosa), así como servicios de pruebas de intrusión de alto nivel. Exploit Database es un proyecto sin ánimo de lucro que Offensive Security proporciona como servicio público.</p>
-<p>La base de datos de exploits, que cumple con CVE, es un archivo público de exploits, así como el software vulnerable correspondiente, desarrollado para su uso por pentesters e investigadores de vulnerabilidades. Su objetivo es ofrecer la colección más completa de exploits recopilados a través de envíos directos, listas de correo y otras fuentes públicas, y presentarlos en una base de datos de fácil navegación y de libre acceso. La base de datos de exploits es un repositorio de exploits y pruebas de conceptos en lugar de avisos, lo que la convierte en un recurso valioso para quienes necesitan datos procesables de inmediato.</p>
-<h3 id="searchsploit">Searchsploit</h3>
-<p>SearchSploit es una herramienta de búsqueda de línea de comandos para Exploit-DB que permite tener una copia de la base de datos de exploits. Searchsploit está incluido en el repositorio de Exploit Database en GitHub.</p>
-<p>También viene instalado por defecto en algunas de las distribuciones de seguridad más conocidas como Kali o Parrot.</p>
-<h4 id="uso-de-searchsploit">Uso de searchsploit</h4>
-<p>Si escribimos en el terminal:</p>
-<div class="highlight"><pre><span></span><code>$<span class="w"> </span>searchsploit
-</code></pre></div>
-<p>Se nos ofrece información completa sobre el uso de <em>searchsploit</em>:</p>
-<p><img alt="" src="../../img/searchsploit.png" /></p>
-<h5 id="busqueda-por-titulo">Búsqueda por título</h5>
-<p>El uso de la opción <code>-t</code> habilita el parámetro “título” para buscar un exploit con un título específico. </p>
-<p>Porque por defecto, searchsploit intentará tanto el título del exploit como la ruta. La búsqueda de un exploit con un título específico da resultados rápidos y ordenados.</p>
-<p><img alt="" src="../../img/searchsploit2.png" /></p>
-<p>El comando anterior buscará un exploit relacionado con el CMS <em>gym</em> y mostrará todos los exploits disponibles en la base de datos exploit-db.</p>
-<h5 id="busqueda-avanzada-de-titulos">Búsqueda avanzada de títulos</h5>
-<p>Incluso se puede usar la opción <code>-t</code>, para obtener un resultado más preciso al encontrar la vulnerabilidad de cualquier plataforma en particular. </p>
-<p>Por ejemplo, si queremos buscar vulnerabilidades para Vmware pero únicamente para Linux, haremos</p>
-<p><img alt="" src="../../img/searchsploit3.png" /></p>
-<h5 id="copiar-al-portapapeles">Copiar al portapapeles</h5>
-<p>Al usar la opción <code>-p</code> se muestra la ruta completa de un exploit.</p>
-<p>Esta opción proporciona más información relacionada con el exploit, así como también copia la ruta completa del exploit al portapapeles, todo lo que se necesitas es presionar las teclas Ctrl + V para pegar.</p>
-<p><img alt="" src="../../img/searchsploit4.png" /></p>
-<h5 id="copiar-al-directorio">Copiar al directorio</h5>
-<p>La opción -m copia un exploit en el directorio de trabajo actual. Esta opción proporciona la misma información que la anterior relacionada con el exploit, pero también copia el exploit en tu directorio actual de trabajo.</p>
-<p><img alt="" src="../../img/searchsploit5.png" /></p>
-<h5 id="examinar-un-exploit">Examinar un exploit</h5>
-<p>Con la opción --examine, se puede leer la funcionalidad de ese exploit con la ayuda del paginador pertinente.</p>
-<div class="highlight"><pre><span></span><code>searchsploit<span class="w"> </span><span class="m">39166</span><span class="w"> </span>--examine
-searchsploit<span class="w"> </span>-x<span class="w"> </span><span class="m">39166</span>
-</code></pre></div>
-<h5 id="mostrar-url-de-exploit-db">Mostrar URL de Exploit-DB</h5>
-<p>Con la opción <code>-w</code>, se muestra la URL de Exploit-DB.com en lugar de la ruta local. En dicho sitio web obtendrás información más detallada, como CVE-ID, archivos de configuración, etiquetas y asignaciones de vulnerabilidad que no se incluyen en searchsploit.</p>
-<p><img alt="" src="../../img/searchsploit6.png" /></p>
-<h5 id="excluir-resultados-no-deseados">Excluir resultados no deseados</h5>
-<p>Al usar la opción <code>--exclude</code>, se habilita el parámetro de exclusión para eliminar los resultados no deseados dentro de la lista de exploits. También puedes eliminar varios términos separando los términos con un “|” (pipe). </p>
-<p><img alt="" src="../../img/searchsploit7.png" /></p>
-<h5 id="distinguir-mayusculas-y-minusculas">Distinguir mayúsculas y minúsculas</h5>
-<p>Al usar la opción <code>-c</code>, se puede realizar una búsqueda que distingue entre mayúsculas y minúsculas. E21sto permite descubrir la vulnerabilidad relacionada con la mención de caracteres específicos en el comando, de manera predeterminada hace una búsqueda insensitive.</p>
-<p><img alt="" src="../../img/searchsploit8.png" /></p>
-<h1 id="ejercicios-exploit">Ejercicios exploit</h1>
-<p>De la misma forma que se ha mostrado aquí, realizad un escaneo de puertos sobre la máquina <a href="https://tryhackme.com/room/ignite">Ignite de TryHackMe</a></p>
-<p>Fijáos bien en la información obtenida y buscad algún exploit que pueda usarse contra ella. Para obtener una reverse shell, podéis hacer uso de <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#netcat-openbsd">este recurso</a>. </p>
-<p>El objetivo final es conseguir la flag de usuario (user.txt).</p>
+<h1 id="casos-practicos-de-respuesta-a-incidentes">Casos prácticos de respuesta a incidentes</h1>
+<h2 id="1-ejercicio-de-simulacion-de-ransomware"><strong>1. Ejercicio de simulación de ransomware</strong></h2>
+<h2 id="objetivo">Objetivo</h2>
+<p>Simular un ataque de ransomware y evaluar la capacidad de respuesta del equipo SOC en todos los roles (L1, L2, L3 y SOC Manager).</p>
+<h2 id="escenario">Escenario</h2>
+<p>Durante una monitorización rutinaria, el SOC observa actividad inusual en la red de la empresa. Varios archivos parecen estar encriptados y se descubre una nota de rescate exigiendo el pago en Bitcoin. El ejercicio comienza con este descubrimiento y procede a través del ciclo de vida de respuesta a incidentes.</p>
+<h2 id="alerta-de-red-siem">Alerta de red (SIEM)</h2>
+<ul>
+<li>ID de Alerta: 3029  </li>
+<li>Gravedad Alta  </li>
+<li>IP de origen: 192.168.1.24  </li>
+<li>IP de destino: 45.77.89.120  </li>
+<li>Descripción: Detectada gran transferencia de datos salientes.</li>
+</ul>
+<h2 id="log-del-endpoint-edr">Log del Endpoint (EDR)</h2>
+<table>
+<thead>
+<tr>
+<th>Hora</th>
+<th>Evento</th>
+<th>Usuario</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10:02:34 AM</td>
+<td>Archivo sospechoso descargado</td>
+<td>user_123</td>
+<td>Archivo: <code>invoice_0321.exe</code></td>
+</tr>
+<tr>
+<td>10:04:56 AM</td>
+<td>Ficheros encriptados detectados</td>
+<td>user_123</td>
+<td>Ficheros encriptados: <code>*.docx</code>, <code>*.xls</code></td>
+</tr>
+<tr>
+<td>10:06:12 AM</td>
+<td>Nota de rescate creada</td>
+<td>user_123</td>
+<td>Nota: «Pague 5 BTC para recuperar sus datos».</td>
+</tr>
+</tbody>
+</table>
+<h1 id="fase-1-deteccion-inicial-y-triaje">Fase 1: Detección inicial y triaje</h1>
+<h3 id="inyeccion-1-actividad-sospechosa-descubierta">Inyección 1: Actividad sospechosa descubierta</h3>
+<ol>
+<li>Una alerta SIEM informa de tráfico saliente inusual hacia una IP no reconocida.</li>
+<li>Los registros EDR revelan una descarga de archivos sospechosa seguida de un rápido cifrado de archivos.</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l1">Preguntas para el analista L1:</h4>
+<ol>
+<li>¿Qué medidas iniciales debe tomar al recibir la alerta SIEM?  </li>
+<li>¿Cómo valida si esta actividad es maliciosa?  </li>
+<li>¿Cuándo debería escalar esta situación a L2?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-de-l2">Preguntas para el analista de L2:</h4>
+<ol>
+<li>¿Cómo confirma si el ransomware está activo?  </li>
+<li>¿Qué registros o herramientas adicionales examinaría para comprender el alcance?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l3">Preguntas para el analista L3:</h4>
+<ol>
+<li>¿Qué técnicas forenses avanzadas puedes aplicar para analizar el ransomware?  </li>
+<li>¿Cómo identificaría el vector de ataque y evitaría que se produjeran más ataques?</li>
+</ol>
+<h4 id="preguntas-para-el-responsable-del-soc">Preguntas para el Responsable del SOC:</h4>
+<ol>
+<li>¿Cómo priorizar los siguientes pasos garantizando una interrupción operativa mínima?  </li>
+<li>¿Qué estrategias de comunicación aplicaría para las partes interesadas internas y externas?</li>
+</ol>
+<h2 id="fase-2-contencion">Fase 2: Contención</h2>
+<h3 id="inyeccion-2-propagacion-de-la-infeccion">Inyección 2: Propagación de la infección</h3>
+<ul>
+<li>TI informa de que tres servidores del departamento de Finanzas son inaccesibles.  </li>
+<li>El análisis del tráfico de red muestra conexiones continuas a la IP externa (45.77.89.120).</li>
+</ul>
+<h4 id="preguntas-para-el-analista-l1_1">Preguntas para el analista L1:</h4>
+<ol>
+<li>¿Qué medidas debe tomar para aislar los sistemas afectados?  </li>
+<li>¿Cómo documenta el incidente para su posterior análisis?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l2">Preguntas para el analista L2:</h4>
+<ol>
+<li>¿Cómo utiliza los datos de tráfico de red para contener la amenaza?  </li>
+<li>¿Qué técnicas de mitigación deben aplicarse para evitar el movimiento lateral?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l3_1">Preguntas para el analista L3:</h4>
+<ol>
+<li>¿Cómo se analiza el malware para crear indicadores de peligro procesables?  </li>
+<li>¿Qué herramientas avanzadas pueden utilizarse para evaluar el alcance completo de los activos afectados?</li>
+</ol>
+<h4 id="preguntas-para-soc-manager">Preguntas para SOC Manager:</h4>
+<ol>
+<li>¿Cómo se asegura de que las acciones de contención se ajustan a las prioridades de la empresa?  </li>
+<li>¿Qué recursos se necesitan para la recuperación inmediata?</li>
+</ol>
+<h2 id="fase-3-analisis-de-la-causa-raiz">Fase 3: Análisis de la causa raíz</h2>
+<h3 id="inyeccion-3-vector-de-ataque-descubierto">Inyección 3: Vector de ataque descubierto</h3>
+<ul>
+<li>Los registros del gateway de correo electrónico revelan que el ransomware se originó a partir de un correo electrónico de phishing enviado a <code>user_123</code>, con un adjunto malicioso llamado <code>invoice_0321.exe</code>.</li>
+</ul>
+<h4 id="preguntas-para-el-analista-l1_2">Preguntas para el analista L1:</h4>
+<ol>
+<li>¿Cómo rastreas el correo electrónico de phishing hasta su origen?  </li>
+<li>¿Qué indicadores buscaría en los correos electrónicos de otros usuarios?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l2_1">Preguntas para el analista L2:</h4>
+<ol>
+<li>¿Cómo correlacionas el correo electrónico de phishing con la actividad del endpoint?  </li>
+<li>¿Qué recomendaciones haría para reforzar la seguridad del correo electrónico?</li>
+</ol>
+<h4 id="preguntas-para-el-analista-l3_2">Preguntas para el analista L3:</h4>
+<ol>
+<li>¿Cómo utiliza la inteligencia sobre amenazas para evaluar el riesgo de ataques similares?  </li>
+<li>¿Qué medidas adicionales pueden tomarse para reforzar los puntos finales?</li>
+</ol>
+<h4 id="preguntas-para-el-responsable-del-soc_1">Preguntas para el responsable del SOC:</h4>
+<ol>
+<li>¿Cómo presentas los resultados a los directivos?  </li>
+<li>¿Cómo asigna recursos para mejoras a largo plazo?</li>
+</ol>
 
 
   
@@ -1359,7 +1226,7 @@ searchsploit<span class="w"> </span>-x<span class="w"> </span><span class="m">39
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../servicios_desact/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Causas de vulnerabilidades en sistemas" rel="prev">
+          <a href="../intro/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Introdución a la respuesta a incidentes" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1368,26 +1235,11 @@ searchsploit<span class="w"> </span>-x<span class="w"> </span><span class="m">39
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Causas de vulnerabilidades en sistemas
+                Introdución a la respuesta a incidentes
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../metasploit/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Metasploit" rel="next">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Siguiente
-              </span>
-              <div class="md-ellipsis">
-                Metasploit
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
         
       </nav>
     

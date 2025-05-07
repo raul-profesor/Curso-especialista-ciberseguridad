@@ -1,0 +1,2676 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/IR/intro/">
+      
+      
+        <link rel="prev" href="../../segdef/wazuh/">
+      
+      
+        <link rel="next" href="../casos/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+    
+    
+      
+        <title>Introdución a la respuesta a incidentes - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3NX5MD5C8H"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3NX5MD5C8H",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3NX5MD5C8H",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion-respuesta-a-incidentes-ir" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-header__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seguridad en sistemas del curso de especialista en ciberseguridad
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introdución a la respuesta a incidentes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Cambiar a modo normal"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Cambiar a modo normal" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../section/" class="md-tabs__link">
+        Warm up
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../segof/" class="md-tabs__link">
+        Seguridad ofensiva
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../segdef/" class="md-tabs__link">
+        Seguridad defensiva
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Respuesta a incidentes (IR)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-nav__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seguridad en sistemas del curso de especialista en ciberseguridad
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../section/">Warm up</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Warm up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/EntLinux/" class="md-nav__link">
+        Entornos Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/Ej_Linux/" class="md-nav__link">
+        Ejercicios propuestos Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/EntWin/" class="md-nav__link">
+        Entornos Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/Ej_Win/" class="md-nav__link">
+        Ejercicios propuestos Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../section/webgrafia/" class="md-nav__link">
+        Webgrafía
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../segof/">Seguridad ofensiva</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Seguridad ofensiva
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/Intro/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/nmap101/" class="md-nav__link">
+        Introducción a Nmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/enumeracion/" class="md-nav__link">
+        Enumeración de servicios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/servicios_desact/" class="md-nav__link">
+        Causas de vulnerabilidades en sistemas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/exploit/" class="md-nav__link">
+        Explotación de vulnerabilidades
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/metasploit/" class="md-nav__link">
+        Metasploit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/EternalBlue/" class="md-nav__link">
+        Ejercicio práctico - Explotación de EternalBlue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/rev_shell/" class="md-nav__link">
+        Shells
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/privesc/" class="md-nav__link">
+        Escalada de privilegios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/ad_enumeration/" class="md-nav__link">
+        Enumeración en entornos AD (Active Directory)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/passw_manag/" class="md-nav__link">
+        Gestión y almacenamiento de credenciales en Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/phising/" class="md-nav__link">
+        Spoofing & phising
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/HackingAD1/" class="md-nav__link">
+        Ataques en entornos Active Directory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/Pivoting/" class="md-nav__link">
+        Laboratorio de pivoting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segof/webgrafia/" class="md-nav__link">
+        Webgrafía
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../segdef/">Seguridad defensiva</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Seguridad defensiva
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/logs/" class="md-nav__link">
+        Análisis de Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/idps/" class="md-nav__link">
+        Monitorización con IDS/IPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/hardening.ssh/" class="md-nav__link">
+        Hardening SSH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/seconion/" class="md-nav__link">
+        Monitorización con Security Onion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/arkime/" class="md-nav__link">
+        Monitorización de red con Arkime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/truffle/" class="md-nav__link">
+        Análisis de archivos con TruffleHog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/truffle2/" class="md-nav__link">
+        (ACTUALIZADO) Análisis de archivos con TruffleHog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/trivy/" class="md-nav__link">
+        Análisis de infraestructura (contenedores) con Trivy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../segdef/wazuh/" class="md-nav__link">
+        Detección de web shells con Wazuh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Respuesta a incidentes (IR)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Respuesta a incidentes (IR)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introdución a la respuesta a incidentes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Introdución a la respuesta a incidentes
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contexto-general-vivimos-en-una-superficie-de-ataque-global" class="md-nav__link">
+    1. Contexto general: Vivimos en una superficie de ataque global
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-que-es-un-incidente-de-seguridad" class="md-nav__link">
+    ⚠️ 2. ¿Qué es un incidente de seguridad?
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ 2. ¿Qué es un incidente de seguridad?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-incidentes" class="md-nav__link">
+    Tipos de incidentes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion-por-gravedad" class="md-nav__link">
+    Clasificación por Gravedad
+  </a>
+  
+    <nav class="md-nav" aria-label="Clasificación por Gravedad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-reales-solo-en-espana-en-2025" class="md-nav__link">
+    Ejemplos reales sólo en España en 2025:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-por-que-necesitamos-una-respuesta-estructurada" class="md-nav__link">
+    🧩 3. ¿Por qué necesitamos una respuesta estructurada?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fundamentos-normativos-y-frameworks" class="md-nav__link">
+    🏛️ 4. Fundamentos normativos y frameworks
+  </a>
+  
+    <nav class="md-nav" aria-label="🏛️ 4. Fundamentos normativos y frameworks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normativas-y-estandares" class="md-nav__link">
+    📚 Normativas y estándares:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciberseguridad-en-capas" class="md-nav__link">
+    🔐 Ciberseguridad en capas:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ciclo-de-vida-de-la-respuesta-a-incidentes" class="md-nav__link">
+    🧠 5. Ciclo de Vida de la Respuesta a Incidentes
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 5. Ciclo de Vida de la Respuesta a Incidentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparacion" class="md-nav__link">
+    🧰 1. Preparación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetivos-de-esta-fase" class="md-nav__link">
+    🎯 Objetivos de esta fase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#componentes-clave-de-la-preparacion" class="md-nav__link">
+    🗂️ Componentes clave de la preparación
+  </a>
+  
+    <nav class="md-nav" aria-label="🗂️ Componentes clave de la preparación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-plan-de-respuesta-a-incidentes-irp" class="md-nav__link">
+    ✅ 1.1 Plan de Respuesta a Incidentes (IRP)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-creacion-del-csirt-irt" class="md-nav__link">
+    👥 1.2 Creación del CSIRT / IRT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-politicas-normas-y-procedimientos" class="md-nav__link">
+    📜 1.3 Políticas, normas y procedimientos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-inventario-y-clasificacion-de-activos" class="md-nav__link">
+    🖥️ 1.4 Inventario y clasificación de activos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-canales-de-comunicacion-establecidos" class="md-nav__link">
+    📞 1.5 Canales de comunicación establecidos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-formacion-y-simulacros" class="md-nav__link">
+    🧪 1.6 Formación y simulacros
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buenas-practicas" class="md-nav__link">
+    🛠️ Buenas prácticas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-esperado" class="md-nav__link">
+    📌 Resultado esperado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deteccion-y-analisis" class="md-nav__link">
+    🔎 2. Detección y análisis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetivos-de-la-fase" class="md-nav__link">
+    🧭 Objetivos de la fase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-clave-para-la-deteccion" class="md-nav__link">
+    🧰 Herramientas clave para la detección
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proceso-tipico-de-analisis" class="md-nav__link">
+    🔄 Proceso típico de análisis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criterios-de-severidad-ejemplo" class="md-nav__link">
+    📊 Criterios de severidad (ejemplo)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rol-de-la-taxonomia-de-incidentes" class="md-nav__link">
+    🧱 Rol de la taxonomía de incidentes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-real" class="md-nav__link">
+    ⚠️ Ejemplo real
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    🧠 Conclusión
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fase-de-contencion" class="md-nav__link">
+    🛑 3. Fase de Contención
+  </a>
+  
+    <nav class="md-nav" aria-label="🛑 3. Fase de Contención">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    🎯 Objetivos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-contencion" class="md-nav__link">
+    ⚙️ Tipos de contención
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Tipos de contención">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contencion-a-corto-plazo" class="md-nav__link">
+    📍 Contención a corto plazo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contencion-a-largo-plazo" class="md-nav__link">
+    🧩 Contención a largo plazo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requiere" class="md-nav__link">
+    🧠 Requiere:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fase-de-erradicacion-y-recuperacion" class="md-nav__link">
+    🧹 4. Fase de Erradicación y Recuperación
+  </a>
+  
+    <nav class="md-nav" aria-label="🧹 4. Fase de Erradicación y Recuperación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erradicacion" class="md-nav__link">
+    🔍 Erradicación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    🧪 Verificación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperacion" class="md-nav__link">
+    ♻️ Recuperación
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetivo-final" class="md-nav__link">
+    ✅ Objetivo final
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fase-de-lecciones-aprendidas" class="md-nav__link">
+    📋 5. Fase de Lecciones Aprendidas
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 5. Fase de Lecciones Aprendidas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actividades-clave" class="md-nav__link">
+    🧠 Actividades clave
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 Actividades clave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-analisis-post-mortem-retrospectiva" class="md-nav__link">
+    🧾 5.1 Análisis post-mortem (retrospectiva)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-mejora-de-controles-y-procesos" class="md-nav__link">
+    📈 5.2 Mejora de controles y procesos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-documentacion-formal" class="md-nav__link">
+    🪪 5.3 Documentación formal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-actualizacion-del-plan-irp-y-formacion" class="md-nav__link">
+    📚 5.4 Actualización del plan IRP y formación
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-esperado_1" class="md-nav__link">
+    📌 Resultado esperado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-roles-del-equipo-de-respuesta-a-incidentes-csirt" class="md-nav__link">
+    👨‍💻 6. Roles del Equipo de Respuesta a Incidentes (CSIRT)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-herramientas-clave-para-respuesta-a-incidentes" class="md-nav__link">
+    🔧 7. Herramientas Clave para Respuesta a Incidentes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cultura-de-seguridad-y-deteccion-temprana" class="md-nav__link">
+    🧠 8. Cultura de Seguridad y Detección Temprana
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 8. Cultura de Seguridad y Detección Temprana">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principios-fundamentales" class="md-nav__link">
+    📌 Principios fundamentales:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-que-es-un-playbook-de-respuesta-a-incidentes" class="md-nav__link">
+    📘 9. ¿Qué es un Playbook de Respuesta a Incidentes?
+  </a>
+  
+    <nav class="md-nav" aria-label="📘 9. ¿Qué es un Playbook de Respuesta a Incidentes?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-usar-playbooks" class="md-nav__link">
+    🧭 ¿Por qué usar playbooks?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-componentes-tipicos-de-un-playbook" class="md-nav__link">
+    🧩 10. Componentes Típicos de un Playbook
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-ejemplo-breve-playbook-de-phishing" class="md-nav__link">
+    🛠️ 12. Ejemplo Breve: Playbook de Phishing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-13-relacion-con-soar-y-automatizacion" class="md-nav__link">
+    13. 🔁 13. Relación con SOAR y Automatización
+  </a>
+  
+    <nav class="md-nav" aria-label="13. 🔁 13. Relación con SOAR y Automatización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plataformas-soar-populares" class="md-nav__link">
+    🛠️ Plataformas SOAR populares:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acciones-tipicas-automatizables" class="md-nav__link">
+    📌 Acciones típicas automatizables:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-taxonomia-de-incidentes" class="md-nav__link">
+    💼 14. Taxonomía de incidentes
+  </a>
+  
+    <nav class="md-nav" aria-label="💼 14. Taxonomía de incidentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-por-que-usar-una-taxonomia" class="md-nav__link">
+    1. ¿Por qué Usar una Taxonomía?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-taxonomia-basada-en-sistemas" class="md-nav__link">
+    2. Taxonomía Basada en Sistemas
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Taxonomía Basada en Sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-por-tipo-de-ataque" class="md-nav__link">
+    A. Por Tipo de Ataque
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-por-impacto-en-sistemas" class="md-nav__link">
+    B. Por Impacto en Sistemas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-por-vector-de-inicializacion" class="md-nav__link">
+    C. Por Vector de Inicialización
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-taxonomias-de-referencia" class="md-nav__link">
+    3. Taxonomías de Referencia
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Taxonomías de Referencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-mitre-attck" class="md-nav__link">
+    A. MITRE ATT&amp;CK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-cwe-common-weakness-enumeration" class="md-nav__link">
+    B. CWE (Common Weakness Enumeration)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-nist-sp-800-61" class="md-nav__link">
+    C. NIST SP 800-61
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-aplicacion-practica-en-ir" class="md-nav__link">
+    4. Aplicación Práctica en IR
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Aplicación Práctica en IR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-clasificar-el-incidente" class="md-nav__link">
+    Paso 1: Clasificar el Incidente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-respuesta-tecnica" class="md-nav__link">
+    Paso 2: Respuesta Técnica
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-reporte-estructurado" class="md-nav__link">
+    Paso 3: Reporte Estructurado
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 3: Reporte Estructurado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reporte-de-incidente" class="md-nav__link">
+    Reporte de Incidente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-herramientas-para-automatizacion" class="md-nav__link">
+    5. Herramientas para Automatización
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion_1" class="md-nav__link">
+    📌 Conclusión
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../casos/" class="md-nav__link">
+        Casos prácticos de respuesta a incidentes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduccion-respuesta-a-incidentes-ir">🛡️ Introducción Respuesta a Incidentes (IR)</h1>
+<h2 id="1-contexto-general-vivimos-en-una-superficie-de-ataque-global">1. Contexto general: Vivimos en una superficie de ataque global</h2>
+<p>Vivimos en una sociedad digital donde cada dispositivo conectado es una puerta potencial para un atacante. Las organizaciones no solo tienen que <strong>defender su perímetro</strong>, sino también prepararse para cuando esa defensa falle. Y <strong>va a fallar</strong>.</p>
+<p>La pregunta no es <em>“¿seremos atacados?”</em>, sino <em>“¿cómo responderemos cuando ocurra?”</em>.</p>
+<div class="admonition quote">
+<p class="admonition-title">💬 <strong>Frase para la reflexión:</strong></p>
+<p>“Los ataques cibernéticos no son eventos aislados. Son inevitables. Lo que distingue a una organización resiliente es su capacidad de respuesta.” </p>
+<ul>
+<li>Adaptado de Bruce Schneier</li>
+</ul>
+</div>
+<h2 id="2-que-es-un-incidente-de-seguridad">⚠️ 2. ¿Qué es un incidente de seguridad?</h2>
+<p><img alt="" src="../../img/amenaza-incidente-riesgo.png" style="height:300px;width:300px" /></p>
+<p>Un <strong>incidente</strong> no es simplemente una amenaza o una vulnerabilidad. Es la <strong>materialización del riesgo</strong>:  </p>
+<blockquote>
+<p>“Un evento adverso real o inminente que pone en peligro la seguridad de los sistemas de información.”</p>
+</blockquote>
+<p><img alt="" src="../../img/clasificacion-ataque-incidente.webp" style="height:200px;width:400px" /></p>
+<h3 id="tipos-de-incidentes">Tipos de incidentes</h3>
+<p>Los incidentes de seguridad se clasifican según su naturaleza, impacto y método de ejecución. Estos son los principales tipos:</p>
+<ol>
+<li>
+<p>Incidentes por Malware</p>
+<ul>
+<li><strong>Ejemplos</strong>: Ransomware, spyware, troyanos, gusanos</li>
+<li><strong>Impacto</strong>: Pérdida de datos, cifrado de sistemas</li>
+<li><strong>Caso reciente</strong>: Ataque de BlackCat/ALPHV a Change Healthcare (2024)</li>
+</ul>
+</li>
+<li>
+<p>Ataques de Phishing</p>
+<ul>
+<li><strong>Variantes</strong>: Spear phishing, smishing, <a href="https://www.cloudflare.com/es-es/learning/email-security/business-email-compromise-bec/">BEC</a></li>
+<li><strong>Objetivo</strong>: Robo de credenciales</li>
+<li><strong>Táctica común</strong>: Correos falsos de instituciones</li>
+</ul>
+</li>
+<li>
+<p>Brechas de Datos</p>
+<ul>
+<li><strong>Causas</strong>: Vulnerabilidades o errores humanos</li>
+<li><strong>Consecuencia</strong>: Exposición de información sensible</li>
+<li><strong>Ejemplo 2024</strong>: Filtración de 73M registros de AT&amp;T</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.stackscale.com/es/blog/ataques-ddos/">Ataques DoS/DDoS</a></p>
+<ul>
+<li><strong>Tipos</strong>:<ul>
+<li>Volumétricos (UDP flood)</li>
+<li>Aplicación (HTTP flood)</li>
+</ul>
+</li>
+<li><strong>Efecto</strong>: Inaccesibilidad de servicios</li>
+</ul>
+</li>
+<li>
+<p>Explotación de Vulnerabilidades</p>
+<ul>
+<li><strong>High-risk</strong>: Zero-days</li>
+<li><strong>Ejemplo crítico</strong>: Log4Shell (CVE-2021-44228)</li>
+</ul>
+</li>
+<li>
+<p>Amenazas Internas</p>
+<ul>
+<li><strong>Tipos</strong>:<ul>
+<li>Intencionadas (empleados maliciosos)</li>
+<li>Negligentes (errores humanos)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Ataques a Cadena de Suministro</p>
+<ul>
+<li><strong>Modus operandi</strong>: Comprometer software legítimo</li>
+<li><strong>Ejemplo</strong>: Ataque a Snowflake (2024)</li>
+</ul>
+</li>
+<li>
+<p>Secuestro de Cuentas</p>
+<ul>
+<li><strong>Métodos</strong>:<ul>
+<li>Credential stuffing</li>
+<li>SIM swapping</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Ataques IoT/OT</p>
+<ul>
+<li><strong>Riesgo</strong>: Infraestructuras críticas</li>
+<li><strong>Ejemplo</strong>: Botnets como Mirai</li>
+</ul>
+</li>
+<li>
+<p>Fraudes Cibernéticos</p>
+<ul>
+<li><strong>Comunes</strong>:<ul>
+<li>BEC (Business Email Compromise)</li>
+<li>Cryptojacking</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="clasificacion-por-gravedad">Clasificación por Gravedad</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crítico</td>
+<td>Ransomware en hospital</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Filtración datos masiva</td>
+</tr>
+<tr>
+<td>Medio</td>
+<td>Phishing a empleados</td>
+</tr>
+<tr>
+<td>Bajo</td>
+<td>Escaneo de puertos bloqueado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplos-reales-solo-en-espana-en-2025">Ejemplos reales sólo en España en 2025:</h3>
+<ul>
+<li>Enero 2025: Ataque de phishing a universitarios en Baleares</li>
+<li>Enero 2025: Brecha de datos en la Guardia Civil y las Fuerzas Armadas</li>
+<li>Enero 2025: Telefónica sufre un ciberataque en su sistema de ticketing</li>
+<li>Febrero 2025: Filtración de datos personales en DKV</li>
+<li>Marzo 2025: Quedan expuestos datos de clientes de El Corte Inglés</li>
+<li>Marzo 2025: Ataque prorruso a webs de diputaciones y ayuntamientos en España</li>
+<li>Abril 2025: robo de los datos de las federaciones de autónomos ATA</li>
+<li>Abril 2025: La compañía Aigües de Mataró sufre un ciberataque</li>
+<li>Abril 2025: Ransomware dirigido al Ayuntamiento de Badajoz</li>
+</ul>
+<p>Más detallado <a href="https://www.channelpartner.es/seguridad/principales-ciberataques-en-espana-en-2025/">aquí</a></p>
+<h2 id="3-por-que-necesitamos-una-respuesta-estructurada">🧩 3. ¿Por qué necesitamos una respuesta estructurada?</h2>
+<div class="admonition quote">
+<p class="admonition-title">💬 <strong>Frase para la reflexión:</strong></p>
+<p>“Security is not a product, but a process.” 
+ — Bruce Schneier</p>
+</div>
+<p>Afirmar que la seguridad es un proceso es una forma muy concisa de transmitir la idea de que la seguridad no puede lograrse simplemente comprando y desplegando productos o herramientas de seguridad. Por el contrario, la verdadera seguridad requiere esfuerzos continuos y exhaustivos que comprenden una amplia gama de actividades y prácticas. La seguridad es un proceso dinámico y polifacético que requiere un esfuerzo coordinado y continuo. Se trata de crear un sistema resistente que debe adaptarse a los nuevos retos y amenazas a lo largo del tiempo. </p>
+<p>Una buena defensa no siempre puede evitar un ataque. Pero una mala respuesta <strong>puede empeorarlo</strong>. Un ejemplo frecuente es reiniciar un equipo infectado sin preservar evidencias, lo cual impide análisis forense posterior.</p>
+<p>Por eso, la <strong>respuesta a incidentes</strong> (IR) es un <strong>proceso formal</strong> y metódico que busca:</p>
+<ul>
+<li>Minimizar impacto</li>
+<li>Restaurar operaciones</li>
+<li>Preservar evidencias</li>
+<li>Aprender del incidente</li>
+</ul>
+<h2 id="4-fundamentos-normativos-y-frameworks">🏛️ 4. Fundamentos normativos y frameworks</h2>
+<h3 id="normativas-y-estandares">📚 Normativas y estándares:</h3>
+<ul>
+<li><strong>NIST SP 800-61 rev.2</strong>: Guía de manejo de incidentes (marco de referencia más usado)</li>
+<li><strong>ISO/IEC 27035</strong>: Estándar internacional para gestión de incidentes</li>
+<li><strong>ENS (España)</strong>: Exige capacidades de IR a sistemas de información públicos</li>
+<li><strong>NIS2 (Europa)</strong>: La NIS2 (Network and Information Security Directive 2) es una normativa de la Unión Europea que refuerza y reemplaza a la directiva original NIS (2016), ampliando sus exigencias en materia de ciberseguridad para sectores críticos y operadores esenciales.</li>
+</ul>
+<h3 id="ciberseguridad-en-capas">🔐 Ciberseguridad en capas:</h3>
+<p>La respuesta a incidentes se sitúa en la <strong>última línea de defensa</strong>, justo después de que todas las otras capas han fallado.</p>
+<h2 id="5-ciclo-de-vida-de-la-respuesta-a-incidentes">🧠 5. Ciclo de Vida de la Respuesta a Incidentes</h2>
+<p>Inspirado en NIST, el proceso se divide en fases interdependientes</p>
+<p><img alt="" src="../../img/fasesIR.png" /></p>
+<blockquote>
+<p>📌 <strong>Nota:</strong> Algunas organizaciones añaden una fase 0 (“Preparación estratégica”) y una 6 (“Automatización y mejora continua”).</p>
+</blockquote>
+<h3 id="1-preparacion">🧰 1. Preparación</h3>
+<p>La <strong>fase de preparación</strong> es la <strong>primera y más crítica etapa</strong> del ciclo de vida de la respuesta a incidentes. Su objetivo es garantizar que la organización esté lista <strong>antes de que ocurra un incidente</strong>, minimizando su impacto y acelerando la recuperación.</p>
+<p>Según NIST, una preparación sólida <strong>marca la diferencia entre el caos y la contención eficaz</strong>.</p>
+<h3 id="objetivos-de-esta-fase">🎯 Objetivos de esta fase</h3>
+<ul>
+<li>Establecer un <strong>plan formal y claro</strong> de actuación ante incidentes.</li>
+<li>Definir roles, responsabilidades y flujos de comunicación.</li>
+<li>Entrenar al personal y fortalecer la infraestructura de seguridad.</li>
+<li>Asegurar que existan herramientas, documentación y procesos actualizados.</li>
+</ul>
+<h3 id="componentes-clave-de-la-preparacion">🗂️ Componentes clave de la preparación</h3>
+<h4 id="11-plan-de-respuesta-a-incidentes-irp">✅ 1.1 Plan de Respuesta a Incidentes (IRP)</h4>
+<ul>
+<li>Documento estratégico y operativo que define <strong>qué hacer, quién lo hace y cómo</strong> ante distintos tipos de incidentes.</li>
+<li>Debe incluir procedimientos, taxonomía, criterios de severidad, matrices de escalado y canales de comunicación.</li>
+<li>Debe actualizarse al menos <strong>una vez al año</strong> o tras incidentes críticos.</li>
+</ul>
+<h4 id="12-creacion-del-csirt-irt">👥 1.2 Creación del CSIRT / IRT</h4>
+<ul>
+<li>Un <strong>Computer Security Incident Response Team</strong> o <strong>equipo de respuesta</strong> puede ser interno, mixto o subcontratado.</li>
+<li>Composición multidisciplinar: ciberseguridad, legal, TI, RRHH, comunicación.</li>
+<li>Debe tener autoridad, herramientas y líneas de comunicación directa con la dirección.</li>
+</ul>
+<h4 id="13-politicas-normas-y-procedimientos">📜 1.3 Políticas, normas y procedimientos</h4>
+<ul>
+<li>Política de gestión de incidentes (quién reporta, tiempos de notificación, etc.).</li>
+<li>Políticas relacionadas: uso aceptable, control de accesos, clasificación de la información.</li>
+<li>Procedimientos operativos normalizados (SOP): recuperación de sistemas, aislamiento de red, backup seguro.</li>
+</ul>
+<h4 id="14-inventario-y-clasificacion-de-activos">🖥️ 1.4 Inventario y clasificación de activos</h4>
+<ul>
+<li>Listado actualizado de <strong>sistemas críticos, redes, datos sensibles y proveedores clave</strong>.</li>
+<li>Identificación de sistemas que requieren <strong>protección reforzada</strong> (según ENS, RGPD, etc.).</li>
+</ul>
+<h4 id="15-canales-de-comunicacion-establecidos">📞 1.5 Canales de comunicación establecidos</h4>
+<ul>
+<li>Definición de contactos internos (SOC, IT, CISO, legales) y externos (CERT/CC, proveedores, policía).</li>
+<li><a href="https://www.xataka.com/servicios/que-nos-quedaramos-movil-durante-apagon-fue-terrible-que-le-pasara-al-gobierno-mucho-preocupante">Protocolos de comunicación en caso de contingencia</a> (email alternativo, móviles, canales encriptados).</li>
+</ul>
+<h4 id="16-formacion-y-simulacros">🧪 1.6 Formación y simulacros</h4>
+<ul>
+<li>Formación continua del personal técnico y no técnico.</li>
+<li><strong>Ejercicios tipo Tabletop</strong>: simulación en sala para discutir respuestas.</li>
+<li><strong>Red Team / Blue Team</strong>: ejercicios ofensivos y defensivos realistas para poner a prueba planes.</li>
+<li>Lecciones aprendidas de cada simulacro → mejoras en IRP y formación.</li>
+</ul>
+<h3 id="buenas-practicas">🛠️ Buenas prácticas</h3>
+<ul>
+<li>Disponer de herramientas EDR, SIEM o ticketing ya preconfiguradas.</li>
+<li>
+<p>Establecer métricas para evaluar la preparación (MTTD, MTTR).</p>
+<p>⏱️ Tipos de Tiempos que se Miden en Respuesta a Incidentes (IR)</p>
+<p>### ⏱️ Tipos de Tiempos que se Miden en Respuesta a Incidentes (IR)</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tiempo</th>
+<th>Definición</th>
+<th>Importancia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MTTD</strong> (Mean Time to Detect)</td>
+<td>Tiempo medio desde que ocurre un incidente hasta que se detecta.</td>
+<td>Evalúa la eficacia de las herramientas de detección y monitorización.</td>
+</tr>
+<tr>
+<td><strong>MTTI</strong> (Mean Time to Identify)</td>
+<td>Tiempo medio desde la detección hasta confirmar que es un incidente.</td>
+<td>Refleja la capacidad de análisis y clasificación del equipo.</td>
+</tr>
+<tr>
+<td><strong>MTTR</strong> (Mean Time to Respond)</td>
+<td>Tiempo medio desde la identificación hasta iniciar la respuesta.</td>
+<td>Mide la agilidad de reacción del CSIRT.</td>
+</tr>
+<tr>
+<td><strong>MTTC</strong> (Mean Time to Contain)</td>
+<td>Tiempo medio desde la detección hasta contener completamente el incidente.</td>
+<td>Indica rapidez para controlar la amenaza.</td>
+</tr>
+<tr>
+<td><strong>MTTE</strong> (Mean Time to Eradicate)</td>
+<td>Tiempo medio para eliminar la causa raíz (malware, acceso, vulnerabilidad).</td>
+<td>Evalúa eficiencia en limpieza y erradicación.</td>
+</tr>
+<tr>
+<td><strong>MTTR</strong> (Mean Time to Recover)</td>
+<td>Tiempo medio para restaurar el sistema a su estado operativo normal.</td>
+<td>Refleja la resiliencia y capacidad de recuperación.</td>
+</tr>
+<tr>
+<td><strong>TTR</strong> (Time to Report)</td>
+<td>Tiempo desde la detección hasta la notificación oficial del incidente.</td>
+<td>Clave para cumplimiento legal (RGPD, ENS, NIS2, etc.).</td>
+</tr>
+<tr>
+<td><strong>Time to Learn</strong></td>
+<td>Tiempo desde la resolución hasta la incorporación de mejoras.</td>
+<td>Mide madurez organizativa y aprendizaje post-incidente.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Alinear la preparación con normativas como el <strong>ENS</strong>, la <strong>NIS2</strong>, y <strong>ISO 27035</strong>.</li>
+<li>Hacer <strong>pruebas cruzadas</strong> con otras funciones: continuidad del negocio, protección de datos, etc.</li>
+</ul>
+<h3 id="resultado-esperado">📌 Resultado esperado</h3>
+<p>Una organización preparada:</p>
+<ul>
+<li>Tiene <strong>procedimientos documentados y conocidos</strong> por todos los actores.</li>
+<li>Puede <strong>responder de forma ordenada, rápida y efectiva</strong>.</li>
+<li>Reduce riesgos legales, reputacionales y económicos ante cualquier incidente.</li>
+</ul>
+<h3 id="2-deteccion-y-analisis">🔎 2. Detección y análisis</h3>
+<p>La <strong>fase de detección y análisis</strong> es el punto en el que una organización <strong>reconoce una posible amenaza</strong> y comienza a investigarla. Esta etapa es <strong>crítica para reducir el tiempo de respuesta</strong> y evitar que el incidente escale.</p>
+<blockquote>
+<p>Una buena detección solo es posible si la fase de preparación se ha ejecutado correctamente.</p>
+</blockquote>
+<hr />
+<h3 id="objetivos-de-la-fase">🧭 Objetivos de la fase</h3>
+<ul>
+<li>Identificar actividades anómalas o maliciosas en tiempo y forma.</li>
+<li>Correlacionar eventos para determinar si constituyen un incidente.</li>
+<li>Clasificar el incidente, evaluando su <strong>gravedad e impacto</strong>.</li>
+<li>Activar el plan de respuesta correspondiente.</li>
+</ul>
+<hr />
+<h3 id="herramientas-clave-para-la-deteccion">🧰 Herramientas clave para la detección</h3>
+<table>
+<thead>
+<tr>
+<th>Herramienta / Tecnología</th>
+<th>Función principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SIEM</strong> (Security Information and Event Management)</td>
+<td>Recolecta, centraliza y correlaciona logs de múltiples fuentes.</td>
+</tr>
+<tr>
+<td><strong>IDS/IPS</strong> (Intrusion Detection/Prevention Systems)</td>
+<td>Detecta y/o bloquea tráfico malicioso en la red.</td>
+</tr>
+<tr>
+<td><strong>EDR/XDR</strong> (Endpoint/Extended Detection and Response)</td>
+<td>Supervisa y responde a amenazas en endpoints (PCs, servidores, etc.).</td>
+</tr>
+<tr>
+<td><strong>Logs y auditoría</strong></td>
+<td>Registro detallado de eventos en sistemas, aplicaciones y redes.</td>
+</tr>
+<tr>
+<td><strong>Herramientas de threat intelligence</strong></td>
+<td>Enriquecen alertas con datos sobre actores y campañas conocidas.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="proceso-tipico-de-analisis">🔄 Proceso típico de análisis</h3>
+<ol>
+<li>
+<p><strong>Recolección de alertas o indicadores</strong></p>
+<ul>
+<li>Las alertas pueden provenir de sensores automáticos (SIEM, EDR), usuarios finales, proveedores, etc.</li>
+</ul>
+</li>
+<li>
+<p><strong>Correlación y contextualización</strong></p>
+<ul>
+<li>El analista revisa patrones y relaciones entre eventos: ¿se trata de una secuencia aleatoria o una amenaza organizada?</li>
+</ul>
+</li>
+<li>
+<p><strong>Verificación</strong></p>
+<ul>
+<li>No toda alerta es un incidente. Muchas son falsos positivos. Hay que confirmar:  <ul>
+<li>¿Es un incidente real?</li>
+<li>¿Qué sistemas están afectados?</li>
+<li>¿Cuál es el vector de ataque?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Clasificación mediante taxonomía</strong></p>
+<ul>
+<li>Se asigna una categoría y subcategoría al incidente según su naturaleza (malware, fuga de datos, DDoS…).</li>
+<li>También se determina su <strong>nivel de criticidad</strong> (bajo, medio, alto, crítico).</li>
+<li>Esto permite seleccionar el <strong>playbook</strong> adecuado para la respuesta.</li>
+</ul>
+</li>
+<li>
+<p><strong>Registro del incidente</strong></p>
+<ul>
+<li>Se documenta en una base de datos o herramienta de ticketing, incluyendo:<ul>
+<li>Hora de detección</li>
+<li>Fuente</li>
+<li>Clasificación</li>
+<li>Responsable asignado</li>
+<li>Acciones iniciales tomadas</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="criterios-de-severidad-ejemplo">📊 Criterios de severidad (ejemplo)</h3>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bajo</td>
+<td>No afecta sistemas críticos, impacto menor</td>
+<td>Usuario abre phishing pero no clickea</td>
+</tr>
+<tr>
+<td>Medio</td>
+<td>Afecta a usuarios individuales o servicios secundarios</td>
+<td>Malware aislado en un PC</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Afecta sistemas clave o datos sensibles</td>
+<td>Exfiltración de datos con impacto legal</td>
+</tr>
+<tr>
+<td>Crítico</td>
+<td>Amenaza para toda la organización</td>
+<td>Ransomware en múltiples servidores clave</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="rol-de-la-taxonomia-de-incidentes">🧱 Rol de la taxonomía de incidentes</h3>
+<p>Durante esta fase se utiliza una <strong>taxonomía estructurada</strong> para clasificar el incidente correctamente.<br />
+Esto facilita:</p>
+<ul>
+<li>Escalar correctamente el incidente.</li>
+<li>Activar el procedimiento (playbook) adecuado.</li>
+<li>Obtener estadísticas y reportes consistentes.</li>
+<li>Cumplir con requisitos regulatorios (ENS, NIS2, ISO 27035…).</li>
+</ul>
+<blockquote>
+<p>📌 <em>Más adelante profundizaremos en la taxonomía de incidentes.</em></p>
+</blockquote>
+<hr />
+<h3 id="ejemplo-real">⚠️ Ejemplo real</h3>
+<blockquote>
+<p>🔔 Un EDR detecta la ejecución de un script PowerShell cifrado en un servidor interno.</p>
+</blockquote>
+<p>📌 Proceso:</p>
+<ul>
+<li>El evento llega al SIEM y se correlaciona con una conexión sospechosa saliente.</li>
+<li>Se identifica como posible malware con comportamiento de exfiltración.</li>
+<li>El analista lo clasifica como:<ul>
+<li>Categoría: <strong>Malware</strong></li>
+<li>Subcategoría: <strong>Downloader + Exfiltración</strong></li>
+<li>Severidad: <strong>Alta</strong></li>
+</ul>
+</li>
+<li>Se activa el playbook de contención de malware y se notifica a la dirección.</li>
+</ul>
+<hr />
+<h3 id="conclusion">🧠 Conclusión</h3>
+<p>Una detección eficaz requiere:</p>
+<ul>
+<li><strong>Visibilidad completa del entorno</strong></li>
+<li><strong>Herramientas adecuadas de monitoreo</strong></li>
+<li>Analistas capacitados y documentación clara</li>
+<li>Coordinación con la fase de preparación</li>
+</ul>
+<p>Una mala detección puede convertir un incidente leve en una <strong>crisis mayor</strong>.</p>
+<h2 id="3-fase-de-contencion">🛑 3. Fase de Contención</h2>
+<p>Una vez confirmado el incidente, la prioridad es <strong>limitar su alcance y daño</strong> lo antes posible. Esta fase consiste en <strong>detener la propagación</strong>, evitar la pérdida de información y <strong>proteger los activos críticos</strong>.</p>
+<h3 id="objetivos">🎯 Objetivos</h3>
+<ul>
+<li>Minimizar el impacto del incidente.</li>
+<li>Proteger sistemas no afectados.</li>
+<li>Ganar tiempo para investigar y planificar la recuperación.</li>
+</ul>
+<h3 id="tipos-de-contencion">⚙️ Tipos de contención</h3>
+<h4 id="contencion-a-corto-plazo">📍 Contención a corto plazo</h4>
+<ul>
+<li><strong>Acción inmediata</strong> para aislar o desconectar sistemas afectados.</li>
+<li>Ejemplos:<ul>
+<li>Quitar de la red el equipo comprometido.</li>
+<li>Bloquear direcciones IP sospechosas en el firewall.</li>
+<li>Cerrar sesiones activas del atacante.</li>
+</ul>
+</li>
+</ul>
+<h4 id="contencion-a-largo-plazo">🧩 Contención a largo plazo</h4>
+<ul>
+<li>Acciones que preparan el sistema para <strong>una recuperación segura</strong>.</li>
+<li>Ejemplos:<ul>
+<li>Aplicación de parches de seguridad.</li>
+<li>Cambio de credenciales comprometidas.</li>
+<li>Reconfiguración de servicios expuestos.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>⚠️ ¡Ojo! Actuar demasiado rápido sin análisis puede destruir evidencias forenses.</p>
+</blockquote>
+<h3 id="requiere">🧠 Requiere:</h3>
+<ul>
+<li>Decisiones rápidas pero <strong>estratégicas y justificadas</strong>.</li>
+<li>Coordinación entre CSIRT, legal y TI.</li>
+<li>Consideración del impacto operacional y reputacional.</li>
+</ul>
+<h2 id="4-fase-de-erradicacion-y-recuperacion">🧹 4. Fase de Erradicación y Recuperación</h2>
+<p>Con el incidente contenido, es hora de <strong>eliminar cualquier rastro de la amenaza</strong> y restaurar los sistemas afectados de forma segura.</p>
+<h3 id="erradicacion">🔍 Erradicación</h3>
+<ul>
+<li><strong>Eliminar el malware</strong>, herramientas del atacante, cuentas no autorizadas o backdoors.</li>
+<li><strong>Buscar persistencia</strong>: el atacante podría haber instalado mecanismos para volver a entrar.</li>
+<li>Comprobar los <strong>registros y hashes</strong> para validar que no quedan trazas.</li>
+</ul>
+<h3 id="verificacion">🧪 Verificación</h3>
+<ul>
+<li>Escaneo de sistemas con antivirus/EDR actualizados.</li>
+<li>Análisis de logs y tráfico de red post-incidente.</li>
+<li>Validación de integridad (checksums, firmas digitales…).</li>
+</ul>
+<h3 id="recuperacion">♻️ Recuperación</h3>
+<ul>
+<li>Restaurar servicios desde <strong>backups verificados</strong>.</li>
+<li>Aplicar <strong>actualizaciones y configuraciones reforzadas</strong>.</li>
+<li><strong>Reincorporar</strong> los sistemas a la red solo cuando estén validados.</li>
+<li>Realizar <strong>pruebas funcionales y de seguridad</strong>.</li>
+</ul>
+<h3 id="objetivo-final">✅ Objetivo final</h3>
+<p>Volver a la normalidad <strong>con garantías de que la amenaza ha sido eliminada</strong> y no puede repetirse por el mismo vector.</p>
+<h2 id="5-fase-de-lecciones-aprendidas">📋 5. Fase de Lecciones Aprendidas</h2>
+<p>Una vez resuelto el incidente, es fundamental <strong>reflexionar sobre lo ocurrido</strong> para mejorar las capacidades futuras.</p>
+<blockquote>
+<p>Esta fase a menudo se olvida… ¡pero es la que convierte el error en mejora continua!</p>
+</blockquote>
+<h3 id="actividades-clave">🧠 Actividades clave</h3>
+<h4 id="51-analisis-post-mortem-retrospectiva">🧾 5.1 Análisis post-mortem (retrospectiva)</h4>
+<ul>
+<li>¿Qué sucedió exactamente?</li>
+<li>¿Cómo se detectó y respondió?</li>
+<li>¿Qué funcionó y qué no?</li>
+<li>¿Qué se podría haber hecho mejor?</li>
+</ul>
+<h4 id="52-mejora-de-controles-y-procesos">📈 5.2 Mejora de controles y procesos</h4>
+<ul>
+<li>Actualizar políticas y procedimientos.</li>
+<li>Ajustar configuraciones de seguridad (firewall, roles, alertas…).</li>
+<li>Invertir en herramientas o formación si se identificaron carencias.</li>
+</ul>
+<h4 id="53-documentacion-formal">🪪 5.3 Documentación formal</h4>
+<ul>
+<li>Redacción de informes internos y ejecutivos.</li>
+<li>Registro en sistemas de ticketing o bases de datos de incidentes.</li>
+<li>Informe a autoridades si es obligatorio (ej. AEPD, CCN-CERT).</li>
+</ul>
+<h4 id="54-actualizacion-del-plan-irp-y-formacion">📚 5.4 Actualización del plan IRP y formación</h4>
+<ul>
+<li>Modificación del Plan de Respuesta a Incidentes.</li>
+<li>Inclusión del incidente como <strong>caso de estudio</strong> para futuras formaciones.</li>
+</ul>
+<h3 id="resultado-esperado_1">📌 Resultado esperado</h3>
+<p>Una organización resiliente:</p>
+<ul>
+<li>Aprende de cada incidente.</li>
+<li>Mejora continuamente su postura de ciberseguridad.</li>
+<li>Reduce el riesgo de que un incidente similar vuelva a ocurrir.</li>
+</ul>
+<h3 id="6-roles-del-equipo-de-respuesta-a-incidentes-csirt">👨‍💻 6. Roles del Equipo de Respuesta a Incidentes (CSIRT)</h3>
+<p>Un equipo efectivo de respuesta a incidentes está compuesto por perfiles técnicos y estratégicos que colaboran de forma coordinada. Cada rol tiene funciones bien definidas para asegurar una respuesta eficiente y controlada.</p>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Funciones Principales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SOC Analyst (Nivel 1/2/3)</strong></td>
+<td>- Monitorización continua de alertas.<br> - Triaje inicial de incidentes.<br> - Contención básica.</td>
+</tr>
+<tr>
+<td><strong>Incident Responder</strong></td>
+<td>- Investigación en profundidad.<br> - Análisis forense básico.<br> - Coordinación técnica.</td>
+</tr>
+<tr>
+<td><strong>Forensic Analyst</strong></td>
+<td>- Análisis de memoria, discos, logs.<br> - Preservación de evidencias.<br> - Apoyo en procesos legales.</td>
+</tr>
+<tr>
+<td><strong>Threat Hunter</strong></td>
+<td>- Detección proactiva de amenazas.<br> - Análisis de TTPs (MITRE ATT&amp;CK).<br> - Mejora de alertado.</td>
+</tr>
+<tr>
+<td><strong>CSIRT Manager</strong></td>
+<td>- Liderazgo del equipo.<br> - Comunicación con stakeholders.<br> - Priorización de incidentes.</td>
+</tr>
+<tr>
+<td><strong>Malware Analyst</strong></td>
+<td>- Reversing de malware.<br> - Análisis estático y dinámico.<br> - Creación de firmas (YARA, Snort).</td>
+</tr>
+<tr>
+<td><strong>Threat Intelligence Analyst</strong></td>
+<td>- Recolección de inteligencia de amenazas.<br> - Enlace con fuentes externas.<br> - Informes y enriquecimiento de alertas.</td>
+</tr>
+<tr>
+<td><strong>Communications Officer</strong></td>
+<td>- Gestión de la comunicación interna y externa.<br> - Comunicación de crisis.<br> - Informes a reguladores o clientes.</td>
+</tr>
+<tr>
+<td><strong>Legal/Compliance Advisor</strong></td>
+<td>- Cumplimiento normativo (ENS, NIS2, RGPD).<br> - Gestión legal de notificaciones y brechas.</td>
+</tr>
+<tr>
+<td><strong>IT/Network Specialist</strong></td>
+<td>- Aplicación de contramedidas técnicas.<br> - Hardening y reconfiguración de red.<br> - Coordinación con sistemas.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-herramientas-clave-para-respuesta-a-incidentes">🔧 7. Herramientas Clave para Respuesta a Incidentes</h2>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Herramientas Comunes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SIEM</strong></td>
+<td>Splunk, Wazuh, IBM QRadar</td>
+</tr>
+<tr>
+<td><strong>EDR/XDR</strong></td>
+<td>CrowdStrike, SentinelOne, Microsoft Defender</td>
+</tr>
+<tr>
+<td><strong>Análisis Forense</strong></td>
+<td>Autopsy, FTK Imager, Volatility</td>
+</tr>
+<tr>
+<td><strong>Sandboxing</strong></td>
+<td>Cuckoo Sandbox, Any.Run</td>
+</tr>
+<tr>
+<td><strong>Threat Intel</strong></td>
+<td>MISP, VirusTotal, Intel 471</td>
+</tr>
+<tr>
+<td><strong>SOAR</strong></td>
+<td>TheHive + Cortex, Shuffle, Splunk SOAR, IBM Resilient</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-cultura-de-seguridad-y-deteccion-temprana">🧠 8. Cultura de Seguridad y Detección Temprana</h2>
+<p>Una respuesta efectiva comienza <strong>mucho antes</strong> de la detección del incidente. La cultura organizativa es clave para prevenir y responder eficazmente.</p>
+<h3 id="principios-fundamentales">📌 Principios fundamentales:</h3>
+<ul>
+<li><strong>Formación continua</strong> de usuarios y técnicos.</li>
+<li>El <strong>usuario final puede ser el primer sensor</strong> de amenazas.</li>
+<li>Fomentar una cultura de <strong>reporte sin miedo ni represalias</strong>.</li>
+<li>Integrar la ciberseguridad en todos los niveles de la organización.</li>
+</ul>
+<h2 id="9-que-es-un-playbook-de-respuesta-a-incidentes">📘 9. ¿Qué es un Playbook de Respuesta a Incidentes?</h2>
+<p>Un <strong>playbook</strong> es un procedimiento detallado, estructurado y reutilizable que define <strong>qué hacer paso a paso ante un tipo específico de incidente</strong>. Sirve como guía para actuar con rapidez, coherencia y eficacia.</p>
+<h3 id="por-que-usar-playbooks">🧭 ¿Por qué usar playbooks?</h3>
+<ul>
+<li>Estandarizan la respuesta.</li>
+<li>Aumentan la agilidad del equipo.</li>
+<li>Facilitan el entrenamiento y la transferencia de conocimiento.</li>
+<li>Sirven de base para la automatización con SOAR.</li>
+</ul>
+<h2 id="10-componentes-tipicos-de-un-playbook">🧩 10. Componentes Típicos de un Playbook</h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nombre del incidente</strong></td>
+<td>Tipo de incidente tratado (phishing, ransomware, fuga de datos…).</td>
+</tr>
+<tr>
+<td><strong>Objetivo</strong></td>
+<td>Qué se espera lograr con la respuesta.</td>
+</tr>
+<tr>
+<td><strong>Indicadores (IoCs)</strong></td>
+<td>Señales observables del incidente (hashes, IPs, dominios...).</td>
+</tr>
+<tr>
+<td><strong>Fases de respuesta</strong></td>
+<td>Qué hacer en cada etapa (detección, contención, erradicación…).</td>
+</tr>
+<tr>
+<td><strong>Roles asignados</strong></td>
+<td>Quién debe realizar cada tarea.</td>
+</tr>
+<tr>
+<td><strong>Checklists operativas</strong></td>
+<td>Acciones concretas: comandos, análisis, aislamiento, herramientas a utilizar.</td>
+</tr>
+<tr>
+<td><strong>Notificaciones</strong></td>
+<td>A quién avisar: CISO, DPO, RRHH, usuarios afectados, autoridades, etc.</td>
+</tr>
+<tr>
+<td><strong>Referencias legales</strong></td>
+<td>Obligaciones de notificación según ENS, RGPD, NIS2, etc.</td>
+</tr>
+<tr>
+<td><strong>Lecciones aprendidas</strong></td>
+<td>Cambios a realizar tras el incidente o ensayo.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-ejemplo-breve-playbook-de-phishing">🛠️ 12. Ejemplo Breve: Playbook de Phishing</h2>
+<div class="highlight"><pre><span></span><code><span class="nt">Nombre</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Phishing por correo</span>
+<span class="nt">Objetivo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Evitar propagación, identificar afectados, contener amenaza.</span>
+<span class="nt">Fase 1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Confirmación → Revisar encabezado, verificar URLs, analizar adjunto.</span>
+<span class="nt">Fase 2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Contención → Bloquear URL/IP en proxy/firewall, revocar accesos comprometidos.</span>
+<span class="nt">Fase 3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Erradicación → Eliminar email de bandejas, forzar cambio de contraseñas.</span>
+<span class="nt">Fase 4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notificación → CISO, RRHH, usuarios afectados.</span>
+<span class="nt">Fase 5</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mejora → Revisar filtros de correo, reforzar formación.</span>
+</code></pre></div>
+<h2 id="13-13-relacion-con-soar-y-automatizacion">13. 🔁 13. Relación con SOAR y Automatización</h2>
+<p>Una vez definidos, los playbooks pueden automatizarse mediante herramientas SOAR (Security Orchestration, Automation and Response).</p>
+<p>Estas plataformas integran sistemas, ejecutan tareas automáticamente y permiten a los analistas centrarse en la toma de decisiones críticas.</p>
+<h3 id="plataformas-soar-populares">🛠️ Plataformas SOAR populares:</h3>
+<ul>
+<li>
+<p>TheHive + Cortex: Open-source, modular, muy usado en Europa.</p>
+</li>
+<li>
+<p>Splunk SOAR: Integrado con Splunk SIEM.</p>
+</li>
+<li>
+<p>IBM Resilient: Potente y enfocado en entornos regulados.</p>
+</li>
+</ul>
+<h3 id="acciones-tipicas-automatizables">📌 Acciones típicas automatizables:</h3>
+<ul>
+<li>
+<p>Cuarentena de un equipo desde EDR.</p>
+</li>
+<li>
+<p>Envío automático de alertas por correo o Slack.</p>
+</li>
+<li>
+<p>Búsqueda de IoCs en múltiples fuentes.</p>
+</li>
+<li>
+<p>Registro del incidente en el sistema de ticketing.</p>
+</li>
+<li>
+<p>La automatización bien aplicada reduce el tiempo de respuesta y el desgaste del equipo.</p>
+</li>
+</ul>
+<h2 id="14-taxonomia-de-incidentes">💼 14. Taxonomía de incidentes</h2>
+<p>La taxonomía de incidentes es un sistema de clasificación que permite categorizar los incidentes de seguridad en sistemas según su origen, impacto, técnicas utilizadas y vectores de ataque. Su objetivo es estandarizar el lenguaje en la respuesta a incidentes (IR) y facilitar el análisis forense, la contención y la remediación.</p>
+<p>A continuación, se presenta una taxonomía técnica centrada en sistemas, basada en marcos como MITRE ATT&amp;CK, CWE (Common Weakness Enumeration) y NIST SP 800-61.</p>
+<h3 id="1-por-que-usar-una-taxonomia">1. ¿Por qué Usar una Taxonomía?</h3>
+<ul>
+<li><strong>Estandarización:</strong> Lenguaje común para describir incidentes</li>
+<li><strong>Priorización:</strong> Determinar criticidad (ej: ransomware &gt; escaneo de puertos)</li>
+<li><strong>Mejora continua:</strong> Generación de métricas para análisis</li>
+</ul>
+<h3 id="2-taxonomia-basada-en-sistemas">2. Taxonomía Basada en Sistemas</h3>
+<h4 id="a-por-tipo-de-ataque">A. Por Tipo de Ataque</h4>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Ejemplos Técnicos</th>
+<th>Indicadores Clave (IOCs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Malware</td>
+<td>Ransomware, rootkits, backdoors</td>
+<td>Hashes de archivos, conexiones C2</td>
+</tr>
+<tr>
+<td>Explotación de SW</td>
+<td>Vulnerabilidades (Log4j, ProxyShell)</td>
+<td>Logs de errores, ejecución de payloads</td>
+</tr>
+<tr>
+<td>Credential Theft</td>
+<td>Pass-the-Hash, Kerberoasting</td>
+<td>Eventos 4625 (Windows)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="b-por-impacto-en-sistemas">B. Por Impacto en Sistemas</h4>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Definición</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crítico</td>
+<td>Compromete toda la infraestructura</td>
+<td>Ransomware en servidores</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Afecta múltiples sistemas</td>
+<td>Dominio AD comprometido</td>
+</tr>
+</tbody>
+</table>
+<h4 id="c-por-vector-de-inicializacion">C. Por Vector de Inicialización</h4>
+<table>
+<thead>
+<tr>
+<th>Vector</th>
+<th>Descripción</th>
+<th>Ejemplo en Sistemas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remoto</td>
+<td>Ataque desde red externa</td>
+<td>Explotación de VPN</td>
+</tr>
+<tr>
+<td>Local</td>
+<td>Ejecución desde dentro</td>
+<td>USB infectado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-taxonomias-de-referencia">3. Taxonomías de Referencia</h3>
+<h4 id="a-mitre-attck">A. MITRE ATT&amp;CK</h4>
+<ul>
+<li><strong>Táctica:</strong> Persistence → <strong>Técnica:</strong> Scheduled Task</li>
+<li>Ejemplo: <code>schtasks /create</code></li>
+</ul>
+<h4 id="b-cwe-common-weakness-enumeration">B. CWE (Common Weakness Enumeration)</h4>
+<ul>
+<li><strong>CWE-89:</strong> SQL Injection → Ataque a bases de datos</li>
+</ul>
+<h4 id="c-nist-sp-800-61">C. NIST SP 800-61</h4>
+<ul>
+<li>Categorías: DoS, Unauthorized Access</li>
+</ul>
+<h3 id="4-aplicacion-practica-en-ir">4. Aplicación Práctica en IR</h3>
+<h4 id="paso-1-clasificar-el-incidente">Paso 1: Clasificar el Incidente</h4>
+<ul>
+<li><strong>Tipo:</strong> Malware (Ransomware)</li>
+<li><strong>Impacto:</strong> Crítico</li>
+<li><strong>Vector:</strong> Remoto (RDP expuesto)</li>
+</ul>
+<h4 id="paso-2-respuesta-tecnica">Paso 2: Respuesta Técnica</h4>
+<ul>
+<li>
+<p><strong>Contención:</strong> Bloquear IPs maliciosas</p>
+</li>
+<li>
+<p><strong>Erradicación:</strong> Eliminar tareas programadas (T1053.005 ATT&amp;CK)</p>
+</li>
+</ul>
+<h4 id="paso-3-reporte-estructurado">Paso 3: Reporte Estructurado</h4>
+<h5 id="reporte-de-incidente">Reporte de Incidente</h5>
+<ul>
+<li><strong>ID:</strong> INC-2023-001</li>
+<li><strong>Taxonomía:</strong> Malware → Ransomware (Ryuk)</li>
+<li><strong>Técnicas MITRE:</strong> T1486 (Data Encrypted for Impact)</li>
+</ul>
+<h3 id="5-herramientas-para-automatizacion">5. Herramientas para Automatización</h3>
+<ul>
+<li>
+<p>MISP: Compartir IOCs</p>
+</li>
+<li>
+<p>Splunk ES: Correlación con ATT&amp;CK</p>
+</li>
+<li>
+<p>TheHive: Gestión de casos</p>
+</li>
+</ul>
+<p>Así pues, a modo de recapitulación, la taxonomía permite:</p>
+<ul>
+<li>
+<p>✔ Priorizar acciones técnicas</p>
+</li>
+<li>
+<p>✔ Comunicación efectiva entre equipos</p>
+</li>
+<li>
+<p>✔ Integración con marcos como ATT&amp;CK</p>
+</li>
+</ul>
+<h2 id="conclusion_1">📌 Conclusión</h2>
+<p>Responder a incidentes no es solo cuestión de tecnología, sino de <strong>personas, procesos y estrategia</strong>. Enseñar a responder correctamente es tan importante como enseñar a prevenir.</p>
+<blockquote>
+<p>“La preparación es la mejor defensa, y la respuesta, la verdadera prueba de madurez en ciberseguridad.”</p>
+</blockquote>
+<h2 id="referencias">Referencias</h2>
+<p><a href="https://terrycutler.com/dont-make-these-incident-response-planning-mistakes/">Don’t Make These Incident Response Planning Mistakes</a></p>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Volver al principio
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../../segdef/wazuh/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Detección de web shells con Wazuh" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Detección de web shells con Wazuh
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../casos/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Casos prácticos de respuesta a incidentes" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Casos prácticos de respuesta a incidentes
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate", "content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+    
+  </body>
+</html>
