@@ -87,6 +87,10 @@ nav:
     - (ACTUALIZADO) Análisis de archivos con TruffleHog: segdef/truffle2.md
     - Análisis de infraestructura (contenedores) con Trivy: segdef/trivy.md
     - Detección de web shells con Wazuh: segdef/wazuh.md
+  - Respuesta a incidentes (IR):
+    - Introdución a la respuesta a incidentes: IR/intro.md
+    - Casos prácticos de respuesta a incidentes: IR/casos.md
+    
 
 
 extra_css:
