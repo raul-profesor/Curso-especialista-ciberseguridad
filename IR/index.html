@@ -6,31 +6,31 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Apuntes, prácticas, ejercicio del curso de especialización de ciberseguridad. Arkime, blue team, seguridad devensiva, análisis de red, escáner de red, bastionado de redes y sistemas.">
+        <meta name="description" content="Apuntes, teoría, prácticas, ejercicio del curso de especialización de ciberseguridad. IES severo ochoa Elche. Hacking ético. incidentes de seguridad, puesta en producción segura.">
       
       
       
-        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/segdef/arkime/">
+        <link rel="canonical" href="https://raul-profesor.github.io/Curso-especialista-ciberseguridad/IR/">
       
       
-        <link rel="prev" href="../seconion/">
+        <link rel="prev" href="../segdef/trivy/">
       
       
-        <link rel="next" href="../truffle/">
+        <link rel="next" href="intro/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
-        <title>Analizando tráfico de red con Arkime - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
+        <title>Apuntes y ejercicios prácticas del curso de especialización ciberseguridad - Seguridad en sistemas del curso de especialista en ciberseguridad</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -46,9 +46,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -88,11 +88,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#mitre-attck" class="md-skip">
-          Saltar a contenido
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -103,7 +98,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-header__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
+    <a href=".." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-header__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -122,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Analizando tráfico de red con Arkime
+              Apuntes y ejercicios prácticas del curso de especialización ciberseguridad
             
           </span>
         </div>
@@ -214,7 +209,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../section/" class="md-tabs__link">
+      <a href="../section/" class="md-tabs__link">
         Warm up
       </a>
     </li>
@@ -230,8 +225,24 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../segof/" class="md-tabs__link">
+      <a href="../segof/" class="md-tabs__link">
         Seguridad ofensiva
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../segdef/" class="md-tabs__link">
+        Seguridad defensiva
       </a>
     </li>
   
@@ -248,23 +259,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link md-tabs__link--active">
-        Seguridad defensiva
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../IR/" class="md-tabs__link">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
         Respuesta a incidentes (IR)
       </a>
     </li>
@@ -294,7 +289,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-nav__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
+    <a href=".." title="Seguridad en sistemas del curso de especialista en ciberseguridad" class="md-nav__button md-logo" aria-label="Seguridad en sistemas del curso de especialista en ciberseguridad" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -343,7 +338,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../section/">Warm up</a>
+          <a href="../section/">Warm up</a>
           
             <label for="__nav_1">
               <span class="md-nav__icon md-icon"></span>
@@ -366,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../section/EntLinux/" class="md-nav__link">
+      <a href="../section/EntLinux/" class="md-nav__link">
         Entornos Linux
       </a>
     </li>
@@ -380,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../section/Ej_Linux/" class="md-nav__link">
+      <a href="../section/Ej_Linux/" class="md-nav__link">
         Ejercicios propuestos Linux
       </a>
     </li>
@@ -394,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../section/EntWin/" class="md-nav__link">
+      <a href="../section/EntWin/" class="md-nav__link">
         Entornos Windows
       </a>
     </li>
@@ -408,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../section/Ej_Win/" class="md-nav__link">
+      <a href="../section/Ej_Win/" class="md-nav__link">
         Ejercicios propuestos Windows
       </a>
     </li>
@@ -422,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../section/webgrafia/" class="md-nav__link">
+      <a href="../section/webgrafia/" class="md-nav__link">
         Webgrafía
       </a>
     </li>
@@ -494,7 +489,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../segof/">Seguridad ofensiva</a>
+          <a href="../segof/">Seguridad ofensiva</a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -517,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/Intro/" class="md-nav__link">
+      <a href="../segof/Intro/" class="md-nav__link">
         Introducción
       </a>
     </li>
@@ -531,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/nmap101/" class="md-nav__link">
+      <a href="../segof/nmap101/" class="md-nav__link">
         Introducción a Nmap
       </a>
     </li>
@@ -545,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/enumeracion/" class="md-nav__link">
+      <a href="../segof/enumeracion/" class="md-nav__link">
         Enumeración de servicios
       </a>
     </li>
@@ -559,7 +554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/servicios_desact/" class="md-nav__link">
+      <a href="../segof/servicios_desact/" class="md-nav__link">
         Causas de vulnerabilidades en sistemas
       </a>
     </li>
@@ -573,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/exploit/" class="md-nav__link">
+      <a href="../segof/exploit/" class="md-nav__link">
         Explotación de vulnerabilidades
       </a>
     </li>
@@ -587,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/metasploit/" class="md-nav__link">
+      <a href="../segof/metasploit/" class="md-nav__link">
         Metasploit
       </a>
     </li>
@@ -601,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/EternalBlue/" class="md-nav__link">
+      <a href="../segof/EternalBlue/" class="md-nav__link">
         Ejercicio práctico - Explotación de EternalBlue
       </a>
     </li>
@@ -615,7 +610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/rev_shell/" class="md-nav__link">
+      <a href="../segof/rev_shell/" class="md-nav__link">
         Shells
       </a>
     </li>
@@ -629,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/privesc/" class="md-nav__link">
+      <a href="../segof/privesc/" class="md-nav__link">
         Escalada de privilegios
       </a>
     </li>
@@ -643,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/ad_enumeration/" class="md-nav__link">
+      <a href="../segof/ad_enumeration/" class="md-nav__link">
         Enumeración en entornos AD (Active Directory)
       </a>
     </li>
@@ -657,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/passw_manag/" class="md-nav__link">
+      <a href="../segof/passw_manag/" class="md-nav__link">
         Gestión y almacenamiento de credenciales en Windows
       </a>
     </li>
@@ -671,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/phising/" class="md-nav__link">
+      <a href="../segof/phising/" class="md-nav__link">
         Spoofing & phising
       </a>
     </li>
@@ -685,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/HackingAD1/" class="md-nav__link">
+      <a href="../segof/HackingAD1/" class="md-nav__link">
         Ataques en entornos Active Directory
       </a>
     </li>
@@ -699,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/Pivoting/" class="md-nav__link">
+      <a href="../segof/Pivoting/" class="md-nav__link">
         Laboratorio de pivoting
       </a>
     </li>
@@ -713,293 +708,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../segof/webgrafia/" class="md-nav__link">
+      <a href="../segof/webgrafia/" class="md-nav__link">
         Webgrafía
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-      
-      
-        
-          
-            
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-      
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../">Seguridad defensiva</a>
-          
-            <label for="__nav_3">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Seguridad defensiva
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../logs/" class="md-nav__link">
-        Análisis de Logs
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../idps/" class="md-nav__link">
-        Monitorización con IDS/IPS
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../hardening.ssh/" class="md-nav__link">
-        Hardening SSH
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../seconion/" class="md-nav__link">
-        Monitorización con Security Onion
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Monitorización de red con Arkime
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Monitorización de red con Arkime
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#mitre-attck" class="md-nav__link">
-    MITRE ATT&amp;CK
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#glosario-de-terminos" class="md-nav__link">
-    Glosario de terminos
-  </a>
-  
-    <nav class="md-nav" aria-label="Glosario de terminos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arkime" class="md-nav__link">
-    Arkime
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#command-and-control-c2" class="md-nav__link">
-    Command and control (C2)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ioc" class="md-nav__link">
-    IOC
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#emotet" class="md-nav__link">
-    Emotet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#lokibot" class="md-nav__link">
-    Lokibot
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spear-phising" class="md-nav__link">
-    Spear phising
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#demostracion-practica-de-arkime" class="md-nav__link">
-    Demostración práctica de Arkime
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#referencias" class="md-nav__link">
-    Referencias
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../truffle/" class="md-nav__link">
-        Análisis de archivos con TruffleHog
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../truffle2/" class="md-nav__link">
-        (ACTUALIZADO) Análisis de archivos con TruffleHog
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../trivy/" class="md-nav__link">
-        Análisis de infraestructura (contenedores) con Trivy
       </a>
     </li>
   
@@ -1027,12 +737,20 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
       
       
         
           
             
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -1048,7 +766,178 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../IR/">Respuesta a incidentes (IR)</a>
+          <a href="../segdef/">Seguridad defensiva</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Seguridad defensiva
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/logs/" class="md-nav__link">
+        Análisis de Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/idps/" class="md-nav__link">
+        Monitorización con IDS/IPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/hardening.ssh/" class="md-nav__link">
+        Hardening SSH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/seconion/" class="md-nav__link">
+        Monitorización con Security Onion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/arkime/" class="md-nav__link">
+        Monitorización de red con Arkime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/truffle/" class="md-nav__link">
+        Análisis de archivos con TruffleHog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/truffle2/" class="md-nav__link">
+        (ACTUALIZADO) Análisis de archivos con TruffleHog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../segdef/trivy/" class="md-nav__link">
+        Análisis de infraestructura (contenedores) con Trivy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Respuesta a incidentes (IR)</a>
           
             <label for="__nav_4">
               <span class="md-nav__icon md-icon"></span>
@@ -1056,7 +945,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Respuesta a incidentes (IR)
@@ -1071,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IR/intro/" class="md-nav__link">
+      <a href="intro/" class="md-nav__link">
         Introdución a la respuesta a incidentes
       </a>
     </li>
@@ -1085,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IR/casos/" class="md-nav__link">
+      <a href="casos/" class="md-nav__link">
         Casos prácticos de respuesta a incidentes
       </a>
     </li>
@@ -1099,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IR/wazuh/" class="md-nav__link">
+      <a href="wazuh/" class="md-nav__link">
         Detección de web shells con Wazuh
       </a>
     </li>
@@ -1113,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IR/sigma/" class="md-nav__link">
+      <a href="sigma/" class="md-nav__link">
         Reglas Sigma
       </a>
     </li>
@@ -1142,67 +1031,15 @@
                   
 
 
-  <h1>Monitorización de red con Arkime</h1>
+  <h1>Apuntes y ejercicios prácticas del curso de especialización ciberseguridad</h1>
 
-<h2 id="mitre-attck">MITRE ATT&amp;CK</h2>
-<p>¿Has escuchado de MITRE ATT&amp;CK? ATT&amp;CK por sus siglas en inglés, significa: "tácticas, técnicas del adversario y conocimiento común". En una fuente de información colaborativa entre los profesionales de seguridad. </p>
-<p>Permite identificar mejor la huella de TTP (técnicas, tácticas y procedimientos) más amplia (y más profunda) que un adversario dado deja atrás en el curso de una campaña de penetración. Es una fuente a tener en cuenta para entender cómo operan los atacantes. </p>
-<p>Los defensores utilizan este framework y las herramientas asociadas en función de la fuente de datos que posean. Muchas de estas herramientas pueden tener capacidades que se superpongan pero representan la mejor opción para formar un conjunto amplio que nos permita defendernos de forma efectiva.</p>
-<p>Dependiendo del tipo de dato que tengamos, las herramientas se categorizan de forma diferente:</p>
-<p><img alt="" src="../../img/mitre.png" /></p>
-<p>Si por ejemplo tuviéramos una fuente de datos relacionados con la red, podríamos mapear estos datos con MITRE ATT&amp;CK:</p>
-<p><img alt="" src="../../img/mitre2.png" /></p>
-<p>Y así sucesivamente.</p>
-<h2 id="glosario-de-terminos">Glosario de terminos</h2>
-<h3 id="arkime">Arkime</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://arkime.com/">Arkime</a></p>
-<p>Augment your current security infrastructure to store and index network traffic in standard PCAP format.
-Arkime is not meant to replace Intrusion Detection Systems (IDS) but instead provides more visibility. </p>
-</div>
-<h3 id="command-and-control-c2">Command and control (C2)</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://www.tarlogic.com/es/glosario-ciberseguridad/c2-command-and-control/">Tarlogic</a></p>
-<p>La mayoría de las amenazas necesitan conectarse a un entorno fuera de la organización, donde poder comunicarse con los operadores de estas amenazas (Threat Actors) para recibir instrucciones, exfiltrar información, etc. Estas comunicaciones de manera general no son contra los entornos finales de estos actores, sino que son hacia servidores que controlan, centralizan la información y realizan las acciones necesarias. Estos servidores se conocen como servidores Command and Control, C&amp;C o C2.</p>
-</div>
-<h3 id="ioc">IOC</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://attacksimulator.es/blog/8-tipos-de-indicadores-de-compromiso-ioc-y-como-reconocerlos/">attacksimulator</a></p>
-<p>Los indicadores de compromiso o IoCs son pistas y pruebas de una brecha de datos, que generalmente se ven durante un ataque de ciberseguridad. Estos indicadores pueden revelar que se ha producido un ataque, qué herramientas se han utilizado para el mismo y quién está detrás. Suelen ser recolectados a través del software, incluyendo los sistemas antivirus y antimalware. Para entenderlo mejor, intenta pensar que los indicadores de compromiso son como las migas de pan que deja un atacante tras un ciberataque.</p>
-</div>
-<h3 id="emotet">Emotet</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://es.malwarebytes.com/emotet/">malwarebytes</a></p>
-<p>El troyano bancario Emotet fue identificado por primera vez por investigadores de seguridad en 2014. Emotet fue diseñado originalmente como un malware bancario que intentaba colarse en su ordenador y robar información confidencial y privada. En versiones posteriores del software se añadieron los servicios de envío de spam y malware, incluidos otros troyanos bancarios.</p>
-</div>
-<h3 id="lokibot">Lokibot</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://www.welivesecurity.com/la-es/2021/09/30/lokibot-principales-caracteristicas-malware-roba-credenciales/">WeLiveSecurity</a></p>
-<p>Lokibot, también conocido como Loki PWS o Loki-bot, es un malware perteneciente a la familia de troyanos que está activo desde 2015 y es utilizado desde entonces en campañas a nivel global. Fue diseñado con el objetivo de robar credenciales de navegadores, clientes FTP/ SSH, sistemas de mensajería, y hasta incluso de billeteras de criptomonedas.</p>
-</div>
-<h3 id="spear-phising">Spear phising</h3>
-<div class="admonition quote">
-<p class="admonition-title">Cita de <a href="https://latam.kaspersky.com/resource-center/definitions/spear-phishing">Kasperksy</a></p>
-<p>El spear phishing es una estafa de correo electrónico o comunicaciones dirigida a personas, organizaciones o empresas específicas. Aunque su objetivo a menudo es robar datos para fines maliciosos, los cibercriminales también pueden tratar de instalar malware en la computadora de la víctima.</p>
-</div>
-<h2 id="demostracion-practica-de-arkime">Demostración práctica de Arkime</h2>
-<ul>
-<li>
-<p>Analizando tráfico spear phising (Dridex)</p>
-</li>
-<li>
-<p>Identificando tráfico C2C (Emotet)</p>
-</li>
-<li>
-<p>Identificando tráfico C2C (Lokibot)</p>
-</li>
-<li>
-<p>Identificación de malware usando comunicaciones seguras con TLS y utilización de hashes JA3 para detectar nodos del command&amp;control</p>
-</li>
-</ul>
-<h2 id="referencias">Referencias</h2>
-<p><a href="https://www.incibe-cert.es/blog/matriz-mitre-tacticas-y-tecnicas-entornos-industriales">La matriz de MITRE: tácticas y técnicas en entornos industriales</a></p>
-<p><a href="https://www.eclecticiq.com/take-action-with-cti/how-to-use-mitre-attck-to-map-and-track-adversary-ttps">How to Use MITRE ATT&amp;CK to Map and Track Adversary TTPs</a></p>
+<p>Los ejercicios y conocimientos contenidos en las prácticas y/o apuntes de 
+todos los módulos tienen exclusivamente propósito formativo, por lo que 
+nunca se deberán utilizar con fines maliciosos o delictivos.</p>
+<p>Ningún alumno o alumna de este curso, ni profesor o profesora como 
+docentes, serán responsables de los daños directos o indirectos que 
+pudieran derivarse del uso inadecuado de las herramientas y mecanismos 
+expuestos.</p>
 
 
   
@@ -1233,7 +1070,7 @@ Arkime is not meant to replace Intrusion Detection Systems (IDS) but instead pro
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../seconion/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Monitorización con Security Onion" rel="prev">
+          <a href="../segdef/trivy/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Análisis de infraestructura (contenedores) con Trivy" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -1242,20 +1079,20 @@ Arkime is not meant to replace Intrusion Detection Systems (IDS) but instead pro
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Monitorización con Security Onion
+                Análisis de infraestructura (contenedores) con Trivy
               </div>
             </div>
           </a>
         
         
           
-          <a href="../truffle/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Análisis de archivos con TruffleHog" rel="next">
+          <a href="intro/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Introdución a la respuesta a incidentes" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Análisis de archivos con TruffleHog
+                Introdución a la respuesta a incidentes
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1287,10 +1124,10 @@ Arkime is not meant to replace Intrusion Detection Systems (IDS) but instead pro
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate", "content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.top", "navigation.indexes", "content.tabs.link", "content.code.annotate", "content.code.copy", "navigation.footer"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>
