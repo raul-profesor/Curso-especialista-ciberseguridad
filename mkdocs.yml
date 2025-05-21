@@ -88,8 +88,10 @@ nav:
     - Análisis de infraestructura (contenedores) con Trivy: segdef/trivy.md
     - Detección de web shells con Wazuh: segdef/wazuh.md
   - Respuesta a incidentes (IR):
+    - IR/index.md
     - Introdución a la respuesta a incidentes: IR/intro.md
     - Casos prácticos de respuesta a incidentes: IR/casos.md
+    - Reglas SIgma: IR/sigma.md 
     
 
 
