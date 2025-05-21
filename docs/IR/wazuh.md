@@ -14,6 +14,73 @@ Técnicamente podría considerarse un HIDS (Host Intrusion Detection System). Es
 
 Así pues, Wazuh quizás se acerque más a un [XDR](https://wazuh.com/platform/xdr/) o un [SIEM](https://wazuh.com/platform/siem/).
 
+Su objetivo principal es **monitorizar la seguridad de los sistemas, detectar amenazas, responder ante incidentes y facilitar el cumplimiento normativo**, todo desde una única consola centralizada.
+
+Wazuh se ha convertido en una solución ampliamente adoptada por su **versatilidad, escalabilidad y transparencia**, y es utilizada tanto en entornos empresariales como académicos.
+
+
+## 🧬 Historia y evolución
+
+Wazuh nació como un **fork de OSSEC**, un proyecto veterano de HIDS, al que se le añadieron mejoras sustanciales en escalabilidad, arquitectura modular, interfaz gráfica, soporte a tecnologías modernas y extensibilidad. Con el tiempo, Wazuh evolucionó hacia una solución integral de **detección y respuesta** que va mucho más allá del simple monitoreo de logs o archivos.
+
+
+## 🧱 Arquitectura de Wazuh
+
+Wazuh sigue una arquitectura **cliente-servidor** (o mejor dicho, **agente-mánager-dashboard**), compuesta por varios componentes clave:
+
+### 1. Agentes Wazuh
+Instalados en sistemas finales (Windows, Linux, macOS), los agentes recogen:
+
+- Logs del sistema y aplicaciones
+- Actividad de red y procesos
+- Cambios en archivos (FIM)
+- Eventos de seguridad (fallos de autenticación, escalada de privilegios, etc.)
+
+### 2. Manager Wazuh
+Es el núcleo del sistema:
+
+- Recibe y analiza los datos de los agentes
+- Aplica reglas de correlación
+- Genera alertas de seguridad
+- Ejecuta respuestas activas si se configuran
+
+### 3. Wazuh Indexer (basado en OpenSearch/Elasticsearch)
+
+Almacena y permite consultar grandes volúmenes de datos estructurados, como eventos y alertas de seguridad, mediante búsquedas rápidas y complejas.
+
+### 4. Wazuh Dashboard
+
+Interfaz web basada en Kibana/OpenSearch Dashboards:
+
+- Visualización de alertas, logs, informes y cumplimiento
+- Gestión de políticas de seguridad
+- Seguimiento de incidentes en tiempo real
+
+
+
+## 🧠 Capacidades clave de Wazuh
+
+| Función                         | Descripción                                                                                                                                     |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| 🔍 **HIDS**                    | Detección basada en host de archivos modificados, nuevos procesos, cambios en el sistema, etc.                                                  |
+| 📑 **FIM (File Integrity Monitoring)** | Monitorización de archivos críticos del sistema o aplicaciones web (muy útil contra webshells).                                                |
+| 📜 **Análisis de logs**         | Ingesta y análisis de logs de sistemas, aplicaciones, dispositivos de red, servicios cloud (AWS, Azure, GCP).                                  |
+| 🛡️ **Detección de amenazas**     | Reglas de correlación que detectan patrones de ataque, como escaladas de privilegios, movimiento lateral o conexiones sospechosas.             |
+| 🤖 **Respuestas activas**        | Scripts automáticos para bloquear IPs, cerrar procesos o modificar configuraciones ante incidentes.                                            |
+| 🏛️ **Cumplimiento normativo**    | Módulos y plantillas para PCI-DSS, GDPR, HIPAA, NIST 800-53, etc., con informes automatizados.                                                 |
+| ☁️ **Integración cloud y contenedores** | Integración con Kubernetes, Docker, AWS CloudTrail, Azure logs, etc. para visibilidad en entornos híbridos y nativos de la nube.              |
+| 🧩 **Extensibilidad**            | Uso de decoders, reglas personalizadas, integraciones con VirusTotal, Suricata, Zeek, TheHive, etc.                                            |
+
+
+## 🎯 Casos de uso típicos
+
+- Monitorización de seguridad de endpoints (EDR/HIDS)
+- Detección de accesos no autorizados y malware
+- Detección de webshells en servidores web (con FIM + análisis de logs + reglas personalizadas)
+- Cumplimiento normativo automatizado
+- Integración con herramientas de respuesta a incidentes (SOAR, TheHive, MISP)
+
+
 ## Web shells
 
 Los cibercriminales utilizan diferentes técnicas para conseguir la persistencia en un sistema previamente comprometido. Una de estas técnicas son las web shells.
@@ -201,13 +268,38 @@ Además, FIM escanea los contenidos de los archivos para monitorizar la aparció
      $ sudo systemctl restart wazuh-manager
      ```
 
+##### Explicación de las reglas personalizadas
+
++ `id="100500"`: ID único de esta regla.
+
++ `level="12"`: Severidad alta. El máximo es 15.
+
++ `<if_sid>554</if_sid>`: Solo se aplica si antes se ha activado la regla con ID 554 (esta regla base detecta creación de archivos).
+
++ `<field name="file" type="pcre2">...`: Aplica un regex (compatible con PCRE2) sobre el campo file. Busca archivos con extensiones típicas de web shells:
+
+    `.php, .asp, .jsp, .cshtml, .vbhtml, etc.`
+
++ `$(file)`: Variable que se sustituye con el nombre del archivo real.
+
++ `<mitre>`: Indica técnicas MITRE ATT&CK asociadas:
+
+    + *T1105 – Ingress Tool Transfer: transferencia de herramientas maliciosas al sistema.*
+    + *T1505 – Server Software Component: modificación maliciosa de componentes del servidor (como web shells).*
+
+📌 Esta regla detecta que se ha creado un archivo sospechoso que podría ser un web shell.
+
+La segunda regla es similar, sólo que intenta detectar la **modificación** y no la creación de archivos.
+
+La tercera regla intenta detectar modificaciones de archivo, es decir que se haya disparado la segunda regla, y que éstas además incluyan funciontes típicas de webshells.
+
 ### Usando reglas personalizadas para detectar indicios de web shells
 
 Wazuh permite escribir reglas personalizadas que disparan alertas cuando se detectan determinadas características en logs. Además integraremos Wazuh con **auditd** en endpoints Linux y **Sysmon** en Windows para enriquecer los fuentes de logs, para así mejorar la seguridad.
 
 #### Ubuntu
 
-**Auditd** (de Linux Audit Daemon) es una utilidad que recopila y almacena eventos del sistema tales como llamadas al sistema (*syscall*) y funciones. Usando auditd podemos monitorizar comandos del sistema así como conexciones de red que lleve a cabo un usuario de servidor web, escribiendo reglas que generen una alerta cuando esto ocurra.
+**Auditd** (de Linux Audit Daemon) es una utilidad que recopila y almacena eventos del sistema tales como llamadas al sistema (*syscall*) y funciones. Usando auditd podemos monitorizar comandos del sistema así como conexiones de red que lleve a cabo un usuario de servidor web, escribiendo reglas que generen una alerta cuando esto ocurra.
 
 Así las cosas:
 
@@ -397,6 +489,8 @@ En esta sección usaremos la monitorización de comandos para complementar el us
     </localfile>
     </ossec_config>
     ```
+    Como vemos, este comando se ejecuta cada 120 segundos con el fin de detectar conexiones activas abiertas por shells como `bash`, `zsh`, etc.
+
 2.  Reiniciar el agente de Wazuh par aplicar los cambios de configuración:
 
     ```console
